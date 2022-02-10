@@ -12,13 +12,13 @@ export const state = () => ({
             icon: ''
         },
         {
-            title: 'Setting',
-            url: '/setting',
+            title: 'Reaction clicker',
+            url: '/reactionClicker',
             icon: ''
         },
         {
-            title: 'Reaction clicker',
-            url: '/reactionClicker',
+            title: 'Setting',
+            url: '/setting',
             icon: ''
         },
 

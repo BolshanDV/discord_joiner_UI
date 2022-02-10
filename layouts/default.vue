@@ -25,9 +25,10 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   background-color: #080D16;
+  height: 100vh;
 }
 .sidebar{
-  background: #161E29;
+  background: #161e29;
   border-radius: 10px;
   width: 8%;
   padding: 1%;

@@ -7,8 +7,9 @@
           Decoders
         </div>
         <div class="input_block_description text_little">License key</div>
-        <div class="input_block">
-          key
+        <div class="form-check form-switch">
+          <input class="form-check-input " type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
         </div>
         <div class="input_block_description text_little">Version</div>
         <div class="input_block">
@@ -45,7 +46,7 @@
       </div>
     </div>
     <div class="row_position button_section">
-      <div class=" row_position functional_btn">Import</div>
+      <div class=" row_position functional_btn ">Import</div>
       <div class="row_position functional_btn">Export</div>
     </div>
   </div>

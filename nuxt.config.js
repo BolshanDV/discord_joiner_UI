@@ -18,11 +18,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-      '/Users/dmitrij/WebstormProjects/discord_joiner_UI/assets/style/fonts.css'
-  ],
+      '/Users/dmitrij/WebstormProjects/discord_joiner_UI/assets/style/fonts.css',
+],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -34,9 +35,15 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'bootstrap-vue/nuxt',
+
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  bootstrapVue: {
+    // Установите плагин `IconsPlugin` (в дополнение к плагину `BootstrapVue`)
+    icons: true
   }
 }
