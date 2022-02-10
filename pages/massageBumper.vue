@@ -1,5 +1,7 @@
 <template>
-  <p>massageBumper</p>
+  <header>
+    <p class="title">Massage Bumper</p>
+  </header>
 </template>
 
 <script>

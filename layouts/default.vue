@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="body">
       <div class="sidebar">
         <Sidebar/>
@@ -7,11 +6,7 @@
       <div class="main">
         <Nuxt/>
       </div>
-
     </div>
-  </div>
-
-
 </template>
 
 <script>
@@ -29,20 +24,20 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /*margin: 0;*/
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #161E29;
 
+  width: 100%;
+  height: 100vh;
+  background-color: #080D16;
 }
 .sidebar{
-  background: #0D121A;
-  width: 8vw;
+  background: #161E29;
+  border-radius: 10px;
+  width: 8%;
+  padding: 1%;
+
 }
 .main{
-  width: 92vw;
-
+  width: 92%;
+  padding: 2%;
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <p>reactionClicker</p>
+  <header>
+    <p class="title">Reaction Clicker</p>
+  </header>
 </template>
 
 <script>

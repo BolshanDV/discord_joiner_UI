@@ -1,5 +1,10 @@
 <template>
-  <p>setting</p>
+  <div>
+    <header>
+      <p class="title">Setting</p>
+    </header>
+  </div>
+
 </template>
 
 <script>
