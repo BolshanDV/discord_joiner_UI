@@ -1,10 +1,10 @@
 <template>
-  <p>home</p>
+  <p>reactionClicker</p>
 </template>
 
 <script>
 export default {
-name: "home"
+name: "reactionClicker"
 }
 </script>
 

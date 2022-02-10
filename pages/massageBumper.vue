@@ -1,10 +1,10 @@
 <template>
-  <p>home</p>
+  <p>massageBumper</p>
 </template>
 
 <script>
 export default {
-name: "home"
+name: "massageBumper"
 }
 </script>
 
