@@ -10,7 +10,7 @@
           active-class="sidebar_item_active"
           :exact="page.exact"
       >
-        {{index}}
+        {{page.title}}
       </nuxt-link>
     </div>
 </template>

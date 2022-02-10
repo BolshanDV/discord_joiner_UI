@@ -3,13 +3,17 @@
     <header>
       <p class="title">Setting</p>
     </header>
+    <settings/>
   </div>
 
 </template>
 
 <script>
 export default {
-name: "setting"
+name: "setting",
+  components: {
+    homeInformation: () => import('../components/settings')
+  }
 }
 </script>
 

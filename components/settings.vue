@@ -1,21 +1,10 @@
 <template>
   <div class="column">
-    <div class="head_block">
-      <div class="row_position">
-        <div>
-          <img src="../static/crypto_logo.svg" alt="">
-        </div>
-        <div class="text">
-          <div class="text_head">Welcome to Discord Hunter</div>
-          <div class="text_little">Developed by Crypto</div>
-        </div>
-      </div>
-    </div>
     <div class="row_position description">
       <div class="column head_block key_info margin">
 
         <div class="text_head">
-          Key information
+          Decoders
         </div>
         <div class="input_block_description text_little">License key</div>
         <div class="input_block">
@@ -28,7 +17,7 @@
       </div>
       <div class="column head_block key_info">
         <div class="text_head">
-          Application info
+         Other settings
         </div>
         <div class="input_block_description text_little">Last update</div>
         <div class="input_block">
@@ -39,11 +28,31 @@
         </div>
       </div>
     </div>
+    <div class="head_block">
+      <div class="row_position">
+        <div class="key_info head_block column webhook_item">
+          <div class="text_head">
+            Webhook settings
+          </div>
+          <div class="input_block_description text_little">Discord Joiner webhook</div>
+          <div class="input_block">
+            https://
+          </div>
+          <div class="input_block button_check ">
+            TEST WEBHOOK
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row_position button_section">
+      <div class=" row_position functional_btn">Import</div>
+      <div class="row_position functional_btn">Export</div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-name: "homeInformation"
+  name: "settings"
 }
 </script>
 
@@ -65,9 +74,8 @@ name: "homeInformation"
 .row_position{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 2%;
-  align-items: center;
 }
 img{
   width: 60px;
@@ -105,7 +113,7 @@ img{
 }
 .button_check {
   background-color: rgba(42, 76, 120, 0.83);
-  margin-top: 7%;
+  margin-top: 5%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -113,5 +121,23 @@ img{
 }
 .margin{
   margin-right: 2%;
+}
+.webhook_item{
+  margin-bottom: 0;
+  justify-content: flex-start;
+  width: 50%;
+  background-color: rgba(22,30,41,0.83);
+}
+.functional_btn{
+  border-radius: 10px;
+  border: 2px solid rgba(42, 76, 120, 0.83);
+  color: rgba(42, 76, 120, 0.83);
+  padding: 1% 2%;
+  margin-right: 2%;
+  width: 7%;
+}
+.button_section{
+  justify-content: flex-start;
+  padding-bottom: 0;
 }
 </style>

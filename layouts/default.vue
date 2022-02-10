@@ -24,9 +24,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-
-  width: 100%;
-  height: 100vh;
   background-color: #080D16;
 }
 .sidebar{

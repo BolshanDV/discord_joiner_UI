@@ -11,5 +11,8 @@ name: "massageBumper"
 </script>
 
 <style scoped>
-
+template{
+  height: 100%;
+  background-color: #080D16;
+}
 </style>
