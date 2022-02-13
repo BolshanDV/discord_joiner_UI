@@ -19,6 +19,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
       '/Users/dmitrij/WebstormProjects/discord_joiner_UI/assets/style/fonts.css',
+      '/Users/dmitrij/WebstormProjects/discord_joiner_UI/assets/transitions/transition.css'
 ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

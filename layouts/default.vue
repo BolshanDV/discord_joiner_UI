@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/sidebar";
 import navbar from "../components/navbar";
 export default {
   name: "default",
@@ -50,7 +50,6 @@ export default {
 }
 .main_section{
   padding: 3%;
-  min-height: 100vh;
 }
 .navbar{
   background-color: #080D16;

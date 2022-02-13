@@ -1,28 +1,28 @@
 <template>
-  <div class="column">
-    <div class="work_space_element_title">Channel id</div>
-    <div class="work_space_element row_position">
-      939163056561348638
-    </div>
-    <div class="work_space_element_title">Message id</div>
-    <div class="work_space_element row_position">
-      941771715887919134
-    </div>
-    <div class="work_space_element_title">Reaction id</div>
-    <div class="work_space_element row_position">
-      941771715887919134
-    </div>
-    <div class="work_space_element_title">Reaction click delay</div>
-    <div class="work_space_element row_position">
-      5555
-    </div>
-    <div class="row_position work_space_element_advent">
-      <div>Reaction clicker only mode</div>
-      <div>
-        <b-form-checkbox name="check-button" switch></b-form-checkbox>
+    <div class="column">
+      <div class="work_space_element_title">Channel id</div>
+      <div class="work_space_element row_position">
+        939163056561348638
+      </div>
+      <div class="work_space_element_title">Message id</div>
+      <div class="work_space_element row_position">
+        941771715887919134
+      </div>
+      <div class="work_space_element_title">Reaction id</div>
+      <div class="work_space_element row_position">
+        941771715887919134
+      </div>
+      <div class="work_space_element_title">Reaction click delay</div>
+      <div class="work_space_element row_position">
+        5555
+      </div>
+      <div class="row_position work_space_element_advent">
+        <div>Reaction clicker only mode</div>
+        <div>
+          <b-form-checkbox name="check-button" switch></b-form-checkbox>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

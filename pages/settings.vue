@@ -1,6 +1,6 @@
 <template>
   <header>
-    <p>Settings</p>
+    <p class="title">Settings</p>
   </header>
 </template>
 

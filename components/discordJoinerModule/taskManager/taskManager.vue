@@ -27,19 +27,30 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker</div>
         <div>
-          <b-form-checkbox name="check-button" switch></b-form-checkbox>
+          <b-form-checkbox
+              name="check-button"
+              switch
+              v-model="selectedReactionClicker"
+          ></b-form-checkbox>
         </div>
       </div>
-      <reaction-clicker/>
+        <reaction-clicker v-if="selectedReactionClicker"/>
+
+
     </div>
     <div class="work_space">
       <div class="row_position work_space_element_advent">
         <div>Send Command</div>
         <div >
-          <b-form-checkbox name="check-button" class="custom-checkbox" switch></b-form-checkbox>
+          <b-form-checkbox
+              name="check-button"
+              class="custom-checkbox"
+              switch
+              v-model="selectedTaskManager"
+          ></b-form-checkbox>
         </div>
       </div>
-      <send-command/>
+      <send-command v-if="selectedTaskManager"/>
     </div>
     <div class="row_position row_position_btn">
       <b-button variant="outline-info" class="row_position_btn_form">Create task</b-button>
@@ -58,6 +69,12 @@ name: "taskManager",
   components: {
     reactionClicker,
     sendCommand
+  },
+  data() {
+    return {
+      selectedTaskManager: false,
+      selectedReactionClicker: false
+    }
   }
 }
 </script>
