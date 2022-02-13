@@ -37,13 +37,20 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
 
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
+
   bootstrapVue: {
     icons: true
+  },
+
+  axios: {
+    baseURL: process.env.API_URL_DISCORD_INVITES,
   }
+
 }

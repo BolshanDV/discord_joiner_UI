@@ -8,19 +8,19 @@
         Task name
       </div>
       <div class="work_space_element row_position">
-        Test
+        <b-form-input v-model="taskName" placeholder="Enter your task name" class="input_element"></b-form-input>
       </div>
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
       <div class="work_space_element row_position">
-        Burners - 1
+        <b-form-input v-model="accountsTokensList" placeholder="Enter accounts tokens list" class="input_element"></b-form-input>
       </div>
       <div class="work_space_element_title">
         Proxy list
       </div>
       <div class="work_space_element row_position">
-        RU- 1
+        <b-form-input v-model="proxyList" placeholder="Enter proxy list" class="input_element"></b-form-input>
       </div>
     </div>
     <div class="work_space">
@@ -53,7 +53,13 @@
       <send-command v-if="selectedTaskManager"/>
     </div>
     <div class="row_position row_position_btn">
-      <b-button variant="outline-info" class="row_position_btn_form">Create task</b-button>
+      <b-button
+          variant="outline-info"
+          class="row_position_btn_form"
+          @click="CREATE_TASK({taskName, accountsTokensList})"
+      >
+        Create task
+      </b-button>
     </div>
 
   </div>
@@ -64,6 +70,7 @@
 <script>
 import reactionClicker from "./reactionClicker";
 import sendCommand from "./sendCommand";
+import {mapActions} from 'vuex'
 export default {
 name: "taskManager",
   components: {
@@ -73,8 +80,14 @@ name: "taskManager",
   data() {
     return {
       selectedTaskManager: false,
-      selectedReactionClicker: false
+      selectedReactionClicker: false,
+      taskName: 'fC58BsPDFU',
+      accountsTokensList: 'NjkyMzI0NjYyODI2MjM3OTcy.YaKYPA.ukmjaaKrpb8teiOUVzyWNKlFcp8',
+      proxyList: ''
     }
+  },
+  methods: {
+    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK'])
   }
 }
 </script>
@@ -90,7 +103,6 @@ name: "taskManager",
   background: rgba(22,30,41,0.6);
   border-radius: 3px;
   height: 6%;
-  padding: 2%;
   margin-top: 2.75%;
 
 }
@@ -111,5 +123,10 @@ name: "taskManager",
   border-radius: 4px;
   color: #CCCCCC;
   width: 35%;
+}
+.input_element{
+  background-color: rgba(22,30,41,0.6);
+  border-width: 0;
+  color: #CCCCCC;
 }
 </style>
