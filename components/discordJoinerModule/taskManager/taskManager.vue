@@ -41,6 +41,9 @@
       </div>
       <send-command/>
     </div>
+    <div class="row_position row_position_btn">
+      <b-button variant="outline-info" class="row_position_btn_form">Create task</b-button>
+    </div>
 
   </div>
 
@@ -65,7 +68,6 @@ name: "taskManager",
   border-radius: 5px;
   padding: 3%;
   margin-top: 2%;
-  /*width: 100%;*/
 }
 .work_space_element{
   background: rgba(22,30,41,0.6);
@@ -81,5 +83,16 @@ name: "taskManager",
 .work_space_element_advent{
   justify-content: space-between;
 }
-
+.row_position_btn{
+  justify-content: flex-end;
+  margin-top: 5%;
+}
+.row_position_btn_form{
+  background: rgba(43, 214, 162, 0.2);
+  border: 1px solid #2BD6A2;
+  box-sizing: border-box;
+  border-radius: 4px;
+  color: #CCCCCC;
+  width: 35%;
+}
 </style>

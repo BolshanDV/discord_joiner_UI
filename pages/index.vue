@@ -36,6 +36,7 @@ name: "home",
 }
 .information_section{
   width: 63%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -43,6 +44,6 @@ name: "home",
 .main_block{
   border-radius: 5px;
   background: rgba(8,13,22,0.6);
-  padding: 1%;
+  padding: 1.5%;
 }
 </style>

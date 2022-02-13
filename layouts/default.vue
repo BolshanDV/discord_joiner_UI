@@ -49,7 +49,7 @@ export default {
   background: url("../assets/images/waveBackground.svg") 20% 50%/100% 100% no-repeat;
 }
 .main_section{
-  padding: 2%;
+  padding: 3%;
   min-height: 100vh;
 }
 .navbar{
