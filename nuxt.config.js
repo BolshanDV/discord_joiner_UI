@@ -43,7 +43,6 @@ export default {
   build: {
   },
   bootstrapVue: {
-    // Установите плагин `IconsPlugin` (в дополнение к плагину `BootstrapVue`)
     icons: true
   }
 }

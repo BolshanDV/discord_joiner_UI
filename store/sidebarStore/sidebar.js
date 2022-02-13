@@ -1,25 +1,20 @@
 export const state = () => ({
     pages: [
         {
-            title: 'Home page',
+            title: 'Discord Joiner',
             url: '/',
             exact: true,
-            icon: ''
+            icon: 'discordJoiner.svg'
         },
         {
-            title: 'Discord massage bumper',
+            title: 'Message Bumper',
             url: '/massageBumper',
-            icon: ''
+            icon: 'messageBumper.svg'
         },
         {
-            title: 'Reaction clicker',
-            url: '/reactionClicker',
-            icon: ''
-        },
-        {
-            title: 'Setting',
-            url: '/setting',
-            icon: ''
+            title: 'Settings',
+            url: '/settings',
+            icon: 'setting.svg'
         },
 
     ]

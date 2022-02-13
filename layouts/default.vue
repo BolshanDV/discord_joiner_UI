@@ -4,17 +4,24 @@
         <Sidebar/>
       </div>
       <div class="main">
-        <Nuxt/>
+        <div class="navbar">
+          <navbar/>
+        </div>
+        <div class="main_section">
+          <Nuxt/>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
 import Sidebar from "../components/Sidebar";
+import navbar from "../components/navbar";
 export default {
   name: "default",
   components: {
-    Sidebar
+    Sidebar,
+    navbar
   }
 }
 </script>
@@ -24,18 +31,29 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  background-color: #080D16;
+  background-color: #161E29;
   height: 100vh;
 }
 .sidebar{
-  background: #161e29;
+  background: #0D121A;
   border-radius: 10px;
-  width: 8%;
-  padding: 1%;
+  width: 20%;
+  /*padding: 1% 1% 1% 1.5%;*/
 
 }
 .main{
-  width: 92%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 80%;
+  background: url("../assets/images/waveBackground.svg") 20% 50%/100% 100% no-repeat;
+}
+.main_section{
   padding: 2%;
+  height: 100%;
+}
+.navbar{
+  background-color: #080D16;
+  height: 9%;
 }
 </style>

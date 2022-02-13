@@ -1,12 +1,12 @@
 <template>
   <header>
-    <p class="title">Reaction Clicker</p>
+    <p>Settings</p>
   </header>
 </template>
 
 <script>
 export default {
-name: "reactionClicker"
+  name: "settings"
 }
 </script>
 
