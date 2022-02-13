@@ -13,7 +13,17 @@ body {
 }
 .title{
     margin: 0;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 21px;
 }
-
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.row_position{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

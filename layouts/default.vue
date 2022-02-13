@@ -32,7 +32,7 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   background-color: #161E29;
-  height: 100vh;
+  min-height: 100vh;
 }
 .sidebar{
   background: #0D121A;
@@ -50,10 +50,10 @@ export default {
 }
 .main_section{
   padding: 2%;
-  height: 100%;
+  min-height: 100vh;
 }
 .navbar{
   background-color: #080D16;
-  height: 9%;
+  height: 7%;
 }
 </style>

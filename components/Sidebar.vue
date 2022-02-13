@@ -37,7 +37,7 @@ name: "Sidebar",
 }
 .sidebar_item {
   margin: 0 2px 2px 0;
-  background-color: #161E29;
+  background-color: rgba(22,30,41,0.6);
   padding: 2.75vh 1.5vh 2.75vh 3vh;
   display: flex;
   justify-content: flex-start;
