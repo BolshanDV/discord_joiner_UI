@@ -85,14 +85,14 @@
       <send-command v-if="selectedTaskManager"/>
     </div>
     <div class="row_position row_position_btn">
-      <b-button
-          variant="outline-info"
-          class="row_position_btn_form"
-          @click="CREATE_TASK({taskName, accountsTokensList})"
+      <div class="row_position row_position_btn_form"
+           @click="CREATE_TASK({taskName, accountsTokensList})"
       >
+
         Create task
-      </b-button>
+      </div>
     </div>
+
 
   </div>
 
@@ -153,11 +153,13 @@ name: "taskManager",
 .row_position_btn_form{
   background: rgba(43, 214, 162, 0.2);
   border: 1px solid #2BD6A2;
-  box-sizing: border-box;
   border-radius: 4px;
-  color: #CCCCCC;
   font-size: 14px;
   line-height: 16px;
+  width: 10vw;
+  height: 5vh;
+  justify-content: center;
+
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);

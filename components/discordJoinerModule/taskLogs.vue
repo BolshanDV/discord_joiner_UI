@@ -22,12 +22,10 @@
       </div>
     </div>
     <div class="row_position first_btn">
-      <div class="btn btn_clear">
-        <b-button variant="secondary">Clear logs</b-button>
-      </div>
+      <div class="row_position btn btn_clear">Clear logs</div>
       <div class="row_position second_btn_element">
-        <div class="btn"><b-button variant="outline-info" class="btn_stop">Stop All</b-button></div>
-        <div class="btn"><b-button variant="outline-info" class="btn_start">Start all</b-button></div>
+        <div class="row_position btn btn_stop ">Stop All</div>
+        <div class="row_position btn btn_start ">Start all</div>
       </div>
     </div>
   </div>
@@ -50,14 +48,15 @@ name: "taskLogs"
 .btn{
   border-radius: 4px;
   color: #CCCCCC;
-  width: 100%;
   font-size: 14px;
   line-height: 16px;
+  width: 10vw;
+  height: 5vh;
+  justify-content: center;
 }
 .btn_start{
   background: rgba(43, 214, 162, 0.2);
   border: 1px solid #2BD6A2;
-
 }
 .btn_stop{
   background: rgba(170, 26, 23, 0.2);
@@ -69,9 +68,10 @@ name: "taskLogs"
   margin-top: 2.75%;
 }
 .second_btn_element{
-  width: 60%;
+  width: 70%;
+  justify-content: flex-end;
 }
 .btn_clear{
-  width: 30%;
+  background: #1F2A39;
 }
 </style>
