@@ -1,0 +1,174 @@
+<template>
+  <div class="column">
+    <div>
+      <p class="title">Task Manager</p>
+    </div>
+    <div class="work_space column">
+      <div class="work_space_element_title">
+        Channels list
+      </div>
+      <div class="work_space_element row_position space_element">
+        <div class="mini_element row_position">
+            <div><img src="../../assets/icons/cross.svg" alt=""></div>
+            <div class="mini_element_icons">#general</div>
+            <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+        </div>
+        <div class="mini_element row_position">
+          <div><img src="../../assets/icons/cross.svg" alt=""></div>
+          <div class="mini_element_icons">#general</div>
+          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+        </div>
+      </div>
+
+      <div class="work_space_element_title">
+        Accounts tokens list
+      </div>
+      <div class="row_position ">
+        <div class="work_space_element input_element_item">
+          <b-form-input placeholder="Enter tokens" class="input_element"></b-form-input>
+        </div>
+        <div class="additional_functional work_space_element item"
+        >
+          <img src="../../assets/icons/download.svg" alt="">
+        </div>
+        <div class="additional_functional work_space_element">
+          <img src="../../assets/icons/add.svg" alt="">
+
+        </div>
+      </div>
+
+      <div class="work_space_element_title">
+        Delay
+      </div>
+      <div class="work_space_element row_position">
+        <b-form-input placeholder="Enter delay" class="input_element"></b-form-input>
+      </div>
+    </div>
+    <div class="work_space column">
+      <div class="work_space_element_title">
+        <div class="row_position work_space_element_advent">
+          <div>Delete messages</div>
+          <input type="checkbox" class="switch_1" >
+        </div>
+      </div>
+      <div class="work_space_element row_position">
+        <b-form-input placeholder="30sec" class="input_element"></b-form-input>
+      </div>
+    </div>
+    <div class="work_space column">
+      <div class="work_space_element_title row_position work_space_element_advent">
+          <div>Message list</div>
+          <div>
+            <img src="../../assets/icons/download.svg" alt="">
+            <img src="../../assets/icons/download.svg" alt="" class="mini_element_icons" style="transform: rotate(180deg)">
+          </div>
+      </div>
+      <div class="work_space_element row_position space_element">
+        <div class="row_position mini_element">
+          <div>#general</div>
+          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+        </div>
+        <div class="row_position mini_element">
+          <div>#general</div>
+          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+        </div>
+        <div class="row_position mini_element">
+          <div>#general</div>
+          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+        </div>
+       </div>
+
+    </div>
+    <div class="row_position row_position_btn">
+      <b-button
+          variant="outline-info"
+          class="row_position_btn_form"
+      >
+        Create task
+      </b-button>
+    </div>
+  </div>
+
+
+</template>
+
+<script>
+export default {
+  name: "taskManagerBumper",
+}
+</script>
+
+<style scoped>
+.work_space{
+  background: rgba(16,23,34,0.6);
+  border-radius: 5px;
+  padding: 0 3% 3% 3%;
+  margin-top: 2%;
+}
+.work_space_element{
+  background: rgba(22,30,41,0.6);
+  border-radius: 3px;
+  height: 6%;
+}
+.work_space_element_title{
+  margin-top: 3.75%;
+  margin-bottom: 2.75%;
+}
+.work_space_element_advent{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input_element{
+  background-color: rgba(22,30,41,0.6);
+  border-width: 0;
+  color: #CCCCCC;
+}
+
+.additional_functional {
+  background: rgba(22,30,41,0.6);
+  border-radius: 3px;
+  padding: 2.75%;
+}
+.item{
+  margin: 0 3%;
+}
+.input_element_item{
+  width: 80%;
+}
+.row_position_btn{
+  justify-content: flex-end;
+  margin-top: 5%;
+
+}
+.row_position_btn_form{
+  background: rgba(43, 214, 162, 0.2);
+  border: 1px solid #2BD6A2;
+  box-sizing: border-box;
+  border-radius: 4px;
+  color: #CCCCCC;
+  font-size: 14px;
+  line-height: 16px;
+}
+.delay{
+  margin-right: 2%;
+}
+.row_position_input{
+  margin-top: 2%;
+}
+.mini_element{
+  background: #272D36;
+  border-radius: 3px;
+  padding: 1.2% 2.5%;
+  margin: 1% 1.75%;
+  justify-content: space-between;
+  align-items: center;
+}
+.space_element{
+  padding: 2%;
+  flex-wrap: wrap;
+}
+.mini_element_icons{
+  margin-left: 4px;
+}
+</style>

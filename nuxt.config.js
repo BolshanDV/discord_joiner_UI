@@ -1,4 +1,5 @@
 export default {
+  mode: 'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Discord Joiner',
@@ -12,14 +13,15 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/crypto_logo.svg' }
+      { rel: 'icon', type: 'image/x-icon', href: '../crypto_logo.svg' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
       'assets/style/fonts.css',
-      'assets/transitions/transition.css'
+      'assets/transitions/transition.css',
+      'assets/style/checkbox.css'
 ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -48,4 +50,6 @@ export default {
   bootstrapVue: {
     icons: true
   },
+
+
 }

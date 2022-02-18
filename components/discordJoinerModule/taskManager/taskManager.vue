@@ -5,10 +5,10 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title">
-        Server id
+        Invite code
       </div>
       <div class="work_space_element row_position">
-        <b-form-input v-model="taskName" placeholder="Enter your server id" class="input_element"></b-form-input>
+        <b-form-input v-model="taskName" placeholder="Enter invite code" class="input_element"></b-form-input>
       </div>
       <div class="work_space_element_title">
         Accounts tokens list
@@ -66,11 +66,9 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker</div>
         <div>
-          <b-form-checkbox
-              name="check-button"
-              switch
-              v-model="selectedReactionClicker"
-          ></b-form-checkbox>
+          <label>
+            <input type="checkbox" class="switch_1" v-model='selectedReactionClicker'>
+          </label>
         </div>
       </div>
         <reaction-clicker v-if="selectedReactionClicker"/>
@@ -81,12 +79,7 @@
       <div class="row_position work_space_element_advent">
         <div>Send Command</div>
         <div >
-          <b-form-checkbox
-              name="check-button"
-              class="custom-checkbox"
-              switch
-              v-model="selectedTaskManager"
-          ></b-form-checkbox>
+          <input type="checkbox" class="switch_1" v-model='selectedTaskManager'>
         </div>
       </div>
       <send-command v-if="selectedTaskManager"/>
@@ -114,7 +107,7 @@ export default {
 name: "taskManager",
   components: {
     reactionClicker,
-    sendCommand
+    sendCommand,
   },
   data() {
     return {
@@ -155,6 +148,7 @@ name: "taskManager",
 .row_position_btn{
   justify-content: flex-end;
   margin-top: 5%;
+
 }
 .row_position_btn_form{
   background: rgba(43, 214, 162, 0.2);
@@ -162,8 +156,8 @@ name: "taskManager",
   box-sizing: border-box;
   border-radius: 4px;
   color: #CCCCCC;
-  width: 35%;
-  height: ;
+  font-size: 14px;
+  line-height: 16px;
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);

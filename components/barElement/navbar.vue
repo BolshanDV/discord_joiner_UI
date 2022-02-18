@@ -21,10 +21,11 @@ export default {
   width: 100%;
 }
 .btn{
-  width: 12%;
+  width: 10%;
   background: #B41210;
   border-radius: 7px;
   color: #FFFFFF;
+  margin: 0 3%;
 }
 .navbar_user{
   margin: 0 2%;

@@ -19,7 +19,9 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker only mode</div>
         <div>
-          <b-form-checkbox name="check-button" switch></b-form-checkbox>
+          <label>
+            <input type="checkbox" class="switch_1" >
+          </label>
         </div>
       </div>
     </div>

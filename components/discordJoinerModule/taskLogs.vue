@@ -51,6 +51,8 @@ name: "taskLogs"
   border-radius: 4px;
   color: #CCCCCC;
   width: 100%;
+  font-size: 14px;
+  line-height: 16px;
 }
 .btn_start{
   background: rgba(43, 214, 162, 0.2);

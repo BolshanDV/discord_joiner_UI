@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Sidebar from "../components/sidebar";
-import navbar from "../components/navbar";
+import Sidebar from "../components/barElement/sidebar";
+import navbar from "../components/barElement/navbar";
 export default {
   name: "default",
   components: {
@@ -36,9 +36,8 @@ export default {
 }
 .sidebar{
   background: #0D121A;
-  border-radius: 10px;
   width: 20%;
-  /*padding: 1% 1% 1% 1.5%;*/
+
 
 }
 .main{
@@ -53,6 +52,6 @@ export default {
 }
 .navbar{
   background-color: #080D16;
-  height: 7%;
+  height: 11vh;
 }
 </style>

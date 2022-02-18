@@ -1,0 +1,39 @@
+
+input[type="checkbox"].switch_1{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 2.2em;
+    height: 1.2em;
+    background: #6D7C92;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type="checkbox"].switch_1:checked{
+    background: #2BD6A2;
+}
+
+input[type="checkbox"].switch_1:after{
+    position: absolute;
+    content: "";
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    background: #0D121A;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+    transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type="checkbox"].switch_1:checked:after{
+    left: calc(100% - 1.2em);
+}

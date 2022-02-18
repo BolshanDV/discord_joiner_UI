@@ -1,5 +1,4 @@
 <template>
-
     <div class="main_section">
       <modal-page v-if="popUpFlag"/>
       <div class="main_block task_manager">
@@ -53,19 +52,5 @@ name: "home",
   border-radius: 5px;
   background: rgba(8,13,22,0.6);
   padding: 1.5%;
-}
-.modal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -100px;
-  margin-top: -75px;
-  width: 100vh;
-}
-
-.modal_container {
-  background-color: #fff;
-  width: 200px;
-  height: 150px;
 }
 </style>
