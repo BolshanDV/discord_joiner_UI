@@ -31,7 +31,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color btn_stop"
-              @click="ADD_TOKENS(text)"
+              @click="EXTRACT_AND_VALIDATE_TOKENS(text)"
           >
             Add
           </b-button>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['ADD_TOKENS'])
+    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_TOKENS'])
   }
 
 }

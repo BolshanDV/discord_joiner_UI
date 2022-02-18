@@ -30,7 +30,26 @@ export const actions = {
                 console.log("There was an error!", error);
             });
     },
-    ADD_TOKENS: (ctx, tokens) => {
-        console.log(tokens)
+    EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
+        const input = tokens.split(',');
+
+        for (const token of input) {
+            const status = await axios
+                .get('https://discord.com/api/users/@me', {
+                    withCredentials: true,
+                    headers: {
+                        'authorization': token
+                    }
+                }
+            ).then(response => {
+                return response.status;
+                })
+
+            if (status !== 200) {
+                console.error(`Some error happened with token ${token}`);
+
+                break;
+            }
+        }
     }
 }
