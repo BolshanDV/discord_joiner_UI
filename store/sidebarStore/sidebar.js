@@ -11,11 +11,6 @@ export const state = () => ({
             url: '/massageBumper',
             icon: 'messageBumper.svg'
         },
-        {
-            title: 'Settings',
-            url: '/settings',
-            icon: 'setting.svg'
-        },
 
     ]
 })

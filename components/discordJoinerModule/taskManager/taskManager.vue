@@ -5,23 +5,62 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title">
-        Task name
+        Server id
       </div>
       <div class="work_space_element row_position">
-        <b-form-input v-model="taskName" placeholder="Enter your task name" class="input_element"></b-form-input>
+        <b-form-input v-model="taskName" placeholder="Enter your server id" class="input_element"></b-form-input>
       </div>
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
-      <div class="work_space_element row_position">
-        <b-form-input v-model="accountsTokensList" placeholder="Enter accounts tokens list" class="input_element"></b-form-input>
+      <div class="row_position ">
+        <div class="work_space_element input_element_item">
+          <b-form-input v-model="accountsTokensList" placeholder="Enter tokens" class="input_element"></b-form-input>
+        </div>
+        <div class="additional_functional work_space_element item"
+             @click="POPUP_DISPLAY"
+        >
+          <img src="../../../assets/icons/download.svg" alt="icon" class="">
+        </div>
+        <div class="additional_functional work_space_element">
+          <img src="../../../assets/icons/add.svg" alt="icon" class="">
+        </div>
       </div>
+
       <div class="work_space_element_title">
         Proxy list
       </div>
-      <div class="work_space_element row_position">
-        <b-form-input v-model="proxyList" placeholder="Enter proxy list" class="input_element"></b-form-input>
+      <div class="row_position ">
+        <div class="work_space_element input_element_item">
+          <b-form-input v-model="accountsTokensList" placeholder="Enter proxy" class="input_element"></b-form-input>
+        </div>
+        <div class="additional_functional work_space_element item"
+        >
+          <img src="../../../assets/icons/download.svg" alt="icon" class="">
+        </div>
+        <div class="additional_functional work_space_element">
+          <img src="../../../assets/icons/add.svg" alt="icon" class="">
+        </div>
       </div>
+      <div class="row_position work_space_element_advent row_position_input">
+        <div class="delay">
+          <div class="work_space_element_title">
+            Delay
+          </div>
+          <div class="work_space_element row_position">
+            <b-form-input v-model="taskName" placeholder="delay" class="input_element"></b-form-input>
+          </div>
+        </div>
+        <div>
+          <div class="work_space_element_title">
+            Invites per task
+          </div>
+          <div class="work_space_element row_position">
+            <b-form-input v-model="taskName" placeholder="Invites per task" class="input_element"></b-form-input>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="work_space">
       <div class="row_position work_space_element_advent">
@@ -70,7 +109,7 @@
 <script>
 import reactionClicker from "./reactionClicker";
 import sendCommand from "./sendCommand";
-import {mapActions} from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskManager",
   components: {
@@ -81,13 +120,14 @@ name: "taskManager",
     return {
       selectedTaskManager: false,
       selectedReactionClicker: false,
-      taskName: 'fC58BsPDFU',
-      accountsTokensList: 'NjkyMzI0NjYyODI2MjM3OTcy.YaKYPA.ukmjaaKrpb8teiOUVzyWNKlFcp8',
+      taskName: '',
+      accountsTokensList: '',
       proxyList: ''
     }
   },
   methods: {
-    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK'])
+    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK']),
+    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY'])
   }
 }
 </script>
@@ -103,14 +143,14 @@ name: "taskManager",
   background: rgba(22,30,41,0.6);
   border-radius: 3px;
   height: 6%;
-  margin-top: 2.75%;
-
 }
 .work_space_element_title{
   margin-top: 3.75%;
+  margin-bottom: 2.75%;
 }
 .work_space_element_advent{
   justify-content: space-between;
+  align-items: center;
 }
 .row_position_btn{
   justify-content: flex-end;
@@ -123,10 +163,29 @@ name: "taskManager",
   border-radius: 4px;
   color: #CCCCCC;
   width: 35%;
+  height: ;
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);
   border-width: 0;
   color: #CCCCCC;
+}
+
+.additional_functional {
+  background: rgba(22,30,41,0.6);
+  border-radius: 3px;
+  padding: 2.75%;
+}
+.item{
+  margin: 0 3%;
+}
+.input_element_item{
+  width: 80%;
+}
+.delay{
+  margin-right: 2%;
+}
+.row_position_input{
+  margin-top: 2%;
 }
 </style>

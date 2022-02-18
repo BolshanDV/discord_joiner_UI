@@ -21,7 +21,7 @@ export default {
   name: "default",
   components: {
     Sidebar,
-    navbar
+    navbar,
   }
 }
 </script>

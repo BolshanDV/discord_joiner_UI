@@ -1,10 +1,16 @@
 import axios from "axios";
 
 export const state = () => ({
-
+    popUpFlag: false,
 })
 
 export const getters = {
+    popUpFlag: state => state.popUpFlag,
+}
+export const mutations = {
+    POPUP_DISPLAY: (state) => {
+        state.popUpFlag = !state.popUpFlag
+    }
 }
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
@@ -21,9 +27,10 @@ export const actions = {
                 }
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
-
+    },
+    ADD_TOKENS: (ctx, tokens) => {
+        console.log(tokens)
     }
 }
