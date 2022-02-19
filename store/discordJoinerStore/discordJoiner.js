@@ -2,42 +2,73 @@ import axios from "axios";
 
 export const state = () => ({
     popUpFlag: false,
-    tokensLists: []
+    tokens: null,
+    errorToken: null,
+    successJoined: [],
+    globalStatus: false
 })
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
-    tokensLists: state => state.tokensLists
 }
 export const mutations = {
     POPUP_DISPLAY: (state) => {
         state.popUpFlag = !state.popUpFlag
     },
-
-    ADD_TOKEN: (state, newToken) => {
-        state.tokensLists.push(newToken)
+    SAVE_TOKENS: (state, tokens) => {
+        state.tokens = tokens;
+    },
+    SAVE_ERROR_TOKEN: (state, token) => {
+        state.errorToken = token;
+    },
+    ADD_SUCCESS_TOKEN: (state, token) => {
+        state.successJoined.push(token);
+    },
+    SWITCH_GLOBAL_STATUS: (state, status) => {
+        state.globalStatus = status;
     }
+
 }
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
-        console.log(parameters)
-        return await axios
-            .post(`${parameters.taskName}`, {}, {
-                withCredentials: true,
-                headers:{
-                    'authorization': parameters.accountsTokensList
-                }
-            })
-            .then(response =>{
-                console.log(response)
-                }
-            )
-            .catch(error => {
-                console.log("There was an error!", error);
-            });
+        const {inviteCode, tokens} = parameters;
+        let errorToken = null;
+
+        for (const token in tokens) {
+            const status = await axios
+                .post(`https://discord.com/api/v9/invites/${inviteCode}`, {}, {
+                    withCredentials: true,
+                    headers: {
+                        'authorization': token
+                    }
+                }).then(response => {
+                    return response.status;
+                })
+
+            if (status !== 200) {
+                console.error(`Some error happened with token ${token}`);
+
+                errorToken = token;
+
+                break;
+            } else {
+                ctx.commit('ADD_SUCCESS_TOKEN', token);
+            }
+        }
+
+        if (errorToken != null) {
+            ctx.commit('SAVE_ERROR_TOKEN', errorToken);
+            ctx.commit('SWITCH_GLOBAL_STATUS', false);
+
+            return;
+        }
+
+        ctx.commit('SWITCH_GLOBAL_STATUS', true);
     },
+
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
-        const input = tokens.split(',');
+        let input = tokens.split(',');
+        let errorToken = null;
 
         for (const token of input) {
             const status = await axios
@@ -54,8 +85,21 @@ export const actions = {
             if (status !== 200) {
                 console.error(`Some error happened with token ${token}`);
 
+                errorToken = token;
+                input = null;
+
                 break;
             }
         }
+
+        if (input != null) {
+            ctx.commit('SAVE_TOKENS', input);
+
+            return;
+        }
+
+        ctx.commit('SAVE_ERROR_TOKEN', errorToken);
     }
 }
+
+
