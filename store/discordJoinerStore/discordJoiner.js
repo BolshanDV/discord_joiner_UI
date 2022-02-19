@@ -2,14 +2,20 @@ import axios from "axios";
 
 export const state = () => ({
     popUpFlag: false,
+    tokensLists: []
 })
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
+    tokensLists: state => state.tokensLists
 }
 export const mutations = {
     POPUP_DISPLAY: (state) => {
         state.popUpFlag = !state.popUpFlag
+    },
+
+    ADD_TOKEN: (state, newToken) => {
+        state.tokensLists.push(newToken)
     }
 }
 export const actions = {

@@ -3,6 +3,7 @@
     <div>
       <p class="title">Task Manager</p>
     </div>
+
     <div class="work_space column">
       <div class="work_space_element_title">
         Invite code
@@ -10,15 +11,36 @@
       <div class="work_space_element row_position">
         <b-form-input v-model="taskName" placeholder="Enter invite code" class="input_element"></b-form-input>
       </div>
+
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
       <div class="row_position ">
         <div class="work_space_element input_element_item">
-          <b-form-input v-model="accountsTokensList" placeholder="Enter tokens" class="input_element"></b-form-input>
+
+          <b-form-input v-model="accountTokenList" placeholder="Enter tokens" class="input_element"></b-form-input>
         </div>
         <div class="additional_functional work_space_element item"
              @click="POPUP_DISPLAY"
+        >
+          <img src="../../../assets/icons/download.svg" alt="icon" class="">
+        </div>
+        <div class="additional_functional work_space_element"
+             @click="ADD_TOKEN_WITH_CLEAR"
+        >
+          <img src="../../../assets/icons/add.svg" alt="icon" class="">
+        </div>
+        <div>{{tokensLists}}</div>
+      </div>
+
+      <div class="work_space_element_title">
+        Proxy list
+      </div>
+      <div class="row_position ">
+        <div class="work_space_element input_element_item">
+          <b-form-input v-model="proxyList" placeholder="Enter proxy" class="input_element"></b-form-input>
+        </div>
+        <div class="additional_functional work_space_element item"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
@@ -27,28 +49,13 @@
         </div>
       </div>
 
-      <div class="work_space_element_title">
-        Proxy list
-      </div>
-      <div class="row_position ">
-        <div class="work_space_element input_element_item">
-          <b-form-input v-model="accountsTokensList" placeholder="Enter proxy" class="input_element"></b-form-input>
-        </div>
-        <div class="additional_functional work_space_element item"
-        >
-          <img src="../../../assets/icons/download.svg" alt="icon" class="">
-        </div>
-        <div class="additional_functional work_space_element">
-          <img src="../../../assets/icons/add.svg" alt="icon" class="">
-        </div>
-      </div>
       <div class="row_position work_space_element_advent row_position_input">
         <div class="delay">
           <div class="work_space_element_title">
             Delay
           </div>
           <div class="work_space_element row_position">
-            <b-form-input v-model="taskName" placeholder="delay" class="input_element"></b-form-input>
+            <b-form-input v-model="delay" placeholder="delay" class="input_element"></b-form-input>
           </div>
         </div>
         <div>
@@ -56,7 +63,7 @@
             Invites per task
           </div>
           <div class="work_space_element row_position">
-            <b-form-input v-model="taskName" placeholder="Invites per task" class="input_element"></b-form-input>
+            <b-form-input v-model="invitesPerTask" placeholder="Invites per task" class="input_element"></b-form-input>
           </div>
         </div>
       </div>
@@ -71,10 +78,9 @@
           </label>
         </div>
       </div>
-        <reaction-clicker v-if="selectedReactionClicker"/>
-
-
+      <reaction-clicker v-if="selectedReactionClicker"/>
     </div>
+
     <div class="work_space">
       <div class="row_position work_space_element_advent">
         <div>Send Command</div>
@@ -88,21 +94,16 @@
       <div class="row_position row_position_btn_form"
            @click="CREATE_TASK({taskName, accountsTokensList})"
       >
-
         Create task
       </div>
     </div>
-
-
   </div>
-
-
 </template>
 
 <script>
 import reactionClicker from "./reactionClicker";
 import sendCommand from "./sendCommand";
-import {mapActions, mapMutations} from 'vuex'
+import {mapActions, mapMutations, mapGetters} from 'vuex'
 export default {
 name: "taskManager",
   components: {
@@ -114,13 +115,23 @@ name: "taskManager",
       selectedTaskManager: false,
       selectedReactionClicker: false,
       taskName: '',
-      accountsTokensList: '',
-      proxyList: ''
+      accountTokenList: '',
+      proxyList: '',
+      delay: '',
+      invitesPerTask: ''
+
     }
+  },
+  computed: {
+    ...mapGetters('discordJoinerStore/discordJoiner', ['tokensLists'])
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY'])
+    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY', 'ADD_TOKEN']),
+    ADD_TOKEN_WITH_CLEAR() {
+      this.ADD_TOKEN(this.accountTokenList);
+      this.accountTokenList = ""
+    }
   }
 }
 </script>
