@@ -21,7 +21,8 @@ export default {
   css: [
       'assets/style/fonts.css',
       'assets/transitions/transition.css',
-      'assets/style/checkbox.css'
+      'assets/style/checkbox.css',
+      'assets/style/input.css'
 ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

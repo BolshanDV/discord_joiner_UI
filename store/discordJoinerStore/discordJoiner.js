@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const state = () => ({
     popUpFlag: false,
-    tokens: null,
+    tokens: [],
     errorToken: null,
     successJoined: [],
     globalStatus: false
@@ -10,6 +10,7 @@ export const state = () => ({
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
+    tokens: state => state.tokens
 }
 export const mutations = {
     POPUP_DISPLAY: (state) => {
@@ -20,6 +21,9 @@ export const mutations = {
     },
     SAVE_ERROR_TOKEN: (state, token) => {
         state.errorToken = token;
+    },
+    SAVE_SINGLE_TOKEN: (state, token) => {
+        state.tokens.push(token)
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         state.successJoined.push(token);
@@ -99,6 +103,37 @@ export const actions = {
         }
 
         ctx.commit('SAVE_ERROR_TOKEN', errorToken);
+    },
+
+    VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
+        let errorToken = null;
+
+        const status = await axios
+            .get('https://discord.com/api/users/@me', {
+                    withCredentials: true,
+                    headers: {
+                        'authorization': token
+                    }
+                }
+            )
+            .then(response => {
+                return response.status;
+            })
+            .catch(error => {
+                console.log("There was an error!", error);
+            }
+    )
+
+        if (status !== 200) {
+            console.log(`Some error happened with token ${token}`);
+
+            errorToken = token;
+            ctx.commit('SAVE_ERROR_TOKEN', errorToken);
+
+            return;
+        }
+
+        ctx.commit('SAVE_SINGLE_TOKEN', token);
     }
 }
 

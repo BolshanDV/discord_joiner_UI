@@ -8,18 +8,26 @@
       <div class="work_space_element_title">
         Invite code
       </div>
-      <div class="work_space_element row_position">
-        <b-form-input v-model="taskName" placeholder="Enter invite code" class="input_element"></b-form-input>
-      </div>
+        <div class="text-field__icon">
+          <input class="text-field__input" type="search" v-model="taskName" name="search" placeholder="Enter invite code" value="css уроки">
+        </div>
 
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
       <div class="row_position ">
         <div class="work_space_element input_element_item">
-
-          <b-form-input v-model="accountTokenList" placeholder="Enter tokens" class="input_element"></b-form-input>
+          <div class="text-field__icon">
+            <input class="text-field__input" type="search" name="search" placeholder="Enter tokens list" value="css уроки">
+<!--            <span class="text-field__aicon">-->
+<!--              //TODO svg-->
+<!--            </span>-->
+          </div>
         </div>
+
+
+
+
         <div class="additional_functional work_space_element item"
              @click="POPUP_DISPLAY"
         >
@@ -30,7 +38,6 @@
         >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
         </div>
-        <div>{{tokensLists}}</div>
       </div>
 
       <div class="work_space_element_title">
@@ -115,7 +122,7 @@ name: "taskManager",
       selectedTaskManager: false,
       selectedReactionClicker: false,
       taskName: '',
-      accountTokenList: '',
+      token: '',
       proxyList: '',
       delay: '',
       invitesPerTask: ''
@@ -123,14 +130,14 @@ name: "taskManager",
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['tokensLists'])
+    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens'])
   },
   methods: {
-    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY', 'ADD_TOKEN']),
+    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
+    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY']),
     ADD_TOKEN_WITH_CLEAR() {
-      this.ADD_TOKEN(this.accountTokenList);
-      this.accountTokenList = ""
+      this.VALIDATE_SINGLE_TOKEN(this.token);
+      this.token = ""
     }
   }
 }
