@@ -9,25 +9,24 @@
         Invite code
       </div>
         <div class="text-field__icon">
-          <input class="text-field__input" type="search" v-model="taskName" name="search" placeholder="Enter invite code" value="css уроки">
-        </div>
+          <input class="text-field__input input_element" type="search" v-model="taskName" name="search" placeholder="Enter invite code">
 
+        </div>
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
       <div class="row_position ">
-        <div class="work_space_element input_element_item">
+        <div class=" input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input" type="search" name="search" placeholder="Enter tokens list" value="css уроки">
-<!--            <span class="text-field__aicon">-->
-<!--              //TODO svg-->
-<!--            </span>-->
+            <input class="text-field__input input_element" v-model="token" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+            <div
+                class="text-field__aicon"
+                @click="DROP_DOWN_LIST_WITH_TOKEN"
+            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlag}">
+            </div>
+
           </div>
         </div>
-
-
-
-
         <div class="additional_functional work_space_element item"
              @click="POPUP_DISPLAY"
         >
@@ -39,13 +38,37 @@
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
         </div>
       </div>
+      <div>
+        <div class="scroll column"
+             v-if="dropDownMenuFlag"
+        >
+          <div
+              class="row_position mini_element scroll_item"
+              v-for="(token, index) in tokens"
+              :key="index"
+          >
+            <div class="scroll scroll_horizontal">
+              <div class="scroll_item">{{token}}</div>
+            </div>
+
+                <div
+                    @click="DELETE_TOKEN_FROM_LIST(index)"
+                >
+                  <img src="../../../assets/icons/cross.svg" alt="">
+                </div>
+
+          </div>
+        </div>
+      </div>
+
+
 
       <div class="work_space_element_title">
         Proxy list
       </div>
       <div class="row_position ">
-        <div class="work_space_element input_element_item">
-          <b-form-input v-model="proxyList" placeholder="Enter proxy" class="input_element"></b-form-input>
+        <div class="input_element_item">
+          <input class="text-field__input input_element" v-model="proxyList" placeholder="Enter proxy" type="search" name="search">
         </div>
         <div class="additional_functional work_space_element item"
         >
@@ -62,7 +85,7 @@
             Delay
           </div>
           <div class="work_space_element row_position">
-            <b-form-input v-model="delay" placeholder="delay" class="input_element"></b-form-input>
+              <input class="text-field__input input_element"  v-model="delay" placeholder="delay" type="search" name="search">
           </div>
         </div>
         <div>
@@ -70,7 +93,7 @@
             Invites per task
           </div>
           <div class="work_space_element row_position">
-            <b-form-input v-model="invitesPerTask" placeholder="Invites per task" class="input_element"></b-form-input>
+            <input class="text-field__input input_element" v-model="invitesPerTask" placeholder="Invites per task" type="search" name="search">
           </div>
         </div>
       </div>
@@ -80,9 +103,7 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker</div>
         <div>
-          <label>
             <input type="checkbox" class="switch_1" v-model='selectedReactionClicker'>
-          </label>
         </div>
       </div>
       <reaction-clicker v-if="selectedReactionClicker"/>
@@ -130,11 +151,11 @@ name: "taskManager",
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens'])
+    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens', 'dropDownMenuFlag'])
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY']),
+    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY', 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST']),
     ADD_TOKEN_WITH_CLEAR() {
       this.VALIDATE_SINGLE_TOKEN(this.token);
       this.token = ""
@@ -201,5 +222,37 @@ name: "taskManager",
 }
 .row_position_input{
   margin-top: 2%;
+  align-items: center;
+}
+.scroll{
+  margin-top: 1%;
+  overflow-x: auto;
+  scroll-snap-type: y;
+  scrollbar-width: none;
+  max-height: 200px;
+  position: absolute;
+  width: 20%;
+  padding: 0.5%;
+  z-index: 2;
+  background-color: #0D121A;
+  border-radius: 5px;
+
+}
+.scroll::-webkit-scrollbar {
+  width: 0;
+}
+.mini_element{
+  background: #161e29;
+  border-radius: 3px;
+  padding: 2% 3%;
+  margin: 1% 1.75%;
+  justify-content: space-between;
+  align-items: center;
+}
+.row_rotate{
+  transform: rotate(180deg);
+}
+.scroll_horizontal{
+
 }
 </style>

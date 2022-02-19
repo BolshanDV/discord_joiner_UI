@@ -6,9 +6,7 @@
 .text-field__input {
     display: block;
     width: 100%;
-    /*height: calc(2.25rem + 2px);*/
-    /*padding: 0.375rem 0.75rem;*/
-    padding: 2.75%;
+    padding: 1vh;
     font-family: inherit;
     font-size: 1rem;
     font-weight: 400;
@@ -46,8 +44,8 @@
 
 .text-field__input:disabled,
 .text-field__input[readonly] {
-    background-color: #f5f5f5;
-    opacity: 1;
+    background-color: #161E29;
+    opacity: 5;
 }
 
 /* active icon - 1 вариант */
@@ -62,13 +60,14 @@
 .text-field__aicon {
     position: absolute;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     top: 0;
     bottom: 0;
-    right: 0.875rem;
+    right: 1rem;
     width: 1rem;
     cursor: pointer;
-    color: #bdbdbd;
+    color: #CCCCCC;
     transition: color 0.15s ease-in-out;
 }
 

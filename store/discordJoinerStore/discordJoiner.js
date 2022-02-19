@@ -5,12 +5,14 @@ export const state = () => ({
     tokens: [],
     errorToken: null,
     successJoined: [],
-    globalStatus: false
+    globalStatus: false,
+    dropDownMenuFlag: false
 })
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
-    tokens: state => state.tokens
+    tokens: state => state.tokens,
+    dropDownMenuFlag: state => state.dropDownMenuFlag
 }
 export const mutations = {
     POPUP_DISPLAY: (state) => {
@@ -30,6 +32,12 @@ export const mutations = {
     },
     SWITCH_GLOBAL_STATUS: (state, status) => {
         state.globalStatus = status;
+    },
+    DROP_DOWN_LIST_WITH_TOKEN: (state) => {
+        state.dropDownMenuFlag = !state.dropDownMenuFlag
+    },
+    DELETE_TOKEN_FROM_LIST: (state, index) => {
+        state.tokens.splice(index, 1)
     }
 
 }
@@ -107,7 +115,7 @@ export const actions = {
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
         let errorToken = null;
-
+        ctx.commit('SAVE_SINGLE_TOKEN', token);
         const status = await axios
             .get('https://discord.com/api/users/@me', {
                     withCredentials: true,
