@@ -5,29 +5,19 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title row_position work_space_element_advent " >
-        <div class="row_position ">Task name</div>
-        <div class="row_position ">Task Status</div>
+        <div class="row_position item">Task name</div>
+        <div class="row_position item">Task Status</div>
         <div class="row_position column_item">Actions</div>
       </div>
       <div class="work_space_element row_position work_space_element_advent">
-        <div class="row_position ">Nask1</div>
-        <div class="row_position ">All accounts joined</div>
+        <div class="row_position item">Nask1</div>
+        <div class="row_position item">All accounts joined</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
           <div class="icon_element"><img src="../../assets/icons/delete.svg" alt="" ></div>
           <div class="icon_element"><img src="../../assets/icons/play.svg" alt="" ></div>
         </div>
       </div>
-      <div class="work_space_element row_position work_space_element_advent">
-        <div class="row_position ">Nask1</div>
-        <div class="row_position ">All accounts joined</div>
-        <div class="row_position column_item">
-          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
-          <div class="icon_element"><img src="../../assets/icons/delete.svg" alt="" ></div>
-          <div class="icon_element"><img src="../../assets/icons/play.svg" alt="" ></div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -66,5 +56,11 @@ name: "taskStatus"
 }
 .column_item{
   width: 15%;
+}
+.work_space_element_title{
+  padding: 0 2%;
+}
+.item{
+  width: 30%;
 }
 </style>

@@ -24,8 +24,15 @@
         Accounts tokens list
       </div>
       <div class="row_position ">
-        <div class="work_space_element input_element_item">
-          <b-form-input placeholder="Enter tokens" class="input_element"></b-form-input>
+        <div class=" input_element_item">
+          <div class="text-field__icon">
+            <input class="text-field__input input_element" v-model="tokenList" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+            <div
+                class="text-field__aicon"
+            ><img src="../../assets/icons/row.svg" alt="">
+            </div>
+
+          </div>
         </div>
         <div class="additional_functional work_space_element item"
         >
@@ -33,15 +40,14 @@
         </div>
         <div class="additional_functional work_space_element">
           <img src="../../assets/icons/add.svg" alt="">
-
         </div>
       </div>
 
       <div class="work_space_element_title">
         Delay
       </div>
-      <div class="work_space_element row_position">
-        <b-form-input placeholder="Enter delay" class="input_element"></b-form-input>
+      <div class="text-field">
+        <input class="text-field__input input_element" v-model="delay" autocomplete="off" placeholder="Enter delay" type="search" name="search">
       </div>
     </div>
     <div class="work_space column">
@@ -51,8 +57,8 @@
           <input type="checkbox" class="switch_1" >
         </div>
       </div>
-      <div class="work_space_element row_position">
-        <b-form-input placeholder="30sec" class="input_element"></b-form-input>
+      <div class="text-field">
+        <input class="text-field__input input_element" v-model="deleteMasses" autocomplete="off" placeholder="30 (sec)" type="search" name="search">
       </div>
     </div>
     <div class="work_space column">
@@ -95,6 +101,13 @@
 <script>
 export default {
   name: "taskManagerBumper",
+  data() {
+    return {
+      tokenList: '',
+      delay: '',
+      deleteMasses: '',
+    }
+  },
 }
 </script>
 

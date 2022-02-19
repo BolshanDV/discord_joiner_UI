@@ -30,21 +30,6 @@ export default {
 </script>
 
 <style scoped>
-.work_space{
-  background: rgba(16,23,34,0.6);
-  border-radius: 5px;
-  padding: 3%;
-  margin-top: 2%;
-  /*width: 100%;*/
-}
-.work_space_element{
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  height: 6%;
-  padding: 2%;
-  margin-top: 2.75%;
-
-}
 .work_space_element_title{
   margin-top: 3.75%;
   margin-bottom: 2.75%;
