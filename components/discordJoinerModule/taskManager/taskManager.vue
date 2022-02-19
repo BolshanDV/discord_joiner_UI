@@ -40,14 +40,14 @@
       </div>
       <div>
         <div class="scroll column"
-             v-if="dropDownMenuFlag"
+             v-if="dropDownMenuFlag && (tokens.length !== 0)"
         >
           <div
               class="row_position mini_element scroll_item"
               v-for="(token, index) in tokens"
               :key="index"
           >
-            <div class="scroll scroll_horizontal">
+            <div class="scroll_horizontal row_position">
               <div class="scroll_item">{{token}}</div>
             </div>
 
@@ -68,7 +68,7 @@
       </div>
       <div class="row_position ">
         <div class="input_element_item">
-          <input class="text-field__input input_element" v-model="proxyList" placeholder="Enter proxy" type="search" name="search">
+          <input class="text-field__input input_element" v-model="proxyList" autocomplete="off" placeholder="Enter proxy" type="search" name="search">
         </div>
         <div class="additional_functional work_space_element item"
         >
@@ -85,7 +85,7 @@
             Delay
           </div>
           <div class="work_space_element row_position">
-              <input class="text-field__input input_element"  v-model="delay" placeholder="delay" type="search" name="search">
+              <input class="text-field__input input_element"  v-model="delay" autocomplete="off" placeholder="delay" type="search" name="search">
           </div>
         </div>
         <div>
@@ -93,7 +93,7 @@
             Invites per task
           </div>
           <div class="work_space_element row_position">
-            <input class="text-field__input input_element" v-model="invitesPerTask" placeholder="Invites per task" type="search" name="search">
+            <input class="text-field__input input_element" v-model="invitesPerTask" autocomplete="off" placeholder="Invites per task" type="search" name="search">
           </div>
         </div>
       </div>
@@ -225,21 +225,15 @@ name: "taskManager",
   align-items: center;
 }
 .scroll{
-  margin-top: 1%;
-  overflow-x: auto;
-  scroll-snap-type: y;
-  scrollbar-width: none;
-  max-height: 200px;
   position: absolute;
   width: 20%;
   padding: 0.5%;
   z-index: 2;
   background-color: #0D121A;
   border-radius: 5px;
-
 }
-.scroll::-webkit-scrollbar {
-  width: 0;
+.scroll_item{
+  height: 20%;
 }
 .mini_element{
   background: #161e29;
@@ -251,8 +245,5 @@ name: "taskManager",
 }
 .row_rotate{
   transform: rotate(180deg);
-}
-.scroll_horizontal{
-
 }
 </style>
