@@ -8,9 +8,8 @@
       <div class="work_space_element_title">
         Invite code
       </div>
-        <div class="text-field__icon">
-          <input class="text-field__input input_element" type="search" v-model="taskName" name="search" placeholder="Enter invite code">
-
+        <div class="text-field">
+          <input class="text-field__input input_element" v-model="taskName" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
         </div>
       <div class="work_space_element_title">
         Accounts tokens list

@@ -1,19 +1,17 @@
 <template>
   <div class="column">
     <div class="work_space_element_title">Channel id</div>
-    <div class="work_space_element row_position">
-      939163056561348638
-    </div>
+      <div class="text-field">
+        <input class="text-field__input input_element" v-model="channelId" autocomplete="off" placeholder="Enter channel id" type="search" name="search">
+      </div>
     <div class="work_space_element_title">Command</div>
-    <div class="work_space_element row_position">
-      /inviter jt85jsln
+    <div class="text-field">
+     <input class="text-field__input input_element" v-model="commandText" autocomplete="off" placeholder="Enter command" type="search" name="search">
     </div>
     <div class="row_position work_space_element_advent">
       <div>Send command only mode</div>
       <div>
-        <label>
-          <input type="checkbox" class="switch_1" >
-        </label>
+        <input type="checkbox" class="switch_1" >
       </div>
     </div>
   </div>
@@ -21,7 +19,13 @@
 
 <script>
 export default {
-  name: "reactionClicker"
+  name: "reactionClicker",
+  data() {
+    return {
+      channelId: '',
+      commandText: '',
+    }
+  },
 }
 </script>
 
@@ -43,6 +47,7 @@ export default {
 }
 .work_space_element_title{
   margin-top: 3.75%;
+  margin-bottom: 2.75%;
 }
 .work_space_element_advent{
   justify-content: space-between;

@@ -115,7 +115,6 @@ export const actions = {
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
         let errorToken = null;
-        ctx.commit('SAVE_SINGLE_TOKEN', token);
         const status = await axios
             .get('https://discord.com/api/users/@me', {
                     withCredentials: true,
