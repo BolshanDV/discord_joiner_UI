@@ -51,6 +51,7 @@
             </div>
 
                 <div
+                    class="cross_icon"
                     @click="DELETE_TOKEN_FROM_LIST(index)"
                 >
                   <img src="../../../assets/icons/cross.svg" alt="">
@@ -225,7 +226,7 @@ name: "taskManager",
 }
 .scroll{
   position: absolute;
-  width: 20%;
+  width: 21%;
   padding: 0.5%;
   z-index: 2;
   background-color: #0D121A;
@@ -244,5 +245,8 @@ name: "taskManager",
 }
 .row_rotate{
   transform: rotate(180deg);
+}
+.cross_icon{
+  margin-left: 4%;
 }
 </style>

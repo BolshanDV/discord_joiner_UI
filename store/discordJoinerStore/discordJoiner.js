@@ -3,7 +3,7 @@ import {validateAndExtractTokens, validateSingleToken} from "./validateService";
 
 export const state = () => ({
     popUpFlag: false,
-    tokens: [],
+    tokens: ['rgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrg'],
     errorToken: null,
     successJoined: [],
     globalStatus: false,
