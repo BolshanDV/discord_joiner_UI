@@ -1,4 +1,5 @@
 import axios from "axios";
+import {validateAndExtractTokens, validateSingleToken} from "./validateService";
 
 export const state = () => ({
     popUpFlag: false,
@@ -79,68 +80,19 @@ export const actions = {
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
-        let input = tokens.split(',');
-        let errorToken = null;
+        const {input, errorToken} = await validateAndExtractTokens(tokens);
 
-        for (const token of input) {
-            const status = await axios
-                .get('https://discord.com/api/users/@me', {
-                    withCredentials: true,
-                    headers: {
-                        'authorization': token
-                    }
-                }
-            ).then(response => {
-                return response.status;
-                })
-
-            if (status !== 200) {
-                console.error(`Some error happened with token ${token}`);
-
-                errorToken = token;
-                input = null;
-
-                break;
-            }
-        }
-
-        if (input != null) {
-            ctx.commit('SAVE_TOKENS', input);
-
-            return;
-        }
-
-        ctx.commit('SAVE_ERROR_TOKEN', errorToken);
+        (errorToken == null)
+            ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
+            : ctx.commit('SAVE_TOKENS', input);
     },
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
-        let errorToken = null;
-        const status = await axios
-            .get('https://discord.com/api/users/@me', {
-                    withCredentials: true,
-                    headers: {
-                        'authorization': token
-                    }
-                }
-            )
-            .then(response => {
-                return response.status;
-            })
-            .catch(error => {
-                console.log("There was an error!", error);
-            }
-    )
+        const {singleToken, errorToken} = validateSingleToken(token);
 
-        if (status !== 200) {
-            console.log(`Some error happened with token ${token}`);
-
-            errorToken = token;
-            ctx.commit('SAVE_ERROR_TOKEN', errorToken);
-
-            return;
-        }
-
-        ctx.commit('SAVE_SINGLE_TOKEN', token);
+        (errorToken == null)
+            ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
+            : ctx.commit('SAVE_SINGLE_TOKEN', singleToken);
     }
 }
 
