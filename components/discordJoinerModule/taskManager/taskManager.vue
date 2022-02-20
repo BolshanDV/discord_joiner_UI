@@ -21,12 +21,12 @@
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_TOKEN"
-            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlag}">
+            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForToken}">
             </div>
           </div>
         </div>
         <div class="additional_functional work_space_element item"
-             @click="POPUP_DISPLAY('Accounts tokens list 1')"
+             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
@@ -38,7 +38,7 @@
       </div>
       <div>
         <div class="scroll column"
-             v-if="dropDownMenuFlag && (tokens.length !== 0)"
+             v-if="dropDownMenuFlagForToken && (tokens.length !== 0)"
         >
           <div
               class="row_position mini_element scroll_item"
@@ -67,15 +67,47 @@
       </div>
       <div class="row_position ">
         <div class="input_element_item">
-          <input class="text-field__input input_element" v-model="proxyList" autocomplete="off" placeholder="Enter proxy" type="search" name="search">
+          <div class="text-field__icon">
+            <input class="text-field__input input_element" v-model="proxy" type="search" name="search"  autocomplete="off" placeholder="Enter proxy">
+            <div
+                class="text-field__aicon"
+                @click="DROP_DOWN_LIST_WITH_PROXY"
+            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForToken}">
+            </div>
+          </div>
         </div>
         <div class="additional_functional work_space_element item"
-             @click="POPUP_DISPLAY('Proxy list 1')"
+             @click="POPUP_DISPLAY('Proxy list')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
-        <div class="additional_functional work_space_element">
+        <div class="additional_functional work_space_element"
+             @click="ADD_PROXY_WITH_CLEAR(proxy)"
+        >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
+        </div>
+      </div>
+      <div>
+        <div class="scroll column"
+             v-if="dropDownMenuFlagForProxy && (proxyLists.length !== 0)"
+        >
+          <div
+              class="row_position mini_element scroll_item"
+              v-for="(proxy, index) in proxyLists"
+              :key="index"
+          >
+            <div class="scroll_horizontal row_position">
+              <div class="scroll_item">{{proxy}}</div>
+            </div>
+
+            <div
+                class="cross_icon"
+                @click="DELETE_PROXY_FROM_LIST(index)"
+            >
+              <img src="../../../assets/icons/cross.svg" alt="">
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -144,22 +176,26 @@ name: "taskManager",
       selectedReactionClicker: false,
       taskName: '',
       token: '',
-      proxyList: '',
+      proxy: '',
       delay: '',
       invitesPerTask: ''
 
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens', 'dropDownMenuFlag'])
+    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens', 'dropDownMenuFlagForToken', 'proxyLists', 'dropDownMenuFlagForProxy'])
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discordJoiner', [ 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST']),
+    ...mapMutations('discordJoinerStore/discordJoiner', [ 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST', 'ADD_PROXY', 'DELETE_PROXY_FROM_LIST', 'DROP_DOWN_LIST_WITH_PROXY']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ADD_TOKEN_WITH_CLEAR() {
       this.VALIDATE_SINGLE_TOKEN(this.token);
       this.token = ""
+    },
+    ADD_PROXY_WITH_CLEAR(proxy) {
+      this.ADD_PROXY(proxy);
+      this.proxy = ''
     }
   }
 }

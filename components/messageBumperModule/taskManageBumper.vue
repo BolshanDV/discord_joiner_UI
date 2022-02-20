@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item"
-             @click="POPUP_DISPLAY('Accounts tokens list 2')"
+             @click="POPUP_DISPLAY('Accounts tokens list Message Bumper')"
         >
           <img src="../../assets/icons/download.svg" alt="">
         </div>

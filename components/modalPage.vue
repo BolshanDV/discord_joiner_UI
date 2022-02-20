@@ -28,7 +28,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color btn_stop"
-              @click="EXTRACT_AND_VALIDATE_TOKENS(text)"
+              @click="EXTRACT_AND_VALIDATE(text)"
           >
             Add
           </b-button>
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_TOKENS'])
+    ...mapActions('popUpStore/popUp', ['EXTRACT_AND_VALIDATE'])
   }
 
 }
