@@ -3,8 +3,13 @@
     <div class="work_space_element_title row_position work_space_element_advent">
       <div>Message list</div>
       <div>
-        <img src="../../assets/icons/download.svg" alt="">
-        <img src="../../assets/icons/download.svg" alt="" class="mini_element_icons" style="transform: rotate(180deg)">
+        <img src="../../assets/icons/download.svg" alt=""
+             @click="POPUP_DISPLAY('Message list 2')"
+        >
+        <img src="../../assets/icons/download.svg" alt=""
+             class="mini_element_icons"
+             style="transform: rotate(180deg)"
+        >
       </div>
     </div>
     <div class="text-field__icon">
@@ -38,18 +43,23 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
+import modalPage from "../modalPage";
 export default {
 name: "messageList",
+  components: {
+    modalPage
+  },
   data() {
     return {
       message: '',
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper', ['messageList'])
+    ...mapGetters('messageBumperStore/messageBumper', ['messageList']),
   },
   methods: {
     ...mapMutations('messageBumperStore/messageBumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
+    ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message){
       this.ADD_MESSAGE_TO_LISTS(message);
       this.message = ''

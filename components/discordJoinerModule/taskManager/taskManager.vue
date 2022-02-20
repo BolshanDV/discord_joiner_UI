@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item"
-             @click="POPUP_DISPLAY"
+             @click="POPUP_DISPLAY('Accounts tokens list 1')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
@@ -70,6 +70,7 @@
           <input class="text-field__input input_element" v-model="proxyList" autocomplete="off" placeholder="Enter proxy" type="search" name="search">
         </div>
         <div class="additional_functional work_space_element item"
+             @click="POPUP_DISPLAY('Proxy list 1')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
@@ -154,7 +155,8 @@ name: "taskManager",
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY', 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST']),
+    ...mapMutations('discordJoinerStore/discordJoiner', [ 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST']),
+    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ADD_TOKEN_WITH_CLEAR() {
       this.VALIDATE_SINGLE_TOKEN(this.token);
       this.token = ""

@@ -2,7 +2,6 @@ import axios from "axios";
 import {validateAndExtractTokens, validateSingleToken} from "./validateService";
 
 export const state = () => ({
-    popUpFlag: false,
     tokens: [],
     errorToken: null,
     successJoined: [],
@@ -11,14 +10,10 @@ export const state = () => ({
 })
 
 export const getters = {
-    popUpFlag: state => state.popUpFlag,
     tokens: state => state.tokens,
     dropDownMenuFlag: state => state.dropDownMenuFlag,
 }
 export const mutations = {
-    POPUP_DISPLAY: (state) => {
-        state.popUpFlag = !state.popUpFlag
-    },
     SAVE_TOKENS: (state, tokens) => {
         state.tokens = tokens;
     },
