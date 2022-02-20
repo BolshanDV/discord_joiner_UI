@@ -9,7 +9,7 @@
         Invite code
       </div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="taskName" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
+          <input class="text-field__input input_element" v-model="inviteCode" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
         </div>
       <div class="work_space_element_title">
         Accounts tokens list
@@ -38,7 +38,7 @@
       </div>
       <div>
         <div class="scroll column"
-             v-if="dropDownMenuFlag && (tokens.length !== 0)"
+             v-if="dropDownMenuFlag"
         >
           <div
               class="row_position mini_element scroll_item"
@@ -119,7 +119,7 @@
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-           @click="CREATE_TASK({taskName, accountsTokensList})"
+           @click="CREATE_TASK({inviteCode, tokens})"
       >
         Create task
       </div>
@@ -141,7 +141,7 @@ name: "taskManager",
     return {
       selectedTaskManager: false,
       selectedReactionClicker: false,
-      taskName: '',
+      inviteCode: '',
       token: '',
       proxyList: '',
       delay: '',

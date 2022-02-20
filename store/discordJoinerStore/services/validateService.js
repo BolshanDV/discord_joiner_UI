@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function validateAndExtractTokens(tokens) {
         let input = tokens.split(',');
-        let errorToken = null;
+        let errorToken = undefined;
 
         for (const token of input) {
             const status = await axios
@@ -19,7 +19,7 @@ export async function validateAndExtractTokens(tokens) {
             if (status !== 200) {
                 console.error(`Some error happened with token ${token}`);
 
-                input = null;
+                input = undefined;
 
                 return { input: input, errorToken: errorToken };
             }
@@ -29,7 +29,7 @@ export async function validateAndExtractTokens(tokens) {
 }
 
 export async function validateSingleToken(singleToken) {
-    let errorToken = null;
+    let errorToken = undefined;
 
     const status = await axios
         .get('https://discord.com/api/users/@me', {
@@ -50,5 +50,5 @@ export async function validateSingleToken(singleToken) {
         errorToken = singleToken;
     }
 
-    return {singleToken: singleToken, errorToken: errorToken};
+    return { singleToken: singleToken, errorToken: errorToken };
 }

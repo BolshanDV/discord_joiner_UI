@@ -1,5 +1,6 @@
 import axios from "axios";
-import {validateAndExtractTokens, validateSingleToken} from "./validateService";
+import {validateAndExtractTokens, validateSingleToken} from "./services/validateService";
+import {solveCaptcha} from "./services/captchaService";
 
 export const state = () => ({
     popUpFlag: false,
@@ -45,9 +46,15 @@ export const mutations = {
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
         const {inviteCode, tokens} = parameters;
+        console.log(parameters);
+        const resp = await solveCaptcha();
+        console.log(resp);
+
         let errorToken = null;
 
-        for (const token in tokens) {
+        for (const token of tokens) {
+            console.log(token);
+
             const status = await axios
                 .post(`https://discord.com/api/v9/invites/${inviteCode}`, {}, {
                     withCredentials: true,
@@ -82,15 +89,15 @@ export const actions = {
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
         const {input, errorToken} = await validateAndExtractTokens(tokens);
 
-        (errorToken == null)
+        (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
             : ctx.commit('SAVE_TOKENS', input);
     },
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
-        const {singleToken, errorToken} = validateSingleToken(token);
+        const {singleToken, errorToken} = await validateSingleToken(token);
 
-        (errorToken == null)
+        (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
             : ctx.commit('SAVE_SINGLE_TOKEN', singleToken);
     }
