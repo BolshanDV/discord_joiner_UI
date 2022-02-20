@@ -29,7 +29,9 @@ export const mutations = {
     },
 }
 export const actions = {
-
+    DOWNLOADING_FILE: (ctx) => {
+        alert('Возможно сделаем тут копирование')
+    }
 }
 
 

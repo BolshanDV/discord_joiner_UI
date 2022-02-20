@@ -7,6 +7,7 @@
              @click="POPUP_DISPLAY('Message list 2')"
         >
         <img src="../../assets/icons/download.svg" alt=""
+             @click="DOWNLOADING_FILE"
              class="mini_element_icons"
              style="transform: rotate(180deg)"
         >
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../modalPage";
 export default {
 name: "messageList",
@@ -59,7 +60,8 @@ name: "messageList",
   },
   methods: {
     ...mapMutations('messageBumperStore/messageBumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
-    ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
+    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
+    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message){
       this.ADD_MESSAGE_TO_LISTS(message);
       this.message = ''

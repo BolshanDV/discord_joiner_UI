@@ -50,11 +50,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('popUpStore/popUp', ['namePopUp'])
+    ...mapGetters('popUpStore/popUp', ['namePopUp']),
+    ...mapGetters('messageBumperStore/messageBumper', ['messageList'])
   },
   methods: {
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('popUpStore/popUp', ['EXTRACT_AND_VALIDATE'])
+    ...mapActions('popUpStore/popUp', ['EXTRACT_AND_VALIDATE']),
   }
 
 }
