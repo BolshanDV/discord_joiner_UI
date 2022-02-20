@@ -23,7 +23,6 @@
                 @click="DROP_DOWN_LIST_WITH_TOKEN"
             ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlag}">
             </div>
-
           </div>
         </div>
         <div class="additional_functional work_space_element item"

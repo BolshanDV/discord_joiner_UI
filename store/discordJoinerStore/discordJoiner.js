@@ -7,13 +7,13 @@ export const state = () => ({
     errorToken: null,
     successJoined: [],
     globalStatus: false,
-    dropDownMenuFlag: false
+    dropDownMenuFlag: false,
 })
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
     tokens: state => state.tokens,
-    dropDownMenuFlag: state => state.dropDownMenuFlag
+    dropDownMenuFlag: state => state.dropDownMenuFlag,
 }
 export const mutations = {
     POPUP_DISPLAY: (state) => {
@@ -26,10 +26,10 @@ export const mutations = {
         state.errorToken = token;
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
-        state.tokens.push(token)
+        if (token !== 0 ) state.tokens.push(token)
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
-        state.successJoined.push(token);
+        if ( token !== 0) state.successJoined.push(token);
     },
     SWITCH_GLOBAL_STATUS: (state, status) => {
         state.globalStatus = status;
@@ -39,7 +39,7 @@ export const mutations = {
     },
     DELETE_TOKEN_FROM_LIST: (state, index) => {
         state.tokens.splice(index, 1)
-    }
+    },
 
 }
 export const actions = {

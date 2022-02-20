@@ -7,16 +7,32 @@
       <div class="work_space_element_title">
         Channels list
       </div>
-      <div class="work_space_element row_position space_element">
-        <div class="mini_element row_position">
-            <div><img src="../../assets/icons/cross.svg" alt=""></div>
-            <div class="mini_element_icons">#general</div>
-            <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+      <div class="text-field__icon">
+        <input class="text-field__input input_element" v-model="channelList" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+        <div
+            class="text-field__aicon"
+            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelList)"
+        ><img src="../../assets/icons/add.svg" alt="">
         </div>
-        <div class="mini_element row_position">
-          <div><img src="../../assets/icons/cross.svg" alt=""></div>
-          <div class="mini_element_icons">#general</div>
-          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
+
+      </div>
+      <div
+          class="work_space_element row_position space_element"
+          v-if="channelLists.length !== 0"
+      >
+        <div
+            class="mini_element row_position"
+            v-for="(channel, index) in channelLists"
+            :key="index"
+        >
+            <div><img src="../../assets/images/chennelImage.svg" alt=""></div>
+            <div class="mini_element_icons">#{{ channel }}</div>
+            <div
+                class="mini_element_icons"
+                @click="DELETE_CHANNEL(index)"
+            >
+              <img src="../../assets/icons/cross.svg" alt="">
+            </div>
         </div>
       </div>
 
@@ -61,30 +77,7 @@
         <input class="text-field__input input_element" v-model="deleteMasses" autocomplete="off" placeholder="30 (sec)" type="search" name="search">
       </div>
     </div>
-    <div class="work_space column">
-      <div class="work_space_element_title row_position work_space_element_advent">
-          <div>Message list</div>
-          <div>
-            <img src="../../assets/icons/download.svg" alt="">
-            <img src="../../assets/icons/download.svg" alt="" class="mini_element_icons" style="transform: rotate(180deg)">
-          </div>
-      </div>
-      <div class="work_space_element row_position space_element">
-        <div class="row_position mini_element">
-          <div>#general</div>
-          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
-        </div>
-        <div class="row_position mini_element">
-          <div>#general</div>
-          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
-        </div>
-        <div class="row_position mini_element">
-          <div>#general</div>
-          <div class="mini_element_icons"><img src="../../assets/icons/cross.svg" alt=""></div>
-        </div>
-       </div>
-
-    </div>
+    <message-list/>
     <div class="row_position row_position_btn">
       <b-button
           variant="outline-info"
@@ -99,15 +92,31 @@
 </template>
 
 <script>
+import messageList from "./messageList";
+import {mapMutations, mapGetters} from 'vuex'
 export default {
   name: "taskManagerBumper",
+  components: {
+    messageList
+  },
   data() {
     return {
       tokenList: '',
       delay: '',
       deleteMasses: '',
+      channelList: ''
     }
   },
+  computed: {
+    ...mapGetters('messageBumperStore/messageBumper', ['channelLists'])
+  },
+  methods: {
+    ...mapMutations('messageBumperStore/messageBumper', ['ADD_CHANNEL_TO_LISTS','DELETE_CHANNEL']),
+    ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
+      this.ADD_CHANNEL_TO_LISTS(channelItem);
+      this.channelList = ''
+    }
+  }
 }
 </script>
 

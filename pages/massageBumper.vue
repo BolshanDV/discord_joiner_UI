@@ -13,7 +13,7 @@
 <script>
 import taskLogsComponent from "../components/discordJoinerModule/taskLogs";
 import taskStatusComponent from "../components/discordJoinerModule/taskStatus";
-import taskManagerBumper from "../components/messageBumperModule/taskManagerBumper";
+import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
 export default {
   name: "home",
   components: {
