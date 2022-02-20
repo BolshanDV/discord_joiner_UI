@@ -6,10 +6,7 @@
         <div>
           <b-form-textarea
               id="textarea"
-              placeholder="Example:
-  ODcwNTM4NzcxNTA0OTc1ODgy.YQOOqA.UhiVDRz_9o73bS6lcS5dW5YyPwQ
-  ODcwNTM5MjQ5ODU2OTU4NDY1.YQOPGg.1_QVPO3dKWS4O7CUDQ7dIKi_RMc
-  ODcwNTM5NTI3NjQxNTI2Mjcz.YQOPXA.yaopn1QmVG-8YxD5EY23FA9P8tc"
+              placeholder="Enter"
               rows="3"
               v-model="text"
               max-rows="6"
@@ -23,7 +20,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color"
-              @click="POPUP_DISPLAY"
+              @click="POPUP_DISPLAY('')"
           >
             Close
           </b-button>
@@ -31,7 +28,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color btn_stop"
-              @click="EXTRACT_AND_VALIDATE_TOKENS(text)"
+              @click="EXTRACT_AND_VALIDATE(text)"
           >
             Add
           </b-button>
@@ -44,7 +41,7 @@
 </template>
 
 <script>
-import {mapMutations, mapActions} from 'vuex'
+import {mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
   name: "popUp",
   data(){
@@ -53,10 +50,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('popUpStore/popUp', ['namePopUp']),
+    ...mapGetters('messageBumperStore/messageBumper', ['messageList'])
   },
   methods: {
-    ...mapMutations('discordJoinerStore/discordJoiner', ['POPUP_DISPLAY']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_TOKENS'])
+    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
+    ...mapActions('popUpStore/popUp', ['EXTRACT_AND_VALIDATE']),
   }
 
 }
@@ -119,7 +118,7 @@ export default {
 .text-area{
   background-color: rgba(22,30,41,0.6);
   color: #CCCCCC;
-  height: 120%;
+  height: 20vh !important;
 }
 .row_position_btn_form{
   background: rgba(43, 214, 162, 0.2);

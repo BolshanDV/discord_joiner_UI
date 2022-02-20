@@ -17,12 +17,21 @@ export const mutations = {
     ADD_MESSAGE_TO_LISTS: (state, massageItem) => {
         if (massageItem !== '') state.messageList.push(massageItem)
     },
+    ADD_MESSAGE_ARR_TO_LISTS: (state, massageArr) => {
+        if (massageArr.length !== 0 ) {
+            massageArr.forEach(function (item) {
+                state.messageList.push(item)
+            })
+        }
+    },
     DELETE_MESSAGE: (state, index) => {
         state.messageList.splice(index, 1)
     },
 }
 export const actions = {
-
+    DOWNLOADING_FILE: (ctx) => {
+        alert('Возможно сделаем тут копирование')
+    }
 }
 
 

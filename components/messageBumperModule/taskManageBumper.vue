@@ -51,6 +51,7 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item"
+             @click="POPUP_DISPLAY('Accounts tokens list Message Bumper')"
         >
           <img src="../../assets/icons/download.svg" alt="">
         </div>
@@ -93,11 +94,13 @@
 
 <script>
 import messageList from "./messageList";
+import modalPage from "../modalPage";
 import {mapMutations, mapGetters} from 'vuex'
 export default {
   name: "taskManagerBumper",
   components: {
-    messageList
+    messageList,
+    modalPage
   },
   data() {
     return {
@@ -108,10 +111,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper', ['channelLists'])
+    ...mapGetters('messageBumperStore/messageBumper', ['channelLists']),
   },
   methods: {
     ...mapMutations('messageBumperStore/messageBumper', ['ADD_CHANNEL_TO_LISTS','DELETE_CHANNEL']),
+    ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
       this.ADD_CHANNEL_TO_LISTS(channelItem);
       this.channelList = ''

@@ -1,6 +1,5 @@
 <template>
     <div class="main_section">
-      <modal-page v-if="popUpFlag"/>
       <div class="main_block task_manager">
         <task-manager/>
       </div>
@@ -15,7 +14,7 @@
 import taskManager from "../components/discordJoinerModule/taskManager/taskManager";
 import taskLogs from "../components/discordJoinerModule/taskLogs";
 import taskStatus from "../components/discordJoinerModule/taskStatus";
-import modalPage from "../components/discordJoinerModule/modalPage";
+import modalPage from "../components/modalPage";
 import {mapGetters} from 'vuex'
 export default {
 name: "home",
@@ -26,7 +25,6 @@ name: "home",
     modalPage
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['popUpFlag'])
   }
 }
 </script>

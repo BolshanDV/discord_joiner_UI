@@ -14,13 +14,18 @@
 import taskLogsComponent from "../components/discordJoinerModule/taskLogs";
 import taskStatusComponent from "../components/discordJoinerModule/taskStatus";
 import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
+import modalPage from "../components/modalPage";
+import {mapGetters} from "vuex";
 export default {
   name: "home",
   components: {
     taskLogsComponent,
     taskStatusComponent,
-    taskManagerBumper
+    taskManagerBumper,
+    modalPage
   },
+  computed: {
+  }
 }
 </script>
 
