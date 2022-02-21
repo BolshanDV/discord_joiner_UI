@@ -1,31 +1,33 @@
 <template>
   <div>
     <div class="toasted">
-      <transition-group
+      <div
           class="error_block"
           name="slide-fade"
       >
-        <div>
-          scs
+        <div class="toasted_element error"
+             v-for="(toastedItem, index) in toasted"
+             :key="index"
+             @click="DELETE_TOASTED(index)"
+        >
+          <div class="content_text">{{toastedItem}}</div>
         </div>
-<!--        <div class="toasted_element"-->
-<!--             v-for="(arrayError, index) in arrayErrors"-->
-<!--             :key="arrayError.id"-->
-<!--             :class="arrayError.style"-->
-<!--             @click="DELETE_PUSH_UP(index)"-->
-<!--        >-->
-<!--          <div class="content_text">{{arrayError.text}}</div>-->
-<!--        </div>-->
-      </transition-group>
-
+<!--      </transition-group>-->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
 name: "toasted",
+  computed: {
+    ...mapGetters('toastedStore/toasted', ['toasted'])
+  },
+  methods: {
+    ...mapMutations('toastedStore/toasted', ['DELETE_TOASTED'])
+  }
 
 }
 </script>

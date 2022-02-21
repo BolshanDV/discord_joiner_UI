@@ -17,7 +17,7 @@
 
       </div>
       <div
-          class="work_space_element row_position space_element"
+          class="work_space_element row_position scroll space_element"
           v-if="channelLists.length !== 0"
       >
         <div
@@ -25,7 +25,7 @@
             v-for="(channel, index) in channelLists"
             :key="index"
         >
-            <div><img src="../../assets/images/chennelImage.svg" alt=""></div>
+            <div><img src="../../assets/images/channelImage.svg" alt=""></div>
             <div class="mini_element_icons">#{{ channel }}</div>
             <div
                 class="mini_element_icons"

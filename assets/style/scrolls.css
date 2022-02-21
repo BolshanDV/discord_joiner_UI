@@ -4,8 +4,8 @@
     scroll-snap-type: y;
     scrollbar-width: none;
     max-height: 200px;
-    width: 20%;
-    padding: 0.5%;
+    /*width: 20%;*/
+    /*padding: 0.5%;*/
     z-index: 2;
 }
 .scroll::-webkit-scrollbar {

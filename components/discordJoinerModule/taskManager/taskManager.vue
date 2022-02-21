@@ -72,7 +72,7 @@
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_PROXY"
-            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForToken}">
+            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForProxy}">
             </div>
           </div>
         </div>

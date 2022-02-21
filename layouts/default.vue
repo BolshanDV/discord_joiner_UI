@@ -3,6 +3,7 @@
       <modal-page
         v-if="popUpFlag"
       />
+      <toasted/>
       <div class="sidebar">
         <Sidebar/>
       </div>
@@ -21,13 +22,15 @@
 import Sidebar from "../components/barElement/sidebar";
 import navbar from "../components/barElement/navbar";
 import modalPage from "../components/modalPage";
+import toasted from "../components/toastedPart/toasted";
 import {mapGetters} from "vuex"
 export default {
   name: "default",
   components: {
     Sidebar,
     navbar,
-    modalPage
+    modalPage,
+    toasted
   },
   computed: {
     ...mapGetters('popUpStore/popUp', ['popUpFlag'])

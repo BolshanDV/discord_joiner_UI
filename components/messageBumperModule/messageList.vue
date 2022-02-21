@@ -23,7 +23,7 @@
 
     </div>
     <div
-        class="work_space_element row_position space_element"
+        class="work_space_element row_position scroll space_element"
         v-if="messageList.length !== 0"
     >
       <div
