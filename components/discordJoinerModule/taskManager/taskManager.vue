@@ -4,7 +4,7 @@
       <p class="title">Task Manager</p>
     </div>
 
-    <div class="work_space column">
+    <div class="work_space column first_element">
       <div class="work_space_element_title">
         Invite code
       </div>
@@ -285,5 +285,8 @@ name: "taskManager",
 }
 .cross_icon{
   margin-left: 4%;
+}
+.first_element{
+  padding: 0 3% 3% 3%;
 }
 </style>
