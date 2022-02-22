@@ -17,11 +17,14 @@
       <div class="row_position ">
         <div class=" input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input input_element" v-model="token" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+            <input class="text-field__input input_element short_input" v-model="token" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_TOKEN"
-            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForToken}">
+            >
+              <img src="../../../assets/icons/row.svg" alt=""
+                  :class="{row_rotate: dropDownMenuFlagForToken}"
+              >
             </div>
           </div>
         </div>
@@ -68,11 +71,13 @@
       <div class="row_position ">
         <div class="input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input input_element" v-model="proxy" type="search" name="search"  autocomplete="off" placeholder="Enter proxy">
+            <input class="text-field__input input_element short_input" v-model="proxy" type="search" name="search"  autocomplete="off" placeholder="Enter proxy">
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_PROXY"
-            ><img src="../../../assets/icons/row.svg" alt="" :class="{row_rotate: dropDownMenuFlagForProxy}">
+            ><img src="../../../assets/icons/row.svg" alt=""
+                  :class="{row_rotate: dropDownMenuFlagForProxy && (proxyLists.length !== 0)}"
+            >
             </div>
           </div>
         </div>
@@ -117,7 +122,12 @@
             Delay
           </div>
           <div class="work_space_element row_position">
-              <input class="text-field__input input_element"  v-model="delay" autocomplete="off" placeholder="delay" type="search" name="search">
+              <input class="text-field__input input_element"
+                     v-model="delay"
+                     autocomplete="off"
+                     placeholder="delay"
+                     type="search"
+                     name="search">
           </div>
         </div>
         <div>
@@ -125,7 +135,13 @@
             Invites per task
           </div>
           <div class="work_space_element row_position">
-            <input class="text-field__input input_element" v-model="invitesPerTask" autocomplete="off" placeholder="Invites per task" type="search" name="search">
+            <input
+                class="text-field__input input_element"
+                v-model="invitesPerTask"
+                autocomplete="off"
+                placeholder="Invites per task"
+                type="search"
+                name="search">
           </div>
         </div>
       </div>
@@ -283,9 +299,11 @@ name: "taskManager",
 }
 .cross_icon{
   margin-right: 4%;
-
 }
 .first_element{
   padding: 0 3% 3% 3%;
+}
+.short_input{
+  width: 16vw;
 }
 </style>

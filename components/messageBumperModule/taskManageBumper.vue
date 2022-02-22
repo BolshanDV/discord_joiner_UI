@@ -42,10 +42,19 @@
       <div class="row_position ">
         <div class=" input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input input_element" v-model="tokenList" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+            <input class="text-field__input input_element short_input"
+                   v-model="tokenList"
+                   type="search"
+                   name="search"
+                   autocomplete="off"
+                   placeholder="Enter tokens list">
             <div
                 class="text-field__aicon"
-            ><img src="../../assets/icons/row.svg" alt="">
+                @click="CHANGE_FLAG()"
+            >
+              <img src="../../assets/icons/row.svg" alt=""
+                   :class="{ row_rotate: dropDownFlagForAccountListMBumper &&  tokensList.length !== 0}"
+              >
             </div>
 
           </div>
@@ -55,16 +64,47 @@
         >
           <img src="../../assets/icons/download.svg" alt="">
         </div>
-        <div class="additional_functional work_space_element">
+        <div
+            @click="ADD_TOKENS_LIST_AND_CLEAR(tokenList)"
+            class="additional_functional work_space_element"
+        >
           <img src="../../assets/icons/add.svg" alt="">
         </div>
       </div>
+      <div>
+        <div class="scroll column"
+             v-if="dropDownFlagForAccountListMBumper && (tokensList.length !== 0)"
+        >
+          <div
+              class="row_position mini_element scroll_item"
+              v-for="(tokensListItem, index) in tokensList"
+              :key="index"
+          >
+            <div class="scroll_horizontal row_position">
+              <div class="scroll_item">{{tokensListItem}}</div>
+            </div>
 
+            <div
+                class="cross_icon"
+                @click="DELETE_TOKEN_FROM_LIST(index)"
+            >
+              <img src="../../assets/icons/cross.svg" alt="">
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div class="work_space_element_title">
         Delay
       </div>
       <div class="text-field">
-        <input class="text-field__input input_element" v-model="delay" autocomplete="off" placeholder="Enter delay" type="search" name="search">
+        <input
+            class="text-field__input input_element"
+            v-model="delay"
+            autocomplete="off"
+            placeholder="Enter delay"
+            type="search"
+            name="search">
       </div>
     </div>
     <div class="work_space column">
@@ -75,7 +115,12 @@
         </div>
       </div>
       <div class="text-field">
-        <input class="text-field__input input_element" v-model="deleteMasses" autocomplete="off" placeholder="30 (sec)" type="search" name="search">
+        <input class="text-field__input input_element"
+               v-model="deleteMasses"
+               autocomplete="off"
+               placeholder="30 (sec)"
+               type="search"
+               name="search">
       </div>
     </div>
     <message-list/>
@@ -108,14 +153,31 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper', ['channelLists']),
+    ...mapGetters('messageBumperStore/messageBumper',
+        [
+          'channelLists',
+          'dropDownFlagForAccountListMBumper',
+          'tokensList']),
   },
   methods: {
-    ...mapMutations('messageBumperStore/messageBumper', ['ADD_CHANNEL_TO_LISTS','DELETE_CHANNEL']),
+    ...mapMutations('messageBumperStore/messageBumper',
+        [
+          'ADD_CHANNEL_TO_LISTS',
+          'DELETE_CHANNEL',
+          'ADD_TOKENS_LIST',
+          'DELETE_TOKEN_FROM_LIST',
+          'CHANGE_FLAG'
+        ]),
+
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
+
     ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
       this.ADD_CHANNEL_TO_LISTS(channelItem);
       this.channelList = ''
+    },
+    ADD_TOKENS_LIST_AND_CLEAR(tokenList) {
+      this.ADD_TOKENS_LIST(tokenList);
+      this.tokenList = ''
     }
   }
 }
@@ -165,14 +227,6 @@ export default {
 .row_position_input{
   margin-top: 2%;
 }
-.mini_element{
-  background: #272D36;
-  border-radius: 3px;
-  padding: 1.2% 2.5%;
-  margin: 1% 1.75%;
-  justify-content: space-between;
-  align-items: center;
-}
 .space_element{
   padding: 2%;
   flex-wrap: wrap;
@@ -194,5 +248,27 @@ export default {
   width: 10vw;
   height: 5vh;
   justify-content: center;
+}
+.short_input{
+  width: 16vw;
+}
+.mini_element{
+  background: rgba(22,30,41,0.6);
+  padding: 4% 3%;
+  justify-content: space-between;
+  align-items: center;
+}
+.mini_element:hover{
+  text-decoration: none;
+  color: #fff;
+  background: #161e29;
+}
+.scroll{
+  border-radius: 12px;
+  /*width: 16vw;*/
+  padding: 1% 0.5%;
+}
+.row_rotate{
+  transform: rotate(180deg);
 }
 </style>
