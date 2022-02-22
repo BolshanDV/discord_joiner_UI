@@ -32,9 +32,7 @@ export const mutations = {
         if ( token !== 0) state.successJoined.push(token);
     },
     ADD_SUCCESS_TOKENS_ARR: (state, tokens) => {
-        if ( tokens.length !== 0) tokens.forEach(function (item) {
-                state.tokens.push(item)
-            })
+        if ( tokens.length !== 0) tokens.forEach(item => state.tokens.push(item))
     },
     SWITCH_GLOBAL_STATUS: (state, status) => {
         state.globalStatus = status;
@@ -63,32 +61,37 @@ export const mutations = {
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
         const {inviteCode, tokens} = parameters;
-        // await solveCaptcha();
-        console.log(parameters)
-
         let errorToken = null;
 
         for (const token of tokens) {
-            console.log(token);
+            const captchaToken = await solveCaptcha();
+
+            let statusCode;
+            let body;
 
             const status = await axios
-                .post(`https://discord.com/api/v9/invites/${inviteCode}`, {}, {
+                .post(`https://discord.com/api/v9/invites/${inviteCode}`, {
+                    'captcha_key': captchaToken
+                }, {
                     withCredentials: true,
                     headers: {
-                        'authorization': token
+                        'authorization': token,
                     }
                 }).then(response => {
-                    return response.status;
+                   statusCode = response.status;
+                   body = response.data;
                 })
 
-            if (status !== 200) {
+            if (statusCode !== 200) {
                 console.error(`Some error happened with token ${token}`);
 
                 errorToken = token;
 
                 break;
             } else {
-                ctx.commit('ADD_SUCCESS_TOKEN', token);
+                const userObj = { username: body.username, token: token }
+
+                ctx.commit('ADD_SUCCESS_TOKEN', userObj);
             }
         }
 
@@ -104,6 +107,7 @@ export const actions = {
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
         const {input, errorToken} = await validateAndExtractTokens(tokens);
+        console.log(input);
 
         (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
@@ -112,6 +116,7 @@ export const actions = {
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
         const {singleToken, errorToken} = await validateSingleToken(token);
+        console.log(singleToken);
 
         (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
