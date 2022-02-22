@@ -1,5 +1,5 @@
 .scroll{
-    overflow-x: auto;
+    overflow-y: auto;
     scroll-snap-type: y;
     scrollbar-width: none;
     max-height: 200px;
@@ -9,11 +9,11 @@
     display: none;
 }
 .scroll_horizontal{
-     overflow-x: auto;
-     scroll-snap-type: y;
-     scrollbar-width: none;
-     align-content: center;
- }
+    overflow-x: auto;
+    scroll-snap-type: x;
+    scrollbar-width: none;
+    align-content: center;
+}
 .scroll_horizontal::-webkit-scrollbar {
     display: none;
 }

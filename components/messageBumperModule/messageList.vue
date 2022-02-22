@@ -14,7 +14,12 @@
       </div>
     </div>
     <div class="text-field__icon">
-      <input class="text-field__input input_element" v-model="message" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+      <input class="text-field__input input_element"
+             v-model="message"
+             type="search"
+             name="search"
+             autocomplete="off"
+             placeholder="Enter tokens list">
       <div
           class="text-field__aicon"
           @click="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
@@ -31,7 +36,9 @@
           v-for="(message, index) in messageList"
           :key="index"
       >
-        <div>#{{ message }}</div>
+        <div class="scroll_horizontal row_position">
+          <div>#{{ message }}</div>
+        </div>
         <div class="mini_element_icons"
              @click="DELETE_MESSAGE(index)"
         >
@@ -102,8 +109,20 @@ name: "messageList",
 .space_element{
   padding: 2%;
   flex-wrap: wrap;
+  width: 100%;
 }
 .mini_element_icons{
   margin-left: 4px;
+}
+.mini_element:hover{
+  text-decoration: none;
+  background: #161e29;
+}
+.input_element{
+  background-color: rgba(22,30,41,0.6);
+  border: none;
+}
+.scroll_horizontal{
+  max-width: 150px;
 }
 </style>

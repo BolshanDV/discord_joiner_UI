@@ -12,7 +12,8 @@
         <div
             class="text-field__aicon"
             @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelList)"
-        ><img src="../../assets/icons/add.svg" alt="">
+        >
+          <img src="../../assets/icons/add.svg" alt="">
         </div>
 
       </div>
@@ -21,12 +22,16 @@
           v-if="channelLists.length !== 0"
       >
         <div
-            class="mini_element row_position"
+            class="row_position mini_element"
             v-for="(channel, index) in channelLists"
             :key="index"
         >
             <div><img src="../../assets/images/channelImage.svg" alt=""></div>
-            <div class="mini_element_icons">#{{ channel }}</div>
+            <div class="mini_element_icons ">
+              <div class="scroll_horizontal scroll_horizontal_limit">
+                #{{ channel }}
+              </div>
+            </div>
             <div
                 class="mini_element_icons"
                 @click="DELETE_CHANNEL(index)"
@@ -72,16 +77,16 @@
         </div>
       </div>
       <div>
-        <div class="scroll column"
+        <div class="scroll column short_input"
              v-if="dropDownFlagForAccountListMBumper && (tokensList.length !== 0)"
         >
           <div
-              class="row_position mini_element scroll_item"
+              class="row_position drop_down_element scroll_item"
               v-for="(tokensListItem, index) in tokensList"
               :key="index"
           >
             <div class="scroll_horizontal row_position">
-              <div class="scroll_item">{{tokensListItem}}</div>
+              <div>{{tokensListItem}}</div>
             </div>
 
             <div
@@ -251,10 +256,13 @@ export default {
 }
 .short_input{
   width: 16vw;
+  border-radius: 0 0 6px 6px;
 }
 .mini_element{
-  background: rgba(22,30,41,0.6);
-  padding: 4% 3%;
+  background: #272D36;
+  border-radius: 3px;
+  padding: 1.2% 2.5%;
+  margin: 1% 1.75%;
   justify-content: space-between;
   align-items: center;
 }
@@ -263,12 +271,23 @@ export default {
   color: #fff;
   background: #161e29;
 }
-.scroll{
-  border-radius: 12px;
-  /*width: 16vw;*/
-  padding: 1% 0.5%;
-}
 .row_rotate{
   transform: rotate(180deg);
+}
+.drop_down_element{
+  background: rgba(22,30,41,0.6);
+  padding: 4% 3%;
+  justify-content: space-between;
+  align-items: center;
+}
+.drop_down_element:hover{
+  text-decoration: none;
+  background: #161e29;
+}
+.cross_icon{
+   margin: 0 4.5%;
+ }
+.scroll_horizontal_limit{
+  max-width: 150px;
 }
 </style>

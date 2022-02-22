@@ -101,7 +101,7 @@
               v-for="(proxy, index) in proxyLists"
               :key="index"
           >
-            <div class="scroll_horizontal row_position">
+            <div class="row_position scroll_horizontal">
               <div class="scroll_item">{{proxy}}</div>
             </div>
 
@@ -276,9 +276,9 @@ name: "taskManager",
   align-items: center;
 }
 .scroll{
-  border-radius: 12px;
+  border-radius: 0 0 6px 6px;
   width: 16vw;
-  padding: 1% 0.5%;
+  /*padding: 1% 0.5%;*/
 }
 .scroll_item{
   height: 20%;
@@ -290,15 +290,15 @@ name: "taskManager",
   align-items: center;
 }
 .mini_element:hover{
-  text-decoration: none; /* Убираем подчеркивание */
-  color: #fff; /* Цвет ссылки при наведении на нее курсора мыши */
+  text-decoration: none;
+  color: #fff;
   background: #161e29;
 }
 .row_rotate{
   transform: rotate(180deg);
 }
 .cross_icon{
-  margin-right: 4%;
+  margin: 0 4.5%;
 }
 .first_element{
   padding: 0 3% 3% 3%;
