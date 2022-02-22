@@ -1,7 +1,7 @@
 <template>
   <div class="popUp">
     <div class="popUp_delete">
-      <div class="main_text"><div>Add discord target tokens list</div></div>
+      <div class="main_text row_position"><div>Accounts token list</div></div>
       <div class="column">
         <div>
           <b-form-textarea
@@ -14,16 +14,7 @@
           >
           </b-form-textarea>
         </div>
-        <div class="button_popUp">
-
-          <b-button
-              tag="div"
-              variant="outline-info"
-              class="row_position_btn_form btn_color"
-              @click="POPUP_DISPLAY('')"
-          >
-            Close
-          </b-button>
+        <div class="row_position button_popUp">
           <b-button
               tag="div"
               variant="outline-info"
@@ -32,6 +23,16 @@
           >
             Add
           </b-button>
+          <b-button
+              tag="div"
+              variant="outline-info"
+              class="row_position_btn_form btn_color"
+              @click="POPUP_DISPLAY('')"
+          >
+            Clear all
+          </b-button>
+
+
         </div>
       </div>
 
@@ -88,37 +89,35 @@ export default {
   border-radius: 5px;
 }
 .button_popUp{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 40px;
+  justify-content: flex-end;
+  margin-top: 1.5vh;
 }
 .popUp_delete{
-  padding: 3%;
-  /*height: 50%;*/
+  padding: 1%;
+  background: #0D121A;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(22,30,41,0.96);
-  /*margin:0 25% 0 25%;*/
-  width: 60%;
+  width: 50%;
   box-shadow: 20px 30px 30px 35px rgba(0, 0, 0, .5);
-  border-radius: 5px;
 }
 .item{
   margin-right: 20px;
 }
 .main_text {
-  font-size: 25px;
-  line-height: 31px;
   text-align: center;
   margin-bottom: 2%;
+  justify-content: flex-start;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
 }
 .text-area{
   background-color: rgba(22,30,41,0.6);
   color: #CCCCCC;
-  height: 20vh !important;
+  height: 40vh !important;
+  border-color: rgba(22,30,41,0.6);
 }
 .row_position_btn_form{
   background: rgba(43, 214, 162, 0.2);
@@ -127,11 +126,10 @@ export default {
   border-radius: 4px;
   color: #CCCCCC;
   width: 25%;
-
+  margin-left: 20px;
 }
 .btn_stop{
   background: rgba(170, 26, 23, 0.2);
   border: 1px solid #AA1A17;
-  margin-left: 20px;
 }
 </style>

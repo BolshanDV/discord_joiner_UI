@@ -235,7 +235,6 @@ name: "taskManager",
   width: 10vw;
   height: 5vh;
   justify-content: center;
-
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);

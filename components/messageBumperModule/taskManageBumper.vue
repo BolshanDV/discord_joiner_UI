@@ -80,12 +80,9 @@
     </div>
     <message-list/>
     <div class="row_position row_position_btn">
-      <b-button
-          variant="outline-info"
-          class="row_position_btn_form"
-      >
+      <div class="row_position row_position_btn_form">
         Create task
-      </b-button>
+      </div>
     </div>
   </div>
 
@@ -162,20 +159,6 @@ export default {
 .input_element_item{
   width: 80%;
 }
-.row_position_btn{
-  justify-content: flex-end;
-  margin-top: 5%;
-
-}
-.row_position_btn_form{
-  background: rgba(43, 214, 162, 0.2);
-  border: 1px solid #2BD6A2;
-  box-sizing: border-box;
-  border-radius: 4px;
-  color: #CCCCCC;
-  font-size: 14px;
-  line-height: 16px;
-}
 .delay{
   margin-right: 2%;
 }
@@ -196,5 +179,20 @@ export default {
 }
 .mini_element_icons{
   margin-left: 4px;
+}
+.row_position_btn{
+  justify-content: flex-end;
+  margin-top: 5%;
+
+}
+.row_position_btn_form{
+  background: rgba(43, 214, 162, 0.2);
+  border: 1px solid #2BD6A2;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 16px;
+  width: 10vw;
+  height: 5vh;
+  justify-content: center;
 }
 </style>
