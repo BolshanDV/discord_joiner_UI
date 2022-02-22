@@ -63,9 +63,8 @@ export const mutations = {
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
         const {inviteCode, tokens} = parameters;
-        console.log(parameters);
-        const resp = await solveCaptcha();
-        console.log(resp);
+        // await solveCaptcha();
+        console.log(parameters)
 
         let errorToken = null;
 
