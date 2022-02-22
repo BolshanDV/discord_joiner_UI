@@ -9,7 +9,7 @@
         Invite code
       </div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="taskName" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
+          <input class="text-field__input input_element" v-model="inviteCode" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
         </div>
       <div class="work_space_element_title">
         Accounts tokens list
@@ -152,7 +152,7 @@
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-           @click="CREATE_TASK({taskName, accountsTokensList})"
+           @click="CREATE_TASK({inviteCode, tokens})"
       >
         Create task
       </div>
@@ -174,7 +174,7 @@ name: "taskManager",
     return {
       selectedTaskManager: false,
       selectedReactionClicker: false,
-      taskName: '',
+      inviteCode: '',
       token: '',
       proxy: '',
       delay: '',
@@ -224,7 +224,6 @@ name: "taskManager",
 .row_position_btn{
   justify-content: flex-end;
   margin-top: 5%;
-
 }
 .row_position_btn_form{
   background: rgba(43, 214, 162, 0.2);
@@ -261,29 +260,30 @@ name: "taskManager",
   align-items: center;
 }
 .scroll{
-  position: absolute;
-  width: 21%;
-  padding: 0.5%;
-  z-index: 2;
-  background-color: #0D121A;
-  border-radius: 5px;
+  border-radius: 12px;
+  width: 16vw;
+  padding: 1% 0.5%;
 }
 .scroll_item{
   height: 20%;
 }
 .mini_element{
-  background: #161e29;
-  border-radius: 3px;
-  padding: 2% 3%;
-  margin: 1% 1.75%;
+  background: rgba(22,30,41,0.6);
+  padding: 4% 3%;
   justify-content: space-between;
   align-items: center;
+}
+.mini_element:hover{
+  text-decoration: none; /* Убираем подчеркивание */
+  color: #fff; /* Цвет ссылки при наведении на нее курсора мыши */
+  background: #161e29;
 }
 .row_rotate{
   transform: rotate(180deg);
 }
 .cross_icon{
-  margin-left: 4%;
+  margin-right: 4%;
+
 }
 .first_element{
   padding: 0 3% 3% 3%;

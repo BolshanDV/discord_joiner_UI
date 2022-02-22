@@ -1,7 +1,14 @@
 <template>
   <div class="popUp">
     <div class="popUp_delete">
-      <div class="main_text row_position"><div>Accounts token list</div></div>
+      <div class="main_text row_position">
+        <div>Accounts token list</div>
+        <div
+            @click="POPUP_DISPLAY('')"
+        >
+          <img src="../assets/icons/cross.svg" alt="">
+        </div>
+      </div>
       <div class="column">
         <div>
           <b-form-textarea
@@ -21,7 +28,7 @@
               class="row_position_btn_form btn_color btn_stop"
               @click="EXTRACT_AND_VALIDATE(text)"
           >
-            Add
+            Clear all
           </b-button>
           <b-button
               tag="div"
@@ -29,7 +36,7 @@
               class="row_position_btn_form btn_color"
               @click="POPUP_DISPLAY('')"
           >
-            Clear all
+            Add
           </b-button>
 
 
@@ -108,7 +115,7 @@ export default {
 .main_text {
   text-align: center;
   margin-bottom: 2%;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
