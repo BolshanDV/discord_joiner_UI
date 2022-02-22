@@ -37,7 +37,7 @@ app.get('/', cors(corsOptions), async (req, res) => {
                 break;
             }
 
-            if (response.data.request !== 'CAPTCHA_NOT_READY') {
+            if (response.data.request !== 'CAPCHA_NOT_READY') {
                 break;
             }
 
@@ -46,6 +46,7 @@ app.get('/', cors(corsOptions), async (req, res) => {
 
         }
     }
+    console.log(result);
 
     res.send(result);
 })

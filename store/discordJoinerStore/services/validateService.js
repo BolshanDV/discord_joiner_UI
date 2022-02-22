@@ -1,11 +1,16 @@
 import axios from "axios";
 
 export async function validateAndExtractTokens(tokens) {
+        const result = [];
+
         let input = tokens.split(',');
         let errorToken = undefined;
 
         for (const token of input) {
-            const status = await axios
+            let statusCode;
+            let body;
+
+            await axios
                 .get('https://discord.com/api/users/@me', {
                         withCredentials: true,
                         headers: {
@@ -13,25 +18,30 @@ export async function validateAndExtractTokens(tokens) {
                         }
                     }
                 ).then(response => {
-                    return response.status;
+                    statusCode = response.status;
+                    body = response.data;
                 })
 
-            if (status !== 200) {
+            if (statusCode !== 200) {
                 console.error(`Some error happened with token ${token}`);
 
                 input = undefined;
 
                 return { input: input, errorToken: errorToken };
             }
+
+            result.push({singleToken: {token: token, username: body.username}, errorToken: errorToken})
         }
 
-        return { input: input, errorToken: errorToken };
+        return { input: result, errorToken: errorToken };
 }
 
 export async function validateSingleToken(singleToken) {
     let errorToken = undefined;
+    let statusCode;
+    let body;
 
-    const status = await axios
+    await axios
         .get('https://discord.com/api/users/@me', {
                 withCredentials: true,
                 headers: {
@@ -40,15 +50,16 @@ export async function validateSingleToken(singleToken) {
             }
         )
         .then(response => {
-            return response.status;
+            statusCode = response.status;
+            body = response.data;
         })
         .catch(error => {
             console.log("There was an error!", error);
         })
 
-    if (status !== 200) {
+    if (statusCode !== 200) {
         errorToken = singleToken;
     }
 
-    return { singleToken: singleToken, errorToken: errorToken };
+    return { singleToken: {token: singleToken, username: body.username}, errorToken: errorToken };
 }
