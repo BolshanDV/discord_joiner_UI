@@ -75,3 +75,13 @@
 .text-field__aicon:hover {
     color: #212529;
 }
+.short_input{
+    width: 16vw;
+    border-radius: 6px;
+}
+.short_input_drop_down_menu{
+    border-radius: 0 0 6px 6px;
+}
+.short_input_active{
+    border-radius: 6px 6px 0 0;
+}

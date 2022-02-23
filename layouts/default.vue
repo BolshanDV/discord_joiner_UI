@@ -11,7 +11,7 @@
         <div class="navbar">
           <navbar/>
         </div>
-        <div class="main_section">
+        <div class="main_section scroll">
           <Nuxt/>
         </div>
       </div>
@@ -65,5 +65,8 @@ export default {
 .navbar{
   background-color: #080D16;
   height: 11vh;
+}
+.scroll{
+  max-height: 100vh;
 }
 </style>

@@ -52,7 +52,9 @@
                    type="search"
                    name="search"
                    autocomplete="off"
-                   placeholder="Enter tokens list">
+                   placeholder="Enter tokens list"
+                   :class="{short_input_active: dropDownFlagForAccountListMBumper}"
+            >
             <div
                 class="text-field__aicon"
                 @click="CHANGE_FLAG()"
@@ -77,7 +79,7 @@
         </div>
       </div>
       <div>
-        <div class="scroll column short_input"
+        <div class="scroll column short_input short_input_drop_down_menu"
              v-if="dropDownFlagForAccountListMBumper && (tokensList.length !== 0)"
         >
           <div
@@ -254,10 +256,16 @@ export default {
   height: 5vh;
   justify-content: center;
 }
-.short_input{
-  width: 16vw;
-  border-radius: 0 0 6px 6px;
-}
+/*.short_input{*/
+/*  width: 16vw;*/
+/*  border-radius: 6px;*/
+/*}*/
+/*.short_input_drop_down_menu{*/
+/*  border-radius: 0 0 6px 6px;*/
+/*}*/
+/*.short_input_active{*/
+/*  border-radius: 6px 6px 0 0;*/
+/*}*/
 .mini_element{
   background: #272D36;
   border-radius: 3px;

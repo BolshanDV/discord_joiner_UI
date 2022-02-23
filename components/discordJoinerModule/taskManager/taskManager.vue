@@ -9,7 +9,12 @@
         Invite code
       </div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="inviteCode" autocomplete="off" placeholder="Enter invite code" type="search" name="search">
+          <input class="text-field__input input_element"
+                 v-model="inviteCode"
+                 autocomplete="off"
+                 placeholder="Enter invite code"
+                 type="search"
+                 name="search">
         </div>
       <div class="work_space_element_title">
         Accounts tokens list
@@ -17,7 +22,14 @@
       <div class="row_position ">
         <div class=" input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input input_element short_input" v-model="token" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+            <input class="text-field__input input_element short_input"
+                   v-model="token"
+                   type="search"
+                   name="search"
+                   autocomplete="off"
+                   placeholder="Enter tokens list"
+                   :class="{short_input_active: dropDownMenuFlagForToken}"
+            >
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_TOKEN"
@@ -40,7 +52,7 @@
         </div>
       </div>
       <div>
-        <div class="scroll column"
+        <div class="scroll column short_input_drop_down_menu"
              v-if="dropDownMenuFlagForToken && (tokens.length !== 0)"
         >
           <div
@@ -71,7 +83,14 @@
       <div class="row_position ">
         <div class="input_element_item">
           <div class="text-field__icon">
-            <input class="text-field__input input_element short_input" v-model="proxy" type="search" name="search"  autocomplete="off" placeholder="Enter proxy">
+            <input class="text-field__input input_element short_input"
+                   v-model="proxy"
+                   type="search"
+                   name="search"
+                   autocomplete="off"
+                   placeholder="Enter proxy"
+                   :class="{short_input_active: dropDownMenuFlagForProxy}"
+            >
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_PROXY"
@@ -93,7 +112,7 @@
         </div>
       </div>
       <div>
-        <div class="scroll column"
+        <div class="scroll column short_input_drop_down_menu"
              v-if="dropDownMenuFlagForProxy && (proxyLists.length !== 0)"
         >
           <div
