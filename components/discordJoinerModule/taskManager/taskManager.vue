@@ -61,7 +61,7 @@
               :key="index"
           >
             <div class="scroll_horizontal row_position">
-              <div class="scroll_item">{{token}}</div>
+              <div class="scroll_item">{{token.userName}}</div>
             </div>
 
                 <div
@@ -187,7 +187,7 @@
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-           @click="CREATE_TASK({inviteCode, tokens})"
+           @click="CREATE_TASK({inviteCode, tokens, delay})"
       >
         Create task
       </div>
