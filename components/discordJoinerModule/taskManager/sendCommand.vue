@@ -14,10 +14,18 @@
         <input type="checkbox" class="switch_1" >
       </div>
     </div>
+    <div class="row_position row_position_btn">
+      <div class="row_position row_position_btn_form"
+           @click="SAVE_DATA_FROM_S_COMMAND({channelId, commandText})"
+      >
+        Save
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: "reactionClicker",
   data() {
@@ -26,6 +34,9 @@ export default {
       commandText: '',
     }
   },
+  methods: {
+    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_S_COMMAND'])
+  }
 }
 </script>
 
@@ -37,6 +48,20 @@ export default {
 .work_space_element_advent{
   justify-content: space-between;
   margin-top: 3.75%;
+}
+.row_position_btn{
+  justify-content: flex-end;
+  margin-top: 5%;
+}
+.row_position_btn_form{
+  background: rgba(43, 214, 162, 0.2);
+  border: 1px solid #2BD6A2;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 16px;
+  width: 10vw;
+  height: 3vh;
+  justify-content: center;
 }
 
 </style>

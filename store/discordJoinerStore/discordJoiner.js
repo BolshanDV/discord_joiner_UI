@@ -9,7 +9,9 @@ export const state = () => ({
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
     proxyLists: [],
-    delay: 0
+    delay: 0,
+    reactionClickerObj: {},
+    sendCommand: {}
 })
 
 export const getters = {
@@ -57,11 +59,19 @@ export const mutations = {
     DELETE_PROXY_FROM_LIST: (state, index) => {
         state.proxyLists.splice(index, 1)
     },
+    SAVE_DATA_FROM_R_CLICKER: (state, obj) => {
+        state.reactionClickerObj = obj
+    },
+    SAVE_DATA_FROM_S_COMMAND: (state, obj) => {
+        state.sendCommand = obj
+    }
 }
 export const actions = {
-    CREATE_TASK: async (ctx, parameters) => {
+    CREATE_SIMPLE_TASK: async (ctx, parameters) => {
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
         const {inviteCode, tokens, delay} = parameters;
+
+        console.log(delay);
 
         for (const token of tokens) {
             const {successToken, errorToken} = await joinChannel(inviteCode, token);
@@ -82,6 +92,7 @@ export const actions = {
 
         ctx.commit('SWITCH_GLOBAL_STATUS', true);
     },
+
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
         const {input, errorToken} = await validateAndExtractTokens(tokens);

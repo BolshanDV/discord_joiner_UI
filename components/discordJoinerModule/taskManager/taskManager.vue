@@ -61,7 +61,7 @@
               :key="index"
           >
             <div class="scroll_horizontal row_position">
-              <div class="scroll_item">{{token.userName}}</div>
+              <div class="scroll_item">{{token.username}}</div>
             </div>
 
                 <div
@@ -173,7 +173,9 @@
             <input type="checkbox" class="switch_1" v-model='selectedReactionClicker'>
         </div>
       </div>
-      <reaction-clicker v-if="selectedReactionClicker"/>
+      <reaction-clicker
+          v-if="selectedReactionClicker"
+      />
     </div>
 
     <div class="work_space">
@@ -183,7 +185,9 @@
           <input type="checkbox" class="switch_1" v-model='selectedTaskManager'>
         </div>
       </div>
-      <send-command v-if="selectedTaskManager"/>
+      <send-command
+          v-if="selectedTaskManager"
+      />
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
