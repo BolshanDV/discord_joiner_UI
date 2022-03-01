@@ -1,5 +1,5 @@
-import {validateAndExtractTokens, validateSingleToken} from "./services/validateService";
-import {joinChannel} from "./services/taskService";
+import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
+import {launchTasks} from "./services/joinerServices/taskService";
 
 export const state = () => ({
     tokens: [],
@@ -67,34 +67,22 @@ export const mutations = {
     }
 }
 export const actions = {
-    CREATE_SIMPLE_TASK: async (ctx, parameters) => {
-        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+    // Function with minimal functionality
+    // The point is only to sequentially call functions along the chain to achieve the final verification
+    CREATE_TASK: async (ctx, parameters) => {
+        // We receive fields from the client, perform minimal validations and pass them to the task launch function
         const {inviteCode, tokens, delay} = parameters;
 
-        console.log(delay);
-
-        for (const token of tokens) {
-            const {successToken, errorToken} = await joinChannel(inviteCode, token);
-
-            if (errorToken !== undefined) {
-                ctx.commit('SAVE_ERROR_TOKEN', errorToken);
-                ctx.commit('SWITCH_GLOBAL_STATUS', false);
-
-                return;
-            } else {
-                const userObj = { username: tokens.username, token: successToken }
-
-                ctx.commit('ADD_SUCCESS_TOKEN', userObj);
-            }
-
-            await sleep(delay);
+        if (inviteCode !== undefined && tokens.length !==0) {
+            const {successTokens, errorTokens} = await launchTasks(tokens, inviteCode, delay);
         }
 
-        ctx.commit('SWITCH_GLOBAL_STATUS', true);
     },
 
-
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
+        // TODO If the token has not passed validation, you must display error at the front
+        // TODO P/S: I sent an example to telegram
+
         const {input, errorToken} = await validateAndExtractTokens(tokens);
 
         (errorToken !== undefined)

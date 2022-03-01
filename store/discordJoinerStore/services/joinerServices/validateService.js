@@ -63,3 +63,27 @@ export async function validateSingleToken(singleToken) {
 
     return { singleToken: {token: singleToken, username: body.username}, errorToken: errorToken };
 }
+
+export async function getMe(singleToken) {
+    let statusCode;
+    let body;
+
+    await axios
+        .get('https://discord.com/api/users/@me', {
+                withCredentials: true,
+                headers: {
+                    'authorization': singleToken
+                }
+            }
+        )
+        .then(response => {
+            statusCode = response.status;
+            body = response.data;
+        })
+        .catch(error => {
+            console.log("There was an error!", error);
+        })
+
+
+    return body;
+}
