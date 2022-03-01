@@ -1,6 +1,5 @@
-import axios from "axios";
 import {validateAndExtractTokens, validateSingleToken} from "./services/validateService";
-import {solveCaptcha} from "./services/captchaService";
+import {joinChannel} from "./services/taskService";
 
 export const state = () => ({
     tokens: [],
@@ -9,7 +8,8 @@ export const state = () => ({
     globalStatus: false,
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
-    proxyLists: []
+    proxyLists: [],
+    delay: 0
 })
 
 export const getters = {
@@ -60,46 +60,24 @@ export const mutations = {
 }
 export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
-        const {inviteCode, tokens} = parameters;
-        let errorToken = null;
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+        const {inviteCode, tokens, delay} = parameters;
 
         for (const token of tokens) {
-            const captchaToken = await solveCaptcha();
+            const {successToken, errorToken} = await joinChannel(inviteCode, token);
 
-            let statusCode;
-            let body;
+            if (errorToken !== undefined) {
+                ctx.commit('SAVE_ERROR_TOKEN', errorToken);
+                ctx.commit('SWITCH_GLOBAL_STATUS', false);
 
-            const status = await axios
-                .post(`https://discord.com/api/v9/invites/${inviteCode}`, {
-                    'captcha_key': captchaToken
-                }, {
-                    withCredentials: true,
-                    headers: {
-                        'authorization': token,
-                    }
-                }).then(response => {
-                   statusCode = response.status;
-                   body = response.data;
-                })
-
-            if (statusCode !== 200) {
-                console.error(`Some error happened with token ${token}`);
-
-                errorToken = token;
-
-                break;
+                return;
             } else {
-                const userObj = { username: body.username, token: token }
+                const userObj = { username: tokens.username, token: successToken }
 
                 ctx.commit('ADD_SUCCESS_TOKEN', userObj);
             }
-        }
 
-        if (errorToken != null) {
-            ctx.commit('SAVE_ERROR_TOKEN', errorToken);
-            ctx.commit('SWITCH_GLOBAL_STATUS', false);
-
-            return;
+            await sleep(delay);
         }
 
         ctx.commit('SWITCH_GLOBAL_STATUS', true);
@@ -107,7 +85,6 @@ export const actions = {
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
         const {input, errorToken} = await validateAndExtractTokens(tokens);
-        console.log(input);
 
         (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
@@ -116,7 +93,6 @@ export const actions = {
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
         const {singleToken, errorToken} = await validateSingleToken(token);
-        console.log(singleToken);
 
         (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
