@@ -67,6 +67,6 @@ export default {
   height: 11vh;
 }
 .scroll{
-  max-height: 100vh;
+  max-height: 90vh;
 }
 </style>
