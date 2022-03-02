@@ -11,32 +11,37 @@ export async function launchTasks(tokens, inviteCode, delay) {
     // TODO Reaction module must contain true/false position respectively, and another module
     // Variables for code readability
 
-    const reactionClickerMode = false;
+    const reactionClickerMode = true;
     const sendCommandMode = false;
 
     const errorTokens = [];
     const successTokens = [];
+
+    const defaultReactionObject = {
+        channelId: '941214970128007169',
+        messageId: '943112978797035541',
+        reactionId: '%E2%9C%85'
+    }
 
     for (const token of tokens) {
         // execute a request to get information about the user to receive mail
         const me = await getMe(token.token);
 
         // after that we pass email and token to the function of joining the channel itself
-        const status = await joinChannel(inviteCode, token.token, me.email);
+        const joinStatus = await joinChannel(inviteCode, token.token, me.email);
 
         //In this if there will be a large number of checks for all kinds of situations:
         // 1) is reaction clicker enabled
         // 2) is send command enabled
         // Depending on this, there may be a need for additional requests, as a result
         // of which they must be added to success tokens to display the current status of the task to the client
-        if (status && !reactionClickerMode && !sendCommandMode) {
-            const userObj = { username: token.username, token: token.token }
-            console.log(userObj);
+        if (joinStatus && !reactionClickerMode && !sendCommandMode) {
+            successTokens.push({ username: token.username, token: token.token });
+        } else if (joinStatus && reactionClickerMode) {
+            const reactionStatus = await setReaction(token.token, me.email, defaultReactionObject);
 
-            successTokens.push(userObj);
-        } else if (status && reactionClickerMode) {
-            // some logic
-        } else if (status && sendCommandMode) {
+            if (reactionStatus) successTokens.push({ username: token.username, token: token.token });
+        } else if (joinStatus && sendCommandMode) {
             // some logic
         } else {
             errorTokens.push(token);
@@ -48,7 +53,7 @@ export async function launchTasks(tokens, inviteCode, delay) {
     return {successTokens: successTokens, errorTokens: errorTokens};
 }
 
-export async function joinChannel(inviteCode, token, email) {
+async function joinChannel(inviteCode, token, email) {
     const captchaToken = await solveCaptcha();
 
     let body;
@@ -59,6 +64,23 @@ export async function joinChannel(inviteCode, token, email) {
     }, {
         withCredentials: true,
         // build headers functions will be generate some headers and created minimal version of request
+        headers: buildHeaders(token, email)
+    }).then(response => {
+        statusCode = response.status;
+        body = response.data;
+    });
+
+    return statusCode === 200;
+}
+
+async function setReaction(token, email, reactionObject) {
+    const {channelId, messageId, reactionId} = reactionObject;
+
+    let statusCode;
+    let body;
+
+    await axios.put(`https://discord.com/api/v9/channels/${channelId}/messages/${messageId}/reactions/${reactionId}/%40me`, null,{
+        withCredentials: true,
         headers: buildHeaders(token, email)
     }).then(response => {
         statusCode = response.status;
