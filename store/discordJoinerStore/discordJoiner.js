@@ -11,14 +11,19 @@ export const state = () => ({
     proxyLists: [],
     delay: 0,
     reactionClickerObj: {},
-    sendCommand: {}
+    sendCommandObj: {},
+    selectedSendCommand: false,
+    selectedReactionClicker: false,
 })
 
 export const getters = {
     tokens: state => state.tokens,
     dropDownMenuFlagForToken: state => state.dropDownMenuFlagForToken,
     proxyLists: state => state.proxyLists,
-    dropDownMenuFlagForProxy: state => state.dropDownMenuFlagForProxy
+    dropDownMenuFlagForProxy: state => state.dropDownMenuFlagForProxy,
+    selectedSendCommand: state => state.selectedSendCommand,
+    selectedReactionClicker: state => state.selectedReactionClicker
+
 }
 export const mutations = {
     SAVE_TOKENS: (state, tokens) => {
@@ -63,7 +68,13 @@ export const mutations = {
         state.reactionClickerObj = obj
     },
     SAVE_DATA_FROM_S_COMMAND: (state, obj) => {
-        state.sendCommand = obj
+        state.sendCommandObj = obj
+    },
+    CHANGE_CHECKBOX_REACTION_CLICKER: (state) => {
+        state.selectedReactionClicker = !state.selectedReactionClicker
+    },
+    CHANGE_CHECKBOX_SEND_COMMAND: (state) => {
+        state.selectedSendCommand = !state.selectedSendCommand
     }
 }
 export const actions = {
@@ -72,9 +83,19 @@ export const actions = {
     CREATE_TASK: async (ctx, parameters) => {
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
         const {inviteCode, tokens, delay} = parameters;
-
+        let mainObj = {
+            tokens: tokens,
+            inviteCode: inviteCode,
+            delay: delay,
+            reactionClickerFlag: ctx.state.selectedReactionClicker,
+            sendCommandFlag: ctx.state.selectedSendCommand,
+            reactionClickerObj:  ctx.state.reactionClickerObj,
+            sendCommandObj: ctx.state.sendCommandObj
+        }
+        console.log(mainObj)
         if (inviteCode !== undefined && tokens.length !==0) {
-            const {successTokens, errorTokens} = await launchTasks(tokens, inviteCode, delay);
+
+            const {successTokens, errorTokens} = await launchTasks(mainObj);
         }
 
     },

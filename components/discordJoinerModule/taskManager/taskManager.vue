@@ -170,7 +170,11 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker</div>
         <div>
-            <input type="checkbox" class="switch_1" v-model='selectedReactionClicker'>
+            <input
+                type="checkbox"
+                class="switch_1"
+                @click="CHANGE_CHECKBOX_REACTION_CLICKER"
+            >
         </div>
       </div>
       <reaction-clicker
@@ -182,11 +186,15 @@
       <div class="row_position work_space_element_advent">
         <div>Send Command</div>
         <div >
-          <input type="checkbox" class="switch_1" v-model='selectedTaskManager'>
+          <input
+              type="checkbox"
+              class="switch_1"
+              @click="CHANGE_CHECKBOX_SEND_COMMAND"
+          >
         </div>
       </div>
       <send-command
-          v-if="selectedTaskManager"
+          v-if="selectedSendCommand"
       />
     </div>
     <div class="row_position row_position_btn">
@@ -211,8 +219,6 @@ name: "taskManager",
   },
   data() {
     return {
-      selectedTaskManager: false,
-      selectedReactionClicker: false,
       inviteCode: '',
       token: '',
       proxy: '',
@@ -222,11 +228,30 @@ name: "taskManager",
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['tokens', 'dropDownMenuFlagForToken', 'proxyLists', 'dropDownMenuFlagForProxy'])
+    ...mapGetters('discordJoinerStore/discordJoiner',
+        [
+          'selectedSendCommand',
+          'selectedReactionClicker',
+          'tokens',
+          'dropDownMenuFlagForToken',
+          'proxyLists',
+          'dropDownMenuFlagForProxy'
+        ]
+    )
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discordJoiner', [ 'DROP_DOWN_LIST_WITH_TOKEN', 'DELETE_TOKEN_FROM_LIST', 'ADD_PROXY', 'DELETE_PROXY_FROM_LIST', 'DROP_DOWN_LIST_WITH_PROXY']),
+    ...mapMutations('discordJoinerStore/discordJoiner',
+        [
+          'DROP_DOWN_LIST_WITH_TOKEN',
+          'DELETE_TOKEN_FROM_LIST',
+          'ADD_PROXY',
+          'DELETE_PROXY_FROM_LIST',
+          'DROP_DOWN_LIST_WITH_PROXY',
+          'CHANGE_CHECKBOX_REACTION_CLICKER',
+          'CHANGE_CHECKBOX_SEND_COMMAND'
+        ]
+    ),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ADD_TOKEN_WITH_CLEAR() {
       this.VALIDATE_SINGLE_TOKEN(this.token);
