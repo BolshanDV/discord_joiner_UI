@@ -14,6 +14,7 @@ export const state = () => ({
     sendCommandObj: {},
     selectedSendCommand: false,
     selectedReactionClicker: false,
+    accept_rules: false
 })
 
 export const getters = {
@@ -22,7 +23,8 @@ export const getters = {
     proxyLists: state => state.proxyLists,
     dropDownMenuFlagForProxy: state => state.dropDownMenuFlagForProxy,
     selectedSendCommand: state => state.selectedSendCommand,
-    selectedReactionClicker: state => state.selectedReactionClicker
+    selectedReactionClicker: state => state.selectedReactionClicker,
+    accept_rules: state => state.accept_rules
 
 }
 export const mutations = {
@@ -75,6 +77,9 @@ export const mutations = {
     },
     CHANGE_CHECKBOX_SEND_COMMAND: (state) => {
         state.selectedSendCommand = !state.selectedSendCommand
+    },
+    CHANGE_CHECKBOX_ACCEPT_RULES: (state) => {
+        state.accept_rules = !state.accept_rules
     }
 }
 export const actions = {
@@ -90,12 +95,13 @@ export const actions = {
             reactionClickerFlag: ctx.state.selectedReactionClicker,
             sendCommandFlag: ctx.state.selectedSendCommand,
             reactionClickerObj:  ctx.state.reactionClickerObj,
-            sendCommandObj: ctx.state.sendCommandObj
+            sendCommandObj: ctx.state.sendCommandObj,
+            accept_rules: ctx.state.accept_rules
         }
-        console.log(mainObj)
+        ctx.commit('toastedStore/toasted/ADDING_ERROR', mainObj.delay , {root: true} )
         if (inviteCode !== undefined && tokens.length !==0) {
-
             const {successTokens, errorTokens} = await launchTasks(mainObj);
+            ctx.commit('toastedStore/toasted/ADDING_ERROR', errorTokens, {root: true} )
         }
 
     },
