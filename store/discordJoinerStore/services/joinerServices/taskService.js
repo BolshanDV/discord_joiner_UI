@@ -78,7 +78,7 @@ async function joinChannel(inviteCode, token, email) {
     return statusCode === 200;
 }
 
-async function setReaction(token, email, reactionObject) {
+async function setReaction(ctx, token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;
 
     let statusCode;
@@ -92,7 +92,9 @@ async function setReaction(token, email, reactionObject) {
             statusCode = response.status;
             body = response.data;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+        })
 
     return statusCode === 200;
 }
