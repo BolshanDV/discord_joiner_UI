@@ -87,11 +87,12 @@ export const actions = {
     // The point is only to sequentially call functions along the chain to achieve the final verification
     CREATE_TASK: async (ctx, parameters) => {
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
-        const {inviteCode, tokens, delay} = parameters;
+        const {inviteCode, tokens, delay, guildId} = parameters;
         let mainObj = {
             tokens: tokens,
             inviteCode: inviteCode,
             delay: delay,
+            guildId: guildId,
             reactionClickerFlag: ctx.state.selectedReactionClicker,
             sendCommandFlag: ctx.state.selectedSendCommand,
             reactionClickerObj:  ctx.state.reactionClickerObj,
@@ -101,7 +102,7 @@ export const actions = {
         ctx.commit('toastedStore/toasted/ADDING_ERROR', mainObj.delay , {root: true} )
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
-            ctx.commit('toastedStore/toasted/ADDING_ERROR', errorTokens, {root: true} )
+            // ctx.commit('toastedStore/toasted/ADDING_ERROR', errorTokens, {root: true})
         }
 
     },
