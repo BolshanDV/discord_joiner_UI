@@ -3,7 +3,6 @@ import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 import taskLogs from "../../../../components/discordJoinerModule/taskLogs";
-import {response} from "express";
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
