@@ -99,12 +99,10 @@ export const actions = {
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules
         }
-        ctx.commit('toastedStore/toasted/ADDING_ERROR', mainObj.delay , {root: true} )
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
-            // ctx.commit('toastedStore/toasted/ADDING_ERROR', errorTokens, {root: true})
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens ,errorTokens}, {root: true} )
         }
-
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {

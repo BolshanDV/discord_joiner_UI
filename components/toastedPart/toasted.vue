@@ -1,21 +1,21 @@
 <template>
   <div>
     <div class="toasted">
-      <div
-          class="error_block"
-          name="slide-fade"
-      >
-        <div class="toasted_element error"
-             v-for="(toastedItem, index) in toasted"
-             :key="index"
-             @click="DELETE_TOASTED(index)"
+        <transition-group
+            name="slide-fade"
+            class="error_block"
         >
-          <div class="content_text">{{toastedItem}}</div>
-        </div>
-<!--      </transition-group>-->
+            <div class="toasted_element"
+                 v-for="(toastedItem, index) in toasted"
+                 :key="toastedItem.id"
+                 @click="DELETE_TOASTED(index)"
+                 :class="toastedItem.style"
+            >
+              <div class="content_text">{{toastedItem.id}}</div>
+            </div>
+        </transition-group>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -59,7 +59,7 @@ name: "toasted",
 }
 .error_block{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 .error{
   background-color: rgba(119,2,0,0.82);
