@@ -164,7 +164,18 @@
           </div>
         </div>
       </div>
-
+    </div>
+    <div class="work_space">
+      <div class="row_position work_space_element_advent">
+        <div>Accept rules</div>
+        <div >
+          <input
+              type="checkbox"
+              class="switch_1"
+              @click="CHANGE_CHECKBOX_ACCEPT_RULES"
+          >
+        </div>
+      </div>
     </div>
     <div class="work_space">
       <div class="row_position work_space_element_advent">
@@ -181,7 +192,6 @@
           v-if="selectedReactionClicker"
       />
     </div>
-
     <div class="work_space">
       <div class="row_position work_space_element_advent">
         <div>Send Command</div>
@@ -224,7 +234,6 @@ name: "taskManager",
       proxy: '',
       delay: '',
       invitesPerTask: ''
-
     }
   },
   computed: {
@@ -235,7 +244,7 @@ name: "taskManager",
           'tokens',
           'dropDownMenuFlagForToken',
           'proxyLists',
-          'dropDownMenuFlagForProxy'
+          'dropDownMenuFlagForProxy',
         ]
     )
   },
@@ -249,7 +258,8 @@ name: "taskManager",
           'DELETE_PROXY_FROM_LIST',
           'DROP_DOWN_LIST_WITH_PROXY',
           'CHANGE_CHECKBOX_REACTION_CLICKER',
-          'CHANGE_CHECKBOX_SEND_COMMAND'
+          'CHANGE_CHECKBOX_SEND_COMMAND',
+          'CHANGE_CHECKBOX_ACCEPT_RULES'
         ]
     ),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),

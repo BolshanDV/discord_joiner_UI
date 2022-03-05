@@ -2,20 +2,16 @@ import axios from "axios";
 import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
+import taskLogs from "../../../../components/discordJoinerModule/taskLogs";
 
 // sleep function for delay
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const getFormRules = async (inviteCode, guildId) => {
-    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`)
-        .then(response => {
-            return response;
-        })
-        .catch((error) => console.log(error));
-}
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 // main task management function
 export async function launchTasks(body) {
+    // TODO Reaction module must contain true/false position respectively, and another module
+    // Variables for code readability
+
     const errorTokens = [];
     const successTokens = [];
 
@@ -31,6 +27,16 @@ export async function launchTasks(body) {
         // 2) is send command enabled
         // Depending on this, there may be a need for additional requests, as a result
         // of which they must be added to success tokens to display the current status of the task to the client
+
+        if (body.reactionClickerFlag) {
+            //TODO
+        }
+        if(body.sendCommandFlag) {
+            //TODO
+        }
+        if (body.sendCommandFlag && body.reactionClickerFlag) {
+            //TODO
+        }
 
         if (joinStatus && !body.reactionClickerFlag && !body.sendCommandFlag) {
             successTokens.push({ username: token.username, token: token.token });
@@ -72,12 +78,6 @@ async function joinChannel(inviteCode, token, email) {
     return statusCode === 200;
 }
 
-async function acceptRules(inviteCode, guildId) {
-    const formRules = await getFormRules(inviteCode, guildId);
-
-
-}
-
 async function setReaction(token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;
 
@@ -93,12 +93,6 @@ async function setReaction(token, email, reactionObject) {
             body = response.data;
         })
         .catch(error => console.log(error))
-
-    return statusCode === 200;
-}
-
-async function sendCommand() {
-    let statusCode;
 
     return statusCode === 200;
 }

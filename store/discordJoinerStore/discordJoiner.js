@@ -82,7 +82,6 @@ export const actions = {
     // The point is only to sequentially call functions along the chain to achieve the final verification
     CREATE_TASK: async (ctx, parameters) => {
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
-        // TODO decompose this object
         const {inviteCode, tokens, delay} = parameters;
         let mainObj = {
             tokens: tokens,
@@ -93,7 +92,7 @@ export const actions = {
             reactionClickerObj:  ctx.state.reactionClickerObj,
             sendCommandObj: ctx.state.sendCommandObj
         }
-
+        console.log(mainObj)
         if (inviteCode !== undefined && tokens.length !==0) {
 
             const {successTokens, errorTokens} = await launchTasks(mainObj);
