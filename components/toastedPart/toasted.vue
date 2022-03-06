@@ -11,7 +11,7 @@
                  @click="DELETE_TOASTED(index)"
                  :class="toastedItem.style"
             >
-              <div class="content_text">{{toastedItem.id}}</div>
+              <div class="content_text">{{toastedItem.element}}</div>
             </div>
         </transition-group>
       </div>

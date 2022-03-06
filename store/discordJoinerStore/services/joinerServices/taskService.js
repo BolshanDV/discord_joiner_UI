@@ -3,6 +3,9 @@ import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 
+const errorTokens = [];
+const successTokens = [];
+
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -17,13 +20,14 @@ const getFormRules = async (inviteCode, guildId, token, email) => {
         .catch((error) => console.log(error));
 }
 
+export const getterTokens = () => {
+    return { successTokens: successTokens, errorTokens: errorTokens };
+}
+
 // main task management function
 export async function launchTasks(body) {
     // TODO Reaction module must contain true/false position respectively, and another module
     // Variables for code readability
-
-    const errorTokens = [];
-    const successTokens = [];
 
     for (const token of body.tokens) {
         // execute a request to get information about the user to receive mail
@@ -51,7 +55,13 @@ export async function launchTasks(body) {
                 errorTokens.push(token);
             }
         } else if (joinStatus && acceptRulesStatus && body.sendCommandFlag) {
-            // some logic
+            const sendCommandStatus = await sendCommand(token.token, me.email, body.sendCommandObj);
+
+            if (sendCommandStatus) {
+                successTokens.push({ username: token.username, token: token.token });
+            } else {
+                errorTokens.push(token);
+            }
         } else {
             errorTokens.push(token);
         }
@@ -113,8 +123,6 @@ async function acceptRules(inviteCode, guildId, token, email) {
         version: formRules.version
     }
 
-    console.log(payload)
-
     await axios.put(`https://discord.com/api/v9/guilds/${guildId}/requests/@me`, payload, {
         withCredentials: true,
         headers: buildHeaders(token, email)
@@ -123,6 +131,29 @@ async function acceptRules(inviteCode, guildId, token, email) {
             statusCode = response.status;
             body = response.data;
         }).catch(error => console.log(error));
+
+    console.log(body);
+
+    return statusCode === 200;
+}
+
+async function sendCommand(token, email, sendCommandObj) {
+    let statusCode;
+    let body;
+
+    const payload = {
+        content: sendCommandObj.commandText,
+        nonce: 0,
+        tts: false
+    }
+
+    await axios.post(`https://discord.com/api/v9/channels/${sendCommandObj.channelId}/messages`, payload, {
+        withCredentials: true,
+        headers: buildHeaders(token, email)
+    }).then(response => {
+            statusCode = response.status;
+            body = response.data;
+    }).catch(error => console.log(error));
 
     console.log(body);
 
