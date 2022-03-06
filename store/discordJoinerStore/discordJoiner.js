@@ -1,10 +1,10 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
-import {launchTasks} from "./services/joinerServices/taskService";
+import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 
 export const state = () => ({
     tokens: [],
     errorToken: null,
-    successJoined: [],
+    processedTokens: null,
     globalStatus: false,
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
@@ -80,6 +80,9 @@ export const mutations = {
     },
     CHANGE_CHECKBOX_ACCEPT_RULES: (state) => {
         state.accept_rules = !state.accept_rules
+    },
+    UPDATE_TOKENS: (state) => {
+        state.processedTokens = getterTokens();
     }
 }
 export const actions = {
@@ -99,10 +102,12 @@ export const actions = {
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules
         }
+
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
-            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens ,errorTokens}, {root: true} )
+            ctx.commit('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
         }
+
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {

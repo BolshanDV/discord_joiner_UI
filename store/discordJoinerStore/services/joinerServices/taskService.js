@@ -2,26 +2,32 @@ import axios from "axios";
 import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
-import taskLogs from "../../../../components/discordJoinerModule/taskLogs";
+
+const errorTokens = [];
+const successTokens = [];
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const getFormRules = async (inviteCode, guildId) => {
-    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`)
+const getFormRules = async (inviteCode, guildId, token, email) => {
+    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`, {
+        withCredentials: true,
+        headers: buildHeaders(token, email)
+    })
         .then(response => {
             return response.data;
         })
         .catch((error) => console.log(error));
 }
 
+export const getterTokens = () => {
+    return { successTokens: successTokens, errorTokens: errorTokens };
+}
+
 // main task management function
 export async function launchTasks(body) {
     // TODO Reaction module must contain true/false position respectively, and another module
     // Variables for code readability
-
-    const errorTokens = [];
-    const successTokens = [];
 
     for (const token of body.tokens) {
         // execute a request to get information about the user to receive mail
@@ -49,7 +55,13 @@ export async function launchTasks(body) {
                 errorTokens.push(token);
             }
         } else if (joinStatus && acceptRulesStatus && body.sendCommandFlag) {
-            // some logic
+            const sendCommandStatus = await sendCommand(token.token, me.email, body.sendCommandObj);
+
+            if (sendCommandStatus) {
+                successTokens.push({ username: token.username, token: token.token });
+            } else {
+                errorTokens.push(token);
+            }
         } else {
             errorTokens.push(token);
         }
@@ -102,9 +114,10 @@ async function setReaction(token, email, reactionObject) {
 }
 
 async function acceptRules(inviteCode, guildId, token, email) {
-    const formRules = await getFormRules(inviteCode, guildId);
+    const formRules = await getFormRules(inviteCode, guildId, token, email);
 
     let statusCode;
+    let body;
     const payload = {
         form_fields: formRules.form_fields,
         version: formRules.version
@@ -116,7 +129,33 @@ async function acceptRules(inviteCode, guildId, token, email) {
     })
         .then(response => {
             statusCode = response.status;
+            body = response.data;
         }).catch(error => console.log(error));
+
+    console.log(body);
+
+    return statusCode === 200;
+}
+
+async function sendCommand(token, email, sendCommandObj) {
+    let statusCode;
+    let body;
+
+    const payload = {
+        content: sendCommandObj.commandText,
+        nonce: 0,
+        tts: false
+    }
+
+    await axios.post(`https://discord.com/api/v9/channels/${sendCommandObj.channelId}/messages`, payload, {
+        withCredentials: true,
+        headers: buildHeaders(token, email)
+    }).then(response => {
+            statusCode = response.status;
+            body = response.data;
+    }).catch(error => console.log(error));
+
+    console.log(body);
 
     return statusCode === 200;
 }
