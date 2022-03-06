@@ -86,6 +86,7 @@ export const actions = {
     // Function with minimal functionality
     // The point is only to sequentially call functions along the chain to achieve the final verification
     CREATE_TASK: async (ctx, parameters) => {
+        scheduledCheckokens();
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
         const {inviteCode, tokens, delay, guildId} = parameters;
         let mainObj = {
@@ -99,7 +100,7 @@ export const actions = {
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules
         }
-        ctx.commit('toastedStore/toasted/ADDING_ERROR', mainObj.delay , {root: true} )
+        // ctx.commit('toastedStore/toasted/ADDING_ERROR', mainObj.delay , {root: true} )
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             // ctx.commit('toastedStore/toasted/ADDING_ERROR', errorTokens, {root: true})

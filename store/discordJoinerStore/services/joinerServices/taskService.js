@@ -2,13 +2,15 @@ import axios from "axios";
 import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
-import taskLogs from "../../../../components/discordJoinerModule/taskLogs";
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const getFormRules = async (inviteCode, guildId) => {
-    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`)
+const getFormRules = async (inviteCode, guildId, token, email) => {
+    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`, {
+        withCredentials: true,
+        headers: buildHeaders(token, email)
+    })
         .then(response => {
             return response.data;
         })
@@ -102,13 +104,16 @@ async function setReaction(token, email, reactionObject) {
 }
 
 async function acceptRules(inviteCode, guildId, token, email) {
-    const formRules = await getFormRules(inviteCode, guildId);
+    const formRules = await getFormRules(inviteCode, guildId, token, email);
 
     let statusCode;
+    let body;
     const payload = {
         form_fields: formRules.form_fields,
         version: formRules.version
     }
+
+    console.log(payload)
 
     await axios.put(`https://discord.com/api/v9/guilds/${guildId}/requests/@me`, payload, {
         withCredentials: true,
@@ -116,7 +121,10 @@ async function acceptRules(inviteCode, guildId, token, email) {
     })
         .then(response => {
             statusCode = response.status;
+            body = response.data;
         }).catch(error => console.log(error));
+
+    console.log(body);
 
     return statusCode === 200;
 }
