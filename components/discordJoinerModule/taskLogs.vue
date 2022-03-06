@@ -58,10 +58,17 @@ name: "taskLogs"
   background: rgba(43, 214, 162, 0.2);
   border: 1px solid #2BD6A2;
 }
+.btn_start:hover{
+  background: rgba(139, 233, 206, 0.2);
+}
 .btn_stop{
   background: rgba(170, 26, 23, 0.2);
   border: 1px solid #AA1A17;
   margin-right: 20px;
+}
+.btn_stop:hover{
+  background: rgba(226, 85, 85, 0.2);
+
 }
 .first_btn{
   justify-content: space-between;
@@ -73,5 +80,8 @@ name: "taskLogs"
 }
 .btn_clear{
   background: #1F2A39;
+}
+.btn_clear:hover{
+  background: #343e51;
 }
 </style>

@@ -8,7 +8,6 @@ export const getters = {
 }
 export const mutations = {
     ADDING_ERROR: (state, item) => {
-        let i = 0
         let successTokensObj = {
             element: "Quantity succeed joined accounts: " + item.successTokens.length,
             style: 'success',

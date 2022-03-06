@@ -321,6 +321,9 @@ name: "taskManager",
   height: 5vh;
   justify-content: center;
 }
+.row_position_btn_form:hover{
+  background: rgba(150, 250, 215, 0.2);
+}
 .input_element{
   background-color: rgba(22,30,41,0.6);
   border-width: 0;
