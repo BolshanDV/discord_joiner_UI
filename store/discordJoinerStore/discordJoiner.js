@@ -86,8 +86,8 @@ export const mutations = {
     SAVE_MAIN_DATA: (state, obj) => {
         state.mainData.push(obj)
     },
-    UPDATE_TOKENS:  (state) => {
-        state.processedTokens = getterTokens();
+    UPDATE_TOKENS: (state, taskName) => {
+        state.processedTokens = getterTokens(taskName);
     }
 }
 export const actions = {

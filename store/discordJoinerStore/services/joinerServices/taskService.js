@@ -152,8 +152,8 @@ async function sendCommand(token, email, sendCommandObj) {
         withCredentials: true,
         headers: buildHeaders(token, email)
     }).then(response => {
-            statusCode = response.status;
-            body = response.data;
+        statusCode = response.status;
+        body = response.data;
     }).catch(error => console.log(error));
 
     return statusCode === 200;
