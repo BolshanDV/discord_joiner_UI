@@ -6,7 +6,7 @@
         </div>
       <div class="work_space_element_title">Message id</div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="massageId" autocomplete="off" placeholder="Enter massager id" type="search" name="search">
+          <input class="text-field__input input_element" v-model="messageId" autocomplete="off" placeholder="Enter massager id" type="search" name="search">
         </div>
       <div class="work_space_element_title">Reaction id</div>
         <div class="text-field">
@@ -24,7 +24,7 @@
       </div>
       <div class="row_position row_position_btn">
         <div class="row_position row_position_btn_form"
-             @click="SAVE_DATA_FROM_R_CLICKER({channelId, massageId, reactionId, reactionClickDelay})"
+             @click="SAVE_DATA_FROM_R_CLICKER({channelId, messageId, reactionId, reactionClickDelay})"
         >
           Save
         </div>
@@ -39,7 +39,7 @@ name: "reactionClicker",
   data() {
     return {
       channelId: '',
-      massageId: '',
+      messageId: '',
       reactionId: '',
       reactionClickDelay: ''
     }

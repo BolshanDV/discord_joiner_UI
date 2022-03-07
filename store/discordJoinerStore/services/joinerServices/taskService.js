@@ -4,7 +4,7 @@ import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../utils/taskUtils";
 
-const tasks = [];
+export const tasks = [];
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -29,7 +29,7 @@ export async function launchTasks(body) {
     const successTokens = [];
     const errorTokens = [];
 
-    if (tasks.length ===0 || !findTask(tasks, body.taskName).status)
+    if (tasks.length === 0 || !findTask(tasks, body.taskName).status)
         tasks.push({taskName: body.taskName, successTokens: successTokens, errorTokens: errorTokens})
 
     for (const token of body.tokens) {
@@ -48,7 +48,7 @@ export async function launchTasks(body) {
         // of which they must be added to success tokens to display the current status of the task to the client
 
         if (joinStatus && acceptRulesStatus && !body.reactionClickerFlag && !body.sendCommandFlag) {
-            successTokens.push({username: token.username, token: token.token});
+            successTokens.push({ username: token.username, token: token.token });
         } else if (joinStatus && acceptRulesStatus && body.reactionClickerFlag) {
             const reactionStatus = await setReaction(token.token, me.email, body.reactionClickerObj);
 
@@ -100,6 +100,8 @@ async function joinChannel(inviteCode, token, email) {
 async function setReaction(token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;
 
+    console.log(reactionObject)
+
     let statusCode = 400;
     let body;
 
@@ -113,7 +115,7 @@ async function setReaction(token, email, reactionObject) {
         })
         .catch(error => console.log(error))
 
-    return statusCode === 200;
+    return statusCode === 204;
 }
 
 async function acceptRules(inviteCode, guildId, token, email) {

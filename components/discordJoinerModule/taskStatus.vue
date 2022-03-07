@@ -15,16 +15,16 @@
           class="work_space_element row_position work_space_element_advent"
       >
         <div class="row_position item">{{mainDataItem.taskName}}</div>
-        <div class="row_position item">All accounts joined</div>
+        <div class="row_position item"> {{successTokens[index]}}| {{mainDataItem.tokens.length}}</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
           <div class="icon_element"><img src="../../assets/icons/delete.svg" alt="" ></div>
-          <div class="icon_element play"
+          <div class="icon_element play"><img src="../../assets/icons/play.svg" alt="" ></div>
+          <div class="icon_element"
                @click="UPDATE_TOKENS(mainDataItem.taskName)"
           >
-            <img src="../../assets/icons/play.svg" alt="" >
+            <img src="../../assets/icons/update.svg" alt="" >
           </div>
-          <div class="icon_element"><img src="../../assets/icons/update.svg" alt="" ></div>
         </div>
       </div>
     </div>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
-  ...mapGetters('discordJoinerStore/discordJoiner', ['mainData'])
+  ...mapGetters('discordJoinerStore/discordJoiner', ['mainData', 'successTokens'])
   },
   methods: {
-  ...mapMutations('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS'])
+  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS'])
   }
 }
 </script>

@@ -244,6 +244,7 @@
 import reactionClicker from "./reactionClicker";
 import sendCommand from "./sendCommand";
 import {mapActions, mapMutations, mapGetters} from 'vuex'
+
 export default {
 name: "taskManager",
   components: {
@@ -298,13 +299,13 @@ name: "taskManager",
     },
     PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName}) {
       this.CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})
-      this.inviteCode = '',
-          this.token = '',
-          this.proxy = '',
-          this.delay = '',
-          this.invitesPerTask = '',
-          this.guildId = '',
-          this.taskName = ''
+      this.inviteCode = ''
+      this.token = ''
+      this.proxy = ''
+      this.delay = ''
+      this.invitesPerTask = ''
+      this.guildId = ''
+      this.taskName = ''
     }
 
   }

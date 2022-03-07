@@ -1,6 +1,7 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 import {findTask, findTaskInMainArray} from "./utils/taskUtils";
+import Vue from "vue";
 
 export const state = () => ({
     tokens: [],
@@ -15,7 +16,9 @@ export const state = () => ({
     sendCommandObj: {},
     selectedSendCommand: false,
     selectedReactionClicker: false,
-    accept_rules: false
+    accept_rules: false,
+    renderKey: 0,
+    successTokens: []
 })
 
 export const getters = {
@@ -26,8 +29,9 @@ export const getters = {
     selectedSendCommand: state => state.selectedSendCommand,
     selectedReactionClicker: state => state.selectedReactionClicker,
     accept_rules: state => state.accept_rules,
-    mainData: state => state.mainData
-
+    mainData: state => state.mainData,
+    successTokens: state => state.successTokens,
+    renderKey: state => state.renderKey
 }
 export const mutations = {
     SAVE_TOKENS: (state, tokens) => {
@@ -86,8 +90,14 @@ export const mutations = {
     SAVE_MAIN_DATA: (state, obj) => {
         state.mainData.push(obj)
     },
-    UPDATE_TOKENS: (state, taskName) => {
-        state.mainData[findTaskInMainArray(state.mainData, taskName)].processedTokens = getterTokens(taskName);
+    UPDATE_TOKENS_AND_SAVE: (state, obj) => {
+        // state.mainData[obj.id].processedTokens = obj.processedTokens.successTokens
+        // Vue.set(state.mainData[obj.id], 'processedTokens', obj.processedTokens.successTokens )
+        // console.log(state.mainData)
+        console.log(obj)
+        state.successTokens[obj.id] = obj.processedTokens.successTokens.length
+        state.renderKey++
+        console.log(state.successTokens)
     }
 }
 export const actions = {
@@ -98,7 +108,6 @@ export const actions = {
         const {inviteCode, tokens, delay, guildId, taskName} = parameters;
         let mainObj = {
             tokens: tokens,
-            processedTokens: null,
             inviteCode: inviteCode,
             delay: delay,
             guildId: guildId,
@@ -113,7 +122,7 @@ export const actions = {
 
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
-            ctx.commit('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
         }
 
     },
@@ -135,6 +144,16 @@ export const actions = {
         (errorToken !== undefined)
             ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
             : ctx.commit('SAVE_SINGLE_TOKEN', singleToken);
+    },
+
+    UPDATE_TOKENS: (ctx, taskName) => {
+        // state.mainData[findTaskInMainArray(state.mainData, taskName)].processedTokens = getterTokens(taskName);
+        let obj = {
+            id: findTaskInMainArray(ctx.state.mainData, taskName),
+            processedTokens: getterTokens(taskName)
+            // processedTokens: "n"
+        }
+        ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
     }
 }
 

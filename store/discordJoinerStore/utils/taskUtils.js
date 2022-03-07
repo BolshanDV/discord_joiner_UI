@@ -3,7 +3,7 @@ export function findTask(tasks, taskName) {
         if (task.taskName === taskName) { return { status: true, task: task }  }
     }
 
-    return { status: false,  task: null};
+    return { status: false,  task: []};
 }
 
 export function findTaskInMainArray(mainArray, taskName) {
