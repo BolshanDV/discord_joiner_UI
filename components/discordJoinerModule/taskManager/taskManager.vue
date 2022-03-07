@@ -6,17 +6,6 @@
 
     <div class="work_space column first_element">
       <div class="work_space_element_title">
-        Invite code
-      </div>
-        <div class="text-field">
-          <input class="text-field__input input_element"
-                 v-model="inviteCode"
-                 autocomplete="off"
-                 placeholder="Enter invite code"
-                 type="search"
-                 name="search">
-        </div>
-      <div class="work_space_element_title">
         Task mane
       </div>
       <div class="text-field">
@@ -27,6 +16,18 @@
                type="search"
                name="search">
       </div>
+      <div class="work_space_element_title">
+        Invite code
+      </div>
+        <div class="text-field">
+          <input class="text-field__input input_element"
+                 v-model="inviteCode"
+                 autocomplete="off"
+                 placeholder="Enter invite code"
+                 type="search"
+                 name="search">
+        </div>
+
       <div class="work_space_element_title">
         Guild Id
       </div>
@@ -231,7 +232,7 @@
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-           @click="CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
+           @click="PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
       >
         Create task
       </div>
@@ -294,7 +295,18 @@ name: "taskManager",
     ADD_PROXY_WITH_CLEAR(proxy) {
       this.ADD_PROXY(proxy);
       this.proxy = ''
+    },
+    PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName}) {
+      this.CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})
+      this.inviteCode = '',
+          this.token = '',
+          this.proxy = '',
+          this.delay = '',
+          this.invitesPerTask = '',
+          this.guildId = '',
+          this.taskName = ''
     }
+
   }
 }
 </script>

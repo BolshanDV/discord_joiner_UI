@@ -9,13 +9,22 @@
         <div class="row_position item">Task Status</div>
         <div class="row_position column_item">Actions</div>
       </div>
-      <div class="work_space_element row_position work_space_element_advent">
-        <div class="row_position item">{{mainData.taskName}}</div>
+      <div
+          v-for="(mainDataItem, index) in mainData"
+          :key="index"
+          class="work_space_element row_position work_space_element_advent"
+      >
+        <div class="row_position item">{{mainDataItem.taskName}}</div>
         <div class="row_position item">All accounts joined</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
           <div class="icon_element"><img src="../../assets/icons/delete.svg" alt="" ></div>
-          <div class="icon_element"><img src="../../assets/icons/play.svg" alt="" ></div>
+          <div class="icon_element play"
+               @click="UPDATE_TOKENS(mainDataItem.taskName)"
+          >
+            <img src="../../assets/icons/play.svg" alt="" >
+          </div>
+          <div class="icon_element"><img src="../../assets/icons/update.svg" alt="" ></div>
         </div>
       </div>
     </div>
@@ -25,11 +34,14 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
   ...mapGetters('discordJoinerStore/discordJoiner', ['mainData'])
+  },
+  methods: {
+  ...mapMutations('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS'])
   }
 }
 </script>
@@ -56,15 +68,18 @@ name: "taskStatus",
   margin-top: 5%;
 }
 .icon_element{
-  margin-right: 15%;
+  margin-right: 8%;
 }
 .column_item{
-  width: 15%;
+  width: 20%;
 }
 .work_space_element_title{
   padding: 0 2%;
 }
 .item{
   width: 30%;
+}
+.play{
+  margin-right: 5%;
 }
 </style>

@@ -3,7 +3,7 @@ import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 
 export const state = () => ({
     tokens: [],
-    mainData: {},
+    mainData: [],
     errorToken: null,
     processedTokens: null,
     globalStatus: false,
@@ -84,9 +84,9 @@ export const mutations = {
         state.accept_rules = !state.accept_rules
     },
     SAVE_MAIN_DATA: (state, obj) => {
-        state.mainData = obj
+        state.mainData.push(obj)
     },
-    UPDATE_TOKENS: (state) => {
+    UPDATE_TOKENS:  (state) => {
         state.processedTokens = getterTokens();
     }
 }
