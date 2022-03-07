@@ -17,6 +17,17 @@
                  name="search">
         </div>
       <div class="work_space_element_title">
+        Task mane
+      </div>
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="taskName"
+               autocomplete="off"
+               placeholder="Enter invite code"
+               type="search"
+               name="search">
+      </div>
+      <div class="work_space_element_title">
         Guild Id
       </div>
       <div class="text-field">
@@ -220,7 +231,7 @@
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-           @click="CREATE_TASK({inviteCode, tokens, delay, guildId})"
+           @click="CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
       >
         Create task
       </div>
@@ -245,7 +256,8 @@ name: "taskManager",
       proxy: '',
       delay: '',
       invitesPerTask: '',
-      guildId: ''
+      guildId: '',
+      taskName: ''
     }
   },
   computed: {

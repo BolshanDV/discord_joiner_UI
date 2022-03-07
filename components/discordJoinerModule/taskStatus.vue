@@ -10,7 +10,7 @@
         <div class="row_position column_item">Actions</div>
       </div>
       <div class="work_space_element row_position work_space_element_advent">
-        <div class="row_position item">Nask1</div>
+        <div class="row_position item">{{mainData.taskName}}</div>
         <div class="row_position item">All accounts joined</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
@@ -25,8 +25,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-name: "taskStatus"
+name: "taskStatus",
+  computed: {
+  ...mapGetters('discordJoinerStore/discordJoiner', ['mainData'])
+  }
 }
 </script>
 

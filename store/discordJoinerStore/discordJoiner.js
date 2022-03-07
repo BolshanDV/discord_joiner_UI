@@ -3,6 +3,7 @@ import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 
 export const state = () => ({
     tokens: [],
+    mainData: {},
     errorToken: null,
     processedTokens: null,
     globalStatus: false,
@@ -24,7 +25,8 @@ export const getters = {
     dropDownMenuFlagForProxy: state => state.dropDownMenuFlagForProxy,
     selectedSendCommand: state => state.selectedSendCommand,
     selectedReactionClicker: state => state.selectedReactionClicker,
-    accept_rules: state => state.accept_rules
+    accept_rules: state => state.accept_rules,
+    mainData: state => state.mainData
 
 }
 export const mutations = {
@@ -81,6 +83,9 @@ export const mutations = {
     CHANGE_CHECKBOX_ACCEPT_RULES: (state) => {
         state.accept_rules = !state.accept_rules
     },
+    SAVE_MAIN_DATA: (state, obj) => {
+        state.mainData = obj
+    },
     UPDATE_TOKENS: (state) => {
         state.processedTokens = getterTokens();
     }
@@ -90,18 +95,20 @@ export const actions = {
     // The point is only to sequentially call functions along the chain to achieve the final verification
     CREATE_TASK: async (ctx, parameters) => {
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
-        const {inviteCode, tokens, delay, guildId} = parameters;
+        const {inviteCode, tokens, delay, guildId, taskName} = parameters;
         let mainObj = {
             tokens: tokens,
             inviteCode: inviteCode,
             delay: delay,
             guildId: guildId,
+            taskName: taskName,
             reactionClickerFlag: ctx.state.selectedReactionClicker,
             sendCommandFlag: ctx.state.selectedSendCommand,
             reactionClickerObj:  ctx.state.reactionClickerObj,
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules
         }
+        ctx.commit("SAVE_MAIN_DATA", mainObj)
 
         if (inviteCode !== undefined && tokens.length !==0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
