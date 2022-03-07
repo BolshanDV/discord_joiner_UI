@@ -79,7 +79,7 @@ async function joinChannel(inviteCode, token, email) {
     const captchaToken = await solveCaptcha();
 
     let body;
-    let statusCode;
+    let statusCode = 400;
 
     await axios.post(`https://discord.com/api/v9/invites/${inviteCode}`,{
         'captcha_key': captchaToken
@@ -100,7 +100,7 @@ async function joinChannel(inviteCode, token, email) {
 async function setReaction(token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;
 
-    let statusCode;
+    let statusCode = 400;
     let body;
 
     await axios.put(`https://discord.com/api/v9/channels/${channelId}/messages/${messageId}/reactions/${reactionId}/%40me`, null,{
@@ -119,7 +119,7 @@ async function setReaction(token, email, reactionObject) {
 async function acceptRules(inviteCode, guildId, token, email) {
     const formRules = await getFormRules(inviteCode, guildId, token, email);
 
-    let statusCode;
+    let statusCode = 400;
     let body;
     const payload = {
         form_fields: formRules.form_fields,
@@ -139,7 +139,7 @@ async function acceptRules(inviteCode, guildId, token, email) {
 }
 
 async function sendCommand(token, email, sendCommandObj) {
-    let statusCode;
+    let statusCode = 400;
     let body;
 
     const payload = {
