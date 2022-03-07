@@ -13,7 +13,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '../crypto_logo.svg' }
+      { rel: 'icon', type: 'image/x-icon', href: '../crypto_logo.svg' },
     ]
   },
 
@@ -23,8 +23,9 @@ export default {
       'assets/transitions/transition.css',
       'assets/style/checkbox.css',
       'assets/style/input.css',
-      'assets/style/scrolls.css'
-],
+      'assets/style/scrolls.css',
+
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

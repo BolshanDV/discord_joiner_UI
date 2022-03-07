@@ -73,7 +73,7 @@ name: "reactionClicker",
   height: 3vh;
   justify-content: center;
 }
-.row_position_btn_form:hover{
-  background: rgba(150, 250, 215, 0.2);
+.row_position_btn_form:active{
+  background: #2BD6A2;
 }
 </style>

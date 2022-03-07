@@ -230,7 +230,7 @@
           v-if="selectedSendCommand"
       />
     </div>
-    <div class="row_position row_position_btn">
+    <div class="row_position row_position_btn waves waves-effect">
       <div class="row_position row_position_btn_form"
            @click="PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
       >
@@ -346,8 +346,8 @@ name: "taskManager",
   height: 5vh;
   justify-content: center;
 }
-.row_position_btn_form:hover{
-  background: rgba(150, 250, 215, 0.2);
+.row_position_btn_form:active{
+  background: #2BD6A2;
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);
