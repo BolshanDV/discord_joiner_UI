@@ -5,3 +5,13 @@ export function findTask(tasks, taskName) {
 
     return { status: false,  task: null};
 }
+
+export function findTaskInMainArray(mainArray, taskName) {
+    for (let i = 0; i < mainArray.length; i++) {
+        if (mainArray[i].taskName === taskName) {
+            return i;
+        }
+    }
+
+    return -1;
+}

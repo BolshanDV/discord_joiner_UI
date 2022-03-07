@@ -4,7 +4,6 @@ import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../utils/taskUtils";
 
-
 const tasks = [];
 
 // sleep function for delay
@@ -30,7 +29,8 @@ export async function launchTasks(body) {
     const successTokens = [];
     const errorTokens = [];
 
-    if (tasks.length ===0 || !findTask(tasks, body.taskName).status) tasks.push({taskName: body.taskName, successTokens: successTokens, errorTokens: errorTokens})
+    if (tasks.length ===0 || !findTask(tasks, body.taskName).status)
+        tasks.push({taskName: body.taskName, successTokens: successTokens, errorTokens: errorTokens})
 
     for (const token of body.tokens) {
         // execute a request to get information about the user to receive mail

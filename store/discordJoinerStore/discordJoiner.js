@@ -1,11 +1,11 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
+import {findTask, findTaskInMainArray} from "./utils/taskUtils";
 
 export const state = () => ({
     tokens: [],
     mainData: [],
     errorToken: null,
-    processedTokens: null,
     globalStatus: false,
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
@@ -87,7 +87,7 @@ export const mutations = {
         state.mainData.push(obj)
     },
     UPDATE_TOKENS: (state, taskName) => {
-        state.processedTokens = getterTokens(taskName);
+        state.mainData[findTaskInMainArray(state.mainData, taskName)].processedTokens = getterTokens(taskName);
     }
 }
 export const actions = {
@@ -98,6 +98,7 @@ export const actions = {
         const {inviteCode, tokens, delay, guildId, taskName} = parameters;
         let mainObj = {
             tokens: tokens,
+            processedTokens: null,
             inviteCode: inviteCode,
             delay: delay,
             guildId: guildId,
