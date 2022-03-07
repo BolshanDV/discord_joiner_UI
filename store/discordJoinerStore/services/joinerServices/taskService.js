@@ -2,9 +2,10 @@ import axios from "axios";
 import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
+import {findTask} from "../../utils/taskUtils";
 
-const errorTokens = [];
-const successTokens = [];
+
+const tasks = [];
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -20,14 +21,16 @@ const getFormRules = async (inviteCode, guildId, token, email) => {
         .catch((error) => console.log(error));
 }
 
-export const getterTokens = () => {
-    return { successTokens: successTokens, errorTokens: errorTokens };
+export const getterTokens = (taskName) => {
+    return findTask(tasks, taskName).task;
 }
 
 // main task management function
 export async function launchTasks(body) {
-    // TODO Reaction module must contain true/false position respectively, and another module
-    // Variables for code readability
+    const successTokens = [];
+    const errorTokens = [];
+
+    if (tasks.length ===0 || !findTask(tasks, body.taskName).status) tasks.push({taskName: body.taskName, successTokens: successTokens, errorTokens: errorTokens})
 
     for (const token of body.tokens) {
         // execute a request to get information about the user to receive mail
@@ -132,8 +135,6 @@ async function acceptRules(inviteCode, guildId, token, email) {
             body = response.data;
         }).catch(error => console.log(error));
 
-    console.log(body);
-
     return statusCode === 200;
 }
 
@@ -154,8 +155,6 @@ async function sendCommand(token, email, sendCommandObj) {
             statusCode = response.status;
             body = response.data;
     }).catch(error => console.log(error));
-
-    console.log(body);
 
     return statusCode === 200;
 }
