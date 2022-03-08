@@ -16,6 +16,7 @@ export const state = () => ({
     globalStatus: false,
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
+    dropDownMenuFlagForGuildID: false,
     proxyLists: [],
     delay: 0,
     reactionClickerObj: {},
@@ -24,7 +25,8 @@ export const state = () => ({
     selectedReactionClicker: false,
     accept_rules: false,
     renderKey: 0,
-    successTokens: []
+    successTokens: [],
+
 })
 
 export const getters = {
@@ -37,7 +39,7 @@ export const getters = {
     accept_rules: state => state.accept_rules,
     mainData: state => state.mainData,
     successTokens: state => state.successTokens,
-    renderKey: state => state.renderKey
+    renderKey: state => state.renderKey,
 }
 export const mutations = {
     SAVE_TOKENS: (state, tokens) => {
@@ -97,9 +99,6 @@ export const mutations = {
         state.mainData.push(obj)
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
-        // state.mainData[obj.id].processedTokens = obj.processedTokens.successTokens
-        // Vue.set(state.mainData[obj.id], 'processedTokens', obj.processedTokens.successTokens )
-        // console.log(state.mainData)
         console.log(obj)
         state.successTokens[obj.id] = obj.processedTokens.successTokens.length
         state.renderKey++

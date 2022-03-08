@@ -3,7 +3,6 @@
     <div>
       <p class="title">Task Manager</p>
     </div>
-
     <div class="work_space column first_element">
       <div class="work_space_element_title">
         Task mane
@@ -27,18 +26,6 @@
                  type="search"
                  name="search">
         </div>
-
-      <div class="work_space_element_title">
-        Guild Id
-      </div>
-      <div class="text-field">
-        <input class="text-field__input input_element"
-               v-model="guildId"
-               autocomplete="off"
-               placeholder="Enter guild id"
-               type="search"
-               name="search">
-      </div>
       <div class="work_space_element_title">
         Accounts tokens list
       </div>
@@ -86,20 +73,15 @@
             <div class="scroll_horizontal row_position">
               <div class="scroll_item">{{token.username}}</div>
             </div>
-
-                <div
-                    class="cross_icon"
-                    @click="DELETE_TOKEN_FROM_LIST(index)"
-                >
-                  <img src="../../../assets/icons/cross.svg" alt="">
-                </div>
-
+              <div
+                  class="cross_icon"
+                  @click="DELETE_TOKEN_FROM_LIST(index)"
+              >
+                <img src="../../../assets/icons/cross.svg" alt="">
+              </div>
           </div>
         </div>
       </div>
-
-
-
       <div class="work_space_element_title">
         Proxy list
       </div>
@@ -199,6 +181,19 @@
           >
         </div>
       </div>
+      <div v-if="accept_rules">
+        <div class="work_space_element_title">
+          Guild Id
+        </div>
+        <div class="text-field">
+          <input class="text-field__input input_element"
+                 v-model="guildId"
+                 autocomplete="off"
+                 placeholder="Enter guild id"
+                 type="search"
+                 name="search">
+        </div>
+      </div>
     </div>
     <div class="work_space">
       <div class="row_position work_space_element_advent">
@@ -271,6 +266,7 @@ name: "taskManager",
           'dropDownMenuFlagForToken',
           'proxyLists',
           'dropDownMenuFlagForProxy',
+          'accept_rules'
         ]
     )
   },
@@ -285,7 +281,7 @@ name: "taskManager",
           'DROP_DOWN_LIST_WITH_PROXY',
           'CHANGE_CHECKBOX_REACTION_CLICKER',
           'CHANGE_CHECKBOX_SEND_COMMAND',
-          'CHANGE_CHECKBOX_ACCEPT_RULES'
+          'CHANGE_CHECKBOX_ACCEPT_RULES',
         ]
     ),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
