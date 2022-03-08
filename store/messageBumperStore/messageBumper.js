@@ -1,3 +1,5 @@
+import {validateSingleToken} from "../discordJoinerStore/services/joinerServices/validateService";
+
 export const state = () => ({
     channelLists: [],
     messageList: [],
@@ -45,7 +47,8 @@ export const mutations = {
 export const actions = {
     DOWNLOADING_FILE: () => {
         alert('Возможно сделаем тут копирование')
-    }
+    },
+
 }
 
 

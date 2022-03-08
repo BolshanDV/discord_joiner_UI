@@ -1,7 +1,13 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
-import {findTask, findTaskInMainArray} from "./utils/taskUtils";
-import Vue from "vue";
+import {findTaskInMainArray} from "./utils/taskUtils";
+
+// TODO Перенести GuildID в Accept Rules module
+// TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда
+// TODO Добавить в Message Bumper функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)
+// TODO Добавить функцию удаления таска при нажатии соответствующей кнопки
+// TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper
+// TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)
 
 export const state = () => ({
     tokens: [],
@@ -128,9 +134,6 @@ export const actions = {
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
-        // TODO If the token has not passed validation, you must display error at the front
-        // TODO P/S: I sent an example to telegram
-
         const {input, errorToken} = await validateAndExtractTokens(tokens);
 
         (errorToken !== undefined)
@@ -154,6 +157,10 @@ export const actions = {
             // processedTokens: "n"
         }
         ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
+    },
+
+    PAUSE_TASK: (ctx, taskName) => {
+
     }
 }
 
