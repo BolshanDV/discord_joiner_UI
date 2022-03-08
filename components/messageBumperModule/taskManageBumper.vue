@@ -8,7 +8,13 @@
         Channels list
       </div>
       <div class="text-field__icon">
-        <input class="text-field__input input_element" v-model="channelList" type="search" name="search"  autocomplete="off" placeholder="Enter tokens list">
+        <input class="text-field__input input_element"
+               v-model="channelList"
+               type="search"
+               name="search"
+               autocomplete="off"
+               placeholder="Enter tokens list"
+        >
         <div
             class="text-field__aicon"
             @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelList)"

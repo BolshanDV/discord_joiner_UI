@@ -53,15 +53,17 @@ export async function validateSingleToken(singleToken) {
             statusCode = response.status;
             body = response.data;
         })
-        .catch(error => {
-            console.log("There was an error!", error);
+        .catch((error) => {
+            statusCode = error.response.status;
         })
 
     if (statusCode !== 200) {
         errorToken = singleToken;
+
+        return {singleToken: undefined, errorToken: errorToken};
     }
 
-    return { singleToken: {token: singleToken, username: body.username}, errorToken: errorToken };
+    return { singleToken: {token: singleToken, username: body.username}, errorToken: undefined };
 }
 
 export async function getMe(singleToken) {

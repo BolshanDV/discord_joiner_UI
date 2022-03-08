@@ -2,7 +2,7 @@ import {validateAndExtractTokens, validateSingleToken} from "./services/joinerSe
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
 
-// TODO Перенести GuildID в Accept Rules module
+// TODO Перенести GuildID в Accept Rules module                                                                         //DONE
 // TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда
 // TODO Добавить в Message Bumper функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)
 // TODO Добавить функцию удаления таска при нажатии соответствующей кнопки
@@ -12,7 +12,7 @@ import {findTaskInMainArray} from "./utils/taskUtils";
 export const state = () => ({
     tokens: [],
     mainData: [],
-    errorToken: null,
+    errorTokens: [],
     globalStatus: false,
     dropDownMenuFlagForToken: false,
     dropDownMenuFlagForProxy: false,
@@ -45,8 +45,13 @@ export const mutations = {
     SAVE_TOKENS: (state, tokens) => {
         state.tokens = tokens;
     },
-    SAVE_ERROR_TOKEN: (state, token) => {
-        state.errorToken = token;
+    SAVE_ERROR_TOKEN: ({state, ctx}, token) => {
+        state.errorTokens.push(token);
+        let obj = {
+            type: "errorTokens",
+            data:  ctx.state.errorTokens
+        }
+        ctx.dispatch('toastedStore/toasted/ADDING_ERROR', obj, {root: true})
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
         if ( token !== 0 ) state.tokens.push(token)
@@ -129,7 +134,6 @@ export const actions = {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
         }
-
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
@@ -141,11 +145,23 @@ export const actions = {
     },
 
     VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
-        const {singleToken, errorToken} = await validateSingleToken(token);
+        let notRepeat = true
+        for (const tokenItem of ctx.state.tokens) {
+            if(tokenItem.token === token) {
+                notRepeat = false
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
+            }
+        }
+        if (notRepeat){
+            const result = await validateSingleToken(token);
 
-        (errorToken !== undefined)
-            ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
-            : ctx.commit('SAVE_SINGLE_TOKEN', singleToken);
+            if (result.errorToken !== undefined) {
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
+            } else {
+                ctx.commit('SAVE_SINGLE_TOKEN', result.singleToken);
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
+            }
+        }
     },
 
     UPDATE_TOKENS: (ctx, taskName) => {
