@@ -23,8 +23,14 @@
           >
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
-          <div class="icon_element play"><img src="../../assets/icons/play.svg" alt="" ></div>
           <div class="icon_element play"
+               v-if="playStopFlag"
+               @click="PLAY"
+          >
+            <img src="../../assets/icons/play.svg" alt="" >
+          </div>
+          <div class="icon_element play"
+               v-if="!playStopFlag"
                @click="PAUSE_TASK"
           >
             <img src="../../assets/icons/stop.svg" alt="" >
@@ -47,11 +53,13 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
-  ...mapGetters('discordJoinerStore/discordJoiner', ['taskStatus', 'successTokens'])
+  ...mapGetters('discordJoinerStore/discordJoiner', ['taskStatus', 'successTokens']),
+    ...mapGetters('discordJoinerStore/taskStatus', ['playStopFlag'])
   },
   methods: {
   ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS']),
-  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS', 'PAUSE_TASK'])
+  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS']),
+    ...mapActions('discordJoinerStore/taskStatus', ['PAUSE_TASK', 'PLAY'])
   }
 }
 </script>

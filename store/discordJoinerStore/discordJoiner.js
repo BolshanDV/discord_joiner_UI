@@ -102,10 +102,7 @@ export const mutations = {
         state.accept_rules = !state.accept_rules
     },
     SAVE_MAIN_DATA: (state, obj) => {
-        state.taskStatus.push({
-            taskName: obj.taskName,
-            tokens: obj.tokens,
-        })
+        state.taskStatus.push(obj)
         state.selectedReactionClicker = false
         state.selectedSendCommand = false
         state.reactionClickerObj = {}
@@ -164,14 +161,10 @@ export const actions = {
 
     UPDATE_TOKENS: (ctx, taskName) => {
         let obj = {
-            id: findTaskInMainArray(ctx.state.mainData, taskName),
+            id: findTaskInMainArray(ctx.state.taskStatus, taskName),
             processedTokens: getterTokens(taskName)
         }
         ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
-    },
-
-    PAUSE_TASK: () => {
-        console.log('hi')
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
