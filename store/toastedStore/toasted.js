@@ -49,12 +49,10 @@ export const mutations = {
     },
     DELETE_TOASTED: (state, index) => {
         state.toasted.splice(index, 1)
-        console.log(state.toasted)
     }
 }
 export const actions = {
     ADDING_ERROR: (ctx, item) => {
-        console.log(item)
         ctx.commit('ADDING_ERROR', item)
         let timerId = setInterval(() => {
             ctx.commit('DELETE_TOASTED', ctx.state.toasted.length - 1)

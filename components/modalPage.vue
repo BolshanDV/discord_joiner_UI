@@ -26,7 +26,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color btn_stop"
-              @click="EXTRACT_AND_VALIDATE(text)"
+              @click="POPUP_DISPLAY('')"
           >
             Clear all
           </b-button>
@@ -34,7 +34,7 @@
               tag="div"
               variant="outline-info"
               class="row_position_btn_form btn_color"
-              @click="POPUP_DISPLAY('')"
+              @click="EXTRACT_AND_VALIDATE(text)"
           >
             Add
           </b-button>

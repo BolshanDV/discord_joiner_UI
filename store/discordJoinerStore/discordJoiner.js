@@ -2,9 +2,9 @@ import {validateAndExtractTokens, validateSingleToken} from "./services/joinerSe
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
 
-// TODO Перенести GuildID в Accept Rules module                                                                         //DONE
-// TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда
-// TODO Добавить в Message Bumper функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)
+// TODO Перенести GuildID в Accept Rules module                                                                                             //DONE
+// TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда                                      //DONE
+// TODO Добавить в Message Bumper  и в Discord Joiner функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)     //DONE
 // TODO Добавить функцию удаления таска при нажатии соответствующей кнопки
 // TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper
 // TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)
@@ -55,6 +55,7 @@ export const mutations = {
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
         if ( token !== 0 ) state.tokens.push(token)
+        console.log(token)
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         if ( token !== 0) state.successJoined.push(token);
@@ -136,15 +137,27 @@ export const actions = {
         }
     },
 
-    EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokens) => {
-        const {input, errorToken} = await validateAndExtractTokens(tokens);
-
-        (errorToken !== undefined)
-            ? ctx.commit('SAVE_ERROR_TOKEN', errorToken)
-            : ctx.commit('SAVE_TOKENS', input);
+    EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokensObj) => {
+        if (tokensObj.type === 'Discord Joiner') await ctx.dispatch('EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER', tokensObj.data)
+        if (tokensObj.type === 'Message Bumper') await ctx.dispatch('messageBumperStore/messageBumper/EXTRACT_AND_VALIDATE_TOKENS_FOR_MASSAGER_BUMPER', tokensObj.data, {root: true})
+        if (tokensObj.type === 'Proxy list') console.log("Proxy list")
     },
 
-    VALIDATE_SINGLE_TOKEN: async (ctx, token) => {
+    VALIDATE_SINGLE_TOKEN: async (ctx, tokenObj) => {
+        (tokenObj.name === 'discordJoiner')
+            ? ctx.dispatch('VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER', tokenObj.token)
+            : ctx.dispatch('messageBumperStore/messageBumper/VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER', tokenObj.token, {root: true})
+    },
+
+    UPDATE_TOKENS: (ctx, taskName) => {
+        let obj = {
+            id: findTaskInMainArray(ctx.state.mainData, taskName),
+            processedTokens: getterTokens(taskName)
+        }
+        ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
+    },
+
+    VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
         let notRepeat = true
         for (const tokenItem of ctx.state.tokens) {
             if(tokenItem.token === token) {
@@ -163,19 +176,31 @@ export const actions = {
             }
         }
     },
-
-    UPDATE_TOKENS: (ctx, taskName) => {
-        // state.mainData[findTaskInMainArray(state.mainData, taskName)].processedTokens = getterTokens(taskName);
-        let obj = {
-            id: findTaskInMainArray(ctx.state.mainData, taskName),
-            processedTokens: getterTokens(taskName)
-            // processedTokens: "n"
+    EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensObj) => {
+        for (const tokensElement of tokensObj) {
+            for (const tokenItem of ctx.state.tokens) {
+                if (tokensElement === tokenItem.token) {
+                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
+                }
+            }
         }
-        ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
-    },
-
-    PAUSE_TASK: (ctx, taskName) => {
-
+        const {input, errorToken} = await validateAndExtractTokens(tokensObj);
+        for (const inputElement of input) {
+            let notRepeat = true
+            for (const tokenItem of ctx.state.tokens) {
+                if (inputElement.singleToken.token === tokenItem.token) {
+                    notRepeat = false
+                }
+            }
+            if (notRepeat) {
+                if (inputElement.errorToken !== undefined) {
+                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
+                } else {
+                    ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
+                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
+                }
+            }
+        }
     }
 }
 

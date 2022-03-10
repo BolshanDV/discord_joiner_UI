@@ -286,7 +286,7 @@ name: "taskManager",
     ),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ADD_TOKEN_WITH_CLEAR() {
-      this.VALIDATE_SINGLE_TOKEN(this.token);
+      this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'discordJoiner'});
       this.token = ""
     },
     ADD_PROXY_WITH_CLEAR(proxy) {
@@ -350,7 +350,6 @@ name: "taskManager",
   border-width: 0;
   color: #CCCCCC;
 }
-
 .additional_functional {
   background: rgba(22,30,41,0.6);
   border-radius: 3px;

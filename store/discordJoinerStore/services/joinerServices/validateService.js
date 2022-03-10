@@ -3,10 +3,12 @@ import axios from "axios";
 export async function validateAndExtractTokens(tokens) {
         const result = [];
 
-        let input = tokens.split(',');
+        // let input = tokens.split(',');
+        let input = tokens
         let errorToken = undefined;
 
         for (const token of input) {
+            console.log(token)
             let statusCode;
             let body;
 

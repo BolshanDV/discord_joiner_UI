@@ -54,7 +54,7 @@
         <div class=" input_element_item">
           <div class="text-field__icon">
             <input class="text-field__input input_element short_input"
-                   v-model="tokenList"
+                   v-model="token"
                    type="search"
                    name="search"
                    autocomplete="off"
@@ -69,7 +69,6 @@
                    :class="{ row_rotate: dropDownFlagForAccountListMBumper &&  tokensList.length !== 0}"
               >
             </div>
-
           </div>
         </div>
         <div class="additional_functional work_space_element item"
@@ -78,7 +77,7 @@
           <img src="../../assets/icons/download.svg" alt="">
         </div>
         <div
-            @click="ADD_TOKENS_LIST_AND_CLEAR(tokenList)"
+            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"
             class="additional_functional work_space_element"
         >
           <img src="../../assets/icons/add.svg" alt="">
@@ -94,7 +93,7 @@
               :key="index"
           >
             <div class="scroll_horizontal row_position">
-              <div>{{tokensListItem}}</div>
+              <div>{{tokensListItem.username}}</div>
             </div>
 
             <div
@@ -150,7 +149,7 @@
 <script>
 import messageList from "./messageList";
 import modalPage from "../modalPage";
-import {mapMutations, mapGetters} from 'vuex'
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
   name: "taskManagerBumper",
   components: {
@@ -159,7 +158,7 @@ export default {
   },
   data() {
     return {
-      tokenList: '',
+      token: '',
       delay: '',
       deleteMasses: '',
       channelList: ''
@@ -181,16 +180,18 @@ export default {
           'DELETE_TOKEN_FROM_LIST',
           'CHANGE_FLAG'
         ]),
-
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
+    ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
       this.ADD_CHANNEL_TO_LISTS(channelItem);
       this.channelList = ''
+
     },
-    ADD_TOKENS_LIST_AND_CLEAR(tokenList) {
-      this.ADD_TOKENS_LIST(tokenList);
-      this.tokenList = ''
+    ADD_TOKENS_LIST_AND_CLEAR(token) {
+      this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'MessageBumper'});
+      // this.ADD_TOKENS_LIST(tokenList);
+      this.token = ''
     }
   }
 }
@@ -262,16 +263,6 @@ export default {
   height: 5vh;
   justify-content: center;
 }
-/*.short_input{*/
-/*  width: 16vw;*/
-/*  border-radius: 6px;*/
-/*}*/
-/*.short_input_drop_down_menu{*/
-/*  border-radius: 0 0 6px 6px;*/
-/*}*/
-/*.short_input_active{*/
-/*  border-radius: 6px 6px 0 0;*/
-/*}*/
 .mini_element{
   background: #272D36;
   border-radius: 3px;

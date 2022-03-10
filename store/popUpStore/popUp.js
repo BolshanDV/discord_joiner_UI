@@ -16,19 +16,20 @@ export const mutations = {
 }
 export const actions = {
     EXTRACT_AND_VALIDATE: (ctx, text) => {
-        text = text.split(' ')
+        text = [...new Set(text.split('\n'))]
+        console.log(text)
         switch (ctx.state.namePopUp) {
-            case "Message list 2": {
-                ctx.commit('messageBumperStore/messageBumper/ADD_MESSAGE_ARR_TO_LISTS', text, {root: true})
+            case "Accounts tokens list Message Bumper": {
+                ctx.dispatch('discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Message Bumper"} , {root: true})
                 break;
             }
             case "Accounts tokens list Discord Joiner": {
-                ctx.commit('discordJoinerStore/discordJoiner/ADD_SUCCESS_TOKENS_ARR', text, {root: true})
+                ctx.dispatch('discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Discord Joiner"}, {root: true})
                 break;
             }
             case "Proxy list": {
-                console.log('hi')
-                ctx.commit('discordJoinerStore/discordJoiner/ADD_PROXY_FROM_ARR', text, {root: true})
+                ctx.commit('discordJoinerStore/discordJoiner/ADD_PROXY_FROM_ARR', {data: text, type: "Proxy list"}, {root: true})
+                break;
             }
         }
         ctx.commit('POPUP_DISPLAY', "")
