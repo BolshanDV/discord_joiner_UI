@@ -10,12 +10,12 @@
         <div class="row_position column_item">Actions</div>
       </div>
       <div
-          v-for="(mainDataItem, index) in mainData"
+          v-for="(taskStatusItem, index) in taskStatus"
           :key="index"
           class="work_space_element row_position work_space_element_advent"
       >
-        <div class="row_position item">{{mainDataItem.taskName}}</div>
-        <div class="row_position item"> {{successTokens[index]}}| {{mainDataItem.tokens.length}}</div>
+        <div class="row_position item">{{taskStatusItem.taskName}}</div>
+        <div class="row_position item"> {{successTokens[index]}} | {{taskStatusItem.tokens.length}}</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
           <div class="icon_element"
@@ -30,7 +30,7 @@
             <img src="../../assets/icons/stop.svg" alt="" >
           </div>
           <div class="icon_element"
-               @click="UPDATE_TOKENS(mainDataItem.taskName)"
+               @click="UPDATE_TOKENS(taskStatusItem.taskName)"
           >
             <img src="../../assets/icons/update.svg" alt="" >
           </div>
@@ -47,7 +47,7 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
-  ...mapGetters('discordJoinerStore/discordJoiner', ['mainData', 'successTokens'])
+  ...mapGetters('discordJoinerStore/discordJoiner', ['taskStatus', 'successTokens'])
   },
   methods: {
   ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS']),

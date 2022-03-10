@@ -1,6 +1,7 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
+import taskStatus from "../../components/discordJoinerModule/taskStatus";
 
 // TODO Перенести GuildID в Accept Rules module                                                                                             //DONE
 // TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда                                      //DONE
@@ -9,9 +10,8 @@ import {findTaskInMainArray} from "./utils/taskUtils";
 // TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper                                              //DONE
 // TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)                                                                        //DONE
 
-export const state = () => ({
+export let state = () => ({
     tokens: [],
-    mainData: [],
     errorTokens: [],
     globalStatus: false,
     dropDownMenuFlagForToken: false,
@@ -26,7 +26,7 @@ export const state = () => ({
     accept_rules: false,
     renderKey: 0,
     successTokens: [],
-
+    taskStatus: []
 })
 
 export const getters = {
@@ -37,9 +37,9 @@ export const getters = {
     selectedSendCommand: state => state.selectedSendCommand,
     selectedReactionClicker: state => state.selectedReactionClicker,
     accept_rules: state => state.accept_rules,
-    mainData: state => state.mainData,
     successTokens: state => state.successTokens,
     renderKey: state => state.renderKey,
+    taskStatus: state => state.taskStatus
 }
 export const mutations = {
     SAVE_TOKENS: (state, tokens) => {
@@ -102,7 +102,16 @@ export const mutations = {
         state.accept_rules = !state.accept_rules
     },
     SAVE_MAIN_DATA: (state, obj) => {
-        state.mainData.push(obj)
+        state.taskStatus.push({
+            taskName: obj.taskName,
+            tokens: obj.tokens,
+        })
+        state.selectedReactionClicker = false
+        state.selectedSendCommand = false
+        state.reactionClickerObj = {}
+        state.sendCommandObj = {}
+        state.accept_rules = false
+        state.tokens = []
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
         console.log(obj)
@@ -111,8 +120,9 @@ export const mutations = {
         console.log(state.successTokens)
     },
     DELETE_TASK_STATUS: (state, index) => {
-        state.mainData.splice(index, 1)
-    }
+        state.taskStatus.splice(index, 1)
+        state.successTokens.splice(index, 1)
+    },
 }
 export const actions = {
     // Function with minimal functionality
