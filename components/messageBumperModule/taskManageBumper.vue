@@ -9,7 +9,7 @@
       </div>
       <div class="text-field__icon">
         <input class="text-field__input input_element"
-               v-model="channelList"
+               v-model="channel"
                type="search"
                name="search"
                autocomplete="off"
@@ -17,7 +17,7 @@
         >
         <div
             class="text-field__aicon"
-            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelList)"
+            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channel)"
         >
           <img src="../../assets/icons/add.svg" alt="">
         </div>
@@ -25,11 +25,11 @@
       </div>
       <div
           class="work_space_element row_position scroll space_element"
-          v-if="channelLists.length !== 0"
+          v-if="channelList.length !== 0"
       >
         <div
             class="row_position mini_element"
-            v-for="(channel, index) in channelLists"
+            v-for="(channel, index) in channelList"
             :key="index"
         >
             <div><img src="../../assets/images/channelImage.svg" alt=""></div>
@@ -123,12 +123,17 @@
       <div class="work_space_element_title">
         <div class="row_position work_space_element_advent">
           <div>Delete messages</div>
-          <input type="checkbox" class="switch_1" >
+          <input type="checkbox"
+                 class="switch_1"
+                 @click="CHANGE_DELETE_MESSAGE_FLAG"
+          >
         </div>
       </div>
-      <div class="text-field">
+      <div class="text-field"
+        v-if="deleteMessagesFlag"
+      >
         <input class="text-field__input input_element"
-               v-model="deleteMasses"
+               v-model="deleteMassages"
                autocomplete="off"
                placeholder="30 (sec)"
                type="search"
@@ -137,7 +142,9 @@
     </div>
     <message-list/>
     <div class="row_position row_position_btn">
-      <div class="row_position row_position_btn_form">
+      <div class="row_position row_position_btn_form"
+        @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR"
+      >
         Create task
       </div>
     </div>
@@ -160,38 +167,45 @@ export default {
     return {
       token: '',
       delay: '',
-      deleteMasses: '',
-      channelList: ''
+      deleteMassages: '',
+      channel: ''
     }
   },
   computed: {
     ...mapGetters('messageBumperStore/messageBumper',
         [
-          'channelLists',
+          'channelList',
           'dropDownFlagForAccountListMBumper',
-          'tokensList']),
+          'tokensList',
+          'deleteMessagesFlag'
+        ]),
   },
   methods: {
     ...mapMutations('messageBumperStore/messageBumper',
         [
           'ADD_CHANNEL_TO_LISTS',
           'DELETE_CHANNEL',
-          'ADD_TOKENS_LIST',
           'DELETE_TOKEN_FROM_LIST',
-          'CHANGE_FLAG'
+          'CHANGE_FLAG',
+          'CHANGE_DELETE_MESSAGE_FLAG'
         ]),
+    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
       this.ADD_CHANNEL_TO_LISTS(channelItem);
-      this.channelList = ''
+      this.channel = ''
 
     },
     ADD_TOKENS_LIST_AND_CLEAR(token) {
       this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'MessageBumper'});
-      // this.ADD_TOKENS_LIST(tokenList);
       this.token = ''
+    },
+    CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR() {
+      this.CREATE_TASK_MESSAGE_BUMPER({delay: this.delay, deleteMasses: this.deleteMassages});
+      this.delay = '';
+      this.deleteMassages = ''
     }
   }
 }
@@ -201,7 +215,7 @@ export default {
 .work_space{
   background: rgba(16,23,34,0.6);
   border-radius: 5px;
-  padding: 0 3% 3% 3%;
+  padding: 0 3% 2% 3%;
   margin-top: 2%;
 }
 .work_space_element{
@@ -294,5 +308,8 @@ export default {
  }
 .scroll_horizontal_limit{
   max-width: 150px;
+}
+.row_position_btn_form:active{
+  background: #2BD6A2;
 }
 </style>

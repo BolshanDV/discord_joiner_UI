@@ -5,9 +5,9 @@ import {findTaskInMainArray} from "./utils/taskUtils";
 // TODO Перенести GuildID в Accept Rules module                                                                                             //DONE
 // TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда                                      //DONE
 // TODO Добавить в Message Bumper  и в Discord Joiner функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)     //DONE
-// TODO Добавить функцию удаления таска при нажатии соответствующей кнопки
-// TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper
-// TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)
+// TODO Добавить функцию удаления таска при нажатии соответствующей кнопки                                                                  //DONE
+// TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper                                              //DONE
+// TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)                                                                        //DONE
 
 export const state = () => ({
     tokens: [],
@@ -109,6 +109,9 @@ export const mutations = {
         state.successTokens[obj.id] = obj.processedTokens.successTokens.length
         state.renderKey++
         console.log(state.successTokens)
+    },
+    DELETE_TASK_STATUS: (state, index) => {
+        state.mainData.splice(index, 1)
     }
 }
 export const actions = {
@@ -155,6 +158,10 @@ export const actions = {
             processedTokens: getterTokens(taskName)
         }
         ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
+    },
+
+    PAUSE_TASK: () => {
+        console.log('hi')
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {

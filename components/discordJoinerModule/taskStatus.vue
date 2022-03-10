@@ -18,8 +18,17 @@
         <div class="row_position item"> {{successTokens[index]}}| {{mainDataItem.tokens.length}}</div>
         <div class="row_position column_item">
           <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
-          <div class="icon_element"><img src="../../assets/icons/delete.svg" alt="" ></div>
+          <div class="icon_element"
+               @click="DELETE_TASK_STATUS(index)"
+          >
+            <img src="../../assets/icons/delete.svg" alt="" >
+          </div>
           <div class="icon_element play"><img src="../../assets/icons/play.svg" alt="" ></div>
+          <div class="icon_element play"
+               @click="PAUSE_TASK"
+          >
+            <img src="../../assets/icons/stop.svg" alt="" >
+          </div>
           <div class="icon_element"
                @click="UPDATE_TOKENS(mainDataItem.taskName)"
           >
@@ -34,14 +43,15 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
   ...mapGetters('discordJoinerStore/discordJoiner', ['mainData', 'successTokens'])
   },
   methods: {
-  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS'])
+  ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS']),
+  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS', 'PAUSE_TASK'])
   }
 }
 </script>
