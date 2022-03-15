@@ -2,6 +2,7 @@ import {
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validateService";
+import {launchBumperTask} from "./services/taskService";
 
 export const state = () => ({
     channelList: [],
@@ -109,8 +110,31 @@ export const actions = {
                 }
             }
         }
-    }
+    },
 
+    CREATE_TASK: async () => {
+        const channelList = [];
+        const messageList = [];
+        const mainToken = '';
+        const messageDelay = 1000;
+
+        const deleteMessageObj = {
+            active: true,
+            deleteDelay: 10000
+        }
+
+        const bumperObj = {
+            delay: messageDelay,
+            channelList: channelList,
+            messageList: messageList,
+            token: mainToken,
+            deleteMessageObj: deleteMessageObj
+        }
+
+        await launchBumperTask(bumperObj);
+
+
+    }
 }
 
 
