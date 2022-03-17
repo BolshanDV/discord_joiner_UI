@@ -1,8 +1,11 @@
 import {
+    getMe,
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validateService";
 import {launchBumperTask} from "./services/taskService";
+import axios from "axios";
+import {buildHeaders} from "../discordJoinerStore/utils/requestUtils";
 
 export const state = () => ({
     channelList: [],
@@ -110,6 +113,25 @@ export const actions = {
                 }
             }
         }
+    },
+
+    GET_LOGO_IMAGE: async (channelId, token) => {
+        //Example channel ID
+        channelId = '912446085388181608';
+        token = 'exampleToken';
+        const me = await getMe(token);
+
+        // Image Url
+        let imageUrl;
+
+        await axios.get(`https://discord.com/api/v9/channels/${channelId}/messages?limit=50`, {
+            headers: buildHeaders(token, me.email),
+            withCredentials: true
+        }).then((response) => {
+            imageUrl = response.data[0].embeds[0].footer.icon_url;
+        }).catch((e) => console.log(e));
+
+        // commit image Url and set in channel
     },
 
     CREATE_TASK: async () => {
