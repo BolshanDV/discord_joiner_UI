@@ -49,6 +49,7 @@ export const actions = {
 
     CLEAR_LOGS: (ctx) => {
         clearLogs()
+        ctx.commit('CLEAT_LOGS_STATE')
     }
 }
 

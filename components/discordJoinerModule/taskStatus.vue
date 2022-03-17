@@ -15,7 +15,27 @@
           class="work_space_element row_position work_space_element_advent"
       >
         <div class="row_position item">{{taskStatusItem.taskName}}</div>
-        <div class="row_position item"> Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})</div>
+        <div class="row_position item"
+             v-if="taskStatusItem.processingTask === '' "
+        >
+          0/{{taskStatusItem.tokens.length}}
+        </div>
+        <div class="row_position item success"
+             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === null"
+        >
+          Processing...
+        </div>
+        <div class="row_position item process"
+             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] > 0"
+        >
+          Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})
+        </div>
+        <div class="row_position item success"
+             v-if="taskStatusItem.processingTask === 'done'"
+        >
+          {{successTokens[index]}}/{{taskStatusItem.tokens.length}}
+        </div>
+
         <div class="row_position column_item">
 <!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
           <div class="icon_element"
@@ -24,21 +44,9 @@
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="taskStatusItem.playStopFlag"
                @click="PLAY_TASK(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
-          </div>
-          <div class="icon_element play"
-               v-if="!taskStatusItem.playStopFlag"
-               @click="CHANGE_ICON_STOP_AND_PLAY(index)"
-          >
-            <img src="../../assets/icons/stop.svg" alt="" >
-          </div>
-          <div class="icon_element"
-               @click="UPDATE_TOKENS(taskStatusItem.taskName)"
-          >
-            <img src="../../assets/icons/update.svg" alt="" >
           </div>
         </div>
       </div>
@@ -99,5 +107,11 @@ name: "taskStatus",
 }
 .play{
   margin-right: 5%;
+}
+.success{
+  color: #2BD6A2;
+}
+.process{
+  color: rgba(255,203,89,0.81);
 }
 </style>

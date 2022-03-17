@@ -362,7 +362,7 @@ name: "taskManager",
   width: 80%;
 }
 .delay{
-  margin-right: 2%;
+  margin-right: 4.5%;
 }
 .row_position_input{
   margin-top: 2%;
@@ -371,7 +371,6 @@ name: "taskManager",
 .scroll{
   border-radius: 0 0 6px 6px;
   width: 16vw;
-  /*padding: 1% 0.5%;*/
 }
 .scroll_item{
   height: 20%;

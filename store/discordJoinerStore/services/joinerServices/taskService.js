@@ -65,20 +65,21 @@ export async function launchTasks(body) {
                 logs.push({ username: token.username, token: token.token, info: 'The reaction has been set'})
             } else {
                 errorTokens.push(token);
+                logs.push({ username: token.username, token: token.token, info: 'Error during the setting of the reaction'})
             }
         } else if (joinStatus && acceptRulesStatus && body.sendCommandFlag) {
             const sendCommandStatus = await sendCommand(token.token, me.email, body.sendCommandObj);
 
             if (sendCommandStatus) {
                 successTokens.push({ username: token.username, token: token.token });
-                logs.push({ username: token.username, token: token.token, info: 'The command was sent successfully'})
+                logs.push({ username: token.username, token: token.token, info: 'Error in putting down the command'})
             } else {
                 errorTokens.push(token);
             }
         } else {
             errorTokens.push(token);
+            logs.push({ username: token.username, token: token.token, info: 'Channel entry error'})
         }
-
         await sleep(body.delay);
     }
 

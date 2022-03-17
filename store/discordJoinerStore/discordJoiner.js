@@ -114,9 +114,11 @@ export const mutations = {
         state.taskStatus.splice(index, 1)
         state.successTokens.splice(index, 1)
     },
-    CHANGE_ICON_STOP_AND_PLAY: (state, index) =>  {
-        state.taskStatus[index].playStopFlag = !state.taskStatus[index].playStopFlag
-    }
+
+    CHANGE_PROCESSING_FLAG: (state, obj) =>  {
+        state.taskStatus[obj.id].processingTask = obj.text
+    },
+
 }
 export const actions = {
     // Function with minimal functionality
@@ -135,7 +137,7 @@ export const actions = {
             reactionClickerObj:  ctx.state.reactionClickerObj,
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules,
-            playStopFlag: true,
+            processingTask: ''
         }
 
         if (inviteCode !== undefined && tokens.length !== 0) {
@@ -144,13 +146,14 @@ export const actions = {
     },
 
     PLAY_TASK: async (ctx, mainObj) => {
-        // ctx.commit('CHANGE_ICON_STOP_AND_PLAY', mainObj.index)
+        let index = findTaskInMainArray(ctx.state.taskStatus, mainObj.taskName)
+        ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
         ctx.dispatch('discordJoinerStore/taskStatus/PROCESS_LOGS', '', {root: true})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);
+            ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
-
         }
     },
 
