@@ -51,18 +51,22 @@ export const mutations = {
     }
 }
 export const actions = {
-    CREATE_TASK_MESSAGE_BUMPER: (ctx, obj) => {
-        let mainData = {
-            delay: obj.delay,
-            deleteMessagesFlag: ctx.state.deleteMessagesFlag,
-            deleteMassages: obj.deleteMassages,
-            channelList: ctx.state.channelList,
-            tokensList: ctx.state.tokensList,
-            messageList: ctx.state.messageList
+    CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
+        let  deleteMessageObj = {
+            active: ctx.state.deleteMessagesFlag,
+            deleteDelay: obj.deleteMassages
         }
-        //TODO Объект готов, собраны все поля
-        console.log(mainData)
+
+        let bumperObj = {
+            delay: obj.delay,
+            channelList: ctx.state.channelList,
+            messageList: ctx.state.messageList,
+            tokensList: ctx.state.tokensList,
+            deleteMessageObj: deleteMessageObj,
+        }
+        await launchBumperTask(bumperObj);
     },
+
     VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
         let notRepeat = true
         for (const tokenItem of ctx.state.tokensList) {
@@ -117,7 +121,6 @@ export const actions = {
         const messageList = [];
         const mainToken = '';
         const messageDelay = 1000;
-        const taskName = '';
 
         const deleteMessageObj = {
             active: true,
@@ -125,7 +128,6 @@ export const actions = {
         }
 
         const bumperObj = {
-            taskName: taskName,
             delay: messageDelay,
             channelList: channelList,
             messageList: messageList,

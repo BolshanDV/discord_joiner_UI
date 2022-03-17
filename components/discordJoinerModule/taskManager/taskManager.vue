@@ -5,7 +5,7 @@
     </div>
     <div class="work_space column first_element">
       <div class="work_space_element_title">
-        Task mane
+        Task name
       </div>
       <div class="text-field">
         <input class="text-field__input input_element"

@@ -1,10 +1,8 @@
 export function findTask(tasks, taskName) {
-    console.log(tasks)
-    console.log(taskName)
     for (const task of tasks) {
-        if (task.taskName === taskName) { return { status: true, task: task }  }
+        if (task.taskName === taskName) { return { status: true, task: task }}
     }
-    return { status: false,  task: []};
+    return { status: false,  task: [] };
 }
 
 export function findTaskInMainArray(mainArray, taskName) {

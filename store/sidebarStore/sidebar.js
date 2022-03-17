@@ -8,7 +8,7 @@ export const state = () => ({
         },
         {
             title: 'Message Bumper',
-            url: '/massageBumper',
+            url: '/messageBumper',
             icon: 'messageBumper.svg'
         },
 
