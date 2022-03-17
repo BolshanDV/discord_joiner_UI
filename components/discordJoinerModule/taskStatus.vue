@@ -17,21 +17,21 @@
         <div class="row_position item">{{taskStatusItem.taskName}}</div>
         <div class="row_position item"> {{successTokens[index]}} | {{taskStatusItem.tokens.length}}</div>
         <div class="row_position column_item">
-          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>
+<!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
           <div class="icon_element"
                @click="DELETE_TASK_STATUS(index)"
           >
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="playStopFlag"
-               @click="PLAY"
+               v-if="taskStatusItem.playStopFlag"
+               @click="PLAY_TASK(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="!playStopFlag"
-               @click="PAUSE_TASK"
+               v-if="!taskStatusItem.playStopFlag"
+               @click="CHANGE_ICON_STOP_AND_PLAY(index)"
           >
             <img src="../../assets/icons/stop.svg" alt="" >
           </div>
@@ -57,8 +57,8 @@ name: "taskStatus",
     ...mapGetters('discordJoinerStore/taskStatus', ['playStopFlag'])
   },
   methods: {
-  ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS']),
-  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS']),
+  ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS', 'CHANGE_ICON_STOP_AND_PLAY']),
+  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS', 'PLAY_TASK']),
     ...mapActions('discordJoinerStore/taskStatus', ['PAUSE_TASK', 'PLAY'])
   }
 }

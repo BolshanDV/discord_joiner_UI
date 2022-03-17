@@ -104,15 +104,20 @@ export const mutations = {
         state.tokens = []
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
-        console.log(obj)
-        state.successTokens[obj.id] = obj.processedTokens.successTokens.length
+        if(obj.processedTokens.length === 0 ) {
+            state.successTokens[obj.id] = 0
+        } else {
+            state.successTokens[obj.id] = obj.processedTokens.successTokens.length
+        }
         state.renderKey++
-        console.log(state.successTokens)
     },
     DELETE_TASK_STATUS: (state, index) => {
         state.taskStatus.splice(index, 1)
         state.successTokens.splice(index, 1)
     },
+    CHANGE_ICON_STOP_AND_PLAY: (state, index) =>  {
+        state.taskStatus[index].playStopFlag = !state.taskStatus[index].playStopFlag
+    }
 }
 export const actions = {
     // Function with minimal functionality
@@ -130,11 +135,19 @@ export const actions = {
             sendCommandFlag: ctx.state.selectedSendCommand,
             reactionClickerObj:  ctx.state.reactionClickerObj,
             sendCommandObj: ctx.state.sendCommandObj,
-            accept_rules: ctx.state.accept_rules
+            accept_rules: ctx.state.accept_rules,
+            playStopFlag: true,
         }
-        ctx.commit("SAVE_MAIN_DATA", mainObj)
 
-        if (inviteCode !== undefined && tokens.length !==0) {
+        if (inviteCode !== undefined && tokens.length !== 0) {
+            ctx.commit("SAVE_MAIN_DATA", mainObj)
+        }
+    },
+
+    PLAY_TASK: async (ctx, mainObj) => {
+        // ctx.commit('CHANGE_ICON_STOP_AND_PLAY', mainObj.index)
+        console.log(mainObj.tokens)
+        if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
         }
@@ -157,6 +170,7 @@ export const actions = {
             id: findTaskInMainArray(ctx.state.taskStatus, taskName),
             processedTokens: getterTokens(taskName)
         }
+        console.log(obj)
         ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
     },
 
