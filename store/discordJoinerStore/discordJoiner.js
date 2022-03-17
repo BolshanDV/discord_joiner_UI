@@ -3,13 +3,6 @@ import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
 import taskStatus from "../../components/discordJoinerModule/taskStatus";
 
-// TODO Перенести GuildID в Accept Rules module                                                                                             //DONE
-// TODO Если токен не прошел проверку (не 200 статус ответа) -> отобразить ошибку на стороне фронтенда                                      //DONE
-// TODO Добавить в Message Bumper  и в Discord Joiner функцию валидации токенов (VALIDATE_SINGLE_TOKEN and EXTRACT_AND_VALIDATE_TOKENS)     //DONE
-// TODO Добавить функцию удаления таска при нажатии соответствующей кнопки                                                                  //DONE
-// TODO создать соответствующий объект для передачи мне в функцию всех полей из Message Bumper                                              //DONE
-// TODO связать кнопку паузы с написанною мною функцией (PAUSE_TASK)                                                                        //DONE
-
 export let state = () => ({
     tokens: [],
     errorTokens: [],

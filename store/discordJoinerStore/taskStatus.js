@@ -12,7 +12,6 @@ export const mutations = {
 }
 export const actions = {
     PAUSE_TASK: (ctx) => {
-        console.log('hi')
         ctx.commit('CHANGE_PLAY_TO_STOP')
     },
 

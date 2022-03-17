@@ -5,24 +5,20 @@ import {getMe} from "./validateService";
 import {findTask} from "../../utils/taskUtils";
 
 export const tasks = [];
+export const controller = new AbortController();
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export const logs = [];
 
+// clear logs function
 export function clearLogs() {
     logs.length = 0;
 }
 
-const getFormRules = async (inviteCode, guildId, token, email) => {
-    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`, {
-        withCredentials: true,
-        headers: buildHeaders(token, email)
-    })
-        .then(response => {
-            return response.data;
-        })
-        .catch((error) => console.log(error));
+// stop all tasks
+export function abortReqs() {
+    controller.abort();
 }
 
 export const getterTokens = (taskName) => {
@@ -34,12 +30,19 @@ export async function launchTasks(body) {
     const successTokens = [];
     const errorTokens = [];
 
-    if (tasks.length === 0 || !findTask(tasks, body.taskName).status)
-        tasks.push({taskName: body.taskName, successTokens: successTokens, errorTokens: errorTokens})
+    if (tasks.length === 0 || !findTask(tasks, body.taskName).status) {
+        tasks.push({
+            taskName: body.taskName,
+            abortController: controller.signal,
+            successTokens: successTokens,
+            errorTokens: errorTokens
+        });
+    }
 
     for (const token of body.tokens) {
         // execute a request to get information about the user to receive mail
         const me = await getMe(token.token);
+        abortReqs();
 
         // after that we pass email and token to the function of joining the channel itself
         const joinStatus = await joinChannel(body.inviteCode, token.token, me.email);
@@ -93,6 +96,7 @@ async function joinChannel(inviteCode, token, email) {
         'captcha_key': captchaToken
     }, {
         withCredentials: true,
+        signal: controller.signal,
         // build headers functions will be generate some headers and created minimal version of request
         headers: buildHeaders(token, email)
     })
@@ -105,6 +109,10 @@ async function joinChannel(inviteCode, token, email) {
     return statusCode === 200;
 }
 
+//**********************************************************************************************
+//*******The function block is the main purpose of sending a request to the discord api*********
+//**********************************************************************************************
+
 async function setReaction(token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;
 
@@ -115,6 +123,7 @@ async function setReaction(token, email, reactionObject) {
 
     await axios.put(`https://discord.com/api/v9/channels/${channelId}/messages/${messageId}/reactions/${reactionId}/%40me`, null,{
         withCredentials: true,
+        signal: controller.signal,
         headers: buildHeaders(token, email)
     })
         .then(response => {
@@ -138,6 +147,7 @@ async function acceptRules(inviteCode, guildId, token, email) {
 
     await axios.put(`https://discord.com/api/v9/guilds/${guildId}/requests/@me`, payload, {
         withCredentials: true,
+        signal: controller.signal,
         headers: buildHeaders(token, email)
     })
         .then(response => {
@@ -160,6 +170,7 @@ async function sendCommand(token, email, sendCommandObj) {
 
     await axios.post(`https://discord.com/api/v9/channels/${sendCommandObj.channelId}/messages`, payload, {
         withCredentials: true,
+        signal: controller.signal,
         headers: buildHeaders(token, email)
     }).then(response => {
         statusCode = response.status;
@@ -167,4 +178,16 @@ async function sendCommand(token, email, sendCommandObj) {
     }).catch(error => console.log(error));
 
     return statusCode === 200;
+}
+
+const getFormRules = async (inviteCode, guildId, token, email) => {
+    return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`, {
+        withCredentials: true,
+        signal: controller.signal,
+        headers: buildHeaders(token, email)
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch((error) => console.log(error));
 }
