@@ -3,29 +3,49 @@ import {buildHeaders} from "../../discordJoinerStore/utils/requestUtils";
 import {getMe} from "../../discordJoinerStore/services/joinerServices/validateService";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const messages = {
-    successMessages: [],
-    deleteParameters: undefined
-};
+
+const tasks = [];
+export const logs = [];
+
+export function clearLogs() {
+    logs.length = 0;
+}
+
+export function stopTask() {
+
+}
 
 export async function launchBumperTask(bumperObj) {
-    const {delay, channelList, messageList, token, deleteMessageObj} = bumperObj;
-    setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay);
-
+    const {taskName, delay, channelList, messageList, token, deleteMessageObj} = bumperObj;
     const me = await getMe(token.token);
 
-    {
-        messages.successMessages = [];
-        messages.deleteParameters = deleteMessageObj.deleteDelay
-    }
-
-    for (const message of messageList) {
-        for (const channel of channelList) {
-            const {status, messageId} = await sendMessage(me.email, token, channel, message);
-
-            if (status) messages.successMessages.push({message: message, messageId: messageId, channel: channel});
-            await sleep(delay);
+    if (!checkTaskExisting(taskName)) {
+        const task = {
+            name: taskName,
+            successMessages: [],
+            deleteParameters: deleteMessageObj.deleteDelay
         }
+        tasks.push(task);
+
+        if (deleteMessageObj.deleteDelay !== undefined)
+            setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
+
+        for (const message of messageList) {
+            for (const channel of channelList) {
+                const {status, messageId} = await sendMessage(me.email, token, channel, message);
+
+                if (status) {
+                    task.successMessages.push({message: message, messageId: messageId, channel: channel});
+                    logs.push({message: message, channel: channel});
+                }
+
+                await sleep(delay);
+            }
+        }
+
+        return {infoMessage: 'Task completed successfully'};
+    } else {
+        return {infoMessage: 'Task already exists'};
     }
 }
 
@@ -50,8 +70,8 @@ async function sendMessage(email, token, channel, message) {
     return {status: status === 200, messageId: messageId};
 }
 
-async function deleteExpiredMessage() {
-    let message = messages.successMessages[messages.successMessages.length];
+async function deleteExpiredMessage(task) {
+    let message = task.successMessages[task.successMessages.length];
 
     let status;
     let flag = false;
@@ -71,4 +91,14 @@ async function deleteExpiredMessage() {
     }
 
     return status === 204;
+}
+
+function checkTaskExisting(taskName) {
+    for (const task of tasks) {
+        if (taskName === task.taskName) {
+            return true;
+        }
+    }
+
+    return false;
 }

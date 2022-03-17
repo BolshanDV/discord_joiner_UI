@@ -117,6 +117,7 @@ export const actions = {
         const messageList = [];
         const mainToken = '';
         const messageDelay = 1000;
+        const taskName = '';
 
         const deleteMessageObj = {
             active: true,
@@ -124,6 +125,7 @@ export const actions = {
         }
 
         const bumperObj = {
+            taskName: taskName,
             delay: messageDelay,
             channelList: channelList,
             messageList: messageList,

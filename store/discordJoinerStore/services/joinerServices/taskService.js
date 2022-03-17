@@ -8,6 +8,11 @@ export const tasks = [];
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+export const logs = [];
+
+export function clearLogs() {
+    logs.length = 0;
+}
 
 const getFormRules = async (inviteCode, guildId, token, email) => {
     return await axios.get(`https://discord.com/api/v9/guilds/${guildId}/member-verification?with_guild=false&invite_code=${inviteCode}`, {
@@ -49,11 +54,13 @@ export async function launchTasks(body) {
 
         if (joinStatus && acceptRulesStatus && !body.reactionClickerFlag && !body.sendCommandFlag) {
             successTokens.push({ username: token.username, token: token.token });
+            logs.push({ username: token.username, token: token.token, info: 'Account successfully in the channel'})
         } else if (joinStatus && acceptRulesStatus && body.reactionClickerFlag) {
             const reactionStatus = await setReaction(token.token, me.email, body.reactionClickerObj);
 
             if (reactionStatus) {
                 successTokens.push({ username: token.username, token: token.token });
+                logs.push({ username: token.username, token: token.token, info: 'The reaction has been set'})
             } else {
                 errorTokens.push(token);
             }
@@ -62,6 +69,7 @@ export async function launchTasks(body) {
 
             if (sendCommandStatus) {
                 successTokens.push({ username: token.username, token: token.token });
+                logs.push({ username: token.username, token: token.token, info: 'The command was sent successfully'})
             } else {
                 errorTokens.push(token);
             }
