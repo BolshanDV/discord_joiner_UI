@@ -7,7 +7,9 @@
         <task-status
             :key="renderKey"
         />
-        <task-logs/>
+        <task-logs
+            :key="date"
+        />
       </div>
     </div>
 </template>
@@ -27,7 +29,8 @@ name: "home",
     modalPage
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey'])
+    ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey']),
+    ...mapGetters('discordJoinerStore/taskStatus', ['date'])
   }
 }
 </script>

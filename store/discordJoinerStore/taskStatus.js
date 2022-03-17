@@ -1,13 +1,28 @@
+import {abortReqs} from "./services/joinerServices/taskService"
+import {logs} from "./services/joinerServices/taskService";
+import {clearLogs} from "./services/joinerServices/taskService"
+
 export const state = () => ({
     playStopFlag: true,
+    logs: []
 })
 
 export const getters = {
-    playStopFlag: state => state.playStopFlag
+    playStopFlag: state => state.playStopFlag,
+    logs: state => state.logs,
+    date: () => Date.now()
 }
 export const mutations = {
-    CHANGE_PLAY_TO_STOP: (state) => {
-        state.playStopFlag = !state.playStopFlag
+    ADD_LOGS: (state, item) => {
+        let obj = {
+            logs: item,
+            date: new Date()
+        }
+        state.logs.push(obj)
+    },
+
+    CLEAT_LOGS_STATE: (state) => {
+        state.logs = []
     }
 }
 export const actions = {
@@ -18,6 +33,23 @@ export const actions = {
     PLAY: (ctx) => {
         ctx.commit('CHANGE_PLAY_TO_STOP')
     },
+
+    PROCESS_LOGS: (ctx) => {
+        setInterval(() => {
+            if(ctx.state.logs.length < logs.length) {
+                console.log(logs)
+                ctx.commit('ADD_LOGS', logs[logs.length - 1])
+            }
+        }, 1000)
+    },
+
+    STOP_ALL_TASKS: () => {
+        abortReqs()
+    },
+
+    CLEAR_LOGS: (ctx) => {
+        clearLogs()
+    }
 }
 
 

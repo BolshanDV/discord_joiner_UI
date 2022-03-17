@@ -1,5 +1,5 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
-import {getterTokens, launchTasks} from "./services/joinerServices/taskService";
+import {getterTokens, launchTasks, logs} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
 import taskStatus from "../../components/discordJoinerModule/taskStatus";
 
@@ -48,7 +48,6 @@ export const mutations = {
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
         if ( token !== 0 ) state.tokens.push(token)
-        console.log(token)
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         if ( token !== 0) state.successJoined.push(token);
@@ -146,10 +145,12 @@ export const actions = {
 
     PLAY_TASK: async (ctx, mainObj) => {
         // ctx.commit('CHANGE_ICON_STOP_AND_PLAY', mainObj.index)
-        console.log(mainObj.tokens)
+        ctx.dispatch('discordJoinerStore/taskStatus/PROCESS_LOGS', '', {root: true})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
+            ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
+
         }
     },
 
@@ -166,12 +167,15 @@ export const actions = {
     },
 
     UPDATE_TOKENS: (ctx, taskName) => {
-        let obj = {
-            id: findTaskInMainArray(ctx.state.taskStatus, taskName),
-            processedTokens: getterTokens(taskName)
-        }
-        console.log(obj)
-        ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
+        let timerId = setInterval(() => {
+                let obj = {
+                    id: findTaskInMainArray(ctx.state.taskStatus, taskName),
+                    processedTokens: getterTokens(taskName)
+                }
+                ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
+            }
+            , 4000)
+
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {

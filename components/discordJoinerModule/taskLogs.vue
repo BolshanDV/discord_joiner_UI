@@ -3,28 +3,29 @@
     <div>
       <p class="title">Tasks Logo</p>
     </div>
-    <div class="work_space column">
-      <div> 01
-        03/22 08:51:01 INFO   :.main: *************** RSVP Agent started ***************
-        02
-        03/22 08:51:01 INFO   :...locate_configFile: Specified configuration file: /u/user10/rsvpd1.conf
-        03/22 08:51:01 INFO   :.main: Using log level 511
-        03/22 08:51:01 INFO   :..settcpimage: Get TCP images rc - EDC8112I Operation not supported on socket.
-        03
-        03/22 08:51:01 INFO   :..settcpimage: Associate with TCP/IP image name = TCPCS
-        03/22 08:51:02 INFO   :..reg_process: registering process with the system
-        03/22 08:51:02 INFO   :..reg_process: attempt OS/390 registration
-        03/22 08:51:02 INFO   :..reg_process: return from registration rc=0
-        04
-        03/22 08:51:06 TRACE  :...read_physical_netif: Home list entries returned = 7
-        03/22 08:51:06 INFO   :...read_physical_netif: index #0, interface VLINK1 has address 129.1.1.1, ifidx 0
-        03/22 08:51:06 INFO   :...read_physical_netif: index #1, interface TR1 has address 9.37.65.139, ifidx 1
+    <div
+        class="work_space column scroll"
+    >
+      <div
+          v-for="(logItem, index) in logs "
+          :key="index"
+      >
+        {{logItem.date.toLocaleString()}}: {{"   "+logItem.logs.username.toUpperCase()}} - {{logItem.logs.info}}
       </div>
     </div>
+
     <div class="row_position first_btn">
-      <div class="row_position btn btn_clear">Clear logs</div>
+      <div class="row_position btn btn_clear"
+           @click="CLEAR_LOGS"
+      >
+        Clear logs
+      </div>
       <div class="row_position second_btn_element">
-        <div class="row_position btn btn_stop ">Stop All</div>
+        <div class="row_position btn btn_stop"
+             @click="STOP_ALL_TASKS"
+        >
+          Stop All
+        </div>
         <div class="row_position btn btn_start">Start all</div>
       </div>
     </div>
@@ -33,8 +34,16 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-name: "taskLogs"
+name: "taskLogs",
+  computed: {
+    ...mapGetters('discordJoinerStore/taskStatus', ['logs', 'date'])
+  },
+  methods: {
+    ...mapActions('discordJoinerStore/taskStatus', ['STOP_ALL_TASKS', 'CLEAR_LOGS'])
+  }
 }
 </script>
 
@@ -44,6 +53,7 @@ name: "taskLogs"
   border-radius: 5px;
   padding: 2%;
   margin-top: 1%;
+  min-height: 250px;
 }
 .btn{
   border-radius: 4px;

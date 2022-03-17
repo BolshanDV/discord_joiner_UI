@@ -15,7 +15,7 @@
           class="work_space_element row_position work_space_element_advent"
       >
         <div class="row_position item">{{taskStatusItem.taskName}}</div>
-        <div class="row_position item"> {{successTokens[index]}} | {{taskStatusItem.tokens.length}}</div>
+        <div class="row_position item"> Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})</div>
         <div class="row_position column_item">
 <!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
           <div class="icon_element"

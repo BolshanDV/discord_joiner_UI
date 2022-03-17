@@ -8,7 +8,6 @@ export async function validateAndExtractTokens(tokens) {
         let errorToken = undefined;
 
         for (const token of input) {
-            console.log(token)
             let statusCode;
             let body;
 
