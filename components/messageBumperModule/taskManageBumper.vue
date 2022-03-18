@@ -34,35 +34,6 @@
                type="search"
                name="search">
       </div>
-<!--      <div class="row_position ">-->
-<!--        <div class=" input_element_item">-->
-<!--          <div class="text-field__icon">-->
-<!--            <input class="text-field__input input_element short_input"-->
-<!--                   v-model="token"-->
-<!--                   type="search"-->
-<!--                   name="search"-->
-<!--                   autocomplete="off"-->
-<!--                   placeholder="Enter tokens list"-->
-<!--                   :class="{short_input_active: dropDownFlagForAccountListMBumper}"-->
-<!--            >-->
-<!--            <div-->
-<!--                class="text-field__aicon"-->
-<!--                @click="CHANGE_FLAG()"-->
-<!--            >-->
-<!--              <img src="../../assets/icons/row.svg" alt=""-->
-<!--                   :class="{ row_rotate: dropDownFlagForAccountListMBumper &&  tokensList.length !== 0}"-->
-<!--              >-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div-->
-<!--            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"-->
-<!--            class="additional_functional work_space_element"-->
-<!--        >-->
-<!--          <img src="../../assets/icons/add.svg" alt="">-->
-<!--        </div>-->
-<!--      </div>-->
-
       <div class="work_space_element_title">
         Channels list
       </div>
@@ -78,7 +49,7 @@
             class="text-field__aicon"
             @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channel)"
         >
-          <img src="../../assets/icons/add.svg" alt="">
+          <img src="../../assets/icons/add.svg" alt="" class="click">
         </div>
 
       </div>
@@ -159,7 +130,8 @@
                autocomplete="off"
                placeholder="30 (sec)"
                type="search"
-               name="search">
+               name="search"
+        >
       </div>
     </div>
     <message-list/>

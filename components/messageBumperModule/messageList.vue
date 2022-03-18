@@ -23,7 +23,7 @@
       <div
           class="text-field__aicon"
           @click="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
-      ><img src="../../assets/icons/add.svg" alt="">
+      ><img src="../../assets/icons/add.svg" alt="" class="click">
       </div>
 
     </div>

@@ -50,12 +50,12 @@
             </div>
           </div>
         </div>
-        <div class="additional_functional work_space_element item"
+        <div class="additional_functional work_space_element item click"
              @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
-        <div class="additional_functional work_space_element"
+        <div class="additional_functional work_space_element click"
              @click="ADD_TOKEN_WITH_CLEAR"
         >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
@@ -105,12 +105,12 @@
             </div>
           </div>
         </div>
-        <div class="additional_functional work_space_element item"
+        <div class="additional_functional work_space_element item click"
              @click="POPUP_DISPLAY('Proxy list')"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
-        <div class="additional_functional work_space_element"
+        <div class="additional_functional work_space_element click"
              @click="ADD_PROXY_WITH_CLEAR(proxy)"
         >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
@@ -397,5 +397,8 @@ name: "taskManager",
 }
 .short_input{
   width: 16vw;
+}
+.click:active{
+  background-color: rgba(53, 60, 73, 0.6);
 }
 </style>

@@ -39,8 +39,7 @@
 
         <div class="row_position column_item">
 <!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
-          <div class="icon_element"
-               @click="DELETE_TASK_STATUS(index)"
+          <div class="icon_element delete"
           >
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
@@ -115,5 +114,13 @@ name: "taskStatus",
 }
 .process{
   color: rgba(255,203,89,0.81);
+}
+.delete:active{
+  background-color: #7e2d2d;
+  border-radius: 5px;
+}
+.play:active{
+  background-color: #3b8069;
+  border-radius: 5px;
 }
 </style>
