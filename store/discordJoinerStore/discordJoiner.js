@@ -140,7 +140,7 @@ export const actions = {
             processingTask: ''
         }
 
-        if (inviteCode !== undefined && tokens.length !== 0) {
+        if (inviteCode !== undefined && tokens.length !== 0 && taskName!== '') {
             ctx.commit("SAVE_MAIN_DATA", mainObj)
         }
     },
@@ -153,7 +153,21 @@ export const actions = {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
-            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {successTokens, errorTokens}, {root: true})
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR',
+                {
+                    successTokens: successTokens,
+                    errorTokens: errorTokens,
+                    type: 'successErrorTokens'
+                },
+
+                {root: true}
+            )
+        }
+    },
+
+    START_ALL_TASKS:  (ctx) => {
+        for (const taskStatusItem of ctx.state.taskStatus) {
+            ctx.dispatch('PLAY_TASK', taskStatusItem)
         }
     },
 
@@ -168,7 +182,6 @@ export const actions = {
             ? ctx.dispatch('VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER', tokenObj.token)
             : ctx.dispatch('messageBumperStore/messageBumper/VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER', tokenObj.token, {root: true})
     },
-
     UPDATE_TOKENS: (ctx, taskName) => {
         let timerId = setInterval(() => {
                 let obj = {
@@ -178,7 +191,6 @@ export const actions = {
                 ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
             }
             , 4000)
-
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {

@@ -26,7 +26,11 @@
         >
           Stop All
         </div>
-        <div class="row_position btn btn_start">Start all</div>
+        <div class="row_position btn btn_start"
+             @click="START_ALL_TASKS"
+        >
+          Start all
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +46,8 @@ name: "taskLogs",
     ...mapGetters('discordJoinerStore/taskStatus', ['logs', 'date'])
   },
   methods: {
-    ...mapActions('discordJoinerStore/taskStatus', ['STOP_ALL_TASKS', 'CLEAR_LOGS'])
+    ...mapActions('discordJoinerStore/taskStatus', ['STOP_ALL_TASKS', 'CLEAR_LOGS']),
+    ...mapActions('discordJoinerStore/discordJoiner', ['START_ALL_TASKS'])
   }
 }
 </script>

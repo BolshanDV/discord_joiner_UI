@@ -19,14 +19,15 @@
              v-if="taskStatusItem.processingTask === '' "
         >
           0/{{taskStatusItem.tokens.length}}
+
         </div>
         <div class="row_position item success"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === null"
+             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === undefined "
         >
           Processing...
         </div>
         <div class="row_position item process"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] > 0"
+             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] >= 0"
         >
           Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})
         </div>

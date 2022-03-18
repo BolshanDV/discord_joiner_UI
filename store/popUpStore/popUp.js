@@ -17,7 +17,6 @@ export const mutations = {
 export const actions = {
     EXTRACT_AND_VALIDATE: (ctx, text) => {
         text = [...new Set(text.split('\n'))]
-        console.log(text)
         switch (ctx.state.namePopUp) {
             case "Accounts tokens list Message Bumper": {
                 ctx.dispatch('discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Message Bumper"} , {root: true})

@@ -37,7 +37,6 @@ export const actions = {
     PROCESS_LOGS: (ctx) => {
         setInterval(() => {
             if(ctx.state.logs.length < logs.length) {
-                console.log(logs)
                 ctx.commit('ADD_LOGS', logs[logs.length - 1])
             }
         }, 1000)
