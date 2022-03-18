@@ -4,7 +4,7 @@
       <task-manager-bumper/>
     </div>
     <div class="main_block information_section">
-      <taskStatusComponent/>
+      <taskStatusMessageBumper/>
       <taskLogsComponent/>
     </div>
   </div>
@@ -12,15 +12,15 @@
 
 <script>
 import taskLogsComponent from "../components/discordJoinerModule/taskLogs";
-import taskStatusComponent from "../components/discordJoinerModule/taskStatus";
+import taskStatusMessageBumper from "../components/messageBumperModule/taskStatusMessageBumper";
 import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
-import modalPage from "../components/modalPage";
+import modalPage from "../components/modalPage/modalPage";
 import {mapGetters} from "vuex";
 export default {
   name: "home",
   components: {
     taskLogsComponent,
-    taskStatusComponent,
+    taskStatusMessageBumper,
     taskManagerBumper,
     modalPage
   },

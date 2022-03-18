@@ -6,7 +6,7 @@
         <div
             @click="POPUP_DISPLAY('')"
         >
-          <img src="../assets/icons/cross.svg" alt="">
+          <img src="../../assets/icons/cross.svg" alt="">
         </div>
       </div>
       <div class="column">

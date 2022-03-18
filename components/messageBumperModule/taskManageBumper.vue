@@ -22,18 +22,6 @@
 <!--          <img src="../../assets/icons/add.svg" alt="">-->
 <!--        </div>-->
       </div>
-
-      <div class="work_space_element_title">
-        Guild Id
-      </div>
-      <div class="text-field">
-        <input class="text-field__input input_element"
-               v-model="guildId"
-               autocomplete="off"
-               placeholder="Enter guild id"
-               type="search"
-               name="search">
-      </div>
       <div class="work_space_element_title">
         Channels list
       </div>
@@ -149,7 +137,7 @@
 
 <script>
 import messageList from "./messageList";
-import modalPage from "../modalPage";
+import modalPage from "../modalPage/modalPage";
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
   name: "taskManagerBumper",
@@ -163,7 +151,6 @@ export default {
       delay: '',
       deleteMassages: '',
       channel: '',
-      guildId: ''
     }
   },
   computed: {

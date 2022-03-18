@@ -21,7 +21,7 @@
 <script>
 import Sidebar from "../components/barElement/sidebar";
 import navbar from "../components/barElement/navbar";
-import modalPage from "../components/modalPage";
+import modalPage from "../components/modalPage/modalPage";
 import toasted from "../components/toastedPart/toasted";
 import {mapGetters} from "vuex"
 export default {

@@ -51,7 +51,7 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
-import modalPage from "../modalPage";
+import modalPage from "../modalPage/modalPage";
 export default {
 name: "messageList",
   components: {
