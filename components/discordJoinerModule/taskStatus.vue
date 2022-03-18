@@ -99,6 +99,7 @@ name: "taskStatus",
 }
 .column_item{
   width: 20%;
+  justify-content: center;
 }
 .work_space_element_title{
   padding: 0 2%;
