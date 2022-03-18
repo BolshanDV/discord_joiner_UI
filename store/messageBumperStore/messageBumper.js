@@ -120,17 +120,17 @@ export const actions = {
         }
     },
 
-    GET_CHANNEL_NAME: async (ctx, channelId) => {
+    GET_CHANNEL_NAME: async (ctx, channelId, token) => {
         //Example channel ID
         // channelId = '912446085388181608';
         // token = 'exampleToken';
-        // const me = await getMe(token);
+        const me = await getMe(token);
 
         // Image Url
         let channelName;
         console.log(channelId)
         await axios.get(`https://discord.com/api/v9/channels/${channelId}`, {
-            // headers: buildHeaders(token, me.email),
+            headers: buildHeaders(token, me.email),
             withCredentials: true
         }).then((response) => {
             channelName = response.data.name;
