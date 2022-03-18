@@ -50,10 +50,10 @@
             v-for="(channel, index) in channelList"
             :key="index"
         >
-            <div><img src="../../assets/images/channelImage.svg" alt=""></div>
-            <div class="mini_element_icons ">
+            <div><img :src='channel.iconUrl' alt="" class="channelIcon"></div>
+            <div class="mini_element_icons">
               <div class="scroll_horizontal scroll_horizontal_limit">
-                #{{ channel }}
+                #{{ channel.channelName }}
               </div>
             </div>
             <div
@@ -298,5 +298,9 @@ export default {
 }
 .row_position_btn_form:active{
   background: #2BD6A2;
+}
+.channelIcon{
+  height: 18px;
+  width: 18px;
 }
 </style>

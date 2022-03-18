@@ -22,8 +22,7 @@ export const getters = {
 }
 export const mutations = {
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
-        console.log(channelElement)
-        if (channelElement !== '') state.channelList.push(channelElement)
+        state.channelList.push(channelElement)
     },
     DELETE_CHANNEL: (state, index) => {
         state.channelList.splice(index, 1)
@@ -123,7 +122,7 @@ export const actions = {
     GET_CHANNEL_INFO: async (ctx, channelObj ) => {
         const embeds = await getIconAndChannelName(channelObj);
 
-        if (embeds.channelName === undefined || embeds.iconUrl === undefined) {
+        if (embeds.channelName !== undefined && embeds.iconUrl !== undefined) {
             ctx.commit('ADD_CHANNEL_TO_LISTS', {
                 channelName: embeds.channelName,
                 iconUrl: embeds.iconUrl
