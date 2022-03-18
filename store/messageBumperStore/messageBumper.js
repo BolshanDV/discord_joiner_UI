@@ -24,7 +24,7 @@ export const getters = {
 }
 export const mutations = {
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
-        if (channelElement !== '')state.channelList.push(channelElement)
+        if (channelElement !== '') state.channelList.push(channelElement)
     },
     DELETE_CHANNEL: (state, index) => {
         state.channelList.splice(index, 1)
@@ -121,22 +121,31 @@ export const actions = {
         }
     },
 
-    GET_CHANNEL_NAME: async (ctx, channelId, token) => {
-        //Example channel ID
-        // channelId = '912446085388181608';
-        // token = 'exampleToken';
+    GET_CHANNEL_INFO: async (ctx, channelId, token) => {
+        const info = {
+            channelName: channelName,
+            iconUrl: iconUrl
+        }
         const me = await getMe(token);
 
-        // Image Url
         let channelName;
-        console.log(channelId)
-        await axios.get(`https://discord.com/api/v9/channels/${channelId}`, {
+        let iconUrl;
+
+        await axios.post(`https://discord.com/api/v9/channels/${channelId}/invites`, {
+            validate : null,
+            max_age : 604800,
+            max_uses : 0,
+            target_type : null,
+            temporary : false
+        }, {
             headers: buildHeaders(token, me.email),
             withCredentials: true
         }).then((response) => {
-            channelName = response.data.name;
+            channelName = response.data.channel.name;
+            iconUrl = `https://cdn.discordapp.com/icons/${response.data.guild.id}/${response.data.guild.icon}.png`;
         }).catch((e) => console.log(e));
-        // commit image Url and set in channel
+
+        return info;
     },
     //
     // CREATE_TASK: async () => {
