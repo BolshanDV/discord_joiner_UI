@@ -41,6 +41,7 @@ export const mutations = {
         state.messageList.splice(index, 1)
     },
     ADD_TOKEN_TO_LIST: (state, item) => {
+        console.log(item)
         state.tokensList.push(item)
     },
     DELETE_TOKEN_FROM_LIST: (state, index) => {

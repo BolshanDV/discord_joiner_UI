@@ -4,10 +4,18 @@ import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../utils/taskUtils";
 
-export let criticalStopFlag = false;
-export let pauseFlag = false;
+let criticalStopFlag = false;
+let pauseFlag = false;
 
-let pause = 0;
+export function setStopCriticalFlag() {
+    criticalStopFlag = true;
+}
+
+export function setStartCriticalFlag() {
+    criticalStopFlag = false;
+}
+
+let pause = 500;
 
 export const tasks = [];
 export const controller = new AbortController();
@@ -21,7 +29,7 @@ function checker() {
         if (pauseFlag) {
             pause = 1000000000000;
         } else {
-            pause = 0;
+            pause = 500;
         }
     }, 100);
 }
@@ -58,7 +66,10 @@ export async function launchTasks(body) {
 
     for (const token of body.tokens) {
         if (pauseFlag) await sleep(pause);
-        if (criticalStopFlag) break;
+        if (criticalStopFlag) {
+            tasks.length = 0;
+            break;
+        }
         // execute a request to get information about the user to receive mail
         const me = await getMe(token.token);
 

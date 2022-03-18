@@ -1,4 +1,4 @@
-import {abortReqs} from "./services/joinerServices/taskService"
+import {setStopCriticalFlag} from "./services/joinerServices/taskService"
 import {logs} from "./services/joinerServices/taskService";
 import {clearLogs} from "./services/joinerServices/taskService"
 
@@ -48,7 +48,7 @@ export const actions = {
             },
             {root: true}
         )
-        abortReqs()
+        setStopCriticalFlag()
     },
 
     CLEAR_LOGS: (ctx) => {

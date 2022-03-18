@@ -1,7 +1,6 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
-import {getterTokens, launchTasks, logs} from "./services/joinerServices/taskService";
+import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "./utils/taskUtils";
-import taskStatus from "../../components/discordJoinerModule/taskStatus";
 
 export let state = () => ({
     tokens: [],
@@ -151,6 +150,7 @@ export const actions = {
     },
 
     PLAY_TASK: async (ctx, mainObj) => {
+        setStartCriticalFlag()
         let index = findTaskInMainArray(ctx.state.taskStatus, mainObj.taskName)
         ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
         ctx.dispatch('discordJoinerStore/taskStatus/PROCESS_LOGS', '', {root: true})

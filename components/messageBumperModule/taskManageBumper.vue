@@ -15,13 +15,24 @@
                autocomplete="off"
                placeholder="Enter tokens list"
         >
-        <div
-            class="text-field__aicon"
-            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"
-        >
-          <img src="../../assets/icons/add.svg" alt="">
-        </div>
+<!--        <div-->
+<!--            class="text-field__aicon"-->
+<!--            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"-->
+<!--        >-->
+<!--          <img src="../../assets/icons/add.svg" alt="">-->
+<!--        </div>-->
+      </div>
 
+      <div class="work_space_element_title">
+        Guild Id
+      </div>
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="guildId"
+               autocomplete="off"
+               placeholder="Enter guild id"
+               type="search"
+               name="search">
       </div>
 <!--      <div class="row_position ">-->
 <!--        <div class=" input_element_item">-->
@@ -179,7 +190,8 @@ export default {
       token: '',
       delay: '',
       deleteMassages: '',
-      channel: ''
+      channel: '',
+      guildId: ''
     }
   },
   computed: {
@@ -214,7 +226,12 @@ export default {
       // this.token = ''
     },
     CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR() {
-      this.CREATE_TASK_MESSAGE_BUMPER({delay: this.delay, deleteMasses: this.deleteMassages});
+      this.CREATE_TASK_MESSAGE_BUMPER(
+          {
+            delay: this.delay,
+            deleteMasses: this.deleteMassages,
+          }
+      );
       this.delay = '';
       this.deleteMassages = ''
     }
