@@ -1,11 +1,9 @@
 import {
-    getMe,
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validateService";
 import {launchBumperTask} from "./services/taskService";
-import axios from "axios";
-import {buildHeaders} from "../discordJoinerStore/utils/requestUtils";
+import {getIconAndChannelName} from "../utils/embedsLoader";
 
 export const state = () => ({
     channelList: [],
@@ -123,28 +121,11 @@ export const actions = {
     },
 
     GET_CHANNEL_INFO: async (ctx, channelObj ) => {
-        const me = await getMe(channelObj.token);
-
-        let channelName;
-        let iconUrl;
-
-        await axios.post(`https://discord.com/api/v9/channels/${channelObj.channelId}/invites`, {
-            validate : null,
-            max_age : 604800,
-            max_uses : 0,
-            target_type : null,
-            temporary : false
-        }, {
-            headers: buildHeaders(channelObj.token, me.email),
-            withCredentials: true
-        }).then((response) => {
-            channelName = response.data.channel.name;
-            iconUrl = `https://cdn.discordapp.com/icons/${response.data.guild.id}/${response.data.guild.icon}.png`;
-        }).catch((e) => console.log(e));
+        const embeds = await getIconAndChannelName(channelObj);
 
         ctx.commit('ADD_CHANNEL_TO_LISTS', {
-            channelName: channelName,
-            iconUrl: iconUrl
+            channelName: embeds.channelName,
+            iconUrl: embeds.iconUrl
         })
     },
 }

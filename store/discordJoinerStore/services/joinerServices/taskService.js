@@ -1,8 +1,8 @@
 import axios from "axios";
 import {solveCaptcha} from "./captchaService";
-import {buildHeaders} from "../../utils/requestUtils";
+import {buildHeaders} from "../../../utils/requestUtils";
 import {getMe} from "./validateService";
-import {findTask} from "../../utils/taskUtils";
+import {findTask} from "../../../utils/taskUtils";
 
 let criticalStopFlag = false;
 let pauseFlag = false;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {buildHeaders} from "../../discordJoinerStore/utils/requestUtils";
+import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "../../discordJoinerStore/services/joinerServices/validateService";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));

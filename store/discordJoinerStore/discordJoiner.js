@@ -1,6 +1,6 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/taskService";
-import {findTaskInMainArray} from "./utils/taskUtils";
+import {findTaskInMainArray} from "../utils/taskUtils";
 
 export let state = () => ({
     tokens: [],
