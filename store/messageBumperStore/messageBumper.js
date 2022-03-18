@@ -138,30 +138,28 @@ export const actions = {
         console.log(imageUrl)
         // commit image Url and set in channel
     },
-
-    CREATE_TASK: async () => {
-        const channelList = [];
-        const messageList = [];
-        const mainToken = '';
-        const messageDelay = 1000;
-
-        const deleteMessageObj = {
-            active: true,
-            deleteDelay: 10000
-        }
-
-        const bumperObj = {
-            delay: messageDelay,
-            channelList: channelList,
-            messageList: messageList,
-            token: mainToken,
-            deleteMessageObj: deleteMessageObj
-        }
-
-        await launchBumperTask(bumperObj);
-
-
-    }
+    //
+    // CREATE_TASK: async () => {
+    //     const channelList = [];
+    //     const messageList = [];
+    //     const mainToken = '';
+    //     const messageDelay = 1000;
+    //
+    //     const deleteMessageObj = {
+    //         active: true,
+    //         deleteDelay: 10000
+    //     }
+    //
+    //     const bumperObj = {
+    //         delay: messageDelay,
+    //         channelList: channelList,
+    //         messageList: messageList,
+    //         token: mainToken,
+    //         deleteMessageObj: deleteMessageObj
+    //     }
+    //
+    //     await launchBumperTask(bumperObj);
+    // }
 }
 
 
