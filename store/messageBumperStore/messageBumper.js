@@ -24,6 +24,7 @@ export const getters = {
 }
 export const mutations = {
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
+        console.log(channelElement)
         if (channelElement !== '') state.channelList.push(channelElement)
     },
     DELETE_CHANNEL: (state, index) => {
@@ -121,54 +122,31 @@ export const actions = {
         }
     },
 
-    GET_CHANNEL_INFO: async (ctx, channelId, token) => {
-        const info = {
-            channelName: channelName,
-            iconUrl: iconUrl
-        }
-        const me = await getMe(token);
+    GET_CHANNEL_INFO: async (ctx, channelObj ) => {
+        const me = await getMe(channelObj.token);
 
         let channelName;
         let iconUrl;
 
-        await axios.post(`https://discord.com/api/v9/channels/${channelId}/invites`, {
+        await axios.post(`https://discord.com/api/v9/channels/${channelObj.channelId}/invites`, {
             validate : null,
             max_age : 604800,
             max_uses : 0,
             target_type : null,
             temporary : false
         }, {
-            headers: buildHeaders(token, me.email),
+            headers: buildHeaders(channelObj.token, me.email),
             withCredentials: true
         }).then((response) => {
             channelName = response.data.channel.name;
             iconUrl = `https://cdn.discordapp.com/icons/${response.data.guild.id}/${response.data.guild.icon}.png`;
         }).catch((e) => console.log(e));
 
-        return info;
+        ctx.commit('ADD_CHANNEL_TO_LISTS', {
+            channelName: channelName,
+            iconUrl: iconUrl
+        })
     },
-    //
-    // CREATE_TASK: async () => {
-    //     const channelList = [];
-    //     const messageList = [];
-    //     const mainToken = '';
-    //     const messageDelay = 1000;
-    //
-    //     const deleteMessageObj = {
-    //         active: true,
-    //         deleteDelay: 10000
-    //     }
-    //
-    //     const bumperObj = {
-    //         delay: messageDelay,
-    //         channelList: channelList,
-    //         messageList: messageList,
-    //         token: mainToken,
-    //         deleteMessageObj: deleteMessageObj
-    //     }
-    //
-    //     await launchBumperTask(bumperObj);
-    // }
 }
 
 

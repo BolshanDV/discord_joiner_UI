@@ -35,7 +35,7 @@
         >
         <div
             class="text-field__aicon"
-            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channel)"
+            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"
         >
           <img src="../../assets/icons/add.svg" alt="" class="click">
         </div>
@@ -171,12 +171,12 @@ export default {
           'CHANGE_FLAG',
           'CHANGE_DELETE_MESSAGE_FLAG'
         ]),
-    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_LOGO_IMAGE']),
+    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
-    ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
-      this.GET_LOGO_IMAGE(channelItem);
+    ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channelItem) {
+      this.GET_CHANNEL_INFO({channelId: channelItem, token: this.token});
       this.channel = ''
 
     },
