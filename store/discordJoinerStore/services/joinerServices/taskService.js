@@ -4,12 +4,27 @@ import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../utils/taskUtils";
 
+export let criticalStopFlag = false;
+export let pauseFlag = false;
+
+let pause = 0;
+
 export const tasks = [];
 export const controller = new AbortController();
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export const logs = [];
+
+function checker() {
+    setInterval(() => {
+        if (pauseFlag) {
+            pause = 1000000000000;
+        } else {
+            pause = 0;
+        }
+    }, 100);
+}
 
 // clear logs function
 export function clearLogs() {
@@ -27,6 +42,8 @@ export const getterTokens = (taskName) => {
 
 // main task management function
 export async function launchTasks(body) {
+    checker();
+
     const successTokens = [];
     const errorTokens = [];
 
@@ -40,6 +57,8 @@ export async function launchTasks(body) {
     }
 
     for (const token of body.tokens) {
+        if (pauseFlag) await sleep(pause);
+        if (criticalStopFlag) break;
         // execute a request to get information about the user to receive mail
         const me = await getMe(token.token);
 
