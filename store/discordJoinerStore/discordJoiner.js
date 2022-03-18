@@ -142,6 +142,11 @@ export const actions = {
 
         if (inviteCode !== undefined && tokens.length !== 0 && taskName!== '') {
             ctx.commit("SAVE_MAIN_DATA", mainObj)
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                    type: 'createTask'
+                },
+                {root: true}
+            )
         }
     },
 
@@ -166,6 +171,11 @@ export const actions = {
     },
 
     START_ALL_TASKS:  (ctx) => {
+        ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                type: 'startAllTasks'
+            },
+            {root: true}
+        )
         for (const taskStatusItem of ctx.state.taskStatus) {
             ctx.dispatch('PLAY_TASK', taskStatusItem)
         }

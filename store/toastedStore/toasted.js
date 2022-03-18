@@ -36,6 +36,33 @@ export const mutations = {
                 state.toasted.push(successTokens)
                 break;
             }
+            case 'startAllTasks': {
+                let obj = {
+                    element: "Start all Tasks",
+                    style: 'success',
+                    id: state.key++
+                }
+                state.toasted.push(obj)
+                break;
+            }
+            case 'stopAllTasks': {
+                let obj = {
+                    element: "Stop all Tasks",
+                    style: 'success',
+                    id: state.key++
+                }
+                state.toasted.push(obj)
+                break;
+            }
+            case 'createTask': {
+                let obj = {
+                    element: "Create Task",
+                    style: 'success',
+                    id: state.key++
+                }
+                state.toasted.push(obj)
+                break;
+            }
             case 'successErrorTokens': {
                 let successTokensObj = {
                     element: "Quantity succeed joined accounts: " + item.successTokens.length,

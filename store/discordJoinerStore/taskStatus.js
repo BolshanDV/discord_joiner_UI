@@ -42,7 +42,12 @@ export const actions = {
         }, 1000)
     },
 
-    STOP_ALL_TASKS: () => {
+    STOP_ALL_TASKS: (ctx) => {
+        ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                type: 'stopAllTasks'
+            },
+            {root: true}
+        )
         abortReqs()
     },
 
