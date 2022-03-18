@@ -17,13 +17,15 @@ export function stopTask() {
 
 export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj} = bumperObj;
-    const me = await getMe(token.token);
+    const me = await getMe(token);
 
     if (!checkTaskExisting(taskName)) {
         const task = {
             name: taskName,
             successMessages: [],
-            deleteParameters: deleteMessageObj.deleteDelay
+            deleteParameters: deleteMessageObj.deleteDelay,
+            token: token,
+            email: me.email
         }
         tasks.push(task);
 
@@ -32,7 +34,7 @@ export async function launchBumperTask(bumperObj) {
 
         for (const message of messageList) {
             for (const channel of channelList) {
-                const {status, messageId} = await sendMessage(me.email, token, channel, message);
+                const {status, messageId} = await sendMessage(me.email, token, channel.channelId, message);
 
                 if (status) {
                     task.successMessages.push({message: message, messageId: messageId, channel: channel});
@@ -71,26 +73,19 @@ async function sendMessage(email, token, channel, message) {
 }
 
 async function deleteExpiredMessage(task) {
-    let message = task.successMessages[task.successMessages.length];
+    if (task.successMessages.length !== 0) {
+        let message = task.successMessages[0];
 
-    let status;
-    let flag = false;
+        await axios.delete(`https://discord.com/api/v9/channels/${message.channel.channelId}/messages/${message.messageId}`, {
+            headers: buildHeaders(task.token, task.email)
+        })
+            .then((response) => {
+            }).catch(e => {
+                console.log(e);
+            });
 
-    while (!flag) {
-        try {
-            axios.delete(`https://discord.com/api/v9/channels/${message.channel}/messages/${message.messageId}`)
-                .then((response) => {
-                    status = response.status;
-                });
-
-            flag = status === 204;
-        } catch (e) {
-            status = e.response.status;
-            await sleep(500);
-        }
+        task.successMessages.splice(0, 1);
     }
-
-    return status === 204;
 }
 
 function checkTaskExisting(taskName) {
@@ -102,3 +97,4 @@ function checkTaskExisting(taskName) {
 
     return false;
 }
+

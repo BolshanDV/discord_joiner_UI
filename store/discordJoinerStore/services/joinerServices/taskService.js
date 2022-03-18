@@ -102,9 +102,10 @@ export async function launchTasks(body) {
 
             if (sendCommandStatus) {
                 successTokens.push({ username: token.username, token: token.token });
-                logs.push({ username: token.username, token: token.token, info: 'Error in putting down the command'})
+                logs.push({ username: token.username, token: token.token, info: `Message has been send: ${body.sendCommandObj.commandText}` })
             } else {
                 errorTokens.push(token);
+                logs.push({ username: token.username, token: token.token, info: 'Error in putting down the command'})
             }
         } else {
             errorTokens.push(token);

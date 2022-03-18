@@ -175,8 +175,8 @@ export default {
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
-    ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channelItem) {
-      this.GET_CHANNEL_INFO({channelId: channelItem, token: this.token});
+    ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel) {
+      this.GET_CHANNEL_INFO({channelId: channel, token: this.token});
       this.channel = ''
 
     },
@@ -189,6 +189,7 @@ export default {
           {
             delay: this.delay,
             deleteMasses: this.deleteMassages,
+            token: this.token
           }
       );
       this.delay = '';

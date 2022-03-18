@@ -9,7 +9,7 @@ export const state = () => ({
     channelList: [],
     messageList: [],
     dropDownFlagForAccountListMBumper: false,
-    tokensList: [],
+    tokensList: null,
     deleteMessagesFlag: false
 })
 
@@ -55,15 +55,15 @@ export const mutations = {
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
         let  deleteMessageObj = {
-            active: ctx.state.deleteMessagesFlag,
-            deleteDelay: obj.deleteMassages
+            active: true,
+            deleteDelay: 6000
         }
 
         let bumperObj = {
             delay: obj.delay,
             channelList: ctx.state.channelList,
             messageList: ctx.state.messageList,
-            tokensList: ctx.state.tokensList,
+            token: obj.token,
             deleteMessageObj: deleteMessageObj,
         }
         console.log(bumperObj)
@@ -125,7 +125,8 @@ export const actions = {
         if (embeds.channelName !== undefined && embeds.iconUrl !== undefined) {
             ctx.commit('ADD_CHANNEL_TO_LISTS', {
                 channelName: embeds.channelName,
-                iconUrl: embeds.iconUrl
+                iconUrl: embeds.iconUrl,
+                channelId: channelObj.channelId
             })
         }
     },
