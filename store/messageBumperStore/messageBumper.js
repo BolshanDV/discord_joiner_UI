@@ -123,10 +123,12 @@ export const actions = {
     GET_CHANNEL_INFO: async (ctx, channelObj ) => {
         const embeds = await getIconAndChannelName(channelObj);
 
-        ctx.commit('ADD_CHANNEL_TO_LISTS', {
-            channelName: embeds.channelName,
-            iconUrl: embeds.iconUrl
-        })
+        if (embeds.channelName === undefined || embeds.iconUrl === undefined) {
+            ctx.commit('ADD_CHANNEL_TO_LISTS', {
+                channelName: embeds.channelName,
+                iconUrl: embeds.iconUrl
+            })
+        }
     },
 }
 
