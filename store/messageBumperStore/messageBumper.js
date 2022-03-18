@@ -67,6 +67,7 @@ export const actions = {
             tokensList: ctx.state.tokensList,
             deleteMessageObj: deleteMessageObj,
         }
+        console.log(bumperObj)
         await launchBumperTask(bumperObj);
     },
 
@@ -119,22 +120,22 @@ export const actions = {
         }
     },
 
-    GET_LOGO_IMAGE: async (channelId, token) => {
+    GET_LOGO_IMAGE: async (ctx, channelId) => {
         //Example channel ID
-        channelId = '912446085388181608';
-        token = 'exampleToken';
-        const me = await getMe(token);
+        // channelId = '912446085388181608';
+        // token = 'exampleToken';
+        // const me = await getMe(token);
 
         // Image Url
         let imageUrl;
-
+        console.log(channelId)
         await axios.get(`https://discord.com/api/v9/channels/${channelId}/messages?limit=50`, {
-            headers: buildHeaders(token, me.email),
+            // headers: buildHeaders(token, me.email),
             withCredentials: true
         }).then((response) => {
             imageUrl = response.data[0].embeds[0].footer.icon_url;
         }).catch((e) => console.log(e));
-
+        console.log(imageUrl)
         // commit image Url and set in channel
     },
 

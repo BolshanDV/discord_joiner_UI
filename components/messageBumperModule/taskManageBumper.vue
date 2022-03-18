@@ -189,12 +189,12 @@ export default {
           'CHANGE_FLAG',
           'CHANGE_DELETE_MESSAGE_FLAG'
         ]),
-    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER']),
+    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_LOGO_IMAGE']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAN_UP(channelItem) {
-      this.ADD_CHANNEL_TO_LISTS(channelItem);
+      this.GET_LOGO_IMAGE(channelItem);
       this.channel = ''
 
     },
