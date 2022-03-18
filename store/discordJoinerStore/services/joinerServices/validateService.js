@@ -1,4 +1,5 @@
 import axios from "axios";
+import {controller} from "./taskService";
 
 export async function validateAndExtractTokens(tokens) {
         const result = [];
@@ -74,6 +75,7 @@ export async function getMe(singleToken) {
     await axios
         .get('https://discord.com/api/users/@me', {
                 withCredentials: true,
+                signal: controller.signal,
                 headers: {
                     'authorization': singleToken
                 }

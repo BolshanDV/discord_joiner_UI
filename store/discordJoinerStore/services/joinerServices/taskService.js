@@ -86,6 +86,10 @@ export async function launchTasks(body) {
     return {successTokens: successTokens, errorTokens: errorTokens};
 }
 
+//**********************************************************************************************
+//*******The function block is the main purpose of sending a request to the discord api*********
+//**********************************************************************************************
+
 async function joinChannel(inviteCode, token, email) {
     const captchaToken = await solveCaptcha();
 
@@ -108,10 +112,6 @@ async function joinChannel(inviteCode, token, email) {
 
     return statusCode === 200;
 }
-
-//**********************************************************************************************
-//*******The function block is the main purpose of sending a request to the discord api*********
-//**********************************************************************************************
 
 async function setReaction(token, email, reactionObject) {
     const {channelId, messageId, reactionId} = reactionObject;

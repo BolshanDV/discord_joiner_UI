@@ -5,6 +5,54 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title">
+        Accounts tokens list
+      </div>
+      <div class="text-field__icon">
+        <input class="text-field__input input_element"
+               v-model="token"
+               type="search"
+               name="search"
+               autocomplete="off"
+               placeholder="Enter tokens list"
+        >
+        <div
+            class="text-field__aicon"
+            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"
+        >
+          <img src="../../assets/icons/add.svg" alt="">
+        </div>
+
+      </div>
+<!--      <div class="row_position ">-->
+<!--        <div class=" input_element_item">-->
+<!--          <div class="text-field__icon">-->
+<!--            <input class="text-field__input input_element short_input"-->
+<!--                   v-model="token"-->
+<!--                   type="search"-->
+<!--                   name="search"-->
+<!--                   autocomplete="off"-->
+<!--                   placeholder="Enter tokens list"-->
+<!--                   :class="{short_input_active: dropDownFlagForAccountListMBumper}"-->
+<!--            >-->
+<!--            <div-->
+<!--                class="text-field__aicon"-->
+<!--                @click="CHANGE_FLAG()"-->
+<!--            >-->
+<!--              <img src="../../assets/icons/row.svg" alt=""-->
+<!--                   :class="{ row_rotate: dropDownFlagForAccountListMBumper &&  tokensList.length !== 0}"-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div-->
+<!--            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"-->
+<!--            class="additional_functional work_space_element"-->
+<!--        >-->
+<!--          <img src="../../assets/icons/add.svg" alt="">-->
+<!--        </div>-->
+<!--      </div>-->
+
+      <div class="work_space_element_title">
         Channels list
       </div>
       <div class="text-field__icon">
@@ -44,43 +92,6 @@
             >
               <img src="../../assets/icons/cross.svg" alt="">
             </div>
-        </div>
-      </div>
-
-      <div class="work_space_element_title">
-        Accounts tokens list
-      </div>
-      <div class="row_position ">
-        <div class=" input_element_item">
-          <div class="text-field__icon">
-            <input class="text-field__input input_element short_input"
-                   v-model="token"
-                   type="search"
-                   name="search"
-                   autocomplete="off"
-                   placeholder="Enter tokens list"
-                   :class="{short_input_active: dropDownFlagForAccountListMBumper}"
-            >
-            <div
-                class="text-field__aicon"
-                @click="CHANGE_FLAG()"
-            >
-              <img src="../../assets/icons/row.svg" alt=""
-                   :class="{ row_rotate: dropDownFlagForAccountListMBumper &&  tokensList.length !== 0}"
-              >
-            </div>
-          </div>
-        </div>
-        <div class="additional_functional work_space_element item"
-             @click="POPUP_DISPLAY('Accounts tokens list Message Bumper')"
-        >
-          <img src="../../assets/icons/download.svg" alt="">
-        </div>
-        <div
-            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"
-            class="additional_functional work_space_element"
-        >
-          <img src="../../assets/icons/add.svg" alt="">
         </div>
       </div>
       <div>
@@ -200,7 +211,7 @@ export default {
     },
     ADD_TOKENS_LIST_AND_CLEAR(token) {
       this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'MessageBumper'});
-      this.token = ''
+      // this.token = ''
     },
     CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR() {
       this.CREATE_TASK_MESSAGE_BUMPER({delay: this.delay, deleteMasses: this.deleteMassages});
