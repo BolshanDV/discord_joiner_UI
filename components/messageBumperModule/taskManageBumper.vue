@@ -5,7 +5,7 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title">
-        Accounts tokens list
+        Account token
       </div>
       <div class="text-field__icon">
         <input class="text-field__input input_element"
@@ -13,14 +13,8 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter tokens list"
+               placeholder="Enter token"
         >
-<!--        <div-->
-<!--            class="text-field__aicon"-->
-<!--            @click="ADD_TOKENS_LIST_AND_CLEAR(token)"-->
-<!--        >-->
-<!--          <img src="../../assets/icons/add.svg" alt="">-->
-<!--        </div>-->
       </div>
       <div class="work_space_element_title">
         Channels list
@@ -31,7 +25,7 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter tokens list"
+               placeholder="Enter channel id"
         >
         <div
             class="text-field__aicon"
@@ -106,6 +100,7 @@
           <div>Delete messages</div>
           <input type="checkbox"
                  class="switch_1"
+                 v-model="deleteMessagesFlag"
                  @click="CHANGE_DELETE_MESSAGE_FLAG"
           >
         </div>
@@ -122,7 +117,9 @@
         >
       </div>
     </div>
-    <message-list/>
+    <message-list
+        :key="keyUpdate"
+    />
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
         @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR"
@@ -158,8 +155,8 @@ export default {
         [
           'channelList',
           'dropDownFlagForAccountListMBumper',
-          'tokensList',
-          'deleteMessagesFlag'
+          'deleteMessagesFlag',
+          'keyUpdate'
         ]),
   },
   methods: {
@@ -167,7 +164,6 @@ export default {
         [
           'ADD_CHANNEL_TO_LISTS',
           'DELETE_CHANNEL',
-          'DELETE_TOKEN_FROM_LIST',
           'CHANGE_FLAG',
           'CHANGE_DELETE_MESSAGE_FLAG'
         ]),
@@ -176,14 +172,10 @@ export default {
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel) {
-      this.GET_CHANNEL_INFO({channelId: channel, token: this.token});
+      this.GET_CHANNEL_INFO({channelId: channel, token: this.token})
       this.channel = ''
+    },
 
-    },
-    ADD_TOKENS_LIST_AND_CLEAR(token) {
-      this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'MessageBumper'});
-      // this.token = ''
-    },
     CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR() {
       this.CREATE_TASK_MESSAGE_BUMPER(
           {
@@ -192,8 +184,9 @@ export default {
             token: this.token
           }
       );
-      this.delay = '';
+      this.delay = ''
       this.deleteMassages = ''
+      this.token = ''
     }
   }
 }

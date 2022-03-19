@@ -202,6 +202,7 @@
             <input
                 type="checkbox"
                 class="switch_1"
+                v-model="selectedReactionClicker"
                 @click="CHANGE_CHECKBOX_REACTION_CLICKER"
             >
         </div>
@@ -217,6 +218,7 @@
           <input
               type="checkbox"
               class="switch_1"
+              v-model="selectedSendCommand"
               @click="CHANGE_CHECKBOX_SEND_COMMAND"
           >
         </div>

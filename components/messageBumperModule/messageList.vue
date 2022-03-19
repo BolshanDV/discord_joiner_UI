@@ -19,7 +19,7 @@
              type="search"
              name="search"
              autocomplete="off"
-             placeholder="Enter tokens list">
+             placeholder="Enter message">
       <div
           class="text-field__aicon"
           @click="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"

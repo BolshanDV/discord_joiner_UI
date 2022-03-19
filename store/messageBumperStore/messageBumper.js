@@ -9,16 +9,17 @@ export const state = () => ({
     channelList: [],
     messageList: [],
     dropDownFlagForAccountListMBumper: false,
-    tokensList: null,
-    deleteMessagesFlag: false
+    deleteMessagesFlag: false,
+    tasksStatusMessageBumper: [],
+    keyUpdate: 0
 })
 
 export const getters = {
     channelList: state => state.channelList,
     messageList: state => state.messageList,
     dropDownFlagForAccountListMBumper: state => state.dropDownFlagForAccountListMBumper,
-    tokensList: state => state.tokensList,
-    deleteMessagesFlag: state => state.deleteMessagesFlag
+    deleteMessagesFlag: state => state.deleteMessagesFlag,
+    keyUpdate: state => state.keyUpdate
 }
 export const mutations = {
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
@@ -38,25 +39,27 @@ export const mutations = {
     DELETE_MESSAGE: (state, index) => {
         state.messageList.splice(index, 1)
     },
-    ADD_TOKEN_TO_LIST: (state, item) => {
-        console.log(item)
-        state.tokensList.push(item)
-    },
-    DELETE_TOKEN_FROM_LIST: (state, index) => {
-        state.tokensList.splice(index, 1)
-    },
     CHANGE_FLAG: (state) => {
         state.dropDownFlagForAccountListMBumper = !state.dropDownFlagForAccountListMBumper
     },
     CHANGE_DELETE_MESSAGE_FLAG: (state) => {
         state.deleteMessagesFlag = !state.deleteMessagesFlag
+    },
+    SAVE_MESSAGE_BUMPER_TASKS: (state, bumperObj) => {
+        state.tasksStatusMessageBumper.push(bumperObj)
+        state.channelList.length = 0
+        state.messageList.length = 0
+        state.dropDownFlagForAccountListMBumper = false
+        state.deleteMessagesFlag = false
+        state.keyUpdate++
+        console.log(state.tasksStatusMessageBumper)
     }
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
         let  deleteMessageObj = {
-            active: true,
-            deleteDelay: 6000
+            active: ctx.state.deleteMessagesFlag ,
+            deleteDelay: obj.deleteMasses
         }
 
         let bumperObj = {
@@ -67,6 +70,7 @@ export const actions = {
             deleteMessageObj: deleteMessageObj,
         }
         console.log(bumperObj)
+        ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
         await launchBumperTask(bumperObj);
     },
 
