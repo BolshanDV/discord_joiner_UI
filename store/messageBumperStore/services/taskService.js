@@ -1,19 +1,11 @@
 import axios from "axios";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "../../discordJoinerStore/services/joinerServices/validateService";
+import {logs} from "../../logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const tasks = [];
-export const logs = [];
-
-export function clearLogs() {
-    logs.length = 0;
-}
-
-export function stopTask() {
-
-}
 
 export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj} = bumperObj;
@@ -28,7 +20,7 @@ export async function launchBumperTask(bumperObj) {
             email: me.email
         }
         tasks.push(task);
-        console.log(deleteMessageObj)
+
         if (deleteMessageObj.active)
             setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
@@ -38,7 +30,9 @@ export async function launchBumperTask(bumperObj) {
 
                 if (status) {
                     task.successMessages.push({message: message, messageId: messageId, channel: channel});
-                    logs.push({message: message, channel: channel});
+                    logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${message}" successfully sent in channel ${channel.channelId}`});
+                } else {
+                    logs.push({type: 'BUMPER', subtype: 'ERROR', message: `An error occurred on the account ${token} while sending the message "${message}"`});
                 }
 
                 await sleep(delay);
@@ -79,11 +73,12 @@ async function deleteExpiredMessage(task) {
         await axios.delete(`https://discord.com/api/v9/channels/${message.channel.channelId}/messages/${message.messageId}`, {
             headers: buildHeaders(task.token, task.email)
         })
-            .then((response) => {
+            .then(() => {
             }).catch(e => {
                 console.log(e);
             });
 
+        logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${task.successMessages[0]}" deleted successfully`})
         task.successMessages.splice(0, 1);
     }
 }

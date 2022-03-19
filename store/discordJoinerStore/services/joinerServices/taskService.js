@@ -3,6 +3,7 @@ import {solveCaptcha} from "./captchaService";
 import {buildHeaders} from "../../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../../utils/taskUtils";
+import {logs} from "../../../logger";
 
 let criticalStopFlag = false;
 let pauseFlag = false;
@@ -22,7 +23,6 @@ export const controller = new AbortController();
 
 // sleep function for delay
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-export const logs = [];
 
 function checker() {
     setInterval(() => {
@@ -32,16 +32,6 @@ function checker() {
             pause = 500;
         }
     }, 100);
-}
-
-// clear logs function
-export function clearLogs() {
-    logs.length = 0;
-}
-
-// stop all tasks
-export function abortReqs() {
-    controller.abort();
 }
 
 export const getterTokens = (taskName) => {
@@ -77,7 +67,15 @@ export async function launchTasks(body) {
         const joinStatus = await joinChannel(body.inviteCode, token.token, me.email);
         let acceptRulesStatus = true;
 
-        if (body.accept_rules) acceptRulesStatus = await acceptRules(body.inviteCode, body.guildId, token.token, me.email);
+        if (body.accept_rules) {
+            acceptRulesStatus = await acceptRules(body.inviteCode, body.guildId, token.token, me.email);
+
+            if (acceptRulesStatus) {
+                logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token.username} successfully accepted rules`})
+            } else {
+                logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${token.username} while sending the message command`})
+            }
+        }
         //In this if there will be a large number of checks for all kinds of situations:
         // 1) is reaction clicker enabled
         // 2) is send command enabled
@@ -86,30 +84,30 @@ export async function launchTasks(body) {
 
         if (joinStatus && acceptRulesStatus && !body.reactionClickerFlag && !body.sendCommandFlag) {
             successTokens.push({ username: token.username, token: token.token });
-            logs.push({ username: token.username, token: token.token, info: 'Account successfully in the channel'})
+            logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token.username} successfully entered the channel`});
         } else if (joinStatus && acceptRulesStatus && body.reactionClickerFlag) {
             const reactionStatus = await setReaction(token.token, me.email, body.reactionClickerObj);
 
             if (reactionStatus) {
                 successTokens.push({ username: token.username, token: token.token });
-                logs.push({ username: token.username, token: token.token, info: 'The reaction has been set'})
+                logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token.username} successfully set a reaction`});
             } else {
                 errorTokens.push(token);
-                logs.push({ username: token.username, token: token.token, info: 'Error during the setting of the reaction'})
+                logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${token.username} while posting a reaction`});
             }
         } else if (joinStatus && acceptRulesStatus && body.sendCommandFlag) {
             const sendCommandStatus = await sendCommand(token.token, me.email, body.sendCommandObj);
 
             if (sendCommandStatus) {
                 successTokens.push({ username: token.username, token: token.token });
-                logs.push({ username: token.username, token: token.token, info: `Message has been send: ${body.sendCommandObj.commandText}` })
+                logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token.username} successfully send the message command`});
             } else {
                 errorTokens.push(token);
-                logs.push({ username: token.username, token: token.token, info: 'Error in putting down the command'})
+                logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${token.username} while sending the message command`});
             }
         } else {
             errorTokens.push(token);
-            logs.push({ username: token.username, token: token.token, info: 'Channel entry error'})
+            logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${token.username} while joining the channel`});
         }
         await sleep(body.delay);
     }
