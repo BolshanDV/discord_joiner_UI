@@ -28,8 +28,8 @@ export async function launchBumperTask(bumperObj) {
             email: me.email
         }
         tasks.push(task);
-
-        if (deleteMessageObj.deleteDelay !== undefined)
+        console.log(deleteMessageObj)
+        if (deleteMessageObj.active)
             setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
         for (const message of messageList) {

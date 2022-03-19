@@ -70,8 +70,8 @@ export const actions = {
             deleteMessageObj: deleteMessageObj,
         }
         console.log(bumperObj)
+        await launchBumperTask(bumperObj)
         ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
-        await launchBumperTask(bumperObj);
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
