@@ -5,6 +5,17 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title">
+        Task name
+      </div>
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="taskName"
+               autocomplete="off"
+               placeholder="Enter invite code"
+               type="search"
+               name="search">
+      </div>
+      <div class="work_space_element_title">
         Account token
       </div>
       <div class="text-field__icon">
@@ -117,9 +128,7 @@
         >
       </div>
     </div>
-    <message-list
-        :key="keyUpdate"
-    />
+    <message-list/>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
         @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR()"
@@ -148,6 +157,7 @@ export default {
       delay: '',
       deleteMassages: '',
       channel: '',
+      taskName: ''
     }
   },
   computed: {
@@ -156,7 +166,6 @@ export default {
           'channelList',
           'dropDownFlagForAccountListMBumper',
           'deleteMessagesFlag',
-          'keyUpdate'
         ]),
   },
   methods: {
@@ -179,6 +188,7 @@ export default {
     CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR() {
       this.CREATE_TASK_MESSAGE_BUMPER(
           {
+            taskName: this.taskName,
             delay: this.delay,
             deleteMasses: this.deleteMassages,
             token: this.token,
@@ -188,6 +198,7 @@ export default {
       this.delay = ''
       this.deleteMassages = ''
       this.token = ''
+      this.taskName = ''
     }
   }
 }

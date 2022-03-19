@@ -51,12 +51,13 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item click"
-             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
+             @click="ADD_TOKEN_WITH_CLEAR"
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
         <div class="additional_functional work_space_element click"
-             @click="ADD_TOKEN_WITH_CLEAR"
+             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
+
         >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
         </div>
@@ -106,12 +107,13 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item click"
-             @click="POPUP_DISPLAY('Proxy list')"
+             @click="ADD_PROXY_WITH_CLEAR(proxy)"
+
         >
           <img src="../../../assets/icons/download.svg" alt="icon" class="">
         </div>
         <div class="additional_functional work_space_element click"
-             @click="ADD_PROXY_WITH_CLEAR(proxy)"
+             @click="POPUP_DISPLAY('Proxy list')"
         >
           <img src="../../../assets/icons/add.svg" alt="icon" class="">
         </div>

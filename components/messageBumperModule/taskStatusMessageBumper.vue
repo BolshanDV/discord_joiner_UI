@@ -5,9 +5,9 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title row_position work_space_element_advent " >
-        <div class="row_position item">Task name</div>
+        <div class="row_position item column_name">Task name</div>
         <div class="row_position item channel_column">Channel</div>
-        <div class="row_position item">Task Status</div>
+        <div class="row_position item column_status">Task Status</div>
         <div class="row_position column_item">Actions</div>
       </div>
       <div
@@ -15,7 +15,7 @@
           :key="index"
           class="work_space_element row_position work_space_element_advent"
       >
-        <div class="row_position item">Task {{index + 1}}</div>
+        <div class="row_position item column_name">{{taskStatusItem.taskName}}</div>
         <div class="row_position item channel_column scroll_horizontal">
           <div
               class="row_position mini_element"
@@ -30,36 +30,18 @@
             </div>
           </div>
         </div>
-        <div class="row_position item"
-             v-if="taskStatusItem.processingTask === '' "
+        <div class="row_position item column_status"
+             :class="taskStatusItem.processingTaskObj.style"
         >
-          0/{{taskStatusItem.tokens.length}}
-
+          {{taskStatusItem.processingTaskObj.text}}
         </div>
-        <div class="row_position item success"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === undefined "
-        >
-          Processing...
-        </div>
-        <div class="row_position item process"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] >= 0"
-        >
-          Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})
-        </div>
-        <div class="row_position item success"
-             v-if="taskStatusItem.processingTask === 'done'"
-        >
-          {{successTokens[index]}}/{{taskStatusItem.tokens.length}}
-        </div>
-
         <div class="row_position column_item">
-          <!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
           <div class="icon_element delete"
           >
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
           <div class="icon_element play"
-               @click="PLAY_TASK(taskStatusItem)"
+               @click="PlAY_TASK_MESSAGE_BUMPER(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
           </div>
@@ -70,12 +52,14 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-
+import {mapGetters, mapActions} from "vuex";
 export default {
   name: "taskStatusMessageBumper",
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper',['tasksStatusMessageBumper'])
+    ...mapGetters('messageBumperStore/messageBumper', ['tasksStatusMessageBumper'])
+  },
+  methods: {
+    ...mapActions('messageBumperStore/messageBumper', ['PlAY_TASK_MESSAGE_BUMPER'])
   }
 }
 </script>
@@ -104,11 +88,11 @@ export default {
   margin-right: 8%;
 }
 .column_item{
-  width: 20%;
+  width: 17%;
   justify-content: center;
 }
 .work_space_element_title{
-  padding: 0 2%;
+  padding: 0 1%;
 }
 .item{
   width: 30%;
@@ -122,6 +106,9 @@ export default {
 .process{
   color: rgba(255,203,89,0.81);
 }
+.failed{
+  color: #FF0300;
+}
 .delete:active{
   background-color: #7e2d2d;
   border-radius: 5px;
@@ -132,6 +119,7 @@ export default {
 }
 .channel_column{
   width: 45%;
+  margin-right: 15px;
 }
 .channelIcon{
   height: 18px;
@@ -148,5 +136,14 @@ export default {
   margin: 1% 1.75%;
   justify-content: space-between;
   align-items: center;
+}
+.column_name{
+  width: 20%;
+}
+.column_status{
+  width: 18%;
+}
+.default{
+  color: #494950;
 }
 </style>

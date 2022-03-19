@@ -39,9 +39,9 @@ export async function launchBumperTask(bumperObj) {
             }
         }
 
-        return {infoMessage: 'Task completed successfully'};
+        return true;
     } else {
-        return {infoMessage: 'Task already exists'};
+        return false;
     }
 }
 

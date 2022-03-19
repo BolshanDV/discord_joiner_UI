@@ -4,6 +4,7 @@ import {
 } from "../discordJoinerStore/services/joinerServices/validateService";
 import {launchBumperTask} from "./services/taskService";
 import {getIconAndChannelName} from "../utils/embedsLoader";
+import {findTaskInMainArray} from "../utils/taskUtils";
 
 export const state = () => ({
     channelList: [],
@@ -52,47 +53,67 @@ export const mutations = {
         state.messageList = []
         state.dropDownFlagForAccountListMBumper = false
         state.deleteMessagesFlag = false
-        state.keyUpdate++
         console.log(state.tasksStatusMessageBumper)
+    },
+    CHANGE_PROCESSING_FLAG_M_BUMPER: (state, obj) => {
+        state.tasksStatusMessageBumper[obj.id].processingTaskObj = {
+            text: obj.text,
+            style: obj.style
+        }
     }
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
 
         let  deleteMessageObj = {
-            active: ctx.state.deleteMessagesFlag ,
+            active: ctx.state.deleteMessagesFlag,
             deleteDelay: obj.deleteMasses
         }
-
+        let processingTaskObj = {
+            text: 'Task created',
+            style: 'default'
+        }
         let bumperObj = {
+            taskName: obj.taskName,
             delay: obj.delay,
             channelList: obj.channelList,
             messageList: ctx.state.messageList,
             token: obj.token,
             deleteMessageObj: deleteMessageObj,
+            processingTaskObj: processingTaskObj
         }
-        // await launchBumperTask(bumperObj)
         ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
     },
 
-    VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
-        let notRepeat = true
-        for (const tokenItem of ctx.state.tokensList) {
-            if(tokenItem.token === token) {
-                notRepeat = false
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
-            }
-        }
-        if (notRepeat) {
-            const result = await validateSingleToken(token);
-            if (result.errorToken !== undefined) {
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
-            } else {
-                ctx.commit('ADD_TOKEN_TO_LIST', result.singleToken);
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
-            }
+    PlAY_TASK_MESSAGE_BUMPER: async (ctx, bumperObj) => {
+        let index = findTaskInMainArray(ctx.state.tasksStatusMessageBumper, bumperObj.taskName)
+        ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "In process", style: "process"})
+        let flagProcessing = await launchBumperTask(bumperObj)
+        if (flagProcessing) {
+            ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "successfully", style: "success"})
+        } else {
+            ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "Failed", style: "failed"})
         }
     },
+
+    // VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
+    //     let notRepeat = true
+    //     for (const tokenItem of ctx.state.tokensList) {
+    //         if(tokenItem.token === token) {
+    //             notRepeat = false
+    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
+    //         }
+    //     }
+    //     if (notRepeat) {
+    //         const result = await validateSingleToken(token);
+    //         if (result.errorToken !== undefined) {
+    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
+    //         } else {
+    //             ctx.commit('ADD_TOKEN_TO_LIST', result.singleToken);
+    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
+    //         }
+    //     }
+    // },
 
     DOWNLOADING_FILE: () => {
         alert('Возможно сделаем тут копирование')
