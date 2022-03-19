@@ -122,7 +122,7 @@
     />
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
-        @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR"
+        @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR()"
       >
         Create task
       </div>
@@ -181,7 +181,8 @@ export default {
           {
             delay: this.delay,
             deleteMasses: this.deleteMassages,
-            token: this.token
+            token: this.token,
+            channelList: this.channelList
           }
       );
       this.delay = ''
