@@ -109,10 +109,11 @@ name: "taskLogs",
   justify-content: flex-end;
 }
 .btn_clear{
-  background: #1F2A39;
+  background-color: rgba(22, 30, 41, 0.6);
+  border: 2px solid rgba(24, 33, 44, 0.96);
 }
 .btn_clear:active{
-  background: #454c5f;
+  background: rgba(24, 33, 44, 0.96);
 }
 .INFO{
   color: #3b8069;

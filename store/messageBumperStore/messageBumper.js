@@ -12,7 +12,8 @@ export const state = () => ({
     dropDownFlagForAccountListMBumper: false,
     deleteMessagesFlag: false,
     tasksStatusMessageBumper: [],
-    keyUpdate: 0
+    keyUpdate: 0,
+    singleToken: ""
 })
 
 export const getters = {
@@ -21,9 +22,15 @@ export const getters = {
     dropDownFlagForAccountListMBumper: state => state.dropDownFlagForAccountListMBumper,
     deleteMessagesFlag: state => state.deleteMessagesFlag,
     keyUpdate: state => state.keyUpdate,
-    tasksStatusMessageBumper: state => state.tasksStatusMessageBumper
+    tasksStatusMessageBumper: state => state.tasksStatusMessageBumper,
+    singleToken: state => state.singleToken
 }
 export const mutations = {
+    VALIDATE_TOKEN: (state, singleToken) => {
+        console.log(singleToken)
+        state.singleToken = singleToken.username
+    },
+
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
         state.channelList.push(channelElement)
     },
@@ -96,24 +103,24 @@ export const actions = {
         }
     },
 
-    // VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
-    //     let notRepeat = true
-    //     for (const tokenItem of ctx.state.tokensList) {
-    //         if(tokenItem.token === token) {
-    //             notRepeat = false
-    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
-    //         }
-    //     }
-    //     if (notRepeat) {
-    //         const result = await validateSingleToken(token);
-    //         if (result.errorToken !== undefined) {
-    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
-    //         } else {
-    //             ctx.commit('ADD_TOKEN_TO_LIST', result.singleToken);
-    //             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
-    //         }
-    //     }
-    // },
+    VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
+        // let notRepeat = true
+        // for (const tokenItem of ctx.state.tokensList) {
+        //     if(tokenItem.token === token) {
+        //         notRepeat = false
+        //         ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
+        //     }
+        // }
+        // if (notRepeat) {
+            const result = await validateSingleToken(token);
+            if (result.errorToken !== undefined) {
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
+            } else {
+                ctx.commit('VALIDATE_TOKEN', result.singleToken);
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
+            }
+        // }
+    },
 
     DOWNLOADING_FILE: () => {
         alert('Возможно сделаем тут копирование')

@@ -26,6 +26,13 @@
                autocomplete="off"
                placeholder="Enter token"
         >
+        <div
+            class="text-field__aicon"
+            @click="VALIDATE_TOKEN(token)"
+        >
+          <img src="../../assets/icons/add.svg" alt="" class="click">
+        </div>
+
       </div>
       <div class="work_space_element_title">
         Channels list
@@ -69,29 +76,6 @@
             </div>
         </div>
       </div>
-      <div>
-        <div class="scroll column short_input short_input_drop_down_menu"
-             v-if="dropDownFlagForAccountListMBumper && (tokensList.length !== 0)"
-        >
-          <div
-              class="row_position drop_down_element scroll_item"
-              v-for="(tokensListItem, index) in tokensList"
-              :key="index"
-          >
-            <div class="scroll_horizontal row_position">
-              <div>{{tokensListItem.username}}</div>
-            </div>
-
-            <div
-                class="cross_icon"
-                @click="DELETE_TOKEN_FROM_LIST(index)"
-            >
-              <img src="../../assets/icons/cross.svg" alt="">
-            </div>
-
-          </div>
-        </div>
-      </div>
       <div class="work_space_element_title">
         Delay
       </div>
@@ -132,7 +116,11 @@
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
         @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR()"
+           v-if="taskName !== '' && channelList.length !== 0 && token !== 0"
       >
+        Create task
+      </div>
+      <div class="row_position row_position_btn_form noActive">
         Create task
       </div>
     </div>
@@ -153,7 +141,7 @@ export default {
   },
   data() {
     return {
-      token: '',
+      token: "",
       delay: '',
       deleteMassages: '',
       channel: '',
@@ -166,6 +154,7 @@ export default {
           'channelList',
           'dropDownFlagForAccountListMBumper',
           'deleteMessagesFlag',
+          'singleToken'
         ]),
   },
   methods: {
@@ -176,7 +165,7 @@ export default {
           'CHANGE_FLAG',
           'CHANGE_DELETE_MESSAGE_FLAG'
         ]),
-    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO']),
+    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO', 'VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
@@ -199,6 +188,9 @@ export default {
       this.deleteMassages = ''
       this.token = ''
       this.taskName = ''
+    },
+    VALIDATE_TOKEN(token) {
+      this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)
     }
   }
 }
@@ -269,6 +261,13 @@ export default {
   width: 10vw;
   height: 5vh;
   justify-content: center;
+}
+.noActive{
+  background-color: rgba(22, 30, 41, 0.6);
+  border: 2px solid rgba(24, 33, 44, 0.96);
+}
+.noActive:active{
+  background-color: rgba(24, 33, 44, 0.96);
 }
 .mini_element{
   background: #272D36;

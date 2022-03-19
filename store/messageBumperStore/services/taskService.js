@@ -78,7 +78,7 @@ async function deleteExpiredMessage(task) {
                 console.log(e);
             });
 
-        logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${task.successMessages[0]}" deleted successfully`})
+        logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${task.successMessages[0].message}" deleted successfully`})
         task.successMessages.splice(0, 1);
     }
 }

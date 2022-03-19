@@ -11,7 +11,7 @@
         <input class="text-field__input input_element"
                v-model="taskName"
                autocomplete="off"
-               placeholder="Enter invite code"
+               placeholder="Enter task name"
                type="search"
                name="search">
       </div>
@@ -231,7 +231,13 @@
     </div>
     <div class="row_position row_position_btn waves waves-effect">
       <div class="row_position row_position_btn_form"
+           v-if="tokens.length !== 0 && taskName !== '' && inviteCode !== '' "
            @click="PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
+      >
+        Create task
+      </div>
+      <div class="row_position row_position_btn_form noActive"
+           v-else
       >
         Create task
       </div>
@@ -348,6 +354,13 @@ name: "taskManager",
 }
 .row_position_btn_form:active{
   background: #2BD6A2;
+}
+.noActive{
+  background-color: rgba(22, 30, 41, 0.6);
+  border: 2px solid rgba(24, 33, 44, 0.96);
+}
+.noActive:active{
+  background-color: rgba(24, 33, 44, 0.96);
 }
 .input_element{
   background-color: rgba(22,30,41,0.6);

@@ -38,7 +38,7 @@ export const mutations = {
             }
             case 'startAllTasks': {
                 let obj = {
-                    element: "Start all Tasks",
+                    element: "Start processing all tokens",
                     style: 'success',
                     id: state.key++
                 }
@@ -47,8 +47,8 @@ export const mutations = {
             }
             case 'stopAllTasks': {
                 let obj = {
-                    element: "Stop all Tasks",
-                    style: 'success',
+                    element: "Stop processing all tokens",
+                    style: 'error',
                     id: state.key++
                 }
                 state.toasted.push(obj)
@@ -56,7 +56,7 @@ export const mutations = {
             }
             case 'createTask': {
                 let obj = {
-                    element: "Create Task",
+                    element: "Task successfully created",
                     style: 'success',
                     id: state.key++
                 }

@@ -47,6 +47,7 @@ name: "home",
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
+  align-items: flex-start;
 }
 .task_manager{
   width: 35%;

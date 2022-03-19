@@ -45,12 +45,13 @@ export const actions = {
     },
 
     STOP_ALL_TASKS: (ctx) => {
-        ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                type: 'stopAllTasks'
-            },
-            {root: true}
-        )
-        setStopCriticalFlag()
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                    type: 'stopAllTasks'
+                },
+                {root: true}
+            )
+
+            setStopCriticalFlag()
     },
 
     CLEAR_LOGS: (ctx) => {

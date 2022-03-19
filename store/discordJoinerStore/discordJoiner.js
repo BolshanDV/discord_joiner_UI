@@ -170,14 +170,17 @@ export const actions = {
     },
 
     START_ALL_TASKS:  (ctx) => {
-        ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                type: 'startAllTasks'
-            },
-            {root: true}
-        )
-        for (const taskStatusItem of ctx.state.taskStatus) {
-            ctx.dispatch('PLAY_TASK', taskStatusItem)
+        if (ctx.state.taskStatus.length !== 0) {
+            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                    type: 'startAllTasks'
+                },
+                {root: true}
+            )
+            for (const taskStatusItem of ctx.state.taskStatus) {
+                ctx.dispatch('PLAY_TASK', taskStatusItem)
+            }
         }
+
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokensObj) => {

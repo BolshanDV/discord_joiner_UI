@@ -14,18 +14,13 @@
 import taskLogsComponent from "../components/discordJoinerModule/taskLogs";
 import taskStatusMessageBumper from "../components/messageBumperModule/taskStatusMessageBumper";
 import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
-import modalPage from "../components/modalPage/modalPage";
-import {mapGetters} from "vuex";
 export default {
   name: "home",
   components: {
     taskLogsComponent,
     taskStatusMessageBumper,
     taskManagerBumper,
-    modalPage
   },
-  computed: {
-  }
 }
 </script>
 
@@ -35,6 +30,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
+  align-items: flex-start;
 }
 .task_manager{
   width: 35%;
