@@ -1,6 +1,5 @@
 import {setStopCriticalFlag} from "./services/joinerServices/taskService"
-import {logs} from "./services/joinerServices/taskService";
-import {clearLogs} from "./services/joinerServices/taskService"
+import {clearLogs, getLogs} from "../logger";
 
 export const state = () => ({
     playStopFlag: true,
@@ -15,10 +14,12 @@ export const getters = {
 export const mutations = {
     ADD_LOGS: (state, item) => {
         let obj = {
-            logs: item,
-            date: new Date()
+            logs: item.message,
+            date: new Date(),
+            subtype: item.subtype,
+            type: item.type
         }
-        state.logs.push(obj)
+        state.logs.unshift(obj)
     },
 
     CLEAT_LOGS_STATE: (state) => {
@@ -36,10 +37,11 @@ export const actions = {
 
     PROCESS_LOGS: (ctx) => {
         setInterval(() => {
+            const logs = getLogs('ALL');
             if(ctx.state.logs.length < logs.length) {
                 ctx.commit('ADD_LOGS', logs[logs.length - 1])
             }
-        }, 1000)
+        }, 100);
     },
 
     STOP_ALL_TASKS: (ctx) => {

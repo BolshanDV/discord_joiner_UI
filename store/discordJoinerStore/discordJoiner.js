@@ -153,7 +153,6 @@ export const actions = {
         setStartCriticalFlag()
         let index = findTaskInMainArray(ctx.state.taskStatus, mainObj.taskName)
         ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
-        ctx.dispatch('discordJoinerStore/taskStatus/PROCESS_LOGS', '', {root: true})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);

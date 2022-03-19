@@ -9,8 +9,23 @@
       <div
           v-for="(logItem, index) in logs "
           :key="index"
+          class="revers"
       >
-        {{logItem.date.toLocaleString()}}: {{"   "+logItem.logs.username.toUpperCase()}} - {{logItem.logs.info}}
+        <div>
+          <span>
+            {{logItem.date.toLocaleString()}}\
+          </span>
+            <span>
+            {{logItem.type}} \
+          </span>
+            <span :class="logItem.subtype">
+            {{logItem.subtype}}
+          </span>
+            <span>
+            \ {{logItem.logs}}
+          </span>
+        </div>
+
       </div>
     </div>
 
@@ -58,7 +73,7 @@ name: "taskLogs",
   border-radius: 5px;
   padding: 2%;
   margin-top: 1%;
-  min-height: 250px;
+  min-height: 370px;
 }
 .btn{
   border-radius: 4px;
@@ -99,4 +114,11 @@ name: "taskLogs",
 .btn_clear:active{
   background: #454c5f;
 }
+.INFO{
+  color: #3b8069;
+}
+.ERROR{
+  color: #7e2d2d;
+}
+
 </style>

@@ -19,7 +19,7 @@ import taskManager from "../components/discordJoinerModule/taskManager/taskManag
 import taskLogs from "../components/discordJoinerModule/taskLogs";
 import taskStatus from "../components/discordJoinerModule/taskStatus";
 import modalPage from "../components/modalPage/modalPage";
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "home",
   components: {
@@ -28,9 +28,15 @@ name: "home",
     taskStatus,
     modalPage
   },
+  beforeMount() {
+    this.PROCESS_LOGS()
+  },
   computed: {
     ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey']),
     ...mapGetters('discordJoinerStore/taskStatus', ['date'])
+  },
+  methods: {
+    ...mapActions('discordJoinerStore/taskStatus', ['PROCESS_LOGS'])
   }
 }
 </script>
