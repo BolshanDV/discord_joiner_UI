@@ -1,5 +1,6 @@
 import axios from "axios";
 import {controller} from "./taskService";
+import {logs} from "../../../logger";
 
 export async function validateAndExtractTokens(tokens) {
         const result = [];
@@ -87,7 +88,11 @@ export async function getMe(singleToken) {
         })
         .catch(error => {
             console.log("There was an error!", error);
-        })
+        });
+
+    (statusCode === 200)
+        ? logs.push({type: 'VALIDATE-SERVICE', subtype: 'INFO', message: `Account ${body.username} has been successfully initialized`})
+        : logs.push({type: 'VALIDATE-SERVICE', subtype: 'ERROR', message: `Initialization failed for "${singleToken}" token`})
 
 
     return body;
