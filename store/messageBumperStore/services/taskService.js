@@ -4,6 +4,15 @@ import {getMe} from "../../discordJoinerStore/services/joinerServices/validateSe
 import {logs} from "../../logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+let criticalStopFlag = false;
+
+export function setStopBumperCriticalFlag() {
+    criticalStopFlag = true;
+}
+
+export function setStartBumperCriticalFlag() {
+    criticalStopFlag = false;
+}
 
 const tasks = [];
 
@@ -12,7 +21,7 @@ export async function launchBumperTask(bumperObj) {
     const me = await getMe(token);
 
     if (!checkTaskExisting(taskName)) {
-        const task = {
+        let task = {
             name: taskName,
             successMessages: [],
             deleteParameters: deleteMessageObj.deleteDelay,
@@ -21,11 +30,25 @@ export async function launchBumperTask(bumperObj) {
         }
         tasks.push(task);
 
+        let intervalId;
         if (deleteMessageObj.active)
-            setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
+            intervalId = setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
         for (const message of messageList) {
+            if (criticalStopFlag) {
+                tasks.length = 0;
+                task = null;
+                clearInterval(intervalId);
+                break;
+            }
             for (const channel of channelList) {
+                if (criticalStopFlag) {
+                    tasks.length = 0;
+                    task = null;
+                    clearInterval(intervalId);
+                    break;
+                }
+
                 const {status, messageId} = await sendMessage(me.email, token, channel.channelId, message);
 
                 if (status) {
