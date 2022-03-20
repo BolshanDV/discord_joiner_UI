@@ -169,17 +169,28 @@ export const actions = {
         }
     },
 
-    START_ALL_TASKS:  (ctx) => {
-        if (ctx.state.taskStatus.length !== 0) {
-            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                    type: 'startAllTasks'
-                },
-                {root: true}
-            )
-            for (const taskStatusItem of ctx.state.taskStatus) {
-                ctx.dispatch('PLAY_TASK', taskStatusItem)
+    START_ALL_TASKS:  (ctx, name) => {
+        switch (name){
+            case 'discordJoiner': {
+                if (ctx.state.taskStatus.length !== 0) {
+                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                            type: 'startAllTasks'
+                        },
+                        {root: true}
+                    )
+                    for (const taskStatusItem of ctx.state.taskStatus) {
+                        ctx.dispatch('PLAY_TASK', taskStatusItem)
+                    }
+                }
+                break;
             }
+            case 'messageBumper': {
+                ctx.dispatch('messageBumperStore/messageBumper/PlAY_ALL_TASK_MESSAGE_BUMPER', '', {root: true})
+                break;
+            }
+
         }
+
 
     },
 

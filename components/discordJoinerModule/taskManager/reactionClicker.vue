@@ -2,19 +2,39 @@
     <div class="column">
       <div class="work_space_element_title">Channel id</div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="channelId" autocomplete="off" placeholder="Enter channel id" type="search" name="search">
+          <input class="text-field__input input_element"
+                 v-model.number="channelId"
+                 autocomplete="off"
+                 placeholder="Enter channel id"
+                 type="search"
+                 name="search">
         </div>
       <div class="work_space_element_title">Message id</div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="messageId" autocomplete="off" placeholder="Enter massager id" type="search" name="search">
+          <input class="text-field__input input_element"
+                 v-model="messageId"
+                 autocomplete="off"
+                 placeholder="Enter massager id"
+                 type="search"
+                 name="search">
         </div>
       <div class="work_space_element_title">Reaction id</div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="reactionId" autocomplete="off" placeholder="Enter reaction id" type="search" name="search">
+          <input class="text-field__input input_element"
+                 v-model.number="reactionId"
+                 autocomplete="off"
+                 placeholder="Enter reaction id"
+                 type="search"
+                 name="search">
         </div>
       <div class="work_space_element_title">Reaction click delay</div>
         <div class="text-field">
-          <input class="text-field__input input_element" v-model="reactionClickDelay" autocomplete="off" placeholder="Enter delay" type="search" name="search">
+          <input class="text-field__input input_element"
+                 v-model.number="reactionClickDelay"
+                 autocomplete="off"
+                 placeholder="Enter delay"
+                 type="search"
+                 name="search">
         </div>
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker only mode</div>

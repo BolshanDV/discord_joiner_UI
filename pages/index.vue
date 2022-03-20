@@ -8,7 +8,8 @@
             :key="renderKey"
         />
         <task-logs
-            :key="date"
+            name="discordJoiner"
+           :key="date"
         />
       </div>
     </div>
@@ -28,16 +29,10 @@ name: "home",
     taskStatus,
     modalPage
   },
-  beforeMount() {
-    this.PROCESS_LOGS()
-  },
   computed: {
     ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey']),
     ...mapGetters('discordJoinerStore/taskStatus', ['date'])
   },
-  methods: {
-    ...mapActions('discordJoinerStore/taskStatus', ['PROCESS_LOGS'])
-  }
 }
 </script>
 

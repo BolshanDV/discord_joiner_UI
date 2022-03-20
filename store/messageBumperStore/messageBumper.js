@@ -27,7 +27,7 @@ export const getters = {
 }
 export const mutations = {
     VALIDATE_TOKEN: (state, singleToken) => {
-        state.singleToken = singleToken.username
+        state.singleToken = singleToken
     },
 
     ADD_CHANNEL_TO_LISTS: (state, channelElement) => {
@@ -66,7 +66,10 @@ export const mutations = {
             text: obj.text,
             style: obj.style
         }
-    }
+    },
+    DELETE_TASK_MESSAGE_BUMPER: (state, id) => {
+        state.tasksStatusMessageBumper.splice(id, 1)
+    },
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
@@ -99,6 +102,12 @@ export const actions = {
             ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "successfully", style: "success"})
         } else {
             ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "Failed", style: "failed"})
+        }
+    },
+
+    PlAY_ALL_TASK_MESSAGE_BUMPER: (ctx) => {
+        for (const bumperObj of ctx.state.tasksStatusMessageBumper) {
+            ctx.dispatch('PlAY_TASK_MESSAGE_BUMPER', bumperObj )
         }
     },
 

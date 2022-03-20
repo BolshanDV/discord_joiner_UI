@@ -5,7 +5,9 @@
     </div>
     <div class="main_block information_section">
       <taskStatusMessageBumper/>
-      <taskLogsComponent/>
+      <taskLogsComponent
+          name="messageBumper"
+      />
     </div>
   </div>
 </template>

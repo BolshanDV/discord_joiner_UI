@@ -1,5 +1,6 @@
 import {setStopCriticalFlag} from "./services/joinerServices/taskService"
 import {clearLogs, getLogs} from "../logger";
+import {setStopBumperCriticalFlag} from "../messageBumperStore/services/taskService";
 
 export const state = () => ({
     playStopFlag: true,
@@ -44,14 +45,22 @@ export const actions = {
         }, 100);
     },
 
-    STOP_ALL_TASKS: (ctx) => {
+    STOP_ALL_TASKS: (ctx, name) => {
             ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
                     type: 'stopAllTasks'
                 },
                 {root: true}
             )
-
-            setStopCriticalFlag()
+        switch (name) {
+            case 'messageBumper': {
+                setStopBumperCriticalFlag()
+                break;
+            }
+            case 'discordJoiner': {
+                setStopCriticalFlag()
+                break;
+            }
+        }
     },
 
     CLEAR_LOGS: (ctx) => {

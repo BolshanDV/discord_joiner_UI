@@ -23,7 +23,7 @@ import Sidebar from "../components/barElement/sidebar";
 import navbar from "../components/barElement/navbar";
 import modalPage from "../components/modalPage/modalPage";
 import toasted from "../components/toastedPart/toasted";
-import {mapGetters} from "vuex"
+import {mapActions, mapGetters} from "vuex"
 export default {
   name: "default",
   components: {
@@ -32,9 +32,16 @@ export default {
     modalPage,
     toasted
   },
+  beforeMount() {
+    this.PROCESS_LOGS()
+  },
   computed: {
     ...mapGetters('popUpStore/popUp', ['popUpFlag'])
+  },
+  methods: {
+    ...mapActions('discordJoinerStore/taskStatus', ['PROCESS_LOGS'])
   }
+
 }
 </script>
 

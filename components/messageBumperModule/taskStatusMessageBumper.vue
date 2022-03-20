@@ -37,6 +37,7 @@
         </div>
         <div class="row_position column_item">
           <div class="icon_element delete"
+               @click="DELETE_TASK_MESSAGE_BUMPER(index)"
           >
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
@@ -52,14 +53,15 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions, mapMutations} from "vuex";
 export default {
   name: "taskStatusMessageBumper",
   computed: {
     ...mapGetters('messageBumperStore/messageBumper', ['tasksStatusMessageBumper'])
   },
   methods: {
-    ...mapActions('messageBumperStore/messageBumper', ['PlAY_TASK_MESSAGE_BUMPER'])
+    ...mapActions('messageBumperStore/messageBumper', ['PlAY_TASK_MESSAGE_BUMPER']),
+    ...mapMutations('messageBumperStore/messageBumper', ['DELETE_TASK_MESSAGE_BUMPER'])
   }
 }
 </script>

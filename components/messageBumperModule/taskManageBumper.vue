@@ -123,7 +123,9 @@
       >
         Create task
       </div>
-      <div class="row_position row_position_btn_form noActive">
+      <div class="row_position row_position_btn_form noActive"
+           v-else
+      >
         Create task
       </div>
     </div>
@@ -173,7 +175,7 @@ export default {
     ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel) {
-      this.GET_CHANNEL_INFO({channelId: channel, token: this.token})
+      this.GET_CHANNEL_INFO({channelId: channel, token: this.singleToken.token})
       this.channel = ''
     },
 
@@ -183,7 +185,7 @@ export default {
             taskName: this.taskName,
             delay: this.delay,
             deleteMasses: this.deleteMassages,
-            token: this.token,
+            token: this.singleToken.token,
             channelList: this.channelList
           }
       );
@@ -194,7 +196,7 @@ export default {
     },
     async VALIDATE_TOKEN  (token) {
       await this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)
-      this.token = this.singleToken
+      this.token = this.singleToken.username
     }
   }
 }
@@ -311,5 +313,6 @@ export default {
 .channelIcon{
   height: 18px;
   width: 18px;
+  border-radius: 50%;
 }
 </style>

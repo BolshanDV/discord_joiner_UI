@@ -55,7 +55,7 @@ export async function launchBumperTask(bumperObj) {
                     task.successMessages.push({message: message, messageId: messageId, channel: channel});
                     logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${message}" successfully sent in channel ${channel.channelId}`});
                 } else {
-                    logs.push({type: 'BUMPER', subtype: 'ERROR', message: `An error occurred on the account ${token} while sending the message "${message}"`});
+                    logs.push({type: 'BUMPER', subtype: 'ERROR', message: `An error occurred on the account ${me.username} while sending the message "${message}"`});
                 }
 
                 await sleep(delay);

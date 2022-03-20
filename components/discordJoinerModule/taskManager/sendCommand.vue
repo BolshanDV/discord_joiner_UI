@@ -2,11 +2,21 @@
   <div class="column">
     <div class="work_space_element_title">Channel id</div>
       <div class="text-field">
-        <input class="text-field__input input_element" v-model="channelId" autocomplete="off" placeholder="Enter channel id" type="search" name="search">
+        <input class="text-field__input input_element"
+               v-model.number="channelId"
+               autocomplete="off"
+               placeholder="Enter channel id"
+               type="search"
+               name="search">
       </div>
     <div class="work_space_element_title">Command</div>
     <div class="text-field">
-     <input class="text-field__input input_element" v-model="commandText" autocomplete="off" placeholder="Enter command" type="search" name="search">
+     <input class="text-field__input input_element"
+            v-model.number="commandText"
+            autocomplete="off"
+            placeholder="Enter command"
+            type="search"
+            name="search">
     </div>
     <div class="row_position work_space_element_advent">
       <div>Send command only mode</div>

@@ -149,7 +149,7 @@
           </div>
           <div class="work_space_element row_position">
               <input class="text-field__input input_element"
-                     v-model="delay"
+                     v-model.number="delay"
                      autocomplete="off"
                      placeholder="delay"
                      type="search"
@@ -163,7 +163,7 @@
           <div class="work_space_element row_position">
             <input
                 class="text-field__input input_element"
-                v-model="invitesPerTask"
+                v-model.number="invitesPerTask"
                 autocomplete="off"
                 placeholder="Invites per task"
                 type="search"
@@ -189,7 +189,7 @@
         </div>
         <div class="text-field">
           <input class="text-field__input input_element"
-                 v-model="guildId"
+                 v-model.number="guildId"
                  autocomplete="off"
                  placeholder="Enter guild id"
                  type="search"
