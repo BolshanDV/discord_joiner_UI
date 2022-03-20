@@ -2,10 +2,22 @@
   <div class="work_space column">
     <div class="work_space_element_title row_position work_space_element_advent">
       <div>Message list</div>
-      <div>
-        <img src="../../assets/icons/download.svg" alt=""
-             @click="POPUP_DISPLAY('Message list 2')"
-        >
+      <div class="row_position">
+        <div>
+          <label>
+            <img src="../../assets/icons/download.svg" alt=""
+            >
+            <input
+                type="file"
+                class="file_btn"
+                @change="FILE_READ"
+                accept=".txt"
+            >
+          </label>
+        </div>
+<!--        <img src="../../assets/icons/download.svg" alt=""-->
+<!--             @click="POPUP_DISPLAY('Message list 2')"-->
+<!--        >-->
         <img src="../../assets/icons/download.svg" alt=""
              @click="DOWNLOADING_FILE"
              class="mini_element_icons"
@@ -69,7 +81,7 @@ name: "messageList",
   methods: {
     ...mapMutations('messageBumperStore/messageBumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE']),
+    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE', 'FILE_READ']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message){
       this.ADD_MESSAGE_TO_LISTS(message);
       this.message = ''
@@ -125,5 +137,11 @@ name: "messageList",
 }
 .scroll_horizontal{
   max-width: 150px;
+}
+.file_btn{
+  display: none;
+}
+label{
+  margin: 0;
 }
 </style>

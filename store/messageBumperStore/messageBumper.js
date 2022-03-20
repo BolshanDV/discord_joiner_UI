@@ -171,6 +171,13 @@ export const actions = {
             })
         }
     },
+    FILE_READ: (ctx, file) => {
+
+        console.log(file.files)
+        let i = Array.from(file.target.files)
+        console.log(i)
+        //TODO обработка файла
+    }
 }
 
 
