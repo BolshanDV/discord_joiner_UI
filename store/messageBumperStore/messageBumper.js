@@ -36,8 +36,14 @@ export const mutations = {
     DELETE_CHANNEL: (state, index) => {
         state.channelList.splice(index, 1)
     },
-    ADD_MESSAGE_TO_LISTS: (state, massageItem) => {
-        if (massageItem !== '') state.messageList.push(massageItem)
+    ADD_MESSAGE_TO_LISTS: (state, messageObj) => {
+        if (typeof messageObj === 'string') {
+            state.messageList.push(messageObj)
+        } else if (Array.isArray(messageObj)) {
+            messageObj.forEach((message) => {
+               state.messageList.push(message);
+            });
+        }
     },
     ADD_MESSAGE_ARR_TO_LISTS: (state, massageArr) => {
         if (massageArr.length !== 0 ) {
@@ -141,7 +147,7 @@ export const actions = {
                 }
             }
         }
-        const {input, errorToken} = await validateAndExtractTokens(tokensObj);
+        const {input} = await validateAndExtractTokens(tokensObj);
         for (const inputElement of input) {
             let notRepeat = true
             for (const tokenItem of ctx.state.tokensList) {
@@ -171,12 +177,18 @@ export const actions = {
             })
         }
     },
-    FILE_READ: (ctx, file) => {
+    FILE_READ: async (ctx, file) => {
+        let blob  = file.target.files[0];
 
-        console.log(file.files)
-        let i = Array.from(file.target.files)
-        console.log(i)
-        //TODO обработка файла
+        let reader = new FileReader();
+        reader.readAsText(blob, 'UTF-8');
+
+        reader.onload = () => {
+            const res = reader.result.split(';');
+            ctx.commit('ADD_MESSAGE_TO_LISTS', res);
+
+            reader = null;
+        }
     }
 }
 
