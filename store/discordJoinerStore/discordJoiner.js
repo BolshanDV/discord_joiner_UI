@@ -46,12 +46,21 @@ export const mutations = {
         ctx.dispatch('toastedStore/toasted/ADDING_ERROR', obj, {root: true})
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
+        console.log(token)
         if ( token !== 0 ) state.tokens.push(token)
+        // if (typeof token === 'string') {
+        //     state.tokens.push(token)
+        // } else if (Array.isArray(token)) {
+        //     token.forEach((tokenItem) => {
+        //         state.tokens.push(tokenItem);
+        //     });
+        // }
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         if ( token !== 0) state.successJoined.push(token);
     },
     ADD_SUCCESS_TOKENS_ARR: (state, tokens) => {
+        console.log(tokens)
         if ( tokens.length !== 0) tokens.forEach(item => state.tokens.push(item))
     },
     SWITCH_GLOBAL_STATUS: (state, status) => {
@@ -215,6 +224,9 @@ export const actions = {
             }
             , 4000)
     },
+    READ_FILE_TOKENS: (ctx, file) => {
+
+    },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
         let notRepeat = true
@@ -255,6 +267,7 @@ export const actions = {
                 if (inputElement.errorToken !== undefined) {
                     ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
                 } else {
+                    console.log(inputElement.singleToken)
                     ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
                     ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
                 }

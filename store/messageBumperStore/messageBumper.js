@@ -177,19 +177,19 @@ export const actions = {
             })
         }
     },
-    FILE_READ: async (ctx, file) => {
-        let blob  = file.target.files[0];
-
-        let reader = new FileReader();
-        reader.readAsText(blob, 'UTF-8');
-
-        reader.onload = () => {
-            const res = reader.result.split(';');
-            ctx.commit('ADD_MESSAGE_TO_LISTS', res);
-
-            reader = null;
-        }
-    }
+    // FILE_READ: async (ctx, file) => {
+    //     let blob  = file.target.files[0];
+    //
+    //     let reader = new FileReader();
+    //     reader.readAsText(blob, 'UTF-8');
+    //
+    //     reader.onload = () => {
+    //         const res = reader.result.split(';');
+    //         ctx.commit('ADD_MESSAGE_TO_LISTS', res);
+    //
+    //         reader = null;
+    //     }
+    // }
 }
 
 

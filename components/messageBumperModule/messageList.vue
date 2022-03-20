@@ -10,14 +10,11 @@
             <input
                 type="file"
                 class="file_btn"
-                @change="FILE_READ"
+                @change="FILE_READ_MESSAGES"
                 accept=".txt"
             >
           </label>
         </div>
-<!--        <img src="../../assets/icons/download.svg" alt=""-->
-<!--             @click="POPUP_DISPLAY('Message list 2')"-->
-<!--        >-->
         <img src="../../assets/icons/download.svg" alt=""
              @click="DOWNLOADING_FILE"
              class="mini_element_icons"
@@ -81,7 +78,8 @@ name: "messageList",
   methods: {
     ...mapMutations('messageBumperStore/messageBumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE', 'FILE_READ']),
+    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE']),
+    ...mapActions('readFileStore/readFile', ['FILE_READ_MESSAGES']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message){
       this.ADD_MESSAGE_TO_LISTS(message);
       this.message = ''

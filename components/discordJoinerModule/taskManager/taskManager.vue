@@ -51,10 +51,28 @@
           </div>
         </div>
         <div class="additional_functional work_space_element item click"
-             @click="ADD_TOKEN_WITH_CLEAR"
         >
-          <img src="../../../assets/icons/download.svg" alt="icon" class="">
+          <label>
+            <img src="../../../assets/icons/download.svg" alt="icon" class="">
+            <input
+                type="file"
+                class="file_btn"
+                @change="READ_FILE_TOKENS"
+                accept=".txt"
+            >
+          </label>
         </div>
+<!--        <div>-->
+<!--          <label>-->
+<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">            >-->
+<!--            <input-->
+<!--                type="file"-->
+<!--                class="file_btn"-->
+<!--                @change="FILE_READ"-->
+<!--                accept=".txt"-->
+<!--            >-->
+<!--          </label>-->
+<!--        </div>-->
         <div class="additional_functional work_space_element click"
              @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
 
@@ -281,7 +299,8 @@ name: "taskManager",
     )
   },
   methods: {
-    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
+    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN', 'READ_FILE_TOKENS']),
+    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
     ...mapMutations('discordJoinerStore/discordJoiner',
         [
           'DROP_DOWN_LIST_WITH_TOKEN',
@@ -417,5 +436,11 @@ name: "taskManager",
 }
 .click:active{
   background-color: rgba(53, 60, 73, 0.6);
+}
+.file_btn{
+  display: none;
+}
+label{
+  margin: 0;
 }
 </style>
