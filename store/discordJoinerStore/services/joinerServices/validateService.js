@@ -8,23 +8,21 @@ export async function validateAndExtractTokens(tokens) {
         const result = [];
 
         let input = tokens
-        let errorToken = undefined;
+        let errorTokens = [];
 
         for (const token of input) {
             const body = await getMe(token);
 
             if (body.statusCode !== 200) {
                 console.error(`Some error happened with token ${token}`);
-
-                input = undefined;
-
-                return { input: input, errorToken: errorToken };
+                errorTokens.push(token);
+                continue;
             }
 
-            result.push({singleToken: {token: token, username: body.username}, errorToken: errorToken})
+            result.push({singleToken: {token: token, username: body.username}, errorToken: errorTokens})
         }
 
-        return { input: result, errorToken: errorToken };
+        return { input: result, errorToken: errorTokens };
 }
 
 export async function validateSingleToken(singleToken) {
