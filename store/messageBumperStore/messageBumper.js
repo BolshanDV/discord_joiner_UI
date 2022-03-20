@@ -27,7 +27,6 @@ export const getters = {
 }
 export const mutations = {
     VALIDATE_TOKEN: (state, singleToken) => {
-        console.log(singleToken)
         state.singleToken = singleToken.username
     },
 

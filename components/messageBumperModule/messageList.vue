@@ -15,6 +15,7 @@
     </div>
     <div class="text-field__icon">
       <input class="text-field__input input_element"
+             @keyup.enter="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
              v-model="message"
              type="search"
              name="search"

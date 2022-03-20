@@ -9,7 +9,7 @@
       </div>
       <div class="text-field">
         <input class="text-field__input input_element"
-               v-model="taskName"
+               v-model = "taskName"
                autocomplete="off"
                placeholder="Enter invite code"
                type="search"
@@ -21,6 +21,8 @@
       <div class="text-field__icon">
         <input class="text-field__input input_element"
                v-model="token"
+               value="token"
+               @keyup.enter="VALIDATE_TOKEN(token)"
                type="search"
                name="search"
                autocomplete="off"
@@ -39,6 +41,7 @@
       </div>
       <div class="text-field__icon">
         <input class="text-field__input input_element"
+               @keyup.enter="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"
                v-model="channel"
                type="search"
                name="search"
@@ -189,8 +192,9 @@ export default {
       this.token = ''
       this.taskName = ''
     },
-    VALIDATE_TOKEN(token) {
-      this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)
+    async VALIDATE_TOKEN  (token) {
+      await this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)
+      this.token = this.singleToken
     }
   }
 }
