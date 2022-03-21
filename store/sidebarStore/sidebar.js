@@ -11,6 +11,11 @@ export const state = () => ({
             url: '/messageBumper',
             icon: 'messageBumper.svg'
         },
+        {
+            title: 'Captcha Settings',
+            url: '/captchaSettings',
+            icon: 'captcha.svg'
+        },
 
     ]
 })

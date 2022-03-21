@@ -2,7 +2,7 @@
   <div class="popUp">
     <div class="popUp_delete">
       <div class="main_text row_position">
-        <div>Accounts token list</div>
+        <div>{{ namePopUp }}</div>
         <div
             @click="POPUP_DISPLAY('')"
         >
@@ -59,7 +59,6 @@ export default {
   },
   computed: {
     ...mapGetters('popUpStore/popUp', ['namePopUp']),
-    ...mapGetters('messageBumperStore/messageBumper', ['messageList'])
   },
   methods: {
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),

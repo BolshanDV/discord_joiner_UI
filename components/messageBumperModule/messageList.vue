@@ -47,7 +47,7 @@
           :key="index"
       >
         <div class="scroll_horizontal row_position">
-          <div>#{{ message }}</div>
+          <div>{{ message }}</div>
         </div>
         <div class="mini_element_icons"
              @click="DELETE_MESSAGE(index)"

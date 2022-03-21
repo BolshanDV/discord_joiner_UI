@@ -1,18 +1,17 @@
 export const state = () => ({
     popUpFlag: false,
-    namePopUp: ''
+    namePopUp: '',
 })
 
 export const getters = {
     popUpFlag: state => state.popUpFlag,
-    namePopUp: state => state.namePopUp
+    namePopUp: state => state.namePopUp,
 }
 export const mutations = {
     POPUP_DISPLAY: (state, name) => {
-        state.popUpFlag = !state.popUpFlag
-        state.namePopUp = name
+            state.popUpFlag = !state.popUpFlag
+            state.namePopUp = name
     },
-
 }
 export const actions = {
     EXTRACT_AND_VALIDATE: (ctx, text) => {
@@ -28,6 +27,10 @@ export const actions = {
             }
             case "Proxy list": {
                 ctx.commit('discordJoinerStore/discordJoiner/ADD_PROXY_FROM_ARR', {data: text, type: "Proxy list"}, {root: true})
+                break;
+            }
+            case "Choose captcha service": {
+                console.log('hi')
                 break;
             }
         }

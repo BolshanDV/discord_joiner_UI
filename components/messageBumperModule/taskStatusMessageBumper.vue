@@ -135,7 +135,7 @@ export default {
   background: #272D36;
   border-radius: 3px;
   padding: 1.2% 2.5%;
-  margin: 1% 1.75%;
+  margin: 0 1.75% 0 0;
   justify-content: space-between;
   align-items: center;
 }

@@ -1,4 +1,5 @@
 <template>
+  <div class="column sidebar_column">
     <div class="sidebar_menu">
       <div class="logo_svg_block">
         <img src="../../static/crypto_logo.svg" alt="" class="logo_svg">
@@ -17,19 +18,52 @@
         {{page.title}}
       </nuxt-link>
     </div>
+<!--      <div class="row_position checkbox_proxy">-->
+<!--        <div class="text">Captcha service</div>-->
+<!--        <div>-->
+<!--          <input-->
+<!--              v-model="popUpFlagProxy"-->
+<!--              type="checkbox"-->
+<!--              class="switch_1"-->
+<!--              @click="POPUP_DISPLAY('Choose captcha service')"-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
+  </div>
+
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
 name: "Sidebar",
   computed: {
-    ...mapGetters('sidebarStore/sidebar',['getPages'])
+    ...mapGetters('sidebarStore/sidebar',['getPages']),
+    ...mapGetters('popUpStore/popUp', ['popUpFlagProxy'])
+  },
+  methods: {
+    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
   }
 }
 </script>
 
 <style scoped>
+.switch_1{
+  display: flex;
+  align-items: center;
+}
+.text{
+  color: #686872;
+}
+.checkbox_proxy{
+  justify-content: space-between;
+  align-items: center;
+  padding: 7% 4%;
+}
+.sidebar_column{
+  justify-content: space-between;
+  height: 100%;
+}
 .sidebar_menu {
   display: flex;
   flex-direction: column;
