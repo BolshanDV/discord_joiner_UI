@@ -224,9 +224,6 @@ export const actions = {
             }
             , 4000)
     },
-    READ_FILE_TOKENS: (ctx, file) => {
-
-    },
 
     VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
         let notRepeat = true
@@ -248,6 +245,7 @@ export const actions = {
         }
     },
     EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensObj) => {
+        console.log(tokensObj)
         for (const tokensElement of tokensObj) {
             for (const tokenItem of ctx.state.tokens) {
                 if (tokensElement === tokenItem.token) {
@@ -264,13 +262,16 @@ export const actions = {
                 }
             }
             if (notRepeat) {
-                if (inputElement.errorToken !== undefined) {
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
-                } else {
-                    console.log(inputElement.singleToken)
-                    ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
-                }
+                ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
+                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
+            //TODO удивительно, что проверка отвалилась
+                // if (inputElement.errorToken !== undefined) {
+                //     // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
+                // } else {
+                //     console.log(inputElement.singleToken)
+                //     ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
+                //     ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
+                // }
             }
         }
     }

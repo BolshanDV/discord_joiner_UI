@@ -62,17 +62,6 @@
             >
           </label>
         </div>
-<!--        <div>-->
-<!--          <label>-->
-<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">            >-->
-<!--            <input-->
-<!--                type="file"-->
-<!--                class="file_btn"-->
-<!--                @change="FILE_READ"-->
-<!--                accept=".txt"-->
-<!--            >-->
-<!--          </label>-->
-<!--        </div>-->
         <div class="additional_functional work_space_element click"
              @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
 
@@ -124,12 +113,22 @@
             </div>
           </div>
         </div>
-        <div class="additional_functional work_space_element item click"
-             @click="ADD_PROXY_WITH_CLEAR(proxy)"
+        <div class="additional_functional work_space_element item click">
+<!--             @click="ADD_PROXY_WITH_CLEAR(proxy)"-->
 
-        >
-          <img src="../../../assets/icons/download.svg" alt="icon" class="">
+<!--        >-->
+          <label>
+            <img src="../../../assets/icons/download.svg" alt="icon" class="">
+            <input
+                type="file"
+                class="file_btn"
+                @change="READ_FILE_PROXY"
+                accept=".txt"
+            >
+          </label>
         </div>
+
+
         <div class="additional_functional work_space_element click"
              @click="POPUP_DISPLAY('Proxy list')"
         >
@@ -299,8 +298,8 @@ name: "taskManager",
     )
   },
   methods: {
-    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN', 'READ_FILE_TOKENS']),
-    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
+    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
+    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS', 'READ_FILE_PROXY']),
     ...mapMutations('discordJoinerStore/discordJoiner',
         [
           'DROP_DOWN_LIST_WITH_TOKEN',
