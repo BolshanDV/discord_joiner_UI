@@ -1,9 +1,8 @@
 import axios from "axios";
-import {controller} from "./taskService";
 
-export async function solveCaptcha() {
-    return await axios.get("http://localhost:3300/", {
-        signal: controller.signal
+export async function solveCaptcha(captchaType, apiKey) {
+    return await axios.post(`http://localhost:3300/${captchaType}`, {
+        token: apiKey
     }).then(response => {
         return response.data;
     })
