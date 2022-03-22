@@ -17,7 +17,7 @@ export const mutations = {
     }
 }
 export const actions = {
-    LOG_IN: (ctx, token) => {
+    LOG_IN: async (ctx, token) => {
         let resultHash = {
             hardwareConcurrency: navigator.hardwareConcurrency,
             width: window.screen.width,
@@ -28,7 +28,7 @@ export const actions = {
             appName: navigator.appName,
             platform: navigator.platform
         }
-        auth(token, resultHash)
+        await auth(token, resultHash)
     }
  }
 
