@@ -1,62 +1,96 @@
 <template>
-    <div class="main_section">
-      <div class="main_block task_manager">
-        <task-manager/>
-      </div>
-      <div class="main_block information_section">
-        <task-status
-            :key="renderKey"
-        />
-        <task-logs
-            name="discordJoiner"
-           :key="date"
-        />
+  <div class="login">
+    <img src="../static/crypto_logo.svg" alt="" class="logo">
+    <div class="title item">
+      Discord Joiner
+    </div>
+    <div class="text-field">
+      <input class="text-field__input input_element"
+             v-model="authToken"
+             autocomplete="off"
+             placeholder="Enter your token"
+             type="search"
+             name="search">
+    </div>
+    <div class="item">
+      <div>
+        <div href="" class="btn waves-effect waves-red"
+             @click.prevent="LOGIN_WITH_TOKE(authToken)"
+        >
+          Login with token
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-import taskManager from "../components/discordJoinerModule/taskManager/taskManager";
-import taskLogs from "../components/discordJoinerModule/taskLogs";
-import taskStatus from "../components/discordJoinerModule/taskStatus";
-import modalPage from "../components/modalPage/modalPage";
-import {mapGetters, mapActions} from 'vuex'
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-name: "home",
-  components: {
-    taskLogs,
-    taskManager,
-    taskStatus,
-    modalPage
+  name: "login",
+  layout: 'empty',
+  data() {
+    return {
+      authToken: ''
+    }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey']),
-    ...mapGetters('discordJoinerStore/taskStatus', ['date'])
+    ...mapGetters('authStore/authorization', ['token'])
   },
+  methods:{
+    ...mapActions('authStore/authorization', ['LOG_IN']),
+    LOGIN_WITH_TOKE(token) {
+      this.LOG_IN(token)
+      this.$router.push('/discordJoiner')
+    }
+  }
 }
 </script>
 
 <style scoped>
-.main_section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 0;
-  align-items: flex-start;
+img{
+  width: 130px;
+  height: 53px;
 }
-.task_manager{
-  width: 35%;
-}
-.information_section{
-  width: 63%;
-  height: auto;
+.login{
+  margin-top: 25vh;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  position: absolute;
 }
-.main_block{
-  border-radius: 5px;
-  background: rgba(8,13,22,0.6);
-  padding: 1.5%;
+.title{
+  font-weight: 300;
+  font-size: 45px;
+  line-height: 45px;
+  margin-top: 20px;
+}
+.item{
+  margin-top: 30px;
+}
+.btn{
+  color: #c4bfbf;
+  width: 200px;
+  height: 56px;
+  background: #B41210;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+.logo{
+  height: 128px;
+  width: 128px;
+}
+.text-field{
+  width: 100%;
+  margin-top: 5%;
+}
+.text-field__input{
+  background-color: rgba(22,30,41,0.81);
 }
 </style>

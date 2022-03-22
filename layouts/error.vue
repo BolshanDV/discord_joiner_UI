@@ -4,17 +4,13 @@
     <div class="title item">
       Discord Joiner
     </div>
-    <div class="text-field">
-      <input class="text-field__input input_element"
-             autocomplete="off"
-             placeholder="Enter your token"
-             type="search"
-             name="search">
+    <div class="title item error">
+      Error 404
     </div>
     <div class="item">
       <div>
         <a href="" class="btn waves-effect waves-red">
-          Login with token
+          Go back login page
         </a>
       </div>
     </div>
@@ -23,7 +19,7 @@
 
 <script>
 export default {
-  name: "login",
+  name: "error",
   layout: 'empty'
 }
 </script>
@@ -52,7 +48,7 @@ img{
   margin-top: 30px;
 }
 .btn{
-  color: #c4bfbf;
+  color: #FFFFFF;
   width: 200px;
   height: 56px;
   background: #B41210;
@@ -61,6 +57,9 @@ img{
   justify-content: center;
   flex-direction: row;
   align-items: center;
+}
+.error{
+  color: #B41210;
 }
 .logo{
   height: 128px;

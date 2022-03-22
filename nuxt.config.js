@@ -16,6 +16,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '../crypto_logo.svg' },
     ]
   },
+  loading:{
+    color: 'red'
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

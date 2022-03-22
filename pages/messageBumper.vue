@@ -18,6 +18,7 @@ import taskStatusMessageBumper from "../components/messageBumperModule/taskStatu
 import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
 export default {
   name: "home",
+  middleware: ['authCheck'],
   components: {
     taskLogsComponent,
     taskStatusMessageBumper,

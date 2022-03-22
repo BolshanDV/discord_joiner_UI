@@ -2,7 +2,7 @@ export const state = () => ({
     pages: [
         {
             title: 'Discord Joiner',
-            url: '/',
+            url: '/discordJoiner',
             exact: true,
             icon: 'discordJoiner.svg'
         },

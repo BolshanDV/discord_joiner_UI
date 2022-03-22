@@ -62,9 +62,11 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import authCheck from "../middleware/authCheck";
 
 export default {
   name: "captchaSettings",
+  middleware: ['authCheck'],
   data() {
     return {
       key: '',
