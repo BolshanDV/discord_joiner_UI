@@ -5,6 +5,9 @@ import {getMe} from "./validateService";
 import {findTask} from "../../../utils/taskUtils";
 import {logs} from "../../../logger";
 
+let key = '';
+let captchaServiceType = '';
+
 let criticalStopFlag = false;
 let pauseFlag = false;
 
@@ -14,6 +17,11 @@ export function setStopCriticalFlag() {
 
 export function setStartCriticalFlag() {
     criticalStopFlag = false;
+}
+
+export function setCaptchaConfig(captchaType, apiKey) {
+    key = apiKey;
+    captchaServiceType = captchaType;
 }
 
 let pause = 500;
@@ -120,7 +128,7 @@ export async function launchTasks(body) {
 //**********************************************************************************************
 
 async function joinChannel(inviteCode, token, email) {
-    const captchaToken = await solveCaptcha();
+    const captchaToken = await solveCaptcha(captchaServiceType, key);
 
     let body;
     let statusCode = 400;
