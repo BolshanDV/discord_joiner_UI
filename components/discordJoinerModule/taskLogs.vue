@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <div>
-      <p class="title">Tasks Logo</p>
+      <p class="title">Tasks Logs</p>
     </div>
     <div
         class="work_space column scroll"

@@ -1,5 +1,5 @@
-import md5 from "../../vendors/md5.min";
-
+import md5 from "../../vendors/md5.min"
+export let check = null
 function md5ByObject(obj) {
     let concatHash = "";
 
@@ -26,11 +26,5 @@ export async function auth(token, resultHash) {
         headers: headers
     });
 
-    if (response.status === 200) {
-        this.$store.commit('authStore/authorization/SET_TOKEN')
-        this.$router('/discordJoiner')
-    } else {
-        // store.commit('authStore/authorization/CLEAR_TOKEN')
-        this.$router('/')
-    }
+    return response.status === 200;
 }

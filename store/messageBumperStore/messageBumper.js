@@ -11,6 +11,7 @@ export const state = () => ({
     messageList: [],
     dropDownFlagForAccountListMBumper: false,
     deleteMessagesFlag: false,
+    deleteMessagesLoop: false,
     tasksStatusMessageBumper: [],
     keyUpdate: 0,
     singleToken: ""
@@ -23,7 +24,8 @@ export const getters = {
     deleteMessagesFlag: state => state.deleteMessagesFlag,
     keyUpdate: state => state.keyUpdate,
     tasksStatusMessageBumper: state => state.tasksStatusMessageBumper,
-    singleToken: state => state.singleToken
+    singleToken: state => state.singleToken,
+    deleteMessagesLoop: state => state.deleteMessagesLoop
 }
 export const mutations = {
     VALIDATE_TOKEN: (state, singleToken) => {
@@ -59,13 +61,16 @@ export const mutations = {
     CHANGE_DELETE_MESSAGE_FLAG: (state) => {
         state.deleteMessagesFlag = !state.deleteMessagesFlag
     },
+    CHANGE_LOOP_MESSAGE_FLAG: (state) => {
+        state.deleteMessagesLoop = !state.deleteMessagesLoop
+    },
     SAVE_MESSAGE_BUMPER_TASKS: (state, bumperObj) => {
         state.tasksStatusMessageBumper.push(bumperObj)
         state.channelList = []
         state.messageList = []
         state.dropDownFlagForAccountListMBumper = false
         state.deleteMessagesFlag = false
-        console.log(state.tasksStatusMessageBumper)
+        state.deleteMessagesLoop = false
     },
     CHANGE_PROCESSING_FLAG_M_BUMPER: (state, obj) => {
         state.tasksStatusMessageBumper[obj.id].processingTaskObj = {
@@ -82,7 +87,11 @@ export const actions = {
 
         let  deleteMessageObj = {
             active: ctx.state.deleteMessagesFlag,
-            deleteDelay: obj.deleteMasses
+            deleteDelay: obj.deleteMassages
+        }
+        let  loopMessageObj = {
+            active: ctx.state.deleteMessagesLoop,
+            deleteDelay: obj.deleteMessagesLoop
         }
         let processingTaskObj = {
             text: 'Task created',
@@ -95,7 +104,8 @@ export const actions = {
             messageList: ctx.state.messageList,
             token: obj.token,
             deleteMessageObj: deleteMessageObj,
-            processingTaskObj: processingTaskObj
+            processingTaskObj: processingTaskObj,
+            loopMessageObj: loopMessageObj
         }
         ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
     },
@@ -128,10 +138,10 @@ export const actions = {
         // if (notRepeat) {
             const result = await validateSingleToken(token);
             if (result.errorToken !== undefined) {
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
             } else {
                 ctx.commit('VALIDATE_TOKEN', result.singleToken);
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
             }
         // }
     },
@@ -143,7 +153,7 @@ export const actions = {
         for (const tokensElement of tokensObj) {
             for (const tokenItem of ctx.state.tokensList) {
                 if (tokensElement === tokenItem.token) {
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
+                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
                 }
             }
         }
@@ -157,10 +167,10 @@ export const actions = {
             }
             if (notRepeat) {
                 if (inputElement.errorToken !== undefined) {
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
+                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
                 } else {
                     ctx.commit('ADD_TOKEN_TO_LIST', inputElement.singleToken);
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
+                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
                 }
             }
         }

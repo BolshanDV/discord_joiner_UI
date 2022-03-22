@@ -2,25 +2,32 @@
   <div class="login">
     <img src="../static/crypto_logo.svg" alt="" class="logo">
     <div class="title item">
-      Discord Joiner
+      Web tools
     </div>
     <div class="title item error">
       Error 404
     </div>
     <div class="item">
-      <div>
-        <a href="" class="btn waves-effect waves-red">
-          Go back login page
-        </a>
-      </div>
+          <nuxt-link
+              @click="CLEAR_TOKEN"
+              class="btn"
+              to="/"
+          >
+            Go back login page
+          </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
   name: "error",
-  layout: 'empty'
+  layout: 'empty',
+  methods:{
+    ...mapMutations('authStore/authorization', ['CLEAR_TOKEN'])
+  }
 }
 </script>
 

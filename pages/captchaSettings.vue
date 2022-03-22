@@ -5,45 +5,20 @@
         <div>API Keys</div>
       </div>
       <div class="column">
-        <div class="row_position between">
-          <div class="work_space element">
-            <div class="row_position work_space_element_advent">
-              <div>CapMonster</div>
-              <div >
-                <input
-                    v-model="capMonster"
-                    type="checkbox"
-                    class="switch_1"
-                    @click="CHANGE_FLAG_CAPTCHA('capMonster')"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="work_space element">
-            <div class="row_position work_space_element_advent">
-              <div>2captcha</div>
-              <div>
-                <input
-                    v-model="captcha2"
-                    type="checkbox"
-                    class="switch_1"
-                    @click="CHANGE_FLAG_CAPTCHA('2captcha')"
-                >
-              </div>
-            </div>
+        <div class="work_space">
+          <div>CapMonster API Key</div>
+          <div class="text-field">
+            <input class="text-field__input input_element"
+                   @keyup.enter="SAVE_KEY(key)"
+                   autocomplete="off"
+                   type="search"
+                   name="search"
+                   value="key"
+                   v-model="key"
+            >
           </div>
         </div>
 
-        <div class="text-field">
-          <input class="text-field__input input_element"
-                 @keyup.enter="SAVE_KEY(key)"
-                 autocomplete="off"
-                 placeholder="Enter API Key"
-                 type="search"
-                 name="search"
-                 v-model="key"
-          >
-        </div>
       </div>
       <div class="row_position button_popUp">
         <b-button
@@ -52,7 +27,7 @@
             class="row_position_btn_form btn_color"
             @click="SAVE_KEY(key)"
         >
-          Add
+          Save
         </b-button>
       </div>
     </div>
@@ -72,11 +47,7 @@ export default {
       key: '',
     }
   },
-  computed: {
-    ...mapGetters('captchaSettingsStore/settings', ['capMonster', 'captcha2'])
-  },
   methods: {
-    ...mapMutations('captchaSettingsStore/settings', ['CHANGE_FLAG_CAPTCHA']),
     ...mapActions('captchaSettingsStore/settings', ['SAVE_KEY'])
   }
 }
@@ -86,7 +57,7 @@ export default {
 .work_space{
   background-color: #101722;
   border-radius: 5px;
-  padding: 1.5% 2%;
+  padding: 2% 3%;
   margin-bottom: 1%;
 }
 .work_space_element_advent{
@@ -140,15 +111,7 @@ export default {
   width: 20%;
   margin-left: 20px;
 }
-/*.column{*/
-/*  background-color: #101722;*/
-/*  padding: 2%;*/
-/*  border-radius: 5px;*/
-/*}*/
-.element{
-  width: 35%;
-}
-.between{
-  justify-content: space-between;
+.input_element{
+  margin-top: 1.75%;
 }
 </style>

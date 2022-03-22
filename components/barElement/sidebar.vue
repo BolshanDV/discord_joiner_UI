@@ -18,17 +18,6 @@
         {{page.title}}
       </nuxt-link>
     </div>
-<!--      <div class="row_position checkbox_proxy">-->
-<!--        <div class="text">Captcha service</div>-->
-<!--        <div>-->
-<!--          <input-->
-<!--              v-model="popUpFlagProxy"-->
-<!--              type="checkbox"-->
-<!--              class="switch_1"-->
-<!--              @click="POPUP_DISPLAY('Choose captcha service')"-->
-<!--          >-->
-<!--        </div>-->
-<!--      </div>-->
   </div>
 
 </template>

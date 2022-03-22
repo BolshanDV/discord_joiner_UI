@@ -1,14 +1,27 @@
 <template>
   <div class="navbar_section">
-    <div class="navbar_icon">Icon</div>
-    <div class="navbar_user">User</div>
-    <b-button variant="outline-danger" class="btn">Exit</b-button>
+    <b-button variant="outline-danger"
+              class="btn"
+              @click=""
+    >
+      <nuxt-link
+          to="/"
+          class="navbar_btn"
+      >
+        Exit
+      </nuxt-link>
+    </b-button>
   </div>
 </template>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
-  name: "navbar"
+  name: "navbar",
+  methods:{
+    ...mapMutations('authStore/authorization', ['CLEAR_TOKEN'])
+  }
 }
 </script>
 
@@ -27,7 +40,7 @@ export default {
   color: #FFFFFF;
   margin: 0 3%;
 }
-.navbar_user{
-  margin: 0 2%;
+.navbar_btn{
+  color: #FFFFFF;
 }
 </style>

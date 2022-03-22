@@ -115,6 +115,29 @@
         >
       </div>
     </div>
+    <div class="work_space column">
+      <div class="work_space_element_title">
+        <div class="row_position work_space_element_advent">
+          <div>Messages loop</div>
+          <input type="checkbox"
+                 class="switch_1"
+                 v-model="deleteMessagesLoop"
+                 @click="CHANGE_LOOP_MESSAGE_FLAG"
+          >
+        </div>
+      </div>
+      <div class="text-field"
+           v-if="deleteMessagesLoop"
+      >
+        <input class="text-field__input input_element"
+               v-model="massagesLoop"
+               autocomplete="off"
+               placeholder="30 (sec)"
+               type="search"
+               name="search"
+        >
+      </div>
+    </div>
     <message-list/>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
@@ -150,7 +173,8 @@ export default {
       delay: '',
       deleteMassages: '',
       channel: '',
-      taskName: ''
+      taskName: '',
+      massagesLoop: ''
     }
   },
   computed: {
@@ -159,7 +183,8 @@ export default {
           'channelList',
           'dropDownFlagForAccountListMBumper',
           'deleteMessagesFlag',
-          'singleToken'
+          'singleToken',
+          'deleteMessagesLoop'
         ]),
   },
   methods: {
@@ -168,7 +193,8 @@ export default {
           'ADD_CHANNEL_TO_LISTS',
           'DELETE_CHANNEL',
           'CHANGE_FLAG',
-          'CHANGE_DELETE_MESSAGE_FLAG'
+          'CHANGE_DELETE_MESSAGE_FLAG',
+          'CHANGE_LOOP_MESSAGE_FLAG'
         ]),
     ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO', 'VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
@@ -184,9 +210,10 @@ export default {
           {
             taskName: this.taskName,
             delay: this.delay,
-            deleteMasses: this.deleteMassages,
+            deleteMassages: this.deleteMassages,
             token: this.singleToken.token,
-            channelList: this.channelList
+            channelList: this.channelList,
+            deleteMessagesLoop: this.deleteMessagesLoop
           }
       );
       this.delay = ''

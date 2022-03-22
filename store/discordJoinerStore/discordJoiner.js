@@ -230,17 +230,17 @@ export const actions = {
         for (const tokenItem of ctx.state.tokens) {
             if(tokenItem.token === token) {
                 notRepeat = false
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
             }
         }
         if (notRepeat){
             const result = await validateSingleToken(token);
 
             if (result.errorToken !== undefined) {
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
             } else {
                 ctx.commit('SAVE_SINGLE_TOKEN', result.singleToken);
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
             }
         }
     },
@@ -249,7 +249,7 @@ export const actions = {
         for (const tokensElement of tokensObj) {
             for (const tokenItem of ctx.state.tokens) {
                 if (tokensElement === tokenItem.token) {
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
+                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
                 }
             }
         }

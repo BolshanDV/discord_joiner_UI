@@ -1,19 +1,18 @@
 import {auth} from "./services/auth";
-
 export const state = () => ({
     token: false
-
 })
 
 export const getters = {
     token: state => state.token
 }
 export const mutations = {
-    SET_TOKEN: (state, token) => {
+    SET_TOKEN: (state) => {
         state.token = true
     },
     CLEAR_TOKEN: (state) => {
-        state.token = null
+        state.token = false
+        console.log(state.token)
     }
 }
 export const actions = {
@@ -28,7 +27,10 @@ export const actions = {
             appName: navigator.appName,
             platform: navigator.platform
         }
-        await auth(token, resultHash)
+        let res = await auth(token, resultHash)
+        if (res) {
+            ctx.commit('SET_TOKEN')
+        }
     }
  }
 

@@ -2,24 +2,26 @@
   <div class="login">
     <img src="../static/crypto_logo.svg" alt="" class="logo">
     <div class="title item">
-      Discord Joiner
+      Web tools
     </div>
     <div class="text-field">
       <input class="text-field__input input_element"
              v-model="authToken"
+             @keyup.enter="LOG_IN(authToken)"
+             value="authToken"
              autocomplete="off"
              placeholder="Enter your token"
              type="search"
              name="search">
     </div>
     <div class="item">
-      <div>
-        <div href="" class="btn waves-effect waves-red"
-             @click.prevent="LOGIN_WITH_TOKE(authToken)"
-        >
-          Login with token
-        </div>
-      </div>
+          <nuxt-link
+              v-if="token"
+              to="/discordJoiner"
+              class="btn"
+          >
+            Login with token
+          </nuxt-link>
     </div>
   </div>
 </template>
@@ -30,6 +32,7 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   name: "login",
   layout: 'empty',
+
   data() {
     return {
       authToken: ''
@@ -40,10 +43,6 @@ export default {
   },
   methods:{
     ...mapActions('authStore/authorization', ['LOG_IN']),
-    LOGIN_WITH_TOKE(authToken) {
-      this.LOG_IN(authToken)
-      // this.$router.push('/discordJoiner')
-    }
   }
 }
 </script>
@@ -54,6 +53,7 @@ img{
   height: 53px;
 }
 .login{
+  width: 25%;
   margin-top: 25vh;
   display: flex;
   justify-content: flex-start;

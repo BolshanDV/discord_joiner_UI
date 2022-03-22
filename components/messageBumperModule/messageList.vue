@@ -15,11 +15,11 @@
             >
           </label>
         </div>
-        <img src="../../assets/icons/download.svg" alt=""
-             @click="DOWNLOADING_FILE"
-             class="mini_element_icons"
-             style="transform: rotate(180deg)"
-        >
+<!--        <img src="../../assets/icons/download.svg" alt=""-->
+<!--             @click="DOWNLOADING_FILE"-->
+<!--             class="mini_element_icons"-->
+<!--             style="transform: rotate(180deg)"-->
+<!--        >-->
       </div>
     </div>
     <div class="text-field__icon">

@@ -248,7 +248,7 @@
     </div>
     <div class="row_position row_position_btn waves waves-effect">
       <div class="row_position row_position_btn_form"
-           v-if="tokens.length !== 0 && taskName !== '' && inviteCode !== '' "
+           v-if="tokens.length !== 0 && taskName !== '' && inviteCode !== ''"
            @click="PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})"
       >
         Create task
