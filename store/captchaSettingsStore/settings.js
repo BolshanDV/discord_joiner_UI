@@ -1,3 +1,5 @@
+import {setCaptchaConfig} from "../discordJoinerStore/services/joinerServices/taskService";
+
 export const state = () => ({
     capMonster: false,
     captcha2: false,
@@ -27,9 +29,15 @@ export const mutations = {
 }
 export const actions = {
     SAVE_KEY: (ctx, key) => {
-        if(ctx.state.capMonster === ctx.state.captcha2) {
-            //TODO ключь
-            console.log(key)
+        if(ctx.state.capMonster !== ctx.state.captcha2) {
+            if(ctx.state.capMonster) {
+                setCaptchaConfig('capmonster', key)
+                console.log('capMonster')
+            } else {
+                setCaptchaConfig('2captcha', key)
+                console.log('2captcha')
+            }
+
         }
     }
 }
