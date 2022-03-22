@@ -14,12 +14,19 @@ export async function auth(token) {
     const headers = {
         'X-Authorization': token,
         'X-Hash': md5ByObject(resultHash),
-        'X-Version': null,
+        'X-Version': '',
         'X-Application-Id': 'discordJoiner'
 
     }
 
+    let response = await fetch("https://cmd-root.com/api/app/auth/b/token", {
+        method: 'POST',
+        headers: headers
+    });
 
+    if (response.status === 200) {
+
+    }
 
     function md5ByObject(obj) {
         let concatHash = "";
