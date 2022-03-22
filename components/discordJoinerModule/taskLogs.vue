@@ -39,7 +39,7 @@
         <div class="row_position btn btn_stop"
              @click="STOP_ALL_TASKS(name)"
         >
-          Stop All
+          Break all
         </div>
         <div class="row_position btn btn_start"
              @click="START_ALL_TASKS(name)"

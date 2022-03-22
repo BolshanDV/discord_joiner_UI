@@ -46,11 +46,6 @@ export const actions = {
     },
 
     STOP_ALL_TASKS: (ctx, name) => {
-            // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-            //         type: 'stopAllTasks'
-            //     },
-            //     {root: true}
-            // )
         switch (name) {
             case 'messageBumper': {
                 setStopBumperCriticalFlag()

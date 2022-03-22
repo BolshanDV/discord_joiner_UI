@@ -12,7 +12,6 @@ export const mutations = {
     },
     CLEAR_TOKEN: (state) => {
         state.token = false
-        console.log(state.token)
     }
 }
 export const actions = {
