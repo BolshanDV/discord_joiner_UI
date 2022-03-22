@@ -42,7 +42,7 @@ export default {
     ...mapActions('authStore/authorization', ['LOG_IN']),
     LOGIN_WITH_TOKE(authToken) {
       this.LOG_IN(authToken)
-      this.$router.push('/discordJoiner')
+      // this.$router.push('/discordJoiner')
     }
   }
 }

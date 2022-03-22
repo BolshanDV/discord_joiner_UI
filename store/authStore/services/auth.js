@@ -11,24 +11,26 @@ function md5ByObject(obj) {
 }
 
 export async function auth(token, resultHash) {
-
     const headers = {
         'X-Authorization': token,
         'X-Hash': md5ByObject(resultHash),
-        'X-Version': '',
-        'X-Application-Id': 'discordJoiner'
-
+        'X-Application-Id': 'discordJoiner',
+        "content-length": "0",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "ru,en-US;q=0.9,en;q=0.8,de;q=0.7",
+        'X-Version': '1.0.0'
     }
-    console.log(headers)
-    let response = await fetch("https://cmd-root.com/api/app/auth/b/token", {
+
+    let response = await fetch("https://crypto.cmd-root.com/api/app/auth/b/token", {
         method: 'POST',
         headers: headers
     });
 
     if (response.status === 200) {
         this.$store.commit('authStore/authorization/SET_TOKEN')
+        this.$router('/discordJoiner')
     } else {
-        this.$store.commit('authStore/authorization/CLEAR_TOKEN')
-
+        // store.commit('authStore/authorization/CLEAR_TOKEN')
+        this.$router('/')
     }
 }
