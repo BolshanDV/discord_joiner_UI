@@ -11,6 +11,16 @@ export async function auth(token) {
         'platform': navigator.platform
     }
 
+    const headers = {
+        'X-Authorization': token,
+        'X-Hash': md5ByObject(resultHash),
+        'X-Version': null,
+        'X-Application-Id': 'discordJoiner'
+
+    }
+
+
+
     function md5ByObject(obj) {
         let concatHash = "";
 
@@ -19,13 +29,5 @@ export async function auth(token) {
         }
 
         return md5(concatHash);
-    }
-
-    const headers = {
-        'X-Authorization': token,
-        'X-Hash': this.hash,
-        'X-Version': packageJson.version,
-        'X-Application-Id': 'binanceAioCli'
-
     }
 }

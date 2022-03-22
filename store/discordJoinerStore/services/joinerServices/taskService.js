@@ -1,5 +1,5 @@
 import axios from "axios";
-import {solveCaptcha} from "./captchaService";
+import {solveCaptcha} from "../../../captchaSettingsStore/captchaService";
 import {buildHeaders} from "../../../utils/requestUtils";
 import {getMe} from "./validateService";
 import {findTask} from "../../../utils/taskUtils";
