@@ -29,7 +29,7 @@ export async function auth(token, resultHash) {
     });
 
     if (response.status === 200) {
-        setInterval(verification, 10*1000, headers);
+        setInterval(verification, 60*1000, headers);
     }
 
     return response.status === 200;
