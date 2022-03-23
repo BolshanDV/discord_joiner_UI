@@ -1,5 +1,5 @@
 import md5 from "../../vendors/md5.min";
-import {mutations, state} from "../authorization";
+import store from "core-js/internals/shared-store";
 export let check = null;
 
 function md5ByObject(obj) {
@@ -42,6 +42,6 @@ async function verification(headers) {
     });
 
     if (response.status !== 200) {
-        mutations.CLEAR_TOKEN(state());
+        store.commit('authStore/authorization/CLEAR_TOKEN')
     }
 }
