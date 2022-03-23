@@ -1,4 +1,5 @@
 import md5 from "../../vendors/md5.min";
+import {mutations, state} from "../authorization";
 export let check = null;
 
 function md5ByObject(obj) {
@@ -27,5 +28,20 @@ export async function auth(token, resultHash) {
         headers: headers
     });
 
+    if (response.status === 200) {
+        setInterval(verification, 10*1000, headers);
+    }
+
     return response.status === 200;
+}
+
+async function verification(headers) {
+    const response = await fetch('https://crypto.cmd-root.com/api/app/auth/b/verify', {
+        method: 'POST',
+        headers: headers
+    });
+
+    if (response.status !== 200) {
+        mutations.CLEAR_TOKEN(state());
+    }
 }
