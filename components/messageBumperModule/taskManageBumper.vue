@@ -213,13 +213,14 @@ export default {
             deleteMassages: this.deleteMassages,
             token: this.singleToken.token,
             channelList: this.channelList,
-            deleteMessagesLoop: this.deleteMessagesLoop
+            messagesLoop: this.massagesLoop
           }
       );
       this.delay = ''
       this.deleteMassages = ''
       this.token = ''
       this.taskName = ''
+      this.massagesLoop = ''
     },
     async VALIDATE_TOKEN  (token) {
       await this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)

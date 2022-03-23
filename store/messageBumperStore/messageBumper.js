@@ -2,7 +2,7 @@ import {
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validateService";
-import {launchBumperTask} from "./services/taskService";
+import {launchBumperTask, loopIteration} from "./services/taskService";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
 
@@ -91,7 +91,8 @@ export const actions = {
         }
         let loopMessageObj = {
             active: ctx.state.deleteMessagesLoop,
-            deleteDelay: obj.deleteMessagesLoop
+            deleteDelay: obj.messagesLoop,
+            loopIteration: loopIteration
         }
         let processingTaskObj = {
             text: 'Task created',
@@ -111,6 +112,9 @@ export const actions = {
     },
 
     PlAY_TASK_MESSAGE_BUMPER: async (ctx, bumperObj) => {
+        if(bumperObj.loopMessageObj.active){
+
+        }
         let index = findTaskInMainArray(ctx.state.tasksStatusMessageBumper, bumperObj.taskName)
         ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "In process", style: "process"})
         let flagProcessing = await launchBumperTask(bumperObj)
@@ -146,9 +150,6 @@ export const actions = {
         // }
     },
 
-    DOWNLOADING_FILE: () => {
-        alert('Возможно сделаем тут копирование')
-    },
     EXTRACT_AND_VALIDATE_TOKENS_FOR_MASSAGER_BUMPER: async (ctx, tokensObj) => {
         for (const tokensElement of tokensObj) {
             for (const tokenItem of ctx.state.tokensList) {
@@ -187,19 +188,6 @@ export const actions = {
             })
         }
     },
-    // FILE_READ: async (ctx, file) => {
-    //     let blob  = file.target.files[0];
-    //
-    //     let reader = new FileReader();
-    //     reader.readAsText(blob, 'UTF-8');
-    //
-    //     reader.onload = () => {
-    //         const res = reader.result.split(';');
-    //         ctx.commit('ADD_MESSAGE_TO_LISTS', res);
-    //
-    //         reader = null;
-    //     }
-    // }
 }
 
 

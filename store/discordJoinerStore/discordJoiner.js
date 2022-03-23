@@ -73,15 +73,12 @@ export const mutations = {
         state.tokens.splice(index, 1)
     },
     ADD_PROXY: (state, proxy) => {
-        if(proxy !== '' && proxy !== ' ') state.proxyLists.push(proxy)
+        if(proxy !== '') state.proxyLists.push(proxy)
     },
     ADD_PROXY_FROM_ARR: (state, proxyArr) => {
-        console.log(proxyArr)
-        if( proxyArr.length !== 0) proxyArr.data.forEach(item => state.proxyLists.push(item))
-        console.log(state.proxyLists)
+        if( proxyArr.length !== 0) proxyArr.forEach(item => state.proxyLists.push(item))
     },
     DROP_DOWN_LIST_WITH_PROXY: (state) => {
-        console.log(state.dropDownMenuFlagForProxy)
         state.dropDownMenuFlagForProxy = !state.dropDownMenuFlagForProxy
     },
     DELETE_PROXY_FROM_LIST: (state, index) => {

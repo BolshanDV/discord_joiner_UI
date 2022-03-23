@@ -30,8 +30,15 @@
             </div>
           </div>
         </div>
+        <div class="row_position item column_status success"
+             v-if="taskStatusItem.loopMessageObj.active"
+        >
+<!--          loop {{taskStatusItem.loopMessageObj.loopIteration}}-->
+          loop
+        </div>
         <div class="row_position item column_status"
              :class="taskStatusItem.processingTaskObj.style"
+             v-else
         >
           {{taskStatusItem.processingTaskObj.text}}
         </div>

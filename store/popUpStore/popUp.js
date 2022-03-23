@@ -26,11 +26,7 @@ export const actions = {
                 break;
             }
             case "Proxy list": {
-                ctx.commit('discordJoinerStore/discordJoiner/ADD_PROXY_FROM_ARR', {data: text, type: "Proxy list"}, {root: true})
-                break;
-            }
-            case "Choose captcha service": {
-                console.log('hi')
+                ctx.commit('discordJoinerStore/discordJoiner/ADD_PROXY_FROM_ARR', text, {root: true})
                 break;
             }
         }
