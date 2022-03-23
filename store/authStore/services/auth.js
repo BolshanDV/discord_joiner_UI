@@ -1,5 +1,5 @@
-import md5 from "../../vendors/md5.min"
-export let check = null
+import md5 from "../../vendors/md5.min";
+export let check = null;
 function md5ByObject(obj) {
     let concatHash = "";
 

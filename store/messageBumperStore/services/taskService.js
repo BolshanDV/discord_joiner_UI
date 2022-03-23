@@ -4,6 +4,8 @@ import {getMe} from "../../discordJoinerStore/services/joinerServices/validateSe
 import {logs} from "../../logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+export let loopIteration = 1;
+
 let criticalStopFlag = false;
 
 export function setStopBumperCriticalFlag() {
@@ -17,7 +19,7 @@ export function setStartBumperCriticalFlag() {
 const tasks = [];
 
 export async function launchBumperTask(bumperObj) {
-    const {taskName, delay, channelList, messageList, token, deleteMessageObj} = bumperObj;
+    const {taskName, delay, channelList, messageList, token, deleteMessageObj, loopMessageObj} = bumperObj;
     const me = await getMe(token);
 
     if (!checkTaskExisting(taskName)) {
@@ -34,31 +36,42 @@ export async function launchBumperTask(bumperObj) {
         if (deleteMessageObj.active)
             intervalId = setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
-        for (const message of messageList) {
-            if (criticalStopFlag) {
-                tasks.length = 0;
-                task = null;
-                clearInterval(intervalId);
-                break;
-            }
-            for (const channel of channelList) {
+        while (loopMessageObj.active) {
+            for (const message of messageList) {
                 if (criticalStopFlag) {
                     tasks.length = 0;
                     task = null;
                     clearInterval(intervalId);
                     break;
                 }
+                for (const channel of channelList) {
+                    if (criticalStopFlag) {
+                        tasks.length = 0;
+                        task = null;
+                        clearInterval(intervalId);
+                        break;
+                    }
 
-                const {status, messageId} = await sendMessage(me.email, token, channel.channelId, message);
+                    const {status, messageId} = await sendMessage(me.email, token, channel.channelId, message);
 
-                if (status) {
-                    task.successMessages.push({message: message, messageId: messageId, channel: channel});
-                    logs.push({type: 'BUMPER', subtype: 'INFO', message: `Message "${message}" successfully sent in channel ${channel.channelId}`});
-                } else {
-                    logs.push({type: 'BUMPER', subtype: 'ERROR', message: `An error occurred on the account ${me.username} while sending the message "${message}"`});
+                    if (status) {
+                        task.successMessages.push({message: message, messageId: messageId, channel: channel});
+                        logs.push({
+                            type: 'BUMPER',
+                            subtype: 'INFO',
+                            message: `Message "${message}" successfully sent in channel ${channel.channelId}`
+                        });
+                    } else {
+                        logs.push({
+                            type: 'BUMPER',
+                            subtype: 'ERROR',
+                            message: `An error occurred on the account ${me.username} while sending the message "${message}"`
+                        });
+                    }
+
+                    loopIteration++;
+                    await sleep(delay);
                 }
-
-                await sleep(delay);
             }
         }
 

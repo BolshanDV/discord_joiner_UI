@@ -89,7 +89,7 @@ export const actions = {
             active: ctx.state.deleteMessagesFlag,
             deleteDelay: obj.deleteMassages
         }
-        let  loopMessageObj = {
+        let loopMessageObj = {
             active: ctx.state.deleteMessagesLoop,
             deleteDelay: obj.deleteMessagesLoop
         }
