@@ -107,8 +107,9 @@
             <div
                 class="text-field__aicon"
                 @click="DROP_DOWN_LIST_WITH_PROXY"
-            ><img src="../../../assets/icons/row.svg" alt=""
-                  :class="{row_rotate: dropDownMenuFlagForProxy && (proxyLists.length !== 0)}"
+            >
+              <img src="../../../assets/icons/row.svg" alt=""
+                  :class="{row_rotate: dropDownMenuFlagForProxy}"
             >
             </div>
           </div>
@@ -137,7 +138,7 @@
       </div>
       <div>
         <div class="scroll column short_input_drop_down_menu"
-             v-if="dropDownMenuFlagForProxy && (proxyLists.length !== 0)"
+             v-if="dropDownMenuFlagForProxy"
         >
           <div
               class="row_position mini_element scroll_item"
