@@ -9,9 +9,8 @@
     </div>
     <div class="item">
           <nuxt-link
-              @click="CLEAR_TOKEN"
               class="btn"
-              to="/"
+              to="/discordJoiner"
           >
             Go back login page
           </nuxt-link>

@@ -4,7 +4,7 @@ import {getMe} from "../../discordJoinerStore/services/joinerServices/validateSe
 import {logs} from "../../logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-export let loopIteration = 1;
+export let loopIteration = 0;
 
 let criticalStopFlag = false;
 

@@ -5,11 +5,11 @@
       </div>
       <div class="main_block information_section">
         <task-status
-            :key="renderKey"
+
         />
         <task-logs
             name="discordJoiner"
-           :key="date"
+
         />
       </div>
     </div>

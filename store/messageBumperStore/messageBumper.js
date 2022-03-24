@@ -5,6 +5,7 @@ import {
 import {launchBumperTask, loopIteration} from "./services/taskService";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
+import {getterTokens, tasks} from "@/store/discordJoinerStore/services/joinerServices/taskService";
 
 export const state = () => ({
     channelList: [],
@@ -81,6 +82,9 @@ export const mutations = {
     DELETE_TASK_MESSAGE_BUMPER: (state, id) => {
         state.tasksStatusMessageBumper.splice(id, 1)
     },
+    SAVE_LOOP_ITERATION: (state, obj) => {
+        state.tasksStatusMessageBumper[obj.id].loopMessageObj.loopIteration = obj.loopIteration
+    }
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
@@ -108,12 +112,21 @@ export const actions = {
             processingTaskObj: processingTaskObj,
             loopMessageObj: loopMessageObj
         }
-        ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
+
+        let repeat = false
+        for (const bumperObjElement of ctx.state.tasksStatusMessageBumper) {
+            if(bumperObjElement.taskName === bumperObj.taskName){
+                repeat = true
+            }
+        }
+        if (!repeat) {
+            ctx.commit('SAVE_MESSAGE_BUMPER_TASKS', bumperObj)
+        }
     },
 
     PlAY_TASK_MESSAGE_BUMPER: async (ctx, bumperObj) => {
         if(bumperObj.loopMessageObj.active){
-
+            ctx.dispatch('UPDATE_LOOP_ITERATION', bumperObj.taskName)
         }
         let index = findTaskInMainArray(ctx.state.tasksStatusMessageBumper, bumperObj.taskName)
         ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "In process", style: "process"})
@@ -123,6 +136,16 @@ export const actions = {
         } else {
             ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "Failed", style: "failed"})
         }
+    },
+
+    UPDATE_LOOP_ITERATION: (ctx, taskName) => {
+        setInterval(() => {
+            let obj = {
+                id: findTaskInMainArray(ctx.state.tasksStatusMessageBumper, taskName),
+                loopIteration: loopIteration
+            }
+            ctx.commit('SAVE_LOOP_ITERATION', obj)
+        }, 2000)
     },
 
     PlAY_ALL_TASK_MESSAGE_BUMPER: (ctx) => {

@@ -147,12 +147,15 @@ export const actions = {
         }
 
         if (inviteCode !== undefined && tokens.length !== 0 && taskName!== '') {
-            ctx.commit("SAVE_MAIN_DATA", mainObj)
-            ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                    type: 'createTask'
-                },
-                {root: true}
-            )
+            let repeat = false
+            for (const element of ctx.state.taskStatus) {
+                if (mainObj.taskName === element.taskName) {
+                    repeat = true
+                }
+            }
+            if (!repeat) {
+                ctx.commit("SAVE_MAIN_DATA", mainObj)
+            }
         }
     },
 
@@ -164,15 +167,15 @@ export const actions = {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
-            ctx.dispatch('toastedStore/toasted/ADDING_ERROR',
-                {
-                    successTokens: successTokens,
-                    errorTokens: errorTokens,
-                    type: 'successErrorTokens'
-                },
-
-                {root: true}
-            )
+            // ctx.dispatch('toastedStore/toasted/ADDING_ERROR',
+            //     {
+            //         successTokens: successTokens,
+            //         errorTokens: errorTokens,
+            //         type: 'successErrorTokens'
+            //     },
+            //
+            //     {root: true}
+            // )
         }
     },
 
@@ -180,11 +183,11 @@ export const actions = {
         switch (name){
             case 'discordJoiner': {
                 if (ctx.state.taskStatus.length !== 0) {
-                    ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                            type: 'startAllTasks'
-                        },
-                        {root: true}
-                    )
+                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
+                    //         type: 'startAllTasks'
+                    //     },
+                    //     {root: true}
+                    // )
                     for (const taskStatusItem of ctx.state.taskStatus) {
                         ctx.dispatch('PLAY_TASK', taskStatusItem)
                     }
@@ -261,7 +264,7 @@ export const actions = {
             }
             if (notRepeat) {
                 ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
-                ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
+                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
             //TODO удивительно, что проверка отвалилась
                 // if (inputElement.errorToken !== undefined) {
                 //     // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
