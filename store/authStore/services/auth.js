@@ -1,6 +1,10 @@
 import md5 from "../../vendors/md5.min";
-import store from "core-js/internals/shared-store";
-export let check = null;
+export let check = false;
+let intervalId;
+
+export function setCheck() {
+    check = false;
+}
 
 function md5ByObject(obj) {
     let concatHash = "";
@@ -29,7 +33,7 @@ export async function auth(token, resultHash) {
     });
 
     if (response.status === 200) {
-        setInterval(verification, 60*1000, headers);
+        intervalId = setInterval(verification, 30*1000, headers);
     }
 
     return response.status === 200;
@@ -42,6 +46,7 @@ async function verification(headers) {
     });
 
     if (response.status !== 200) {
-        store.commit('authStore/authorization/CLEAR_TOKEN')
+        check = true;
+        clearInterval(intervalId);
     }
 }

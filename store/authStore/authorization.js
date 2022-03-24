@@ -1,4 +1,4 @@
-import {auth} from "./services/auth";
+import {auth, check, setCheck} from "./services/auth";
 export const state = () => ({
     token: false
 })
@@ -28,8 +28,19 @@ export const actions = {
         }
         let res = await auth(token, resultHash)
         if (res) {
+            setCheck();
             ctx.commit('SET_TOKEN')
+            ctx.dispatch('CHEK_TOKEN')
         }
+    },
+    CHEK_TOKEN: (ctx) => {
+        setInterval(() => {
+            if(check) {
+                ctx.commit('CLEAR_TOKEN')
+            } else {
+                ctx.commit('SET_TOKEN')
+            }
+        }, 100)
     }
  }
 
