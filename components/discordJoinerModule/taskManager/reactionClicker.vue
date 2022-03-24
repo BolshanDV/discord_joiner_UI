@@ -39,14 +39,11 @@
       <div class="row_position work_space_element_advent">
         <div>Reaction clicker only mode</div>
         <div>
-            <input type="checkbox" class="switch_1" >
-        </div>
-      </div>
-      <div class="row_position row_position_btn">
-        <div class="row_position row_position_btn_form"
-             @click="SAVE_DATA_FROM_R_CLICKER({channelId, messageId, reactionId, reactionClickDelay})"
-        >
-          Save
+            <input
+                type="checkbox"
+                class="switch_1"
+                v-model="mode"
+            >
         </div>
       </div>
     </div>
@@ -61,11 +58,28 @@ name: "reactionClicker",
       channelId: '',
       messageId: '',
       reactionId: '',
-      reactionClickDelay: ''
+      reactionClickDelay: '',
+      mode: ''
     }
   },
   methods:{
-    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_R_CLICKER'])
+    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_R_CLICKER']),
+    SAVE_DATA() {
+      this.SAVE_DATA_FROM_R_CLICKER({
+        channelId: this.channelId,
+        messageId: this.messageId,
+        reactionId: this.reactionId,
+        reactionClickDelay: this.reactionClickDelay,
+        mode: this.mode
+      })
+    }
+  },
+  watch: {
+    channelId: function () {this.SAVE_DATA()},
+    messageId: function () {this.SAVE_DATA()},
+    reactionId: function () {this.SAVE_DATA()},
+    reactionClickDelay: function () {this.SAVE_DATA()},
+    mode: function () {this.SAVE_DATA()},
   }
 }
 </script>

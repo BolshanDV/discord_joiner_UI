@@ -21,14 +21,11 @@
     <div class="row_position work_space_element_advent">
       <div>Send command only mode</div>
       <div>
-        <input type="checkbox" class="switch_1" >
-      </div>
-    </div>
-    <div class="row_position row_position_btn">
-      <div class="row_position row_position_btn_form"
-           @click="SAVE_DATA_FROM_S_COMMAND({channelId, commandText})"
-      >
-        Save
+        <input
+            type="checkbox"
+            class="switch_1"
+            v-model="mode"
+        >
       </div>
     </div>
   </div>
@@ -42,10 +39,23 @@ export default {
     return {
       channelId: '',
       commandText: '',
+      mode: ''
     }
   },
   methods: {
-    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_S_COMMAND'])
+    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_S_COMMAND']),
+    SAVE() {
+      this.SAVE_DATA_FROM_S_COMMAND({
+        channelId: this.channelId,
+        commandText: this.commandText,
+        mode: this.mode
+      })
+    }
+  },
+  watch: {
+    channelId: function () {this.SAVE()},
+    commandText: function () {this.SAVE()},
+    mode: function () {this.SAVE()},
   }
 }
 </script>
