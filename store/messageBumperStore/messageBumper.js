@@ -5,7 +5,6 @@ import {
 import {launchBumperTask, loopIteration} from "./services/taskService";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
-import {getterTokens, tasks} from "@/store/discordJoinerStore/services/joinerServices/taskService";
 
 export const state = () => ({
     channelList: [],

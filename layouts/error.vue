@@ -10,7 +10,7 @@
     <div class="item">
           <nuxt-link
               class="btn"
-              to="/discordJoiner"
+              to="/discord-joiner"
           >
             Go back login page
           </nuxt-link>

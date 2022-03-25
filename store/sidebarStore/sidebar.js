@@ -2,18 +2,18 @@ export const state = () => ({
     pages: [
         {
             title: 'Discord Joiner',
-            url: '/discordJoiner',
+            url: '/discord-joiner',
             exact: true,
             icon: 'discordJoiner.svg'
         },
         {
             title: 'Message Bumper',
-            url: '/messageBumper',
+            url: '/message-bumper',
             icon: 'messageBumper.svg'
         },
         {
             title: 'Captcha Settings',
-            url: '/captchaSettings',
+            url: '/captcha-settings',
             icon: 'captcha.svg'
         },
 

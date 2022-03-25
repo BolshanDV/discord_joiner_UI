@@ -1,9 +1,9 @@
 import axios from "axios";
-import {solveCaptcha} from "../../../captchaSettingsStore/captchaService";
-import {buildHeaders} from "../../../utils/requestUtils";
+import {solveCaptcha} from "@/store/captchaSettingsStore/captchaService";
+import {buildHeaders} from "@/store/utils/requestUtils";
 import {getMe} from "./validateService";
-import {findTask} from "../../../utils/taskUtils";
-import {logs} from "../../../logger";
+import {findTask} from "@/store/utils/taskUtils";
+import {logs} from "@/store/logger";
 
 let key = '';
 let captchaServiceType = '';

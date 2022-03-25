@@ -17,7 +17,7 @@
     <div class="item">
           <nuxt-link
               v-if="token"
-              to="/discordJoiner"
+              to="/discord-joiner"
               class="btn"
           >
             Login with token
