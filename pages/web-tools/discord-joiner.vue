@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import taskManager from "../components/discordJoinerModule/taskManager/taskManager";
-import taskLogs from "../components/discordJoinerModule/taskLogs";
-import taskStatus from "../components/discordJoinerModule/taskStatus";
-import modalPage from "../components/modalPage/modalPage";
+import taskManager from "../../components/discordJoinerModule/taskManager/taskManager";
+import taskLogs from "../../components/discordJoinerModule/taskLogs";
+import taskStatus from "../../components/discordJoinerModule/taskStatus";
+import modalPage from "../../components/modalPage/modalPage";
 import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "home",

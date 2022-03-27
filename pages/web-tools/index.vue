@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <img src="../static/crypto_logo.svg" alt="" class="logo">
+    <img src="../../static/crypto_logo.svg" alt="" class="logo">
     <div class="title item">
       Web tools
     </div>
@@ -17,7 +17,7 @@
     <div class="item">
           <nuxt-link
               v-if="token"
-              to="/discord-joiner"
+              to="/web-tools/discord-joiner"
               class="btn"
           >
             Login with token

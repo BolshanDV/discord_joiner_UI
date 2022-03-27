@@ -5,7 +5,7 @@
               @click=""
     >
       <nuxt-link
-          to="/"
+          to="/web-tools"
           class="navbar_btn"
       >
         Exit

@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import taskLogsComponent from "../components/discordJoinerModule/taskLogs";
-import taskStatusMessageBumper from "../components/messageBumperModule/taskStatusMessageBumper";
-import taskManagerBumper from "../components/messageBumperModule/taskManageBumper";
+import taskLogsComponent from "../../components/discordJoinerModule/taskLogs";
+import taskStatusMessageBumper from "../../components/messageBumperModule/taskStatusMessageBumper";
+import taskManagerBumper from "../../components/messageBumperModule/taskManageBumper";
 export default {
   name: "home",
   middleware: ['authCheck'],

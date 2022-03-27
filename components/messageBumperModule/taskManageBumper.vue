@@ -109,7 +109,7 @@
         <input class="text-field__input input_element"
                v-model="deleteMassages"
                autocomplete="off"
-               placeholder="30 (sec)"
+               placeholder="msec"
                type="search"
                name="search"
         >
@@ -132,7 +132,7 @@
         <input class="text-field__input input_element"
                v-model="massagesLoop"
                autocomplete="off"
-               placeholder="30 (sec)"
+               placeholder="msec"
                type="search"
                name="search"
         >
