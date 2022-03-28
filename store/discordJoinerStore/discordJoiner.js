@@ -46,15 +46,7 @@ export const mutations = {
         ctx.dispatch('toastedStore/toasted/ADDING_ERROR', obj, {root: true})
     },
     SAVE_SINGLE_TOKEN: (state, token) => {
-        console.log(token)
         if ( token !== 0 ) state.tokens.push(token)
-        // if (typeof token === 'string') {
-        //     state.tokens.push(token)
-        // } else if (Array.isArray(token)) {
-        //     token.forEach((tokenItem) => {
-        //         state.tokens.push(tokenItem);
-        //     });
-        // }
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         if ( token !== 0) state.successJoined.push(token);
@@ -77,9 +69,6 @@ export const mutations = {
     },
     ADD_PROXY_FROM_ARR: (state, proxyArr) => {
         if( proxyArr.length !== 0) proxyArr.forEach(item => state.proxyLists.push(item))
-    },
-    DROP_DOWN_LIST_WITH_PROXY: (state) => {
-        state.dropDownMenuFlagForProxy = !state.dropDownMenuFlagForProxy
     },
     DELETE_PROXY_FROM_LIST: (state, index) => {
         state.proxyLists.splice(index, 1)
@@ -167,15 +156,6 @@ export const actions = {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj);
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
-            // ctx.dispatch('toastedStore/toasted/ADDING_ERROR',
-            //     {
-            //         successTokens: successTokens,
-            //         errorTokens: errorTokens,
-            //         type: 'successErrorTokens'
-            //     },
-            //
-            //     {root: true}
-            // )
         }
     },
 
@@ -183,11 +163,6 @@ export const actions = {
         switch (name){
             case 'discordJoiner': {
                 if (ctx.state.taskStatus.length !== 0) {
-                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {
-                    //         type: 'startAllTasks'
-                    //     },
-                    //     {root: true}
-                    // )
                     for (const taskStatusItem of ctx.state.taskStatus) {
                         ctx.dispatch('PLAY_TASK', taskStatusItem)
                     }
@@ -198,10 +173,7 @@ export const actions = {
                 ctx.dispatch('messageBumperStore/messageBumper/PlAY_ALL_TASK_MESSAGE_BUMPER', '', {root: true})
                 break;
             }
-
         }
-
-
     },
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokensObj) => {
@@ -225,35 +197,25 @@ export const actions = {
             }
             , 4000)
     },
-
-    VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
-        let notRepeat = true
-        for (const tokenItem of ctx.state.tokens) {
-            if(tokenItem.token === token) {
-                notRepeat = false
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
-            }
-        }
-        if (notRepeat){
-            const result = await validateSingleToken(token);
-
-            if (result.errorToken !== undefined) {
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
-            } else {
-                ctx.commit('SAVE_SINGLE_TOKEN', result.singleToken);
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
-            }
-        }
-    },
+    //
+    // VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
+    //     let notRepeat = true
+    //     for (const tokenItem of ctx.state.tokens) {
+    //         if(tokenItem.token === token) {
+    //             notRepeat = false
+    //         }
+    //     }
+    //     if (notRepeat){
+    //         const result = await validateSingleToken(token);
+    //
+    //         if (result.errorToken !== undefined) {
+    //         } else {
+    //             ctx.commit('SAVE_SINGLE_TOKEN', result.singleToken);
+    //         }
+    //     }
+    // },
     EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensObj) => {
         console.log(tokensObj)
-        for (const tokensElement of tokensObj) {
-            for (const tokenItem of ctx.state.tokens) {
-                if (tokensElement === tokenItem.token) {
-                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
-                }
-            }
-        }
         const {input, errorToken} = await validateAndExtractTokens(tokensObj);
         for (const inputElement of input) {
             let notRepeat = true
@@ -264,15 +226,6 @@ export const actions = {
             }
             if (notRepeat) {
                 ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
-            //TODO удивительно, что проверка отвалилась
-                // if (inputElement.errorToken !== undefined) {
-                //     // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
-                // } else {
-                //     console.log(inputElement.singleToken)
-                //     ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
-                //     ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
-                // }
             }
         }
     }

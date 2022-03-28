@@ -76,6 +76,7 @@ name: "Sidebar",
 .sidebar_item_active{
   border-right-style: solid;
   border-color: #6E7F99 ;
+  border-right-width: 1px;
 }
 .logo_svg{
   height: 11vh;

@@ -26,70 +26,72 @@
                  type="search"
                  name="search">
         </div>
-      <div class="work_space_element_title">
-        Accounts tokens list
-      </div>
-      <div class="row_position ">
-        <div class=" input_element_item">
-          <div class="text-field__icon">
-            <input class="text-field__input input_element short_input"
-                   v-model="token"
-                   type="search"
-                   name="search"
-                   autocomplete="off"
-                   placeholder="Enter tokens list"
-                   :class="{short_input_active: dropDownMenuFlagForToken}"
-            >
-            <div
-                class="text-field__aicon"
-                @click="DROP_DOWN_LIST_WITH_TOKEN"
-            >
-              <img src="../../../assets/icons/row.svg" alt=""
-                  :class="{row_rotate: dropDownMenuFlagForToken}"
-              >
-            </div>
-          </div>
-        </div>
-        <div class="additional_functional work_space_element item click"
-        >
-          <label>
-            <img src="../../../assets/icons/download.svg" alt="icon" class="">
-            <input
-                type="file"
-                class="file_btn"
-                @change="READ_FILE_TOKENS"
-                accept=".txt"
-            >
-          </label>
-        </div>
-        <div class="additional_functional work_space_element click"
-             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"
+<!--      <div class="work_space_element_title">-->
+<!--        Accounts tokens list-->
+<!--      </div>-->
+<!--      <div class="row_position ">-->
+<!--        <div class=" input_element_item">-->
+<!--          <div class="text-field__icon">-->
+<!--            <input class="text-field__input input_element short_input"-->
+<!--                   v-model="token"-->
+<!--                   type="search"-->
+<!--                   name="search"-->
+<!--                   autocomplete="off"-->
+<!--                   placeholder="Enter tokens list"-->
+<!--                   :class="{short_input_active: dropDownMenuFlagForToken}"-->
+<!--            >-->
+<!--            <div-->
+<!--                class="text-field__aicon"-->
+<!--                @click="DROP_DOWN_LIST_WITH_TOKEN"-->
+<!--            >-->
+<!--              <img src="../../../assets/icons/row.svg" alt=""-->
+<!--                  :class="{row_rotate: dropDownMenuFlagForToken}"-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional_functional work_space_element item click"-->
+<!--        >-->
+<!--          <label>-->
+<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">-->
+<!--            <input-->
+<!--                type="file"-->
+<!--                class="file_btn"-->
+<!--                @change="READ_FILE_TOKENS"-->
+<!--                accept=".txt"-->
+<!--            >-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div class="additional_functional work_space_element click"-->
+<!--             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"-->
 
-        >
-          <img src="../../../assets/icons/add.svg" alt="icon" class="">
-        </div>
-      </div>
-      <div>
-        <div class="scroll column short_input_drop_down_menu"
-             v-if="dropDownMenuFlagForToken && (tokens.length !== 0)"
-        >
-          <div
-              class="row_position mini_element scroll_item"
-              v-for="(token, index) in tokens"
-              :key="index"
-          >
-            <div class="scroll_horizontal row_position">
-              <div class="scroll_item">{{token.username}}</div>
-            </div>
-              <div
-                  class="cross_icon"
-                  @click="DELETE_TOKEN_FROM_LIST(index)"
-              >
-                <img src="../../../assets/icons/cross.svg" alt="">
-              </div>
-          </div>
-        </div>
-      </div>
+<!--        >-->
+<!--          <img src="../../../assets/icons/add.svg" alt="icon" class="">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <div class="scroll column short_input_drop_down_menu"-->
+<!--             v-if="dropDownMenuFlagForToken && (tokens.length !== 0)"-->
+<!--        >-->
+<!--          <div-->
+<!--              class="row_position mini_element scroll_item"-->
+<!--              v-for="(token, index) in tokens"-->
+<!--              :key="index"-->
+<!--          >-->
+<!--            <div class="scroll_horizontal row_position">-->
+<!--              <div class="scroll_item">{{token.username}}</div>-->
+<!--            </div>-->
+<!--              <div-->
+<!--                  class="cross_icon"-->
+<!--                  @click="DELETE_TOKEN_FROM_LIST(index)"-->
+<!--              >-->
+<!--                <img src="../../../assets/icons/cross.svg" alt="">-->
+<!--              </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+      <account-tokens/>
+
       <div class="work_space_element_title">
         Proxy list
       </div>
@@ -265,6 +267,7 @@
 
 <script>
 import reactionClicker from "./reactionClicker";
+import accountTokens from "@/components/discordJoinerModule/taskManager/accountTokens";
 import sendCommand from "./sendCommand";
 import {mapActions, mapMutations, mapGetters} from 'vuex'
 
@@ -273,6 +276,7 @@ name: "taskManager",
   components: {
     reactionClicker,
     sendCommand,
+    accountTokens
   },
   data() {
     return {

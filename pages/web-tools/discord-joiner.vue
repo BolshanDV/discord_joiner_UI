@@ -57,7 +57,7 @@ name: "home",
 }
 .main_block{
   border-radius: 5px;
-  background: rgba(8,13,22,0.6);
+  background: #0D121A;
   padding: 1.5%;
 }
 </style>

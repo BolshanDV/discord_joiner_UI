@@ -1,6 +1,6 @@
 import {auth, check, setCheck} from "./services/auth";
 export const state = () => ({
-    token: false
+    token: true
 })
 
 export const getters = {

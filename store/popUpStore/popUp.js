@@ -21,7 +21,7 @@ export const actions = {
                 ctx.dispatch('discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Message Bumper"} , {root: true})
                 break;
             }
-            case "Accounts tokens list Discord Joiner": {
+            case "Accounts tokens Discord Joiner": {
                 ctx.dispatch('discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Discord Joiner"}, {root: true})
                 break;
             }
