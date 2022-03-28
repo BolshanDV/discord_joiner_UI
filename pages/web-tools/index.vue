@@ -10,7 +10,7 @@
              @keyup.enter="LOG_IN(authToken)"
              value="authToken"
              autocomplete="off"
-             placeholder="Enter your token"
+             placeholder="Enter your license key"
              type="search"
              name="search">
     </div>

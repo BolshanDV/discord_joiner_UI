@@ -6,11 +6,12 @@
         <div>
           <img
               src="../../../assets/icons/add.svg" alt=""
-              class="click"
+              class="click icons_svg"
               @click="POPUP_DISPLAY('Proxy list')"
           >
           <label>
             <img src="../../../assets/icons/download.svg" alt=""
+                 class="icons_svg"
             >
             <input
                 type="file"
@@ -45,7 +46,7 @@
         <div class="mini_element_icons"
              @click="DELETE_PROXY_FROM_LIST(index)"
         >
-          <img src="../../../assets/icons/cross.svg" alt="">
+          <img src="../../../assets/icons/cross.svg" alt="" class="icons_svg">
         </div>
       </div>
     </div>

@@ -6,8 +6,6 @@ export let state = () => ({
     tokens: [],
     errorTokens: [],
     globalStatus: false,
-    dropDownMenuFlagForToken: false,
-    dropDownMenuFlagForProxy: false,
     dropDownMenuFlagForGuildID: false,
     proxyLists: [],
     delay: 0,

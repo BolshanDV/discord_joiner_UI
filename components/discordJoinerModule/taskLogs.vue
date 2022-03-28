@@ -30,18 +30,18 @@
     </div>
 
     <div class="row_position first_btn">
-      <div class="row_position btn btn_clear"
+      <div class="row_position row_position_btn_form noActive"
            @click="CLEAR_LOGS"
       >
         Clear logs
       </div>
       <div class="row_position second_btn_element">
-        <div class="row_position btn btn_stop"
+        <div class="row_position row_position_btn_form_error"
              @click="STOP_ALL_TASKS(name)"
         >
           Break all
         </div>
-        <div class="row_position btn btn_start"
+        <div class="row_position row_position_btn_form"
              @click="START_ALL_TASKS(name)"
         >
           Start all
@@ -70,36 +70,11 @@ export default {
 
 <style scoped>
 .work_space{
-  background: rgba(16,23,34,0.6);
+  background: #101722;
   border-radius: 5px;
   padding: 2%;
   margin-top: 1%;
   min-height: 370px;
-}
-.btn{
-  border-radius: 4px;
-  color: #CCCCCC;
-  font-size: 14px;
-  line-height: 16px;
-  width: 10vw;
-  height: 5vh;
-  justify-content: center;
-}
-.btn_start{
-  background: rgba(43, 214, 162, 0.2);
-  border: 1px solid #2BD6A2;
-}
-.btn_start:active{
-  background: #2BD6A2;
-}
-.btn_stop{
-  background: rgba(170, 26, 23, 0.2);
-  border: 1px solid #AA1A17;
-  margin-right: 20px;
-}
-.btn_stop:active{
-  background: #AA1A17;
-
 }
 .first_btn{
   justify-content: space-between;

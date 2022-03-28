@@ -192,7 +192,7 @@ name: "taskManager",
 
 <style scoped>
 .work_space{
-  background: rgba(16,23,34,0.6);
+  background: #101722;
   border-radius: 5px;
   padding: 3%;
   margin-top: 2%;
@@ -214,28 +214,8 @@ name: "taskManager",
   justify-content: flex-end;
   margin-top: 5%;
 }
-.row_position_btn_form{
-  background: rgba(43, 214, 162, 0.2);
-  border: 1px solid #2BD6A2;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 16px;
-  width: 10vw;
-  height: 5vh;
-  justify-content: center;
-}
-.row_position_btn_form:active{
-  background: #2BD6A2;
-}
-.noActive{
-  background-color: rgba(22, 30, 41, 0.6);
-  border: 2px solid rgba(24, 33, 44, 0.96);
-}
-.noActive:active{
-  background-color: rgba(24, 33, 44, 0.96);
-}
 .input_element{
-  background-color: rgba(22,30,41,0.6);
+  background: #161E29;
   border-width: 0;
   color: #CCCCCC;
 }

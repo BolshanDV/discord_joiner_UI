@@ -73,7 +73,7 @@ name: "taskStatus",
 
 <style scoped>
 .work_space{
-  background: rgba(16,23,34,0.6);
+  background: #101722;
   border-radius: 5px;
   padding: 2%;
   margin: 1% 0 3% 0;

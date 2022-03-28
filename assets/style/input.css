@@ -10,7 +10,7 @@
     /*font-size: 1rem;*/
     /*font-weight: 400;*/
     color: #CCCCCC;
-    background-color: #161E29;
+    background: #161E29;
     background-clip: padding-box;
     border: 1px solid #161E29;
     border-radius: 0.25rem;
@@ -35,7 +35,7 @@
 
 .text-field__input:focus {
     color: #CCCCCC;
-    background-color: #161E29;
+    /*background-color: #161E29;*/
     border-color: #161E29;
     outline: 0;
     box-shadow: 0 0 0 1px rgba(158, 158, 158, 0.25);

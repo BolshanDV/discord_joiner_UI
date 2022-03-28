@@ -6,7 +6,7 @@
     >
       <nuxt-link
           to="/web-tools"
-          class="navbar_btn"
+          class="navbar_btn exit_btn"
       >
         Exit
       </nuxt-link>
@@ -34,7 +34,8 @@ export default {
   width: 100%;
 }
 .btn{
-  width: 10%;
+  width: 6%;
+  height: 5%;
   background: #B41210;
   border-radius: 7px;
   color: #FFFFFF;

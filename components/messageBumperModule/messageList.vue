@@ -6,6 +6,7 @@
         <div>
           <label>
             <img src="../../assets/icons/download.svg" alt=""
+                 class="icons_svg"
             >
             <input
                 type="file"
@@ -33,7 +34,7 @@
       <div
           class="text-field__aicon"
           @click="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
-      ><img src="../../assets/icons/add.svg" alt="" class="click">
+      ><img src="../../assets/icons/add.svg" alt="" class="click icons_svg">
       </div>
 
     </div>
@@ -52,7 +53,7 @@
         <div class="mini_element_icons"
              @click="DELETE_MESSAGE(index)"
         >
-          <img src="../../assets/icons/cross.svg" alt="">
+          <img src="../../assets/icons/cross.svg" alt="" class="icons_svg">
         </div>
       </div>
     </div>

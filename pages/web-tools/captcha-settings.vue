@@ -2,7 +2,7 @@
   <div class="popUp_delete">
     <div>
       <div class="main_text row_position">
-        <div>API Keys</div>
+        <div class="title">API Keys</div>
       </div>
       <div class="column">
         <div class="work_space">

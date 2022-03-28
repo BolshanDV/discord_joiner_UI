@@ -66,11 +66,6 @@ export const mutations = {
     },
     SAVE_MESSAGE_BUMPER_TASKS: (state, bumperObj) => {
         state.tasksStatusMessageBumper.push(bumperObj)
-        state.channelList = []
-        state.messageList = []
-        state.dropDownFlagForAccountListMBumper = false
-        state.deleteMessagesFlag = false
-        state.deleteMessagesLoop = false
     },
     CHANGE_PROCESSING_FLAG_M_BUMPER: (state, obj) => {
         state.tasksStatusMessageBumper[obj.id].processingTaskObj = {

@@ -11,7 +11,7 @@
         <input class="text-field__input input_element"
                v-model = "taskName"
                autocomplete="off"
-               placeholder="Enter invite code"
+               placeholder="Enter task name"
                type="search"
                name="search">
       </div>
@@ -216,11 +216,7 @@ export default {
             messagesLoop: this.massagesLoop
           }
       );
-      this.delay = ''
-      this.deleteMassages = ''
-      this.token = ''
       this.taskName = ''
-      this.massagesLoop = ''
     },
     async VALIDATE_TOKEN  (token) {
       await this.VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER(token)
@@ -232,9 +228,9 @@ export default {
 
 <style scoped>
 .work_space{
-  background: rgba(16,23,34,0.6);
+  background: #101722;
   border-radius: 5px;
-  padding: 0 3% 2% 3%;
+  padding: 1% 3% 1% 3%;
   margin-top: 2%;
 }
 .work_space_element{
@@ -252,7 +248,7 @@ export default {
 }
 
 .input_element{
-  background-color: rgba(22,30,41,0.6);
+  background: #161E29;
   border-width: 0;
   color: #CCCCCC;
 }

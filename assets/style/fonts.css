@@ -4,8 +4,8 @@ body {
     font-family: 'Roboto',sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 1.8vh;
+    line-height: 2.1vh;
     letter-spacing: 0.01em;
     color: #CCCCCC;
     margin: 0;
@@ -13,8 +13,8 @@ body {
 }
 .title{
     margin: 0;
-    font-size: 18px;
-    line-height: 21px;
+    font-size: 2vh;
+    line-height: 2.3vh;
 }
 .column{
     display: flex;
