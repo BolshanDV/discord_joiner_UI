@@ -1,0 +1,55 @@
+.work_space_token{
+    border-radius: 5px;
+    /*padding: 0 3% 3% 3%;*/
+    margin-top: 2%;
+}
+.work_space_element{
+    background: rgba(22,30,41,0.6);
+    border-radius: 3px;
+    height: 6%;
+}
+.work_space_element_title{
+    margin-top: 3.5%;
+    margin-bottom: 2.5%;
+}
+.work_space_element_advent{
+    justify-content: space-between;
+    align-items: center;
+}
+.mini_element{
+    background: #272D36;
+    border-radius: 3px;
+    padding: 1.2% 2.5%;
+    margin: 1% 1.75%;
+    justify-content: space-between;
+    align-items: center;
+}
+.space_element{
+    padding: 1%;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.mini_element_icons{
+    margin-left: 4px;
+}
+.mini_element:hover{
+    text-decoration: none;
+    background: #161e29;
+}
+.input_element{
+    background-color: rgba(22,30,41,0.6);
+    border: none;
+}
+.scroll_horizontal{
+    max-width: 150px;
+}
+.file_btn{
+    display: none;
+}
+label{
+    margin: 0;
+}
+.text{
+    color: rgba(94,97,103,0.81)	;
+    padding: 1vh;
+}

@@ -1,13 +1,13 @@
 <template>
   <div class="work_space_token column">
     <div class="work_space_element_title row_position work_space_element_advent">
-      <div>Accounts tokens list</div>
+      <div>Proxy list</div>
       <div class="row_position">
         <div>
           <img
               src="../../../assets/icons/add.svg" alt=""
               class="click"
-              @click="POPUP_DISPLAY('Accounts tokens Discord Joiner')"
+              @click="POPUP_DISPLAY('Proxy list')"
           >
           <label>
             <img src="../../../assets/icons/download.svg" alt=""
@@ -16,33 +16,34 @@
                 type="file"
                 class="file_btn"
                 accept=".txt"
-                @change="READ_FILE_TOKENS"
+                @change="READ_FILE_PROXY"
             >
           </label>
         </div>
 
       </div>
     </div>
+
     <div
-        v-if="tokens.length === 0"
+        v-if="proxyLists.length === 0"
         class="work_space_element row_position scroll space_element text"
     >
-      Enter accounts tokens list
+      Enter proxy list
     </div>
     <div
-        v-if="tokens.length !== 0"
+        v-else
         class="work_space_element row_position scroll space_element"
     >
       <div
           class="row_position mini_element"
-          v-for="(token, index) in tokens"
+          v-for="(proxy, index) in proxyLists"
           :key="index"
       >
         <div class="scroll_horizontal row_position">
-          <div>{{token.username}}</div>
+          <div>{{proxy}}</div>
         </div>
         <div class="mini_element_icons"
-             @click="DELETE_TOKEN_FROM_LIST(index)"
+             @click="DELETE_PROXY_FROM_LIST(index)"
         >
           <img src="../../../assets/icons/cross.svg" alt="">
         </div>
@@ -55,18 +56,18 @@
 import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
-  name: "accountTokens",
+  name: "proxyList",
   computed: {
     ...mapGetters('discordJoinerStore/discordJoiner',
         [
-          'tokens',
+          'proxyLists',
         ]
     )
   },
-  methods: {
-    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
+  methods:{
+    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_PROXY_FROM_LIST']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TOKEN_FROM_LIST'])
+    ...mapActions('readFileStore/readFile', ['READ_FILE_PROXY'])
   }
 }
 </script>

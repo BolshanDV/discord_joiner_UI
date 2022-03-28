@@ -91,76 +91,77 @@
 <!--        </div>-->
 <!--      </div>-->
       <account-tokens/>
+      <proxy-list/>
 
-      <div class="work_space_element_title">
-        Proxy list
-      </div>
-      <div class="row_position ">
-        <div class="input_element_item">
-          <div class="text-field__icon">
-            <input class="text-field__input input_element short_input"
-                   v-model="proxy"
-                   type="search"
-                   name="search"
-                   autocomplete="off"
-                   placeholder="Enter proxy"
-                   :class="{short_input_active: dropDownMenuFlagForProxy}"
-            >
-            <div
-                class="text-field__aicon"
-                @click="DROP_DOWN_LIST_WITH_PROXY"
-            >
-              <img src="../../../assets/icons/row.svg" alt=""
-                  :class="{row_rotate: dropDownMenuFlagForProxy}"
-            >
-            </div>
-          </div>
-        </div>
-        <div class="additional_functional work_space_element item click">
-<!--             @click="ADD_PROXY_WITH_CLEAR(proxy)"-->
+<!--      <div class="work_space_element_title">-->
+<!--        Proxy list-->
+<!--      </div>-->
+<!--      <div class="row_position ">-->
+<!--        <div class="input_element_item">-->
+<!--          <div class="text-field__icon">-->
+<!--            <input class="text-field__input input_element short_input"-->
+<!--                   v-model="proxy"-->
+<!--                   type="search"-->
+<!--                   name="search"-->
+<!--                   autocomplete="off"-->
+<!--                   placeholder="Enter proxy"-->
+<!--                   :class="{short_input_active: dropDownMenuFlagForProxy}"-->
+<!--            >-->
+<!--            <div-->
+<!--                class="text-field__aicon"-->
+<!--                @click="DROP_DOWN_LIST_WITH_PROXY"-->
+<!--            >-->
+<!--              <img src="../../../assets/icons/row.svg" alt=""-->
+<!--                  :class="{row_rotate: dropDownMenuFlagForProxy}"-->
+<!--            >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional_functional work_space_element item click">-->
+<!--&lt;!&ndash;             @click="ADD_PROXY_WITH_CLEAR(proxy)"&ndash;&gt;-->
 
+<!--&lt;!&ndash;        >&ndash;&gt;-->
+<!--          <label>-->
+<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">-->
+<!--            <input-->
+<!--                type="file"-->
+<!--                class="file_btn"-->
+<!--                @change="READ_FILE_PROXY"-->
+<!--                accept=".txt"-->
+<!--            >-->
+<!--          </label>-->
+<!--        </div>-->
+
+
+<!--        <div class="additional_functional work_space_element click"-->
+<!--             @click="POPUP_DISPLAY('Proxy list')"-->
 <!--        >-->
-          <label>
-            <img src="../../../assets/icons/download.svg" alt="icon" class="">
-            <input
-                type="file"
-                class="file_btn"
-                @change="READ_FILE_PROXY"
-                accept=".txt"
-            >
-          </label>
-        </div>
+<!--          <img src="../../../assets/icons/add.svg" alt="icon" class="">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <div class="scroll column short_input_drop_down_menu"-->
+<!--             v-if="dropDownMenuFlagForProxy"-->
+<!--        >-->
+<!--          <div-->
+<!--              class="row_position mini_element scroll_item"-->
+<!--              v-for="(proxy, index) in proxyLists"-->
+<!--              :key="index"-->
+<!--          >-->
+<!--            <div class="row_position scroll_horizontal">-->
+<!--              <div class="scroll_item">{{proxy}}</div>-->
+<!--            </div>-->
 
+<!--            <div-->
+<!--                class="cross_icon"-->
+<!--                @click="DELETE_PROXY_FROM_LIST(index)"-->
+<!--            >-->
+<!--              <img src="../../../assets/icons/cross.svg" alt="">-->
+<!--            </div>-->
 
-        <div class="additional_functional work_space_element click"
-             @click="POPUP_DISPLAY('Proxy list')"
-        >
-          <img src="../../../assets/icons/add.svg" alt="icon" class="">
-        </div>
-      </div>
-      <div>
-        <div class="scroll column short_input_drop_down_menu"
-             v-if="dropDownMenuFlagForProxy"
-        >
-          <div
-              class="row_position mini_element scroll_item"
-              v-for="(proxy, index) in proxyLists"
-              :key="index"
-          >
-            <div class="row_position scroll_horizontal">
-              <div class="scroll_item">{{proxy}}</div>
-            </div>
-
-            <div
-                class="cross_icon"
-                @click="DELETE_PROXY_FROM_LIST(index)"
-            >
-              <img src="../../../assets/icons/cross.svg" alt="">
-            </div>
-
-          </div>
-        </div>
-      </div>
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="row_position work_space_element_advent row_position_input">
         <div class="delay">
@@ -269,6 +270,7 @@
 import reactionClicker from "./reactionClicker";
 import accountTokens from "@/components/discordJoinerModule/taskManager/accountTokens";
 import sendCommand from "./sendCommand";
+import proxyList from "@/components/discordJoinerModule/taskManager/proxyList";
 import {mapActions, mapMutations, mapGetters} from 'vuex'
 
 export default {
@@ -276,7 +278,8 @@ name: "taskManager",
   components: {
     reactionClicker,
     sendCommand,
-    accountTokens
+    accountTokens,
+    proxyList
   },
   data() {
     return {

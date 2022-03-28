@@ -8,7 +8,7 @@
     padding: 1vh;
     font-family: inherit;
     /*font-size: 1rem;*/
-    font-weight: 400;
+    /*font-weight: 400;*/
     color: #CCCCCC;
     background-color: #161E29;
     background-clip: padding-box;
@@ -28,8 +28,9 @@
 }
 
 .text-field__input::placeholder {
-    color: #CCCCCC;
-    opacity: 0.4;
+    color: rgba(94,97,103,0.81)	;
+    /*color: #CCCCCC;*/
+    /*opacity: 0.4;*/
 }
 
 .text-field__input:focus {
