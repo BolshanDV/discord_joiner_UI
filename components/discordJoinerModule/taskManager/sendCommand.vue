@@ -69,21 +69,4 @@ export default {
   justify-content: space-between;
   margin-top: 3.75%;
 }
-.row_position_btn{
-  justify-content: flex-end;
-  margin-top: 5%;
-}
-.row_position_btn_form{
-  background: rgba(43, 214, 162, 0.2);
-  border: 1px solid #2BD6A2;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 16px;
-  width: 10vw;
-  height: 3vh;
-  justify-content: center;
-}
-.row_position_btn_form:active{
-  background: #2BD6A2;
-}
 </style>

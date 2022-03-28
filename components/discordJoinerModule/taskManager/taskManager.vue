@@ -18,150 +18,18 @@
       <div class="work_space_element_title">
         Invite code
       </div>
-        <div class="text-field">
-          <input class="text-field__input input_element"
-                 v-model="inviteCode"
-                 autocomplete="off"
-                 placeholder="Enter invite code"
-                 type="search"
-                 name="search">
-        </div>
-<!--      <div class="work_space_element_title">-->
-<!--        Accounts tokens list-->
-<!--      </div>-->
-<!--      <div class="row_position ">-->
-<!--        <div class=" input_element_item">-->
-<!--          <div class="text-field__icon">-->
-<!--            <input class="text-field__input input_element short_input"-->
-<!--                   v-model="token"-->
-<!--                   type="search"-->
-<!--                   name="search"-->
-<!--                   autocomplete="off"-->
-<!--                   placeholder="Enter tokens list"-->
-<!--                   :class="{short_input_active: dropDownMenuFlagForToken}"-->
-<!--            >-->
-<!--            <div-->
-<!--                class="text-field__aicon"-->
-<!--                @click="DROP_DOWN_LIST_WITH_TOKEN"-->
-<!--            >-->
-<!--              <img src="../../../assets/icons/row.svg" alt=""-->
-<!--                  :class="{row_rotate: dropDownMenuFlagForToken}"-->
-<!--              >-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional_functional work_space_element item click"-->
-<!--        >-->
-<!--          <label>-->
-<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">-->
-<!--            <input-->
-<!--                type="file"-->
-<!--                class="file_btn"-->
-<!--                @change="READ_FILE_TOKENS"-->
-<!--                accept=".txt"-->
-<!--            >-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <div class="additional_functional work_space_element click"-->
-<!--             @click="POPUP_DISPLAY('Accounts tokens list Discord Joiner')"-->
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="inviteCode"
+               autocomplete="off"
+               placeholder="Enter invite code"
+               type="search"
+               name="search">
+      </div>
 
-<!--        >-->
-<!--          <img src="../../../assets/icons/add.svg" alt="icon" class="">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <div class="scroll column short_input_drop_down_menu"-->
-<!--             v-if="dropDownMenuFlagForToken && (tokens.length !== 0)"-->
-<!--        >-->
-<!--          <div-->
-<!--              class="row_position mini_element scroll_item"-->
-<!--              v-for="(token, index) in tokens"-->
-<!--              :key="index"-->
-<!--          >-->
-<!--            <div class="scroll_horizontal row_position">-->
-<!--              <div class="scroll_item">{{token.username}}</div>-->
-<!--            </div>-->
-<!--              <div-->
-<!--                  class="cross_icon"-->
-<!--                  @click="DELETE_TOKEN_FROM_LIST(index)"-->
-<!--              >-->
-<!--                <img src="../../../assets/icons/cross.svg" alt="">-->
-<!--              </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
       <account-tokens/>
+
       <proxy-list/>
-
-<!--      <div class="work_space_element_title">-->
-<!--        Proxy list-->
-<!--      </div>-->
-<!--      <div class="row_position ">-->
-<!--        <div class="input_element_item">-->
-<!--          <div class="text-field__icon">-->
-<!--            <input class="text-field__input input_element short_input"-->
-<!--                   v-model="proxy"-->
-<!--                   type="search"-->
-<!--                   name="search"-->
-<!--                   autocomplete="off"-->
-<!--                   placeholder="Enter proxy"-->
-<!--                   :class="{short_input_active: dropDownMenuFlagForProxy}"-->
-<!--            >-->
-<!--            <div-->
-<!--                class="text-field__aicon"-->
-<!--                @click="DROP_DOWN_LIST_WITH_PROXY"-->
-<!--            >-->
-<!--              <img src="../../../assets/icons/row.svg" alt=""-->
-<!--                  :class="{row_rotate: dropDownMenuFlagForProxy}"-->
-<!--            >-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional_functional work_space_element item click">-->
-<!--&lt;!&ndash;             @click="ADD_PROXY_WITH_CLEAR(proxy)"&ndash;&gt;-->
-
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--          <label>-->
-<!--            <img src="../../../assets/icons/download.svg" alt="icon" class="">-->
-<!--            <input-->
-<!--                type="file"-->
-<!--                class="file_btn"-->
-<!--                @change="READ_FILE_PROXY"-->
-<!--                accept=".txt"-->
-<!--            >-->
-<!--          </label>-->
-<!--        </div>-->
-
-
-<!--        <div class="additional_functional work_space_element click"-->
-<!--             @click="POPUP_DISPLAY('Proxy list')"-->
-<!--        >-->
-<!--          <img src="../../../assets/icons/add.svg" alt="icon" class="">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <div class="scroll column short_input_drop_down_menu"-->
-<!--             v-if="dropDownMenuFlagForProxy"-->
-<!--        >-->
-<!--          <div-->
-<!--              class="row_position mini_element scroll_item"-->
-<!--              v-for="(proxy, index) in proxyLists"-->
-<!--              :key="index"-->
-<!--          >-->
-<!--            <div class="row_position scroll_horizontal">-->
-<!--              <div class="scroll_item">{{proxy}}</div>-->
-<!--            </div>-->
-
-<!--            <div-->
-<!--                class="cross_icon"-->
-<!--                @click="DELETE_PROXY_FROM_LIST(index)"-->
-<!--            >-->
-<!--              <img src="../../../assets/icons/cross.svg" alt="">-->
-<!--            </div>-->
-
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
 
       <div class="row_position work_space_element_advent row_position_input">
         <div class="delay">
@@ -298,45 +166,23 @@ name: "taskManager",
           'selectedSendCommand',
           'selectedReactionClicker',
           'tokens',
-          'dropDownMenuFlagForToken',
           'proxyLists',
-          'dropDownMenuFlagForProxy',
           'accept_rules'
         ]
     )
   },
   methods: {
     ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS', 'READ_FILE_PROXY']),
     ...mapMutations('discordJoinerStore/discordJoiner',
         [
-          'DROP_DOWN_LIST_WITH_TOKEN',
-          'DELETE_TOKEN_FROM_LIST',
-          'ADD_PROXY',
-          'DELETE_PROXY_FROM_LIST',
-          'DROP_DOWN_LIST_WITH_PROXY',
           'CHANGE_CHECKBOX_REACTION_CLICKER',
           'CHANGE_CHECKBOX_SEND_COMMAND',
           'CHANGE_CHECKBOX_ACCEPT_RULES',
         ]
     ),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ADD_TOKEN_WITH_CLEAR() {
-      this.VALIDATE_SINGLE_TOKEN({token: this.token, name: 'discordJoiner'});
-      this.token = ""
-    },
-    ADD_PROXY_WITH_CLEAR(proxy) {
-      this.ADD_PROXY(proxy);
-      this.proxy = ''
-    },
     PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName}) {
       this.CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})
-      this.inviteCode = ''
-      this.token = ''
-      this.proxy = ''
-      this.delay = ''
-      this.invitesPerTask = ''
-      this.guildId = ''
       this.taskName = ''
     }
 

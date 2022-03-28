@@ -23,9 +23,7 @@ export let state = () => ({
 
 export const getters = {
     tokens: state => state.tokens,
-    dropDownMenuFlagForToken: state => state.dropDownMenuFlagForToken,
     proxyLists: state => state.proxyLists,
-    dropDownMenuFlagForProxy: state => state.dropDownMenuFlagForProxy,
     selectedSendCommand: state => state.selectedSendCommand,
     selectedReactionClicker: state => state.selectedReactionClicker,
     accept_rules: state => state.accept_rules,
@@ -58,9 +56,6 @@ export const mutations = {
     SWITCH_GLOBAL_STATUS: (state, status) => {
         state.globalStatus = status;
     },
-    DROP_DOWN_LIST_WITH_TOKEN: (state) => {
-        state.dropDownMenuFlagForToken = !state.dropDownMenuFlagForToken
-    },
     DELETE_TOKEN_FROM_LIST: (state, index) => {
         state.tokens.splice(index, 1)
     },
@@ -90,12 +85,6 @@ export const mutations = {
     },
     SAVE_MAIN_DATA: (state, obj) => {
         state.taskStatus.push(obj)
-        state.selectedReactionClicker = false
-        state.selectedSendCommand = false
-        state.reactionClickerObj = {}
-        state.sendCommandObj = {}
-        state.accept_rules = false
-        state.tokens = []
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
         if(obj.processedTokens.length === 0 ) {
