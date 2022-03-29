@@ -1,6 +1,5 @@
 <template>
   <div class="popUp_delete">
-    <div>
       <div class="main_text row_position">
         <div class="title">API Keys</div>
       </div>
@@ -30,8 +29,6 @@
           Save
         </b-button>
       </div>
-    </div>
-
   </div>
 </template>
 
@@ -84,7 +81,7 @@ export default {
 .popUp_delete{
   padding: 1.75%;
   background: #0D121A;
-
+  margin-left: 0.6%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;

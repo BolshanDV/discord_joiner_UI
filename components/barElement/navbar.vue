@@ -34,7 +34,7 @@ export default {
   width: 100%;
 }
 .btn{
-  width: 6%;
+  width: 5vw;
   height: 5%;
   background: #B41210;
   border-radius: 7px;

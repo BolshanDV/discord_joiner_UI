@@ -3,7 +3,7 @@
     <div>
       <p class="title">Task Manager</p>
     </div>
-    <div class="work_space column">
+    <div class="work_space column work_space_main">
       <div class="work_space_element_title">
         Task name
       </div>
@@ -18,7 +18,7 @@
       <div class="work_space_element_title">
         Account token
       </div>
-      <div class="text-field__icon">
+      <div class="text-field">
         <input class="text-field__input input_element"
                v-model="token"
                value="token"
@@ -28,18 +28,11 @@
                autocomplete="off"
                placeholder="Enter token"
         >
-        <div
-            class="text-field__aicon"
-            @click="VALIDATE_TOKEN(token)"
-        >
-          <img src="../../assets/icons/add.svg" alt="" class="click">
-        </div>
-
       </div>
       <div class="work_space_element_title">
         Channels list
       </div>
-      <div class="text-field__icon">
+      <div class="text-field">
         <input class="text-field__input input_element"
                @keyup.enter="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"
                v-model="channel"
@@ -48,13 +41,6 @@
                autocomplete="off"
                placeholder="Enter channel id"
         >
-        <div
-            class="text-field__aicon"
-            @click="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"
-        >
-          <img src="../../assets/icons/add.svg" alt="" class="click">
-        </div>
-
       </div>
       <div
           class="work_space_element row_position scroll space_element"
@@ -230,8 +216,11 @@ export default {
 .work_space{
   background: #101722;
   border-radius: 5px;
-  padding: 1% 3% 1% 3%;
+  padding: 1% 3%;
   margin-top: 2%;
+}
+.work_space_main{
+  padding: 1% 3% 3% 3%;
 }
 .work_space_element{
   background: rgba(22,30,41,0.6);

@@ -1,59 +1,58 @@
 <template>
-  <div class="work_space column">
+  <div class="work_space_token column">
     <div class="work_space_element_title row_position work_space_element_advent">
       <div>Message list</div>
       <div class="row_position">
         <div>
           <label>
-            <img src="../../assets/icons/download.svg" alt=""
+            <img src="../../assets/icons/download.svg"
+                 alt=""
                  class="icons_svg"
             >
             <input
                 type="file"
                 class="file_btn"
-                @change="FILE_READ_MESSAGES"
                 accept=".txt"
+                @change="FILE_READ_MESSAGES"
             >
           </label>
         </div>
-<!--        <img src="../../assets/icons/download.svg" alt=""-->
-<!--             @click="DOWNLOADING_FILE"-->
-<!--             class="mini_element_icons"-->
-<!--             style="transform: rotate(180deg)"-->
-<!--        >-->
-      </div>
-    </div>
-    <div class="text-field__icon">
-      <input class="text-field__input input_element"
-             @keyup.enter="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
-             v-model="message"
-             type="search"
-             name="search"
-             autocomplete="off"
-             placeholder="Enter message">
-      <div
-          class="text-field__aicon"
-          @click="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message)"
-      ><img src="../../assets/icons/add.svg" alt="" class="click icons_svg">
-      </div>
 
+      </div>
     </div>
-    <div
-        class="work_space_element row_position scroll space_element"
-        v-if="messageList.length !== 0"
+    <div tabindex="3"
+         class="space"
     >
-      <div
-          class="row_position mini_element"
-          v-for="(message, index) in messageList"
-          :key="index"
-      >
-        <div class="scroll_horizontal row_position">
-          <div>{{ message }}</div>
-        </div>
-        <div class="mini_element_icons"
-             @click="DELETE_MESSAGE(index)"
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="message"
+               @keyup.enter="ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP"
+               type="search"
+               name="search"
+               autocomplete="off"
+               placeholder="Enter message"
+               :class="{input_space: messageList.length !== 0}"
         >
-          <img src="../../assets/icons/cross.svg" alt="" class="icons_svg">
+      </div>
+      <div
+          v-if="messageList.length !== 0"
+          class="work_space_element row_position scroll space_element"
+      >
+        <div
+            class="row_position mini_element"
+            v-for="(message, index) in messageList"
+            :key="index"
+        >
+          <div class="scroll_horizontal row_position">
+            <div>{{message}}</div>
+          </div>
+          <div class="mini_element_icons"
+               @click="DELETE_MESSAGE(index)"
+          >
+            <img src="../../assets/icons/cross.svg" alt=""
+                 class="icons_svg_cross"
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -63,6 +62,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../modalPage/modalPage";
+import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
 export default {
 name: "messageList",
   components: {
@@ -81,8 +81,8 @@ name: "messageList",
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE']),
     ...mapActions('readFileStore/readFile', ['FILE_READ_MESSAGES']),
-    ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(message){
-      this.ADD_MESSAGE_TO_LISTS(message);
+    ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(){
+      this.ADD_MESSAGE_TO_LISTS(converter(this.message));
       this.message = ''
     }
   }

@@ -1,10 +1,12 @@
+import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
+
 export const actions = {
     FILE_READ_MESSAGES: async (ctx, file) => {
         let blob  = file.target.files[0];
         let reader = new FileReader();
         reader.readAsText(blob, 'UTF-8');
         reader.onload = () => {
-            const res = reader.result.split(';');
+            const res = converter(reader.result);
             ctx.commit(`messageBumperStore/messageBumper/ADD_MESSAGE_TO_LISTS`, res, {root: true});
             reader = null;
         }

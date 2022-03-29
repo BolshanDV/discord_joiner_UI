@@ -5,6 +5,7 @@ import {
 import {launchBumperTask, loopIteration} from "./services/taskService";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
+import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
 
 export const state = () => ({
     channelList: [],
@@ -39,13 +40,14 @@ export const mutations = {
         state.channelList.splice(index, 1)
     },
     ADD_MESSAGE_TO_LISTS: (state, messageObj) => {
-        if (typeof messageObj === 'string') {
-            state.messageList.push(messageObj)
-        } else if (Array.isArray(messageObj)) {
-            messageObj.forEach((message) => {
-               state.messageList.push(message);
-            });
-        }
+        messageObj.forEach((message) => {state.messageList.push(message)})
+        // if (typeof messageObj === 'string') {
+        //     state.messageList.push(messageObj)
+        // } else if (Array.isArray(messageObj)) {
+        //     messageObj.forEach((message) => {
+        //        state.messageList.push(message);
+        //     });
+        // }
     },
     ADD_MESSAGE_ARR_TO_LISTS: (state, massageArr) => {
         if (massageArr.length !== 0 ) {
