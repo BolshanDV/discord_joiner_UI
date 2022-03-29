@@ -24,11 +24,12 @@
     justify-content: space-between;
     align-items: center;
 }
-.space_element{
+.space_element {
     padding: 1%;
     flex-wrap: wrap;
     width: 100%;
     background: #161E29;
+    border-radius: 0 0 6px 6px;
 }
 .mini_element_icons{
     margin-left: 4px;
@@ -38,7 +39,7 @@
     background: #161e29;
 }
 .input_element{
-    background-color: rgba(22,30,41,0.6);
+    /*background-color: rgba(22,30,41,0.6);*/
     border: none;
 }
 .scroll_horizontal{
@@ -53,4 +54,8 @@ label{
 .text{
     color: rgba(94,97,103,0.81)	;
     padding: 1vh;
+}
+.space:focus{
+    box-shadow: 0 0 0 1px rgba(158, 158, 158, 0.25);
+    border-radius: 5px;
 }

@@ -14,7 +14,7 @@ export const actions = {
         let reader = new FileReader();
         reader.readAsText(blob, 'UTF-8');
         reader.onload = () => {
-            const res = reader.result.split('\n');
+            const res = reader.result
             ctx.dispatch(`discordJoinerStore/discordJoiner/EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER`, res, {root: true});
             reader = null;
         }

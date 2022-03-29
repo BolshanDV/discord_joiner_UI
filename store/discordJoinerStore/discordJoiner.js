@@ -1,6 +1,7 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
 import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/taskService";
 import {findTaskInMainArray} from "../utils/taskUtils";
+import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
 
 export let state = () => ({
     tokens: [],
@@ -184,25 +185,8 @@ export const actions = {
             }
             , 4000)
     },
-    //
-    // VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER: async (ctx, token) => {
-    //     let notRepeat = true
-    //     for (const tokenItem of ctx.state.tokens) {
-    //         if(tokenItem.token === token) {
-    //             notRepeat = false
-    //         }
-    //     }
-    //     if (notRepeat){
-    //         const result = await validateSingleToken(token);
-    //
-    //         if (result.errorToken !== undefined) {
-    //         } else {
-    //             ctx.commit('SAVE_SINGLE_TOKEN', result.singleToken);
-    //         }
-    //     }
-    // },
-    EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensObj) => {
-        console.log(tokensObj)
+    EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensText) => {
+        let tokensObj = converter(tokensText)
         const {input, errorToken} = await validateAndExtractTokens(tokensObj);
         for (const inputElement of input) {
             let notRepeat = true
@@ -214,6 +198,12 @@ export const actions = {
             if (notRepeat) {
                 ctx.commit('SAVE_SINGLE_TOKEN', inputElement.singleToken);
             }
+        }
+    },
+    EXTRACT_AND_VALIDATE_PROXY: (ctx, proxyText) => {
+        let proxyObj = converter(proxyText)
+        for (const proxy of proxyObj) {
+            ctx.commit('ADD_PROXY', proxy)
         }
     }
 }

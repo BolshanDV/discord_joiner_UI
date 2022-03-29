@@ -4,11 +4,6 @@
       <div>Accounts tokens list</div>
       <div class="row_position">
         <div>
-          <img
-              src="../../../assets/icons/add.svg" alt=""
-              class="click icons_svg"
-              @click="POPUP_DISPLAY('Accounts tokens Discord Joiner')"
-          >
           <label>
             <img src="../../../assets/icons/download.svg"
                  alt=""
@@ -25,30 +20,39 @@
 
       </div>
     </div>
-    <div
-        v-if="tokens.length === 0"
-        class="work_space_element row_position scroll space_element text"
+    <div tabindex="3"
+         class="space"
     >
-      Enter accounts tokens list
-    </div>
-    <div
-        v-if="tokens.length !== 0"
-        class="work_space_element row_position scroll space_element"
-    >
-      <div
-          class="row_position mini_element"
-          v-for="(token, index) in tokens"
-          :key="index"
-      >
-        <div class="scroll_horizontal row_position">
-          <div>{{token.username}}</div>
-        </div>
-        <div class="mini_element_icons"
-             @click="DELETE_TOKEN_FROM_LIST(index)"
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="tokenInput"
+               @keyup.enter="EXTRACT_AND_VALIDATE"
+               type="search"
+               name="search"
+               autocomplete="off"
+               placeholder="Enter message"
+               :class="{input_space: tokens.length !== 0}"
         >
-          <img src="../../../assets/icons/cross.svg" alt=""
-               class="icons_svg"
+      </div>
+      <div
+          v-if="tokens.length !== 0"
+          class="work_space_element row_position scroll space_element"
+      >
+        <div
+            class="row_position mini_element"
+            v-for="(token, index) in tokens"
+            :key="index"
+        >
+          <div class="scroll_horizontal row_position">
+            <div>{{token.username}}</div>
+          </div>
+          <div class="mini_element_icons"
+               @click="DELETE_TOKEN_FROM_LIST(index)"
           >
+            <img src="../../../assets/icons/cross.svg" alt=""
+                 class="icons_svg_cross"
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +64,11 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "accountTokens",
+  data() {
+    return {
+      tokenInput: "",
+    }
+  },
   computed: {
     ...mapGetters('discordJoinerStore/discordJoiner',
         [
@@ -69,8 +78,12 @@ export default {
   },
   methods: {
     ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
-    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TOKEN_FROM_LIST'])
+    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER']),
+    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TOKEN_FROM_LIST']),
+    EXTRACT_AND_VALIDATE() {
+      this.EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER(this.tokenInput)
+      this.tokenInput = ""
+    },
   }
 }
 </script>
