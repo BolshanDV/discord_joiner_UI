@@ -1,4 +1,4 @@
-import {setCaptchaConfig} from "../discordJoinerStore/services/joinerServices/taskService";
+import {setCaptchaConfig} from "../discordJoinerStore/services/joinerServices/extendedTaskService";
 // export let state = () => ({
 //     tokens: [],
 // })

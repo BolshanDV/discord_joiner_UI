@@ -1,4 +1,4 @@
-import {setStopCriticalFlag} from "./services/joinerServices/taskService"
+import {setStopCriticalFlag} from "./services/joinerServices/extendedTaskService"
 import {clearLogs, getLogs} from "../logger";
 import {setStopBumperCriticalFlag} from "../messageBumperStore/services/taskService";
 

@@ -1,5 +1,5 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
-import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/taskService";
+import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/extendedTaskService";
 import {findTaskInMainArray} from "../utils/taskUtils";
 import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
 
