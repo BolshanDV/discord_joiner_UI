@@ -71,7 +71,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner',
+    ...mapGetters('discordJoinerStore/discord-joiner.js',
         [
           'tokens',
         ]
@@ -79,8 +79,8 @@ export default {
   },
   methods: {
     ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER']),
-    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TOKEN_FROM_LIST']),
+    ...mapActions('discordJoinerStore/discord-joiner.js', ['EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER']),
+    ...mapMutations('discordJoinerStore/discord-joiner.js', ['DELETE_TOKEN_FROM_LIST']),
     EXTRACT_AND_VALIDATE() {
       this.EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER(this.tokenInput)
       this.tokenInput = ""

@@ -12,7 +12,8 @@ function findLogsByType(type) {
     const filteredLogs = [];
 
     logs.forEach((log) => {
-        if (log.type === type || log.type === 'VALIDATE-SERVICE') filteredLogs.push(log);
+        if (log.type === type || log.type === 'VALIDATE-SERVICE')
+            filteredLogs.push(log);
     })
 
     return filteredLogs;

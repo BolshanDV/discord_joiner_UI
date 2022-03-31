@@ -63,7 +63,7 @@ name: "reactionClicker",
     }
   },
   methods:{
-    ...mapMutations('discordJoinerStore/discordJoiner', ['SAVE_DATA_FROM_R_CLICKER']),
+    ...mapMutations('discordJoinerStore/discord-joiner.js', ['SAVE_DATA_FROM_R_CLICKER']),
     SAVE_DATA() {
       this.SAVE_DATA_FROM_R_CLICKER({
         channelId: this.channelId,

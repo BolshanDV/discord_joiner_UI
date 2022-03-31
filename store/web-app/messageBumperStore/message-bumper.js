@@ -1,11 +1,10 @@
 import {
     validateAndExtractTokens,
     validateSingleToken
-} from "../discordJoinerStore/services/joinerServices/validateService";
-import {launchBumperTask, loopIteration} from "./services/taskService";
+} from "../discordJoinerStore/services/joinerServices/validate-service";
+import {launchBumperTask, loopIteration} from "./services/task-service";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
-import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
 
 export const state = () => ({
     channelList: [],

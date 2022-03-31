@@ -168,7 +168,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper',
+    ...mapGetters('messageBumperStore/message-bumper.js',
         [
           'channelList',
           'dropDownFlagForAccountListMBumper',
@@ -178,7 +178,7 @@ export default {
         ]),
   },
   methods: {
-    ...mapMutations('messageBumperStore/messageBumper',
+    ...mapMutations('messageBumperStore/message-bumper.js',
         [
           'ADD_CHANNEL_TO_LISTS',
           'DELETE_CHANNEL',
@@ -186,9 +186,9 @@ export default {
           'CHANGE_DELETE_MESSAGE_FLAG',
           'CHANGE_LOOP_MESSAGE_FLAG'
         ]),
-    ...mapActions('messageBumperStore/messageBumper',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO', 'VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER']),
+    ...mapActions('messageBumperStore/message-bumper.js',['CREATE_TASK_MESSAGE_BUMPER', 'GET_CHANNEL_INFO', 'VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER']),
     ...mapMutations('popUpStore/popUp',['POPUP_DISPLAY']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['VALIDATE_SINGLE_TOKEN']),
+    ...mapActions('discordJoinerStore/discord-joiner.js', ['VALIDATE_SINGLE_TOKEN']),
 
     ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel) {
       this.GET_CHANNEL_INFO({channelId: channel, token: this.singleToken.token})

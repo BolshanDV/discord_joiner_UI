@@ -1,7 +1,7 @@
 import axios from "axios";
 import {buildHeaders} from "../../utils/requestUtils";
-import {getMe} from "../../discordJoinerStore/services/joinerServices/validateService";
-import {logs} from "../../logger";
+import {getMe} from "../../discordJoinerStore/services/joinerServices/validate-service";
+import {logs} from "@/store/web-app/logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export let loopIteration = 0;

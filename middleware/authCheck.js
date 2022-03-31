@@ -1,6 +1,6 @@
 export default function ({store, redirect}) {
     if (store.getters['authStore/authorization/token'] === false) {
-        redirect('/web-tools')
+        redirect('/web-app-tools')
     }
 }
 

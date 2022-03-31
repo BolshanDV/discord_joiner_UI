@@ -31,8 +31,8 @@ name: "home",
     modalPage
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['renderKey']),
-    ...mapGetters('discordJoinerStore/taskStatus', ['date'])
+    ...mapGetters('discordJoinerStore/discord-joiner.js', ['renderKey']),
+    ...mapGetters('discordJoinerStore/task-status.js', ['date'])
   },
 }
 </script>

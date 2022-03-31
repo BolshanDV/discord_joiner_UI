@@ -39,7 +39,7 @@ export default {
     ...mapGetters('popUpStore/popUp', ['popUpFlag'])
   },
   methods: {
-    ...mapActions('discordJoinerStore/taskStatus', ['PROCESS_LOGS'])
+    ...mapActions('discordJoinerStore/task-status.js', ['PROCESS_LOGS'])
   }
 
 }
