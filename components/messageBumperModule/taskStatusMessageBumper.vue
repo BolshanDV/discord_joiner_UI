@@ -63,11 +63,11 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 export default {
   name: "taskStatusMessageBumper",
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper', ['tasksStatusMessageBumper'])
+    ...mapGetters('messageBumperStore/message-bumper.js', ['tasksStatusMessageBumper'])
   },
   methods: {
-    ...mapActions('messageBumperStore/messageBumper', ['PlAY_TASK_MESSAGE_BUMPER']),
-    ...mapMutations('messageBumperStore/messageBumper', ['DELETE_TASK_MESSAGE_BUMPER'])
+    ...mapActions('messageBumperStore/message-bumper.js', ['PlAY_TASK_MESSAGE_BUMPER']),
+    ...mapMutations('messageBumperStore/message-bumper.js', ['DELETE_TASK_MESSAGE_BUMPER'])
   }
 }
 </script>

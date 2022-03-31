@@ -1,6 +1,6 @@
-import {setStopCriticalFlag} from "./services/joinerServices/extendedTaskService"
-import {clearLogs, getLogs} from "../logger";
-import {setStopBumperCriticalFlag} from "../messageBumperStore/services/taskService";
+import {setStopCriticalFlag} from "./services/joinerServices/extended-task-service"
+import {clearLogs, getLogs} from "../../logger";
+import {setStopBumperCriticalFlag} from "../messageBumperStore/services/task-service";
 
 export const state = () => ({
     playStopFlag: true,

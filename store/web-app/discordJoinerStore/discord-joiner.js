@@ -1,7 +1,7 @@
-import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validateService";
-import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/extendedTaskService";
+import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validate-service";
+import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/extended-task-service";
 import {findTaskInMainArray} from "../utils/taskUtils";
-import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
 
 export let state = () => ({
     tokens: [],
@@ -158,7 +158,7 @@ export const actions = {
                 break;
             }
             case 'messageBumper': {
-                ctx.dispatch('messageBumperStore/messageBumper/PlAY_ALL_TASK_MESSAGE_BUMPER', '', {root: true})
+                ctx.dispatch('messageBumperStore/message-bumper.js/PlAY_ALL_TASK_MESSAGE_BUMPER', '', {root: true})
                 break;
             }
         }
@@ -166,14 +166,14 @@ export const actions = {
 
     EXTRACT_AND_VALIDATE_TOKENS: async (ctx, tokensObj) => {
         if (tokensObj.type === 'Discord Joiner') await ctx.dispatch('EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER', tokensObj.data)
-        if (tokensObj.type === 'Message Bumper') await ctx.dispatch('messageBumperStore/messageBumper/EXTRACT_AND_VALIDATE_TOKENS_FOR_MASSAGER_BUMPER', tokensObj.data, {root: true})
+        if (tokensObj.type === 'Message Bumper') await ctx.dispatch('messageBumperStore/message-bumper.js/EXTRACT_AND_VALIDATE_TOKENS_FOR_MASSAGER_BUMPER', tokensObj.data, {root: true})
         if (tokensObj.type === 'Proxy list') console.log("Proxy list")
     },
 
     VALIDATE_SINGLE_TOKEN: async (ctx, tokenObj) => {
         (tokenObj.name === 'discordJoiner')
             ? ctx.dispatch('VALIDATE_SINGLE_TOKEN_FOR_DISCORD_JOINER', tokenObj.token)
-            : ctx.dispatch('messageBumperStore/messageBumper/VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER', tokenObj.token, {root: true})
+            : ctx.dispatch('messageBumperStore/message-bumper.js/VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER', tokenObj.token, {root: true})
     },
     UPDATE_TOKENS: (ctx, taskName) => {
         let timerId = setInterval(() => {

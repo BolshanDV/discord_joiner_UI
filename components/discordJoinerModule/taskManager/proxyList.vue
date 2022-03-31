@@ -70,13 +70,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner', ['proxyLists',])
+    ...mapGetters('discordJoinerStore/discord-joiner.js', ['proxyLists',])
   },
   methods:{
-    ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_PROXY_FROM_LIST']),
+    ...mapMutations('discordJoinerStore/discord-joiner.js', ['DELETE_PROXY_FROM_LIST']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
     ...mapActions('readFileStore/readFile', ['READ_FILE_PROXY']),
-    ...mapActions('discordJoinerStore/discordJoiner', ['EXTRACT_AND_VALIDATE_PROXY']),
+    ...mapActions('discordJoinerStore/discord-joiner.js', ['EXTRACT_AND_VALIDATE_PROXY']),
 
     EXTRACT_AND_VALIDATE() {
       this.EXTRACT_AND_VALIDATE_PROXY(this.proxyInput)

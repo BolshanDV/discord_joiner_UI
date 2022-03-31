@@ -1,4 +1,4 @@
-import {getMe} from "../discordJoinerStore/services/joinerServices/validateService";
+import {getMe} from "../discordJoinerStore/services/joinerServices/validate-service";
 import axios from "axios";
 import {buildHeaders} from "./requestUtils";
 

@@ -62,7 +62,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../modalPage/modalPage";
-import {converter} from "@/store/discordJoinerStore/services/joinerServices/textConverter";
+import {converter} from "@/store/discordJoinerStore/services/joinerServices/text-converter";
 export default {
 name: "messageList",
   components: {
@@ -74,12 +74,12 @@ name: "messageList",
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/messageBumper', ['messageList']),
+    ...mapGetters('messageBumperStore/message-bumper.js', ['messageList']),
   },
   methods: {
-    ...mapMutations('messageBumperStore/messageBumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
+    ...mapMutations('messageBumperStore/message-bumper.js',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
     ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('messageBumperStore/messageBumper', ['DOWNLOADING_FILE']),
+    ...mapActions('messageBumperStore/message-bumper.js', ['DOWNLOADING_FILE']),
     ...mapActions('readFileStore/readFile', ['FILE_READ_MESSAGES']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(){
       this.ADD_MESSAGE_TO_LISTS(converter(this.message));

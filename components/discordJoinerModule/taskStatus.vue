@@ -60,13 +60,13 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
-  ...mapGetters('discordJoinerStore/discordJoiner', ['taskStatus', 'successTokens']),
-    ...mapGetters('discordJoinerStore/taskStatus', ['playStopFlag'])
+  ...mapGetters('discordJoinerStore/discord-joiner.js', ['taskStatus', 'successTokens']),
+    ...mapGetters('discordJoinerStore/task-status.js', ['playStopFlag'])
   },
   methods: {
-  ...mapMutations('discordJoinerStore/discordJoiner', ['DELETE_TASK_STATUS', 'CHANGE_ICON_STOP_AND_PLAY']),
-  ...mapActions('discordJoinerStore/discordJoiner', ['UPDATE_TOKENS', 'PLAY_TASK']),
-    ...mapActions('discordJoinerStore/taskStatus', ['PAUSE_TASK', 'PLAY'])
+  ...mapMutations('discordJoinerStore/discord-joiner.js', ['DELETE_TASK_STATUS', 'CHANGE_ICON_STOP_AND_PLAY']),
+  ...mapActions('discordJoinerStore/discord-joiner.js', ['UPDATE_TOKENS', 'PLAY_TASK']),
+    ...mapActions('discordJoinerStore/task-status.js', ['PAUSE_TASK', 'PLAY'])
   }
 }
 </script>

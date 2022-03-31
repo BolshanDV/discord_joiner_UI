@@ -1,10 +1,19 @@
 import axios from "axios";
-import {buildHeaders} from "@/store/utils/requestUtils";
-import {getMe} from "@/store/discordJoinerStore/services/joinerServices/validateService";
+import {buildHeaders} from "@/store/web-app/utils/requestUtils";
+import {getMe} from "@/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
 import {logs} from "@/store/logger";
 
+/**
+ * @description it's global variable for UI
+ * @type {number}
+ */
 export let successAccounts = 0;
 
+/**
+ * @description This function must record log info and increment counter success tokens accounts
+ * @param {string} token - some token of user
+ * @return {VoidFunction}
+ */
 function incrementCounterAndRecordLog(token) {
     successAccounts++;
     logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token} successfully entered the channel`});

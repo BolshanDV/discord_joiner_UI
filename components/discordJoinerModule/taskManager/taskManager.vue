@@ -161,7 +161,7 @@ name: "taskManager",
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discordJoiner',
+    ...mapGetters('discordJoinerStore/discord-joiner.js',
         [
           'selectedSendCommand',
           'selectedReactionClicker',
@@ -172,8 +172,8 @@ name: "taskManager",
     )
   },
   methods: {
-    ...mapActions('discordJoinerStore/discordJoiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discordJoiner',
+    ...mapActions('discordJoinerStore/discord-joiner.js', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
+    ...mapMutations('discordJoinerStore/discord-joiner.js',
         [
           'CHANGE_CHECKBOX_REACTION_CLICKER',
           'CHANGE_CHECKBOX_SEND_COMMAND',
