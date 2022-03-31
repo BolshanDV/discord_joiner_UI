@@ -56,11 +56,11 @@ export default {
     }
   },
   computed:{
-    ...mapGetters('messageBumperStore/messageBumper', ['channelList', 'singleToken'])
+    ...mapGetters('web-app/messageBumperStore/message-bumper', ['channelList', 'singleToken'])
   },
   methods: {
-    ...mapMutations('messageBumperStore/messageBumper', ['DELETE_CHANNEL']),
-    ...mapActions('messageBumperStore/messageBumper', ['GET_CHANNEL_INFO']),
+    ...mapMutations('web-app/messageBumperStore/message-bumper', ['DELETE_CHANNEL']),
+    ...mapActions('web-app/messageBumperStore/message-bumper', ['GET_CHANNEL_INFO']),
     ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP() {
       this.GET_CHANNEL_INFO({channelId: this.channel, token: this.singleToken.token})
       this.channel = ''

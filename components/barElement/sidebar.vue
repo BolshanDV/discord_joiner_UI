@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
 name: "Sidebar",
   computed: {
-    ...mapGetters('sidebarStore/sidebar',['getPages']),
+    ...mapGetters('ui/sidebarStore/sidebar',['getPages']),
   },
 }
 </script>

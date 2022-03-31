@@ -25,7 +25,7 @@ export default {
   name: "error",
   layout: 'empty',
   methods:{
-    ...mapMutations('authStore/authorization', ['CLEAR_TOKEN'])
+    ...mapMutations('web-app/authStore/authorization', ['CLEAR_TOKEN'])
   }
 }
 </script>

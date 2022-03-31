@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('captchaSettingsStore/settings', ['SAVE_KEY'])
+    ...mapActions('web-app/captchaSettingsStore/settings', ['SAVE_KEY'])
   }
 }
 </script>

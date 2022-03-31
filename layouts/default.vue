@@ -36,10 +36,10 @@ export default {
     this.PROCESS_LOGS()
   },
   computed: {
-    ...mapGetters('popUpStore/popUp', ['popUpFlag'])
+    ...mapGetters('ui/popUpStore/popUp', ['popUpFlag'])
   },
   methods: {
-    ...mapActions('discordJoinerStore/task-status.js', ['PROCESS_LOGS'])
+    ...mapActions('web-app/discordJoinerStore/task-status', ['PROCESS_LOGS'])
   }
 
 }

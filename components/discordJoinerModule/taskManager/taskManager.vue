@@ -165,7 +165,7 @@ name: "taskManager",
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discord-joiner.js',
+    ...mapGetters('web-app/discordJoinerStore/discord-joiner',
         [
           'selectedSendCommand',
           'selectedReactionClicker',
@@ -176,15 +176,15 @@ name: "taskManager",
     )
   },
   methods: {
-    ...mapActions('discordJoinerStore/discord-joiner.js', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
-    ...mapMutations('discordJoinerStore/discord-joiner.js',
+    ...mapActions('web-app/discordJoinerStore/discord-joiner', ['CREATE_TASK', 'VALIDATE_SINGLE_TOKEN']),
+    ...mapMutations('web-app/discordJoinerStore/discord-joiner',
         [
           'CHANGE_CHECKBOX_REACTION_CLICKER',
           'CHANGE_CHECKBOX_SEND_COMMAND',
           'CHANGE_CHECKBOX_ACCEPT_RULES',
         ]
     ),
-    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
+    ...mapMutations('ui/popUpStore/popUp', ['POPUP_DISPLAY']),
     PRE_CREATE_TASK({inviteCode, tokens, delay, guildId, taskName}) {
       this.CREATE_TASK({inviteCode, tokens, delay, guildId, taskName})
       this.taskName = ''

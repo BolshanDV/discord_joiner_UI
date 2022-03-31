@@ -43,7 +43,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('discordJoinerStore/discord-joiner.js', ['SAVE_DATA_FROM_S_COMMAND']),
+    ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['SAVE_DATA_FROM_S_COMMAND']),
     SAVE() {
       this.SAVE_DATA_FROM_S_COMMAND({
         channelId: this.channelId,

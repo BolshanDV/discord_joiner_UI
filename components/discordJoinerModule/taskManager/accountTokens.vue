@@ -71,16 +71,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('discordJoinerStore/discord-joiner.js',
-        [
-          'tokens',
-        ]
-    )
+    ...mapGetters('web-app/discordJoinerStore/discord-joiner', ['tokens',])
   },
   methods: {
-    ...mapActions('readFileStore/readFile', ['READ_FILE_TOKENS']),
-    ...mapActions('discordJoinerStore/discord-joiner.js', ['EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER']),
-    ...mapMutations('discordJoinerStore/discord-joiner.js', ['DELETE_TOKEN_FROM_LIST']),
+    ...mapActions('ui/readFileStore/readFile', ['READ_FILE_TOKENS']),
+    ...mapActions('web-app/discordJoinerStore/discord-joiner', ['EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER']),
+    ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['DELETE_TOKEN_FROM_LIST']),
     EXTRACT_AND_VALIDATE() {
       this.EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER(this.tokenInput)
       this.tokenInput = ""

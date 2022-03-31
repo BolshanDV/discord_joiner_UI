@@ -62,7 +62,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../modalPage/modalPage";
-import {converter} from "@/store/discordJoinerStore/services/joinerServices/text-converter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
 export default {
 name: "messageList",
   components: {
@@ -74,13 +74,13 @@ name: "messageList",
     }
   },
   computed: {
-    ...mapGetters('messageBumperStore/message-bumper.js', ['messageList']),
+    ...mapGetters('web-app/messageBumperStore/message-bumper', ['messageList']),
   },
   methods: {
-    ...mapMutations('messageBumperStore/message-bumper.js',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
-    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('messageBumperStore/message-bumper.js', ['DOWNLOADING_FILE']),
-    ...mapActions('readFileStore/readFile', ['FILE_READ_MESSAGES']),
+    ...mapMutations('web-app/messageBumperStore/message-bumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
+    ...mapMutations('ui/popUpStore/popUp', ['POPUP_DISPLAY']),
+    ...mapActions('web-app/messageBumperStore/message-bumper', ['DOWNLOADING_FILE']),
+    ...mapActions('ui/readFileStore/readFile', ['FILE_READ_MESSAGES']),
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(){
       this.ADD_MESSAGE_TO_LISTS(converter(this.message));
       this.message = ''
@@ -91,56 +91,5 @@ name: "messageList",
 </script>
 
 <style scoped src="assets/style/field.css">
-/*.work_space{*/
-/*  background: rgba(16,23,34,0.6);*/
-/*  border-radius: 5px;*/
-/*  padding: 0 3% 3% 3%;*/
-/*  margin-top: 2%;*/
-/*}*/
-/*.work_space_element{*/
-/*  background: rgba(22,30,41,0.6);*/
-/*  border-radius: 3px;*/
-/*  height: 6%;*/
-/*}*/
-/*.work_space_element_title{*/
-/*  margin-top: 3.75%;*/
-/*  margin-bottom: 2.75%;*/
-/*}*/
-/*.work_space_element_advent{*/
-/*  justify-content: space-between;*/
-/*  align-items: center;*/
-/*}*/
-/*.mini_element{*/
-/*  background: #272D36;*/
-/*  border-radius: 3px;*/
-/*  padding: 1.2% 2.5%;*/
-/*  margin: 1% 1.75%;*/
-/*  justify-content: space-between;*/
-/*  align-items: center;*/
-/*}*/
-/*.space_element{*/
-/*  padding: 2%;*/
-/*  flex-wrap: wrap;*/
-/*  width: 100%;*/
-/*}*/
-/*.mini_element_icons{*/
-/*  margin-left: 4px;*/
-/*}*/
-/*.mini_element:hover{*/
-/*  text-decoration: none;*/
-/*  background: #161e29;*/
-/*}*/
-/*.input_element{*/
-/*  background-color: rgba(22,30,41,0.6);*/
-/*  border: none;*/
-/*}*/
-/*.scroll_horizontal{*/
-/*  max-width: 150px;*/
-/*}*/
-/*.file_btn{*/
-/*  display: none;*/
-/*}*/
-/*label{*/
-/*  margin: 0;*/
-/*}*/
+
 </style>

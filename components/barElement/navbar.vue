@@ -20,7 +20,7 @@ import {mapMutations} from "vuex";
 export default {
   name: "navbar",
   methods:{
-    ...mapMutations('authStore/authorization', ['CLEAR_TOKEN'])
+    ...mapMutations('web-app/authStore/authorization', ['CLEAR_TOKEN'])
   }
 }
 </script>

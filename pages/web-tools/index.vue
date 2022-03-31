@@ -39,10 +39,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('authStore/authorization', ['token'])
+    ...mapGetters('web-app/authStore/authorization', ['token'])
   },
   methods:{
-    ...mapActions('authStore/authorization', ['LOG_IN']),
+    ...mapActions('web-app/authStore/authorization', ['LOG_IN']),
   }
 }
 </script>

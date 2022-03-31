@@ -59,11 +59,11 @@ export default {
   props: ['name'],
   name: "taskLogs",
   computed: {
-    ...mapGetters('discordJoinerStore/task-status.js', ['logs', 'date'])
+    ...mapGetters('web-app/discordJoinerStore/task-status', ['logs', 'date'])
   },
   methods: {
-    ...mapActions('discordJoinerStore/task-status.js', ['STOP_ALL_TASKS', 'CLEAR_LOGS']),
-    ...mapActions('discordJoinerStore/discord-joiner.js', ['START_ALL_TASKS'])
+    ...mapActions('web-app/discordJoinerStore/task-status', ['STOP_ALL_TASKS', 'CLEAR_LOGS']),
+    ...mapActions('web-app/discordJoinerStore/discord-joiner', ['START_ALL_TASKS'])
   }
 }
 </script>

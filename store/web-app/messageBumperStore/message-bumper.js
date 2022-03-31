@@ -40,13 +40,6 @@ export const mutations = {
     },
     ADD_MESSAGE_TO_LISTS: (state, messageObj) => {
         messageObj.forEach((message) => {state.messageList.push(message)})
-        // if (typeof messageObj === 'string') {
-        //     state.messageList.push(messageObj)
-        // } else if (Array.isArray(messageObj)) {
-        //     messageObj.forEach((message) => {
-        //        state.messageList.push(message);
-        //     });
-        // }
     },
     ADD_MESSAGE_ARR_TO_LISTS: (state, massageArr) => {
         if (massageArr.length !== 0 ) {

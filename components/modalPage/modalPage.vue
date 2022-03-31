@@ -58,11 +58,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('popUpStore/popUp', ['namePopUp']),
+    ...mapGetters('ui/popUpStore/popUp', ['namePopUp']),
   },
   methods: {
-    ...mapMutations('popUpStore/popUp', ['POPUP_DISPLAY']),
-    ...mapActions('popUpStore/popUp', ['EXTRACT_AND_VALIDATE']),
+    ...mapMutations('ui/popUpStore/popUp', ['POPUP_DISPLAY']),
+    ...mapActions('ui/popUpStore/popUp', ['EXTRACT_AND_VALIDATE']),
   }
 
 }

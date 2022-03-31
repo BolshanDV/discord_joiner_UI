@@ -18,11 +18,11 @@ export const actions = {
         text = [...new Set(text.split('\n'))]
         switch (ctx.state.namePopUp) {
             case "Accounts tokens list Message Bumper": {
-                ctx.dispatch('discordJoinerStore/discord-joiner.js/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Message Bumper"} , {root: true})
+                ctx.dispatch('web-app/discordJoinerStore/discord-joiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Message Bumper"} , {root: true})
                 break;
             }
             case "Accounts tokens Discord Joiner": {
-                ctx.dispatch('discordJoinerStore/discord-joiner.js/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Discord Joiner"}, {root: true})
+                ctx.dispatch('webdiscordJoinerStore/discord-joiner/EXTRACT_AND_VALIDATE_TOKENS', {data: text, type: "Discord Joiner"}, {root: true})
                 break;
             }
             case "Proxy list": {
