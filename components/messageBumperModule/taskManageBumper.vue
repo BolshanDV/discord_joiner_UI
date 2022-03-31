@@ -29,42 +29,44 @@
                placeholder="Enter token"
         >
       </div>
-      <div class="work_space_element_title">
-        Channels list
-      </div>
-      <div class="text-field">
-        <input class="text-field__input input_element"
-               @keyup.enter="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"
-               v-model="channel"
-               type="search"
-               name="search"
-               autocomplete="off"
-               placeholder="Enter channel id"
-        >
-      </div>
-      <div
-          class="work_space_element row_position scroll space_element"
-          v-if="channelList.length !== 0"
-      >
-        <div
-            class="row_position mini_element"
-            v-for="(channel, index) in channelList"
-            :key="index"
-        >
-            <div><img :src='channel.iconUrl' alt="" class="channelIcon"></div>
-            <div class="mini_element_icons">
-              <div class="scroll_horizontal scroll_horizontal_limit">
-                #{{ channel.channelName }}
-              </div>
-            </div>
-            <div
-                class="mini_element_icons"
-                @click="DELETE_CHANNEL(index)"
-            >
-              <img src="../../assets/icons/cross.svg" alt="">
-            </div>
-        </div>
-      </div>
+
+      <channels-list/>
+<!--      <div class="work_space_element_title">-->
+<!--        Channels list-->
+<!--      </div>-->
+<!--      <div class="text-field">-->
+<!--        <input class="text-field__input input_element"-->
+<!--               @keyup.enter="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"-->
+<!--               v-model="channel"-->
+<!--               type="search"-->
+<!--               name="search"-->
+<!--               autocomplete="off"-->
+<!--               placeholder="Enter channel id"-->
+<!--        >-->
+<!--      </div>-->
+<!--      <div-->
+<!--          class="work_space_element row_position scroll space_element"-->
+<!--          v-if="channelList.length !== 0"-->
+<!--      >-->
+<!--        <div-->
+<!--            class="row_position mini_element"-->
+<!--            v-for="(channel, index) in channelList"-->
+<!--            :key="index"-->
+<!--        >-->
+<!--            <div><img :src='channel.iconUrl' alt="" class="channelIcon"></div>-->
+<!--            <div class="mini_element_icons">-->
+<!--              <div class="scroll_horizontal scroll_horizontal_limit">-->
+<!--                #{{ channel.channelName }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--                class="mini_element_icons"-->
+<!--                @click="DELETE_CHANNEL(index)"-->
+<!--            >-->
+<!--              <img src="../../assets/icons/cross.svg" alt="">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="work_space_element_title">
         Delay
       </div>
@@ -146,12 +148,14 @@
 <script>
 import messageList from "./messageList";
 import modalPage from "../modalPage/modalPage";
+import channelsList from "@/components/messageBumperModule/channelsList";
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
   name: "taskManagerBumper",
   components: {
     messageList,
-    modalPage
+    modalPage,
+    channelsList
   },
   data() {
     return {

@@ -151,32 +151,14 @@ export const actions = {
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {
-        // let notRepeat = true
-        // for (const tokenItem of ctx.state.tokensList) {
-        //     if(tokenItem.token === token) {
-        //         notRepeat = false
-        //         ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: token}, {root: true})
-        //     }
-        // }
-        // if (notRepeat) {
             const result = await validateSingleToken(token);
             if (result.errorToken !== undefined) {
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  result.errorToken}, {root: true})
             } else {
                 ctx.commit('VALIDATE_TOKEN', result.singleToken);
-                // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  result.singleToken}, {root: true})
             }
-        // }
     },
 
     EXTRACT_AND_VALIDATE_TOKENS_FOR_MASSAGER_BUMPER: async (ctx, tokensObj) => {
-        for (const tokensElement of tokensObj) {
-            for (const tokenItem of ctx.state.tokensList) {
-                if (tokensElement === tokenItem.token) {
-                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "repeatTokens", data: tokensElement}, {root: true})
-                }
-            }
-        }
         const {input} = await validateAndExtractTokens(tokensObj);
         for (const inputElement of input) {
             let notRepeat = true
@@ -187,10 +169,8 @@ export const actions = {
             }
             if (notRepeat) {
                 if (inputElement.errorToken !== undefined) {
-                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "errorTokens", data:  inputElement.errorToken}, {root: true})
                 } else {
                     ctx.commit('ADD_TOKEN_TO_LIST', inputElement.singleToken);
-                    // ctx.dispatch('toastedStore/toasted/ADDING_ERROR', {type: "successTokens", data:  inputElement.singleToken}, {root: true})
                 }
             }
         }

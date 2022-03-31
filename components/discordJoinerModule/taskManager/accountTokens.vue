@@ -31,6 +31,7 @@
                name="search"
                autocomplete="off"
                placeholder="Enter message"
+               @click="FOCUS"
                :class="{input_space: tokens.length !== 0}"
         >
       </div>
@@ -83,6 +84,10 @@ export default {
     EXTRACT_AND_VALIDATE() {
       this.EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER(this.tokenInput)
       this.tokenInput = ""
+    },
+    FOCUS() {
+      this.focus = true
+      console.log('g')
     },
   }
 }

@@ -98,9 +98,11 @@
             >
         </div>
       </div>
+
       <reaction-clicker
           v-if="selectedReactionClicker"
       />
+
     </div>
     <div class="work_space">
       <div class="row_position work_space_element_advent">
@@ -114,9 +116,11 @@
           >
         </div>
       </div>
+
       <send-command
           v-if="selectedSendCommand"
       />
+
     </div>
     <div class="row_position row_position_btn waves waves-effect">
       <div class="row_position row_position_btn_form"

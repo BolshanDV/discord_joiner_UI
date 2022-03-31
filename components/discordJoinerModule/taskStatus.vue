@@ -5,7 +5,8 @@
     </div>
     <div class="work_space column">
       <div class="work_space_element_title row_position work_space_element_advent " >
-        <div class="row_position item">Task name</div>
+        <div class="row_position item_name">Task name</div>
+        <div class="row_position item account_column">Accounts</div>
         <div class="row_position item">Task Status</div>
         <div class="row_position column_item">Actions</div>
       </div>
@@ -14,7 +15,20 @@
           :key="index"
           class="work_space_element row_position work_space_element_advent"
       >
-        <div class="row_position item">{{taskStatusItem.taskName}}</div>
+        <div class="row_position item_name">{{taskStatusItem.taskName}}</div>
+        <div class="row_position item account_column scroll_horizontal">
+          <div
+              class="row_position mini_element"
+              v-for="(token, j) in taskStatusItem.tokens"
+              :key="j"
+          >
+            <div class="mini_element_icons">
+              <div class="scroll_horizontal scroll_horizontal_limit">
+                {{ token.username }}
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row_position item"
              v-if="taskStatusItem.processingTask === '' "
         >
@@ -96,14 +110,14 @@ name: "taskStatus",
   margin-right: 8%;
 }
 .column_item{
-  width: 20%;
+  width: 15%;
   justify-content: center;
 }
 .work_space_element_title{
   padding: 0 2%;
 }
 .item{
-  width: 30%;
+  width: 20%;
 }
 .play{
   margin-right: 5%;
@@ -121,5 +135,23 @@ name: "taskStatus",
 .play:active{
   background-color: #3b8069;
   border-radius: 5px;
+}
+.account_column{
+  width: 45%;
+  margin-right: 15px;
+}
+.mini_element_icons{
+  margin-left: 4px;
+}
+.mini_element{
+  background: #272D36;
+  border-radius: 3px;
+  padding: 1.2% 2.5%;
+  margin: 0 1.75% 0 0;
+  justify-content: space-between;
+  align-items: center;
+}
+.item_name{
+  width: 15%;
 }
 </style>

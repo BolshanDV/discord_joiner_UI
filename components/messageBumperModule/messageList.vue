@@ -90,57 +90,57 @@ name: "messageList",
 }
 </script>
 
-<style scoped>
-.work_space{
-  background: rgba(16,23,34,0.6);
-  border-radius: 5px;
-  padding: 0 3% 3% 3%;
-  margin-top: 2%;
-}
-.work_space_element{
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  height: 6%;
-}
-.work_space_element_title{
-  margin-top: 3.75%;
-  margin-bottom: 2.75%;
-}
-.work_space_element_advent{
-  justify-content: space-between;
-  align-items: center;
-}
-.mini_element{
-  background: #272D36;
-  border-radius: 3px;
-  padding: 1.2% 2.5%;
-  margin: 1% 1.75%;
-  justify-content: space-between;
-  align-items: center;
-}
-.space_element{
-  padding: 2%;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.mini_element_icons{
-  margin-left: 4px;
-}
-.mini_element:hover{
-  text-decoration: none;
-  background: #161e29;
-}
-.input_element{
-  background-color: rgba(22,30,41,0.6);
-  border: none;
-}
-.scroll_horizontal{
-  max-width: 150px;
-}
-.file_btn{
-  display: none;
-}
-label{
-  margin: 0;
-}
+<style scoped src="assets/style/field.css">
+/*.work_space{*/
+/*  background: rgba(16,23,34,0.6);*/
+/*  border-radius: 5px;*/
+/*  padding: 0 3% 3% 3%;*/
+/*  margin-top: 2%;*/
+/*}*/
+/*.work_space_element{*/
+/*  background: rgba(22,30,41,0.6);*/
+/*  border-radius: 3px;*/
+/*  height: 6%;*/
+/*}*/
+/*.work_space_element_title{*/
+/*  margin-top: 3.75%;*/
+/*  margin-bottom: 2.75%;*/
+/*}*/
+/*.work_space_element_advent{*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
+/*.mini_element{*/
+/*  background: #272D36;*/
+/*  border-radius: 3px;*/
+/*  padding: 1.2% 2.5%;*/
+/*  margin: 1% 1.75%;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
+/*.space_element{*/
+/*  padding: 2%;*/
+/*  flex-wrap: wrap;*/
+/*  width: 100%;*/
+/*}*/
+/*.mini_element_icons{*/
+/*  margin-left: 4px;*/
+/*}*/
+/*.mini_element:hover{*/
+/*  text-decoration: none;*/
+/*  background: #161e29;*/
+/*}*/
+/*.input_element{*/
+/*  background-color: rgba(22,30,41,0.6);*/
+/*  border: none;*/
+/*}*/
+/*.scroll_horizontal{*/
+/*  max-width: 150px;*/
+/*}*/
+/*.file_btn{*/
+/*  display: none;*/
+/*}*/
+/*label{*/
+/*  margin: 0;*/
+/*}*/
 </style>
