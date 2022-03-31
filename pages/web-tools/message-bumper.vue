@@ -15,7 +15,7 @@
 <script>
 import taskLogsComponent from "../../components/discordJoinerModule/taskLogs";
 import taskStatusMessageBumper from "../../components/messageBumperModule/taskStatusMessageBumper";
-import taskManagerBumper from "../../components/messageBumperModule/taskManageBumper";
+import taskManagerBumper from "../../components/messageBumperModule/taskManager/taskManageBumper";
 export default {
   name: "home",
   middleware: ['authCheck'],

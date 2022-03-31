@@ -5,7 +5,7 @@
       <div class="row_position">
         <div>
           <label>
-            <img src="../../assets/icons/download.svg"
+            <img src="../../../assets/icons/download.svg"
                  alt=""
                  class="icons_svg"
             >
@@ -49,7 +49,7 @@
           <div class="mini_element_icons"
                @click="DELETE_MESSAGE(index)"
           >
-            <img src="../../assets/icons/cross.svg" alt=""
+            <img src="../../../assets/icons/cross.svg" alt=""
                  class="icons_svg_cross"
             >
           </div>
@@ -61,8 +61,8 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
-import modalPage from "../modalPage/modalPage";
-import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+import modalPage from "../../modalPage/modalPage";
+import {converter} from "~/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
 export default {
 name: "messageList",
   components: {
@@ -90,6 +90,6 @@ name: "messageList",
 }
 </script>
 
-<style scoped src="../../assets/style/components/field.css">
+<style scoped src="../../../assets/style/components/field.css">
 
 </style>

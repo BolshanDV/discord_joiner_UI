@@ -3,7 +3,7 @@
     <div>
       <p class="title">Task Manager</p>
     </div>
-    <div class="work_space column first_element">
+    <div class="work_space column work_space_main">
       <div class="work_space_element_title">
         Task name
       </div>
@@ -31,38 +31,20 @@
 
       <proxy-list/>
 
-      <div class="row_position work_space_element_advent row_position_input">
-        <div class="delay">
-          <div class="work_space_element_title">
-            Delay
-          </div>
-          <div class="work_space_element row_position">
-              <input class="text-field__input input_element"
-                     v-model.number="delay"
-                     autocomplete="off"
-                     placeholder="delay"
-                     type="search"
-                     name="search">
-          </div>
+        <div class="work_space_element_title">
+          Delay
         </div>
-        <div>
-          <div class="work_space_element_title">
-            Invites per task
-          </div>
-          <div class="work_space_element row_position">
-            <input
-                class="text-field__input input_element"
-                v-model.number="invitesPerTask"
-                autocomplete="off"
-                placeholder="Invites per task"
-                type="search"
-                name="search">
-          </div>
+        <div class="text-field">
+          <input class="text-field__input input_element"
+                 v-model="delay"
+                 autocomplete="off"
+                 placeholder="msec"
+                 type="search"
+                 name="search">
         </div>
-      </div>
     </div>
-    <div class="work_space">
-      <div class="row_position work_space_element_advent">
+    <div class="work_space column">
+      <div class="row_position work_space_element_advent ">
         <div>Accept rules</div>
         <div >
           <input
@@ -72,6 +54,7 @@
           >
         </div>
       </div>
+
       <div v-if="accept_rules">
         <div class="work_space_element_title">
           Guild Id
@@ -194,90 +177,5 @@ name: "taskManager",
 }
 </script>
 
-<style scoped>
-.work_space{
-  background: #101722;
-  border-radius: 5px;
-  padding: 3%;
-  margin-top: 2%;
-}
-.work_space_element{
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  height: 6%;
-}
-.work_space_element_title{
-  margin-top: 3.75%;
-  margin-bottom: 2.75%;
-}
-.work_space_element_advent{
-  justify-content: space-between;
-  align-items: center;
-}
-.row_position_btn{
-  justify-content: flex-end;
-  margin-top: 5%;
-}
-.input_element{
-  background: #161E29;
-  border-width: 0;
-  color: #CCCCCC;
-}
-.additional_functional {
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  padding: 2.75%;
-}
-.item{
-  margin: 0 3%;
-}
-.input_element_item{
-  width: 80%;
-}
-.delay{
-  margin-right: 4.5%;
-}
-.row_position_input{
-  margin-top: 2%;
-  align-items: center;
-}
-.scroll{
-  border-radius: 0 0 6px 6px;
-  width: 16vw;
-}
-.scroll_item{
-  height: 20%;
-}
-.mini_element{
-  background: rgba(22,30,41,0.6);
-  padding: 4% 3%;
-  justify-content: space-between;
-  align-items: center;
-}
-.mini_element:hover{
-  text-decoration: none;
-  color: #fff;
-  background: #161e29;
-}
-.row_rotate{
-  transform: rotate(180deg);
-}
-.cross_icon{
-  margin: 0 4.5%;
-}
-.first_element{
-  padding: 0 3% 3% 3%;
-}
-.short_input{
-  width: 16vw;
-}
-.click:active{
-  background-color: rgba(53, 60, 73, 0.6);
-}
-.file_btn{
-  display: none;
-}
-label{
-  margin: 0;
-}
+<style scoped src="../../../assets/style/components/taskManger.css">
 </style>

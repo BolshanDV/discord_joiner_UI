@@ -31,42 +31,7 @@
       </div>
 
       <channels-list/>
-<!--      <div class="work_space_element_title">-->
-<!--        Channels list-->
-<!--      </div>-->
-<!--      <div class="text-field">-->
-<!--        <input class="text-field__input input_element"-->
-<!--               @keyup.enter="ADD_CHANNEL_TO_LISTS_WITH_CLEAR_UP(channel)"-->
-<!--               v-model="channel"-->
-<!--               type="search"-->
-<!--               name="search"-->
-<!--               autocomplete="off"-->
-<!--               placeholder="Enter channel id"-->
-<!--        >-->
-<!--      </div>-->
-<!--      <div-->
-<!--          class="work_space_element row_position scroll space_element"-->
-<!--          v-if="channelList.length !== 0"-->
-<!--      >-->
-<!--        <div-->
-<!--            class="row_position mini_element"-->
-<!--            v-for="(channel, index) in channelList"-->
-<!--            :key="index"-->
-<!--        >-->
-<!--            <div><img :src='channel.iconUrl' alt="" class="channelIcon"></div>-->
-<!--            <div class="mini_element_icons">-->
-<!--              <div class="scroll_horizontal scroll_horizontal_limit">-->
-<!--                #{{ channel.channelName }}-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div-->
-<!--                class="mini_element_icons"-->
-<!--                @click="DELETE_CHANNEL(index)"-->
-<!--            >-->
-<!--              <img src="../../assets/icons/cross.svg" alt="">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--      </div>-->
+
       <div class="work_space_element_title">
         Delay
       </div>
@@ -81,7 +46,6 @@
       </div>
     </div>
     <div class="work_space column">
-      <div class="work_space_element_title">
         <div class="row_position work_space_element_advent">
           <div>Delete messages</div>
           <input type="checkbox"
@@ -90,8 +54,7 @@
                  @click="CHANGE_DELETE_MESSAGE_FLAG"
           >
         </div>
-      </div>
-      <div class="text-field"
+      <div class="text-field bumper_input"
         v-if="deleteMessagesFlag"
       >
         <input class="text-field__input input_element"
@@ -104,7 +67,6 @@
       </div>
     </div>
     <div class="work_space column">
-      <div class="work_space_element_title">
         <div class="row_position work_space_element_advent">
           <div>Messages loop</div>
           <input type="checkbox"
@@ -113,8 +75,7 @@
                  @click="CHANGE_LOOP_MESSAGE_FLAG"
           >
         </div>
-      </div>
-      <div class="text-field"
+      <div class="text-field bumper_input"
            v-if="deleteMessagesLoop"
       >
         <input class="text-field__input input_element"
@@ -126,7 +87,10 @@
         >
       </div>
     </div>
-    <message-list/>
+    <div class="message_container">
+      <message-list/>
+    </div>
+
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form"
         @click="CREATE_TASK_MESSAGE_BUMPER_AND_CLEAR()"
@@ -147,8 +111,8 @@
 
 <script>
 import messageList from "./messageList";
-import modalPage from "../modalPage/modalPage";
-import channelsList from "@/components/messageBumperModule/channelsList";
+import modalPage from "../../modalPage/modalPage";
+import channelsList from "~/components/messageBumperModule/taskManager/channelsList";
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
   name: "taskManagerBumper",
@@ -216,120 +180,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.work_space{
-  background: #101722;
-  border-radius: 5px;
-  padding: 1% 3%;
-  margin-top: 2%;
-}
-.work_space_main{
-  padding: 1% 3% 3% 3%;
-}
-.work_space_element{
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  height: 6%;
-}
-.work_space_element_title{
-  margin-top: 3.75%;
-  margin-bottom: 2.75%;
-}
-.work_space_element_advent{
-  justify-content: space-between;
-  align-items: center;
-}
-
-.input_element{
-  background: #161E29;
-  border-width: 0;
-  color: #CCCCCC;
-}
-
-.additional_functional {
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  padding: 2.75%;
-}
-.item{
-  margin: 0 3%;
-}
-.input_element_item{
-  width: 80%;
-}
-.delay{
-  margin-right: 2%;
-}
-.row_position_input{
-  margin-top: 2%;
-}
-.space_element{
-  padding: 2%;
-  flex-wrap: wrap;
-}
-.mini_element_icons{
-  margin-left: 4px;
-}
-.row_position_btn{
-  justify-content: flex-end;
-  margin-top: 5%;
-
-}
-.row_position_btn_form{
-  background: rgba(43, 214, 162, 0.2);
-  border: 1px solid #2BD6A2;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 16px;
-  width: 10vw;
-  height: 5vh;
-  justify-content: center;
-}
-.noActive{
-  background-color: rgba(22, 30, 41, 0.6);
-  border: 2px solid rgba(24, 33, 44, 0.96);
-}
-.noActive:active{
-  background-color: rgba(24, 33, 44, 0.96);
-}
-.mini_element{
-  background: #272D36;
-  border-radius: 3px;
-  padding: 1.2% 2.5%;
-  margin: 1% 1.75%;
-  justify-content: space-between;
-  align-items: center;
-}
-.mini_element:hover{
-  text-decoration: none;
-  color: #fff;
-  background: #161e29;
-}
-.row_rotate{
-  transform: rotate(180deg);
-}
-.drop_down_element{
-  background: rgba(22,30,41,0.6);
-  padding: 4% 3%;
-  justify-content: space-between;
-  align-items: center;
-}
-.drop_down_element:hover{
-  text-decoration: none;
-  background: #161e29;
-}
-.cross_icon{
-   margin: 0 4.5%;
- }
-.scroll_horizontal_limit{
-  max-width: 150px;
-}
-.row_position_btn_form:active{
-  background: #2BD6A2;
-}
-.channelIcon{
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-}
+<style scoped src="../../../assets/style/components/taskManger.css">
 </style>

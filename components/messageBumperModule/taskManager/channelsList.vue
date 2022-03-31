@@ -35,7 +35,7 @@
           <div class="mini_element_icons"
                @click="DELETE_CHANNEL(index)"
           >
-            <img src="../../assets/icons/cross.svg" alt=""
+            <img src="../../../assets/icons/cross.svg" alt=""
                  class="icons_svg_cross"
             >
           </div>
@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style scoped src="../../assets/style/components/field.css">
+<style scoped src="../../../assets/style/components/field.css">
 .additional_functional {
   background: rgba(22,30,41,0.6);
   border-radius: 3px;
