@@ -1,7 +1,7 @@
-import axios from "axios";
 import {buildHeaders} from "@/store/web-app/utils/requestUtils";
 import {getMe} from "@/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
 import {logs} from "@/store/web-app/logger";
+import {createAxiosInstance} from "@/store/web-app/discordJoinerStore/services/joinerServices/https-agent-service";
 
 /**
  * @description it's global variable for UI
@@ -31,7 +31,9 @@ export async function startTaskAsynchronously(taskParameters) {
      await setEmails(preparedTaskObj);
 
      preparedTaskObj.tokens.forEach((obj) => {
-         axios.post(`https://discord.com/api/v9/invites/${taskParameters.inviteCode}`, {}, {
+         const axiosInstance = createAxiosInstance(obj.proxy);
+
+         axiosInstance.post(`https://discord.com/api/v9/invites/${taskParameters.inviteCode}`, {}, {
              withCredentials: true,
              headers: buildHeaders(obj.token, obj.email)
          }).then((res) => {
