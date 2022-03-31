@@ -90,6 +90,6 @@ name: "messageList",
 }
 </script>
 
-<style scoped src="assets/style/field.css">
+<style scoped src="../../assets/style/components/field.css">
 
 </style>

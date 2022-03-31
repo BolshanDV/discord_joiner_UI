@@ -5,11 +5,9 @@
       </div>
       <div class="main_block information_section">
         <task-status
-
         />
         <task-logs
             name="discordJoiner"
-
         />
       </div>
     </div>
@@ -37,27 +35,5 @@ name: "home",
 }
 </script>
 
-<style scoped>
-.main_section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 0;
-  align-items: flex-start;
-}
-.task_manager{
-  width: 35%;
-}
-.information_section{
-  width: 63%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.main_block{
-  border-radius: 5px;
-  background: #0D121A;
-  padding: 1.5%;
-}
+<style scoped src="../../assets/style/components/mainPage.css">
 </style>

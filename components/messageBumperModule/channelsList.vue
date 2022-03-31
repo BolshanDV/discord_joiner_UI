@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style scoped src="assets/style/field.css">
+<style scoped src="../../assets/style/components/field.css">
 .additional_functional {
   background: rgba(22,30,41,0.6);
   border-radius: 3px;

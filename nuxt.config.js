@@ -22,13 +22,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-      'assets/style/fonts.css',
-      'assets/transitions/transition.css',
-      'assets/style/checkbox.css',
-      'assets/style/input.css',
-      'assets/style/scrolls.css',
-      'assets/style/icons.css',
-      'assets/style/button.css'
+      'assets/style/elements/fonts.css',
+      'assets/style/elements/checkbox.css',
+      'assets/style/elements/input.css',
+      'assets/style/elements/scrolls.css',
+      'assets/style/elements/icons.css',
+      'assets/style/elements/button.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

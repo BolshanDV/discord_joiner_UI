@@ -40,6 +40,7 @@ export default {
   max-height: 43px;
   background: #B41210;
   border-radius: 7px;
+  border-color: #B41210;
   color: #FFFFFF;
   margin: 0 3%;
 }
