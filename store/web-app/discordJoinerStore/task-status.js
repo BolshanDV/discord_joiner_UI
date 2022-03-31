@@ -1,5 +1,5 @@
 import {setStopCriticalFlag} from "./services/joinerServices/extended-task-service"
-import {clearLogs, getLogs} from "../../logger";
+import {clearLogs, getLogs} from "../logger";
 import {setStopBumperCriticalFlag} from "../messageBumperStore/services/task-service";
 
 export const state = () => ({

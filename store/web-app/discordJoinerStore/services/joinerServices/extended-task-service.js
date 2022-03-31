@@ -3,7 +3,7 @@ import {solveCaptcha} from "@/store/web-app/captchaSettingsStore/captcha-service
 import {buildHeaders} from "@/store/web-app/utils/requestUtils";
 import {getMe} from "./validate-service";
 import {findTask} from "@/store/web-app/utils/taskUtils";
-import {logs} from "@/store/logger";
+import {logs} from "@/store/web-app/logger";
 
 let key = '';
 let captchaServiceType = '';

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {buildHeaders} from "@/store/web-app/utils/requestUtils";
 import {getMe} from "@/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
-import {logs} from "@/store/logger";
+import {logs} from "@/store/web-app/logger";
 
 /**
  * @description it's global variable for UI

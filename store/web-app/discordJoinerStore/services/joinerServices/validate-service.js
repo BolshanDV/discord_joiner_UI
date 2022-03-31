@@ -1,6 +1,6 @@
 import axios from "axios";
 import {controller} from "./extended-task-service";
-import {logs} from "@/store/logger";
+import {logs} from "@/store/web-app/logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
