@@ -13,16 +13,17 @@ export const tasks = [];
 /**
  * @description This function must record log info and increment counter success tokens accounts
  * @param {string} token - some token of user
- * @param {inviteCode} inviteCode - invite
+ * @param {Date} id - id task
  * @return {VoidFunction}
  */
-function incrementCounterAndRecordLog(token, inviteCode) {
-    tasks.forEach(task => { if (task.taskId === inviteCode) task.successAccounts++ });
+function incrementCounterAndRecordLog(token, id) {
+    tasks.forEach(task => { if (task.id === id) task.successAccounts++ });
 
     logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token} successfully entered the channel`});
 }
 
 /**
+ * @param {Date} [taskParameters.id] - uniq identification
  * @param {string} [taskParameters.inviteCode = https://discord.gg/qdpSJwTR,qdpSJwTR] - invite code in channel
  * @param {string[]|string} [taskParameters.tokens = [token1, token2]] - token list ore single token
  * @param {string[]|string} [taskParameters.proxies = [proxy1, proxy2]] - proxy list ore single proxy
@@ -31,7 +32,7 @@ function incrementCounterAndRecordLog(token, inviteCode) {
  */
 export async function startTaskAsynchronously(taskParameters) {
     const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
-    tasks.push({inviteCode: taskParameters.inviteCode, successAccounts: 0});
+    tasks.push({id: taskParameters.id, successAccounts: 0});
 
     for (const obj of preparedTaskObj.tokens) {
         const axiosInstance = createAxiosInstance(obj.proxy);
@@ -41,7 +42,7 @@ export async function startTaskAsynchronously(taskParameters) {
             headers: buildHeaders(obj.token, obj.email)
         }).then((res) => {
             (res.status === 200)
-                ? incrementCounterAndRecordLog(obj.token, preparedTaskObj.inviteCode)
+                ? incrementCounterAndRecordLog(obj.token, taskParameters.id)
                 : logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
         }).catch((e) => {
             console.log(e);
