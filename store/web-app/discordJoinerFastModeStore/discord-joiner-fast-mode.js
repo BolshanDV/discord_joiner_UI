@@ -83,9 +83,6 @@ export const actions = {
                 ctx.dispatch('COMPLETED_TASK', taskParameter.id);
             }
         })
-        // if (status) {
-        //     ctx.dispatch('COMPLETED_TASK', taskParameter.id)
-        // }
         ctx.commit('SAVE_TASK', taskParameter)
         ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.id)
     },
@@ -108,11 +105,11 @@ export const actions = {
             10)
     },
     COMPLETED_TASK: (ctx, id) => {
-        console.log('hi')
+        console.log('sd')
         let obj = {
             id: findTaskInFastMode(ctx.state.taskFastMode, id),
             processTask: {
-                successAccounts: "Done",
+                successAccounts: -1,
                 style: 'success'
             }
         }

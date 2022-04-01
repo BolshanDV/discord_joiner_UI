@@ -61,7 +61,7 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import {converter} from "~/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
 export default {
   name: "accountTokenFastMode",

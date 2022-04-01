@@ -1,7 +1,7 @@
 import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validate-service";
 import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/extended-task-service";
 import {findTaskInMainArray} from "../utils/taskUtils";
-import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
 export let state = () => ({
     tokens: [],

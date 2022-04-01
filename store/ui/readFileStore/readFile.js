@@ -1,4 +1,4 @@
-import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
 export const actions = {
     FILE_READ_MESSAGES: async (ctx, file) => {
