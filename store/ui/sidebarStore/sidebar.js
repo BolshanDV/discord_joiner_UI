@@ -12,7 +12,7 @@ export const state = () => ({
             icon: 'messageBumper.svg'
         },
         {
-            title: 'Discord Joiner Fast Mode',
+            title: 'Joiner Fast Mode',
             url: '/web-tools/discord-joiner-fast-mode',
             icon: 'fast.svg'
         },

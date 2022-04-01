@@ -1,13 +1,17 @@
 import {validateAndExtractTokens} from "~/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
+import {startTaskAsynchronously} from "~/store/web-app/discordJoinerFastModeStore/fastModeServices/simple-task-service";
+import {logs} from "~/store/web-app/logger";
 
 export let state = () => ({
     accountToken: [],
-    proxy: []
+    proxy: [],
+    taskFastMode: [],
 })
 
 export const getters = {
     accountToken: state => state.accountToken,
-    proxy: state => state.proxy
+    proxy: state => state.proxy,
+    taskFastMode: state => state.taskFastMode,
 }
 
 export const mutations = {
@@ -23,6 +27,12 @@ export const mutations = {
     },
     DELETE_PROXY: (state, index) => {
         state.proxy.splice(index, 1)
+    },
+    SAVE_TASK: (state, obj) => {
+        state.taskFastMode.push(obj)
+    },
+    DELETE_TASK: (state, index) => {
+        state.taskFastMode.splice(index, 1)
     }
 }
 
@@ -48,6 +58,20 @@ export const actions = {
                 ctx.commit('SAVE_PROXY_TO_ARR', proxyItem)
             }
         }
+    },
+    CREATE_TASK_AND_START: (ctx, obj) => {
+        const taskParameter = {
+            inviteCode: obj.inviteCode,
+            tokens: obj.accountToken,
+            proxy: obj.proxy
+        }
+        console.log(taskParameter)
+        ctx.commit('SAVE_TASK', taskParameter)
+        // startTaskAsynchronously(taskParameter)
+        //     .then(r => ctx.commit('SAVE_TASK', taskParameter))
+    },
+    DELETE_TASK_ELEMENT: (ctx, index) => {
+        ctx.commit('DELETE_TASK', index)
     }
 }
 

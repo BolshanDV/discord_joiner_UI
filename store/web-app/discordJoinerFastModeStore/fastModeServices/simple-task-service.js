@@ -1,7 +1,7 @@
-import {buildHeaders} from "@/store/web-app/utils/requestUtils";
-import {getMe} from "@/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
-import {logs} from "@/store/web-app/logger";
-import {createAxiosInstance} from "@/store/web-app/discordJoinerStore/services/joinerServices/https-agent-service";
+import {buildHeaders} from "~/store/web-app/utils/requestUtils";
+import {getMe} from "~/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
+import {logs} from "~/store/web-app/logger";
+import {createAxiosInstance} from "~/store/web-app/discordJoinerFastModeStore/fastModeServices/https-agent-service";
 
 /**
  * @description it's global variable for UI

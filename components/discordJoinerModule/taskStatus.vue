@@ -52,7 +52,6 @@
         </div>
 
         <div class="row_position column_item">
-<!--          <div class="icon_element"><img src="../../assets/icons/copy.svg" alt=""></div>-->
           <div class="icon_element delete"
                @click="DELETE_TASK_STATUS(index)"
           >
