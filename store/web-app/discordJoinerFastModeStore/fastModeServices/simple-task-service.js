@@ -25,7 +25,7 @@ function incrementCounterAndRecordLog(token) {
  * @param {string[]|string} [taskParameters.tokens = [token1, token2]] - token list ore single token
  * @param {string[]|string} [taskParameters.proxies = [proxy1, proxy2]] - proxy list ore single proxy
  * @param {number} [taskParameters.delay = 3000] - delay
- * @returns {Promise<void>}
+ * @returns {Promise<boolean>}
  */
 export async function startTaskAsynchronously(taskParameters) {
     const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
@@ -47,6 +47,7 @@ export async function startTaskAsynchronously(taskParameters) {
 
          await sleep(taskParameters.delay);
     }
+    return true
 }
 
 /**

@@ -67,7 +67,7 @@ export const actions = {
             }
         }
     },
-    CREATE_TASK_AND_START: (ctx, obj) => {
+    CREATE_TASK_AND_START: async (ctx, obj) => {
         const taskParameter = {
             id: Date.now(),
             inviteCode: obj.inviteCode,
@@ -75,12 +75,14 @@ export const actions = {
             proxies: obj.proxy,
             delay: obj.delay,
             processTask: {
-                successAccounts: successAccounts,
+                successAccounts: 0,
                 style: ''
             }
         }
-        console.log(taskParameter)
-        startTaskAsynchronously(taskParameter).then(() => ctx.dispatch('COMPLETED_TASK', taskParameter.id))
+        let status = await startTaskAsynchronously(taskParameter)
+        if (status) {
+            ctx.dispatch('COMPLETED_TASK', taskParameter.id)
+        }
         ctx.commit('SAVE_TASK', taskParameter)
         ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.id)
     },
@@ -103,6 +105,7 @@ export const actions = {
             10)
     },
     COMPLETED_TASK: (ctx, id) => {
+        console.log('hi')
         let obj = {
             id: findTaskInFastMode(ctx.state.taskFastMode, id),
             processTask: {

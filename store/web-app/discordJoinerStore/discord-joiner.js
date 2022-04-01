@@ -49,7 +49,6 @@ export const mutations = {
         if ( token !== 0) state.successJoined.push(token);
     },
     ADD_SUCCESS_TOKENS_ARR: (state, tokens) => {
-        console.log(tokens)
         if ( tokens.length !== 0) tokens.forEach(item => state.tokens.push(item))
     },
     SWITCH_GLOBAL_STATUS: (state, status) => {

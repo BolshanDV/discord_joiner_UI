@@ -15,19 +15,20 @@
       >
         <div class="row_position item_name">Task {{index + 1}}</div>
         <div class="row_position item"
+             :class="taskFastModeItem.processTask.style"
+             v-if="taskFastModeItem.processTask.successAccounts === 'Done'"
         >
-          {{taskFastModeItem.successAccounts}}/{{taskFastModeItem.tokens.length}}
+          {{taskFastModeItem.processTask.successAccounts}}
+        </div>
+        <div class="row_position item"
+        >
+          {{taskFastModeItem.processTask.successAccounts}}/{{taskFastModeItem.tokens.length}}
         </div>
         <div class="row_position column_item">
           <div class="icon_element delete"
                @click="DELETE_TASK_ELEMENT(index)"
           >
             <img src="../../assets/icons/delete.svg" alt="" >
-          </div>
-          <div class="icon_element play"
-               @click="CREATE_TASK_AND_START(taskStatusItem)"
-          >
-            <img src="../../assets/icons/play.svg" alt="" >
           </div>
         </div>
       </div>
