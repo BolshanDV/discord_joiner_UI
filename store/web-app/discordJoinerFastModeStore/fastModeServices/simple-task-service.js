@@ -26,26 +26,24 @@ function incrementCounterAndRecordLog(token) {
  * @returns {Promise<void>}
  */
 export async function startTaskAsynchronously(taskParameters) {
-    console.log(taskParameters)
-     const preparedTaskObj = prepareTaskParamsObject(taskParameters);
+    const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
     console.log(preparedTaskObj)
-    await setEmails(preparedTaskObj);
 
-     preparedTaskObj.tokens.forEach((obj) => {
-         const axiosInstance = createAxiosInstance(obj.proxy);
+    preparedTaskObj.tokens.forEach((obj) => {
+        const axiosInstance = createAxiosInstance(obj.proxy);
 
-         axiosInstance.post(`https://discord.com/api/v9/invites/${taskParameters.inviteCode}`, {}, {
-             withCredentials: true,
-             headers: buildHeaders(obj.token, obj.email)
-         }).then((res) => {
-             (res.status === 200)
-                 ? incrementCounterAndRecordLog(obj.token)
-                 : logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
-         }).catch((e) => {
-             console.log(e);
-             logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
-         })
-     });
+        axiosInstance.post(`https://discord.com/api/v9/invites/${preparedTaskObj.inviteCode}`, {}, {
+            withCredentials: true,
+            headers: buildHeaders(obj.token, obj.email)
+        }).then((res) => {
+            (res.status === 200)
+                ? incrementCounterAndRecordLog(obj.token)
+                : logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
+        }).catch((e) => {
+            console.log(e);
+            logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
+        })
+    });
 }
 
 /**
@@ -53,15 +51,17 @@ export async function startTaskAsynchronously(taskParameters) {
  * @param taskParameters {{inviteCode?: string, tokens?: (string[]|string), proxy?: (string[]|string), proxies?: (string[]|string)}}
  * @returns {{inviteCode: "For example: qdpSJwTR", tokens: [{"token": "token1", "proxy": "someProxy1", "email": "somemail@bk.ru"}, {"token": "token2", "proxy": "someProxy2", "email": "somemail@bk.ru"}]}}
  */
-function prepareTaskParamsObject(taskParameters) {
+async function prepareTaskParamsObject(taskParameters) {
     const obj = {
         inviteCode: undefined,
         tokens: [],
     }
 
     taskParameters.inviteCode.includes('https')
-        ? obj.inviteCode = taskParameters.inviteCode.split(".gg/")[1]
+        ? obj.inviteCode = taskParameters.inviteCode.split('.gg/')[1]
         : obj.inviteCode = taskParameters.inviteCode;
+
+    console.log(obj);
 
     if (Array.isArray(taskParameters.tokens)) {
         taskParameters.tokens.forEach((token) => {
@@ -72,6 +72,7 @@ function prepareTaskParamsObject(taskParameters) {
     }
 
     allocateProxy(obj, taskParameters);
+    await setEmails(obj);
 
     return obj;
 }
@@ -111,4 +112,6 @@ async function setEmails(preparedTaskObj) {
     for (let i = 0; i < preparedTaskObj.tokens; i++) {
         preparedTaskObj.email = await getMe(preparedTaskObj[i].token);
     }
+
+    return preparedTaskObj;
 }
