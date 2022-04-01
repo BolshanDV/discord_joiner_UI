@@ -30,7 +30,7 @@ export const tasks = [];
 export const controller = new AbortController();
 
 // sleep function for delay
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 function checker() {
     setInterval(() => {
@@ -66,6 +66,7 @@ export async function launchTasks(body) {
         if (pauseFlag) await sleep(pause);
         if (criticalStopFlag) {
             tasks.length = 0;
+            logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
             break;
         }
         // execute a request to get information about the user to receive mail

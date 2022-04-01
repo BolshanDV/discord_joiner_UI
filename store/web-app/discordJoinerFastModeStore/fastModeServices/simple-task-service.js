@@ -2,6 +2,7 @@ import {buildHeaders} from "~/store/web-app/utils/requestUtils";
 import {getMe} from "~/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
 import {logs} from "~/store/web-app/logger";
 import {createAxiosInstance} from "~/store/web-app/discordJoinerFastModeStore/fastModeServices/https-agent-service";
+import {sleep} from "~/store/web-app/discordJoinerStore/services/joinerServices/extended-task-service";
 
 /**
  * @description it's global variable for UI
@@ -23,13 +24,13 @@ function incrementCounterAndRecordLog(token) {
  * @param {string} [taskParameters.inviteCode = https://discord.gg/qdpSJwTR,qdpSJwTR] - invite code in channel
  * @param {string[]|string} [taskParameters.tokens = [token1, token2]] - token list ore single token
  * @param {string[]|string} [taskParameters.proxies = [proxy1, proxy2]] - proxy list ore single proxy
+ * @param {number} [taskParameters.delay = 3000] - delay
  * @returns {Promise<void>}
  */
 export async function startTaskAsynchronously(taskParameters) {
     const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
-    console.log(preparedTaskObj)
 
-    preparedTaskObj.tokens.forEach((obj) => {
+    for (const obj of preparedTaskObj.tokens) {
         const axiosInstance = createAxiosInstance(obj.proxy);
 
         axiosInstance.post(`https://discord.com/api/v9/invites/${preparedTaskObj.inviteCode}`, {}, {
@@ -42,8 +43,10 @@ export async function startTaskAsynchronously(taskParameters) {
         }).catch((e) => {
             console.log(e);
             logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
-        })
-    });
+        });
+
+         await sleep(taskParameters.delay);
+    }
 }
 
 /**
