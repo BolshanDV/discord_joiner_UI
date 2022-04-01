@@ -1,10 +1,11 @@
 import {validateAndExtractTokens} from "~/store/web-app/discordJoinerStore/services/joinerServices/validate-service";
 import {
     startTaskAsynchronously,
-    successAccounts
+    tasks
 } from "~/store/web-app/discordJoinerFastModeStore/fastModeServices/simple-task-service";
 import {findTaskInFastMode} from "@/store/web-app/utils/taskUtils";
 import {getterTokens} from "@/store/web-app/discordJoinerStore/services/joinerServices/extended-task-service";
+import {logs} from "@/store/web-app/logger";
 
 export let state = () => ({
     accountToken: [],
@@ -39,6 +40,7 @@ export const mutations = {
         state.taskFastMode.splice(index, 1)
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
+        console.log(obj)
         state.taskFastMode[obj.id].processTask = obj.processTask
     }
 }
@@ -67,9 +69,8 @@ export const actions = {
             }
         }
     },
-    CREATE_TASK_AND_START: async (ctx, obj) => {
+    CREATE_TASK_AND_START:  (ctx, obj) => {
         const taskParameter = {
-            id: Date.now(),
             inviteCode: obj.inviteCode,
             tokens: obj.accountToken,
             proxies: obj.proxy,
@@ -79,24 +80,24 @@ export const actions = {
                 style: ''
             }
         }
-        let status = await startTaskAsynchronously(taskParameter)
-        if (status) {
-            ctx.dispatch('COMPLETED_TASK', taskParameter.id)
-        }
+        startTaskAsynchronously(taskParameter).then(r => console.log(r))
+        // if (status) {
+        //     ctx.dispatch('COMPLETED_TASK', taskParameter.id)
+        // }
         ctx.commit('SAVE_TASK', taskParameter)
-        ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.id)
+        ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.inviteCode)
     },
 
     DELETE_TASK_ELEMENT: (ctx, index) => {
         ctx.commit('DELETE_TASK', index)
     },
 
-    UPDATE_TOKENS_FAST_MODE: (ctx, id) => {
+    UPDATE_TOKENS_FAST_MODE: (ctx, inviteCode) => {
         let timerId = setInterval(() => {
                 let obj = {
-                    id: findTaskInFastMode(ctx.state.taskFastMode, id),
+                    id: findTaskInFastMode(ctx.state.taskFastMode, inviteCode),
                     processTask: {
-                        successAccounts: successAccounts,
+                        successAccounts: tasks[findTaskInFastMode(tasks, inviteCode)].successAccounts,
                         style: ''
                     }
                 }

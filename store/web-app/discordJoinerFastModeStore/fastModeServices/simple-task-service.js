@@ -31,7 +31,7 @@ function incrementCounterAndRecordLog(token, inviteCode) {
  */
 export async function startTaskAsynchronously(taskParameters) {
     const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
-    tasks.push({taskId: preparedTaskObj.inviteCode, successAccounts: 0});
+    tasks.push({inviteCode: taskParameters.inviteCode, successAccounts: 0});
 
     for (const obj of preparedTaskObj.tokens) {
         const axiosInstance = createAxiosInstance(obj.proxy);

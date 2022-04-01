@@ -14,9 +14,9 @@ export function findTaskInMainArray(mainArray, taskName) {
     return -1;
 }
 
-export function findTaskInFastMode(mainArray, num) {
+export function findTaskInFastMode(mainArray, inviteCode) {
     for (let i = 0; i < mainArray.length; i++) {
-        if (mainArray[i].id === num) {
+        if (mainArray[i].inviteCode === inviteCode) {
             return i;
         }
     }
