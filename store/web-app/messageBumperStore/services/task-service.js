@@ -41,6 +41,7 @@ export async function launchBumperTask(bumperObj) {
                 if (criticalStopFlag) {
                     tasks.length = 0;
                     task = null;
+                    logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                     clearInterval(intervalId);
                     break;
                 }
@@ -49,6 +50,7 @@ export async function launchBumperTask(bumperObj) {
                         tasks.length = 0;
                         task = null;
                         clearInterval(intervalId);
+                        logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                         break;
                     }
 
@@ -69,9 +71,10 @@ export async function launchBumperTask(bumperObj) {
                         });
                     }
 
-                    loopIteration++;
                     await sleep(delay);
                 }
+
+                loopIteration++;
             }
 
             await sleep(loopMessageObj.deleteDelay);
