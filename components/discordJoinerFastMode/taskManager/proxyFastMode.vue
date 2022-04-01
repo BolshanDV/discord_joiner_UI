@@ -46,7 +46,7 @@
 
         >
           <div class="scroll_horizontal row_position">
-            <div>{{proxyItem}}</div>
+            <div>{{proxyItem.split(':')[0]}}</div>
           </div>
           <div class="mini_element_icons"
                @click="DELETE_PROXY(index)"

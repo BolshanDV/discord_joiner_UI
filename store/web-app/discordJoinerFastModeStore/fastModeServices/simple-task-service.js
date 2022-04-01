@@ -22,13 +22,14 @@ function incrementCounterAndRecordLog(token) {
 /**
  * @param {string} [taskParameters.inviteCode = https://discord.gg/qdpSJwTR,qdpSJwTR] - invite code in channel
  * @param {string[]|string} [taskParameters.tokens = [token1, token2]] - token list ore single token
- * @param {string[]|string} [taskParameters.proxy = [token1, token2]] - token list ore single token
  * @param {string[]|string} [taskParameters.proxies = [proxy1, proxy2]] - proxy list ore single proxy
  * @returns {Promise<void>}
  */
 export async function startTaskAsynchronously(taskParameters) {
+    console.log(taskParameters)
      const preparedTaskObj = prepareTaskParamsObject(taskParameters);
-     await setEmails(preparedTaskObj);
+    console.log(preparedTaskObj)
+    await setEmails(preparedTaskObj);
 
      preparedTaskObj.tokens.forEach((obj) => {
          const axiosInstance = createAxiosInstance(obj.proxy);
@@ -56,7 +57,6 @@ function prepareTaskParamsObject(taskParameters) {
     const obj = {
         inviteCode: undefined,
         tokens: [],
-        proxies: undefined
     }
 
     taskParameters.inviteCode.includes('https')
@@ -65,7 +65,7 @@ function prepareTaskParamsObject(taskParameters) {
 
     if (Array.isArray(taskParameters.tokens)) {
         taskParameters.tokens.forEach((token) => {
-            obj.tokens.push({token: token, proxy: undefined, email: undefined});
+            obj.tokens.push({token: token.token, proxy: undefined, email: undefined});
         })
     } else {
         obj.tokens.push({token: taskParameters.tokens, proxy: undefined, email: undefined})
