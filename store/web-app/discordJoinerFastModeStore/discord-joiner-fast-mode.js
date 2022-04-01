@@ -16,6 +16,13 @@ export const mutations = {
     },
     DELETE_TOKEN: (state, index) => {
         state.accountToken.splice(index, 1)
+    },
+    SAVE_PROXY_TO_ARR: (state, proxy) => {
+        console.log(proxy)
+        state.proxy.push(proxy)
+    },
+    DELETE_PROXY: (state, index) => {
+        state.proxy.splice(index, 1)
     }
 }
 
@@ -34,6 +41,14 @@ export const actions = {
             }
         }
     },
+
+    SAVE_PROXY: (ctx, proxyArr) => {
+        for (const proxyItem of proxyArr) {
+            if (proxyItem !== "") {
+                ctx.commit('SAVE_PROXY_TO_ARR', proxyItem)
+            }
+        }
+    }
 }
 
 

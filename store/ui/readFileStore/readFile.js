@@ -37,8 +37,18 @@ export const actions = {
         reader.readAsText(blob, 'UTF-8');
         reader.onload = () => {
             const res = converter(reader.result)
-            // ctx.commit('web-app/discordJoinerStore/discord-joiner/ADD_PROXY_FROM_ARR', res, {root: true})
+            ctx.dispatch('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode/EXTRACT_AND_VALIDATE_TOKENS', res, {root: true})
             reader = null;
         }
-    }
+    },
+    READ_FILE_PROXY_FAST_MODE: async (ctx, file) => {
+        let blob  = file.target.files[0];
+        let reader = new FileReader();
+        reader.readAsText(blob, 'UTF-8');
+        reader.onload = () => {
+            const res = converter(reader.result)
+            ctx.dispatch('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode/SAVE_PROXY', res, {root: true})
+            reader = null;
+        }
+    },
  }

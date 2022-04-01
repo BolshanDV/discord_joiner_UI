@@ -13,6 +13,7 @@
                 type="file"
                 class="file_btn"
                 accept=".txt"
+                @change="READ_FILE_PROXY_FAST_MODE"
             >
           </label>
         </div>
@@ -24,23 +25,31 @@
     >
       <div class="text-field">
         <input class="text-field__input input_element"
+               v-model="proxyInput"
+               @keyup.enter="EXTRACT_AND_SAVE_PROXY"
                type="search"
                name="search"
                autocomplete="off"
                placeholder="Enter message"
+               :class="{input_space: proxy.length !== 0}"
+
         >
       </div>
       <div
+          v-if="proxy.length !== 0"
           class="work_space_element row_position scroll space_element"
       >
         <div
             class="row_position mini_element"
+            v-for="(proxyItem, index) in proxy"
+            :key="index"
 
         >
           <div class="scroll_horizontal row_position">
-            <div></div>
+            <div>{{proxyItem}}</div>
           </div>
           <div class="mini_element_icons"
+               @click="DELETE_PROXY(index)"
           >
             <img src="../../../assets/icons/cross.svg" alt=""
                  class="icons_svg_cross"
@@ -53,8 +62,28 @@
 </template>
 
 <script>
+import {mapActions, mapGetters, mapMutations} from "vuex";
+import {converter} from "~/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+
 export default {
-  name: "proxyFastMode"
+  name: "proxyFastMode",
+  data() {
+    return {
+      proxyInput: "",
+    }
+  },
+  computed: {
+    ...mapGetters('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['proxy'])
+  },
+  methods: {
+    ...mapActions('ui/readFileStore/readFile', ['READ_FILE_PROXY_FAST_MODE']),
+    ...mapActions('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['SAVE_PROXY']),
+    ...mapMutations('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['DELETE_PROXY']),
+    EXTRACT_AND_SAVE_PROXY() {
+      this.SAVE_PROXY(converter(this.proxyInput))
+      this.proxyInput = ""
+    }
+  }
 }
 </script>
 
