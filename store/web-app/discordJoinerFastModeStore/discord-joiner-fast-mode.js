@@ -29,7 +29,6 @@ export const mutations = {
     },
     SAVE_TASK: (state, obj) => {
         state.taskFastMode.push(obj)
-        console.log('SAVED');
     },
     DELETE_TASK: (state, index) => {
         state.taskFastMode.splice(index, 1)
@@ -63,11 +62,13 @@ export const actions = {
         const taskParameter = {
             inviteCode: obj.inviteCode,
             tokens: obj.accountToken,
-            proxies: obj.proxy
-        };
-
-        startTaskAsynchronously(taskParameter).then(() => console.log('Task completed successfully'));
-        ctx.commit('SAVE_TASK', taskParameter);
+            proxies: obj.proxy,
+            delay: obj.delay
+        }
+        console.log(taskParameter)
+        // ctx.commit('SAVE_TASK', taskParameter)
+        startTaskAsynchronously(taskParameter)
+            .then(r => ctx.commit('SAVE_TASK', taskParameter))
     },
     DELETE_TASK_ELEMENT: (ctx, index) => {
         ctx.commit('DELETE_TASK', index)

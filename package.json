@@ -25,6 +25,7 @@
     "ws": "^8.5.0"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.8",
     "axios": "^0.26.0",
     "cors": "^2.8.5",
     "https-proxy-agent": "^5.0.0",
