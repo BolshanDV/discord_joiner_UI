@@ -70,23 +70,7 @@ export default {
 </script>
 
 <style scoped src="../../../assets/style/components/field.css">
-.additional_functional {
-  background: rgba(22,30,41,0.6);
-  border-radius: 3px;
-  padding: 2.75%;
-}
-.item{
-  margin: 0 3%;
-}
-.input_element_item{
-  width: 80%;
-}
-.delay{
-  margin-right: 2%;
-}
-.row_position_input{
-  margin-top: 2%;
-}
+
 .space_element{
   padding: 2%;
   flex-wrap: wrap;
@@ -98,22 +82,6 @@ export default {
   text-decoration: none;
   color: #fff;
   background: #161e29;
-}
-.row_rotate{
-  transform: rotate(180deg);
-}
-.drop_down_element{
-  background: rgba(22,30,41,0.6);
-  padding: 4% 3%;
-  justify-content: space-between;
-  align-items: center;
-}
-.drop_down_element:hover{
-  text-decoration: none;
-  background: #161e29;
-}
-.cross_icon{
-  margin: 0 4.5%;
 }
 .scroll_horizontal_limit{
   max-width: 150px;

@@ -13,7 +13,7 @@
                 type="file"
                 class="file_btn"
                 accept=".txt"
-                @change=""
+                @change="READ_FILE_ACCOUNT_FAST_MODE"
             >
           </label>
         </div>
@@ -25,23 +25,29 @@
     >
       <div class="text-field">
         <input class="text-field__input input_element"
+               v-model="token"
+               @keyup.enter="EXTRACT_AND_VALIDATE"
                type="search"
                name="search"
                autocomplete="off"
                placeholder="Enter message"
+               :class="{input_space: accountToken.length !== 0}"
+
         >
       </div>
       <div
+          v-if="accountToken.length !== 0"
           class="work_space_element row_position scroll space_element"
       >
         <div
             class="row_position mini_element"
-
+            v-for="(tokenItem, index) in accountToken"
         >
           <div class="scroll_horizontal row_position">
-            <div></div>
+            <div>{{tokenItem.username}}</div>
           </div>
           <div class="mini_element_icons"
+               @click="DELETE_TOKEN(index)"
           >
             <img src="../../../assets/icons/cross.svg" alt=""
                  class="icons_svg_cross"
@@ -54,8 +60,29 @@
 </template>
 
 <script>
+import {mapActions, mapGetters, mapMutations} from "vuex";
+import {converter} from "~/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+
 export default {
-  name: "accountTokenFastMode"
+  name: "accountTokenFastMode",
+  data() {
+    return {
+      token: "",
+    }
+  },
+  computed: {
+    ...mapGetters('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['accountToken'])
+  },
+  methods: {
+    ...mapActions('ui/readFileStore/readFile', ['READ_FILE_ACCOUNT_FAST_MODE']),
+    ...mapActions('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['EXTRACT_AND_VALIDATE_TOKENS']),
+    ...mapMutations('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['DELETE_TOKEN']),
+
+    EXTRACT_AND_VALIDATE() {
+      this.EXTRACT_AND_VALIDATE_TOKENS(converter(this.token))
+      this.token = ""
+    }
+  }
 }
 </script>
 

@@ -31,7 +31,6 @@
                name="search"
                autocomplete="off"
                placeholder="Enter message"
-               @click="FOCUS"
                :class="{input_space: tokens.length !== 0}"
         >
       </div>
@@ -71,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('web-app/discordJoinerStore/discord-joiner', ['tokens',])
+    ...mapGetters('web-app/discordJoinerStore/discord-joiner', ['tokens'])
   },
   methods: {
     ...mapActions('ui/readFileStore/readFile', ['READ_FILE_TOKENS']),
