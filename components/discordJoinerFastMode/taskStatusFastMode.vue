@@ -14,6 +14,10 @@
           v-for="(taskFastModeItem, index) in taskFastMode"
       >
         <div class="row_position item_name">Task {{index + 1}}</div>
+        <div class="row_position item"
+        >
+          {{taskFastModeItem.successAccounts}}/{{taskFastModeItem.tokens.length}}
+        </div>
         <div class="row_position column_item">
           <div class="icon_element delete"
                @click="DELETE_TASK_ELEMENT(index)"

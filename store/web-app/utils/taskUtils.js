@@ -13,3 +13,12 @@ export function findTaskInMainArray(mainArray, taskName) {
     }
     return -1;
 }
+
+export function findTaskInFastMode(mainArray, num) {
+    for (let i = 0; i < mainArray.length; i++) {
+        if (mainArray[i].id === num) {
+            return i;
+        }
+    }
+    return -1;
+}
