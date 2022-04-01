@@ -6,17 +6,19 @@ import {sleep} from "~/store/web-app/discordJoinerStore/services/joinerServices/
 
 /**
  * @description it's global variable for UI
- * @type {number}
+ * @type {*[]}
  */
-export let successAccounts = 0;
+export const tasks = [];
 
 /**
  * @description This function must record log info and increment counter success tokens accounts
  * @param {string} token - some token of user
+ * @param {inviteCode} inviteCode - invite
  * @return {VoidFunction}
  */
-function incrementCounterAndRecordLog(token) {
-    successAccounts++;
+function incrementCounterAndRecordLog(token, inviteCode) {
+    tasks.forEach(task => { if (task.taskId === inviteCode) task.successAccounts++ });
+
     logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token} successfully entered the channel`});
 }
 
@@ -29,6 +31,7 @@ function incrementCounterAndRecordLog(token) {
  */
 export async function startTaskAsynchronously(taskParameters) {
     const preparedTaskObj = await prepareTaskParamsObject(taskParameters);
+    tasks.push({taskId: preparedTaskObj.inviteCode, successAccounts: 0});
 
     for (const obj of preparedTaskObj.tokens) {
         const axiosInstance = createAxiosInstance(obj.proxy);
@@ -38,7 +41,7 @@ export async function startTaskAsynchronously(taskParameters) {
             headers: buildHeaders(obj.token, obj.email)
         }).then((res) => {
             (res.status === 200)
-                ? incrementCounterAndRecordLog(obj.token)
+                ? incrementCounterAndRecordLog(obj.token, preparedTaskObj.inviteCode)
                 : logs.push({type: 'JOINER', subtype: 'ERROR', message: `An error occurred on the account ${obj.token} while joining the channel`});
         }).catch((e) => {
             console.log(e);
@@ -47,7 +50,8 @@ export async function startTaskAsynchronously(taskParameters) {
 
          await sleep(taskParameters.delay);
     }
-    return true
+
+    return true;
 }
 
 /**
