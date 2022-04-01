@@ -90,6 +90,10 @@ name: "messageList",
 }
 </script>
 
-<style scoped src="../../../assets/style/components/field.css">
-
+<style scoped src="../../../assets/style/components/field.css"></style>
+<style scoped>
+.work_space_element_advent{
+  margin-top: 0;
+}
 </style>
+

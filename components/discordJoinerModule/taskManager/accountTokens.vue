@@ -30,7 +30,7 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter message"
+               placeholder="Enter token"
                :class="{input_space: tokens.length !== 0}"
         >
       </div>

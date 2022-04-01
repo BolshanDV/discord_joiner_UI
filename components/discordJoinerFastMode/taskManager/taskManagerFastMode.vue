@@ -18,6 +18,17 @@
       </div>
       <account-token-fast-mode/>
       <proxy-fast-mode/>
+      <div class="work_space_element_title">
+        Delay
+      </div>
+      <div class="text-field">
+        <input class="text-field__input input_element"
+               v-model="delay"
+               autocomplete="off"
+               placeholder="msec"
+               type="search"
+               name="search">
+      </div>
     </div>
     <div class="row_position row_position_btn">
       <div class="row_position row_position_btn_form limit_btn"
@@ -48,6 +59,7 @@ export default {
   data() {
     return {
       inviteCode: '',
+      delay: ''
     }
   },
   computed: {
@@ -60,7 +72,8 @@ export default {
         this.CREATE_TASK_AND_START({
           inviteCode: this.inviteCode,
           accountToken: this.accountToken,
-          proxy: this.proxy
+          proxy: this.proxy,
+          delay: this.delay
         }
         )
       }
