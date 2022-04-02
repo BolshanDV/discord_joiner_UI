@@ -11,12 +11,13 @@ export function createAxiosInstance(proxy) {
 }
 
 function proxyParser(proxy) {
+    console.log(proxy)
     const parsedProxy = {
         host: undefined,
         port: undefined,
         auth: undefined
     }
-
+    if ( proxy === undefined) return parsedProxy
     parsedProxy.host = proxy.split(':')[0];
     parsedProxy.port = proxy.split(':')[1];
     parsedProxy.auth = proxy.split(':')[2] + proxy.split(':')[3];

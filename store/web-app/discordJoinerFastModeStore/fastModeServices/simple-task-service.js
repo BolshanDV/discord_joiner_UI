@@ -70,7 +70,6 @@ async function prepareTaskParamsObject(taskParameters) {
         ? obj.inviteCode = taskParameters.inviteCode.split('.gg/')[1]
         : obj.inviteCode = taskParameters.inviteCode;
 
-    console.log(obj);
 
     if (Array.isArray(taskParameters.tokens)) {
         taskParameters.tokens.forEach((token) => {
@@ -105,7 +104,7 @@ function allocateProxy(obj, taskParameters) {
 
     if (qtyProxies <= qtyTokens) {
         obj.tokens.forEach((obj, index, array) => {
-            if (index === array.length) {obj.proxy = taskParameters.proxies[taskParameters.proxies.length]}
+            if (index === array.length) {obj.proxy = taskParameters.proxies[taskParameters.proxies.length - 1]}
             obj.proxy = taskParameters.proxies[proxyIterator];
             tokenIterator++;
 

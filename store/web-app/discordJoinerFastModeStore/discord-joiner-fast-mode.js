@@ -38,6 +38,7 @@ export const mutations = {
         state.taskFastMode.splice(index, 1)
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
+        console.log('update')
         state.taskFastMode[obj.id].processTask = obj.processTask
     }
 }
@@ -66,7 +67,7 @@ export const actions = {
             }
         }
     },
-    CREATE_TASK_AND_START:  (ctx, obj) => {
+    CREATE_TASK_AND_START:  async (ctx, obj) => {
         const taskParameter = {
             id: Date.now(),
             inviteCode: obj.inviteCode,
@@ -74,17 +75,20 @@ export const actions = {
             proxies: obj.proxy,
             delay: obj.delay,
             processTask: {
-                successAccounts: 0,
+                successAccounts: -2,
                 style: ''
             }
         }
+        let timerId = await ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.id)
+        console.log(timerId)
         startTaskAsynchronously(taskParameter).then((result) => {
             if (result) {
+                console.log('stop')
                 ctx.dispatch('COMPLETED_TASK', taskParameter.id);
+                clearInterval(timerId)
             }
         })
         ctx.commit('SAVE_TASK', taskParameter)
-        ctx.dispatch('UPDATE_TOKENS_FAST_MODE', taskParameter.id)
     },
 
     DELETE_TASK_ELEMENT: (ctx, index) => {
@@ -92,7 +96,7 @@ export const actions = {
     },
 
     UPDATE_TOKENS_FAST_MODE: (ctx, id) => {
-        let timerId = setInterval(() => {
+        return setInterval(() => {
                 let obj = {
                     id: findTaskInFastMode(ctx.state.taskFastMode, id),
                     processTask: {
@@ -105,14 +109,14 @@ export const actions = {
             10)
     },
     COMPLETED_TASK: (ctx, id) => {
-        console.log('sd')
         let obj = {
             id: findTaskInFastMode(ctx.state.taskFastMode, id),
             processTask: {
-                successAccounts: -1,
+                successAccounts: ctx.state.taskFastMode[id].processTask.successAccounts,
                 style: 'success'
             }
         }
+        console.log(obj)
         ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
     }
 }
