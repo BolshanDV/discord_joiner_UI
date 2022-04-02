@@ -104,7 +104,8 @@ function allocateProxy(obj, taskParameters) {
     let tokenIterator = 1;
 
     if (qtyProxies <= qtyTokens) {
-        obj.tokens.forEach((obj) => {
+        obj.tokens.forEach((obj, index, array) => {
+            if (index === array.length) {obj.proxy = taskParameters.proxies[taskParameters.proxies.length]}
             obj.proxy = taskParameters.proxies[proxyIterator];
             tokenIterator++;
 
