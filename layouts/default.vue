@@ -56,8 +56,6 @@ export default {
 .sidebar{
   background: #0D121A;
   width: 20%;
-
-
 }
 .main{
   display: flex;
@@ -75,5 +73,6 @@ export default {
 }
 .scroll{
   max-height: 90vh;
+  scrollbar-width: none;
 }
 </style>

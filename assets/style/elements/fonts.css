@@ -27,3 +27,6 @@ body {
     justify-content: flex-start;
     align-items: center;
 }
+::-webkit-scrollbar {
+    width: 0;
+}

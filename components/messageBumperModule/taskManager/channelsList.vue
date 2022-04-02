@@ -13,7 +13,7 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter message"
+               placeholder="Enter channels"
                :class="{input_space: channelList.length !== 0}"
         >
       </div>
