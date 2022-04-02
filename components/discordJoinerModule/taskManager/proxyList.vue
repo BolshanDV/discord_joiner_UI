@@ -44,7 +44,7 @@
             :key="index"
         >
           <div class="scroll_horizontal row_position">
-            <div>{{proxy}}</div>
+            <div>{{proxy.split(':')[0]}}</div>
           </div>
           <div class="mini_element_icons"
                @click="DELETE_PROXY_FROM_LIST(index)"

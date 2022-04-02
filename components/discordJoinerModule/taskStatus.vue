@@ -55,7 +55,7 @@
           <div class="icon_element delete"
                @click="DELETE_TASK_STATUS(index)"
           >
-            <img src="../../assets/icons/delete.svg" alt="" >
+            <img src="../../assets/icons/delete.svg" alt="">
           </div>
           <div class="icon_element play"
                @click="PLAY_TASK(taskStatusItem)"
@@ -94,7 +94,7 @@ name: "taskStatus",
 .work_space_element{
   background: rgba(22,30,41,0.6);
   border-radius: 3px;
-  padding: 2%;
+  padding: 1% 2%;
   margin-top: 1%;
 
 }
@@ -107,6 +107,7 @@ name: "taskStatus",
 }
 .icon_element{
   margin-right: 8%;
+  width: 1.1vw;
 }
 .column_item{
   width: 15%;
