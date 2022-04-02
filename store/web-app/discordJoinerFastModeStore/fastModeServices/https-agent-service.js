@@ -11,7 +11,6 @@ export function createAxiosInstance(proxy) {
 }
 
 function proxyParser(proxy) {
-    console.log(proxy)
     const parsedProxy = {
         host: undefined,
         port: undefined,
