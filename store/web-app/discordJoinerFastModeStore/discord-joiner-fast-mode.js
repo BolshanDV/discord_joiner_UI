@@ -92,6 +92,8 @@ export const actions = {
                 id: taskParameter.id,
                 timerId: timerId
             });
+        } else {
+            ctx.commit('ERROR_TASK', taskParameter.id)
         }
     },
 
@@ -114,8 +116,6 @@ export const actions = {
     },
 
     COMPLETED_TASK: (ctx, mainObj) => {
-        console.log("COMPLETED_TASK")
-        console.log('stop')
         let obj = {
             id: findTaskInFastMode(ctx.state.taskFastMode, mainObj.id),
             processTask: {
@@ -123,14 +123,22 @@ export const actions = {
                 style: 'success'
             }
         }
-        console.log(obj)
-        // clearInterval(mainObj.timerId)
         setTimeout(() => {
             clearInterval(mainObj.timerId)
-            console.log(tasks[findTaskInFastMode(tasks, mainObj.id)].successAccounts)
             obj.processTask.successAccounts = tasks[findTaskInFastMode(tasks, mainObj.id)].successAccounts
             ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
         }, 1000)
+    },
+
+    ERROR_TASK: (ctx, id) => {
+        ctx.commit('UPDATE_TOKENS_AND_SAVE', {
+            id: findTaskInFastMode(ctx.state.taskFastMode, id),
+            processTask: {
+                successAccounts: "Failed",
+                style: 'success'
+            }
+        })
+
     }
 }
 

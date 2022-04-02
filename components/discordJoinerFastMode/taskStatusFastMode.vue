@@ -14,14 +14,19 @@
           v-for="(taskFastModeItem, index) in taskFastMode"
       >
         <div class="row_position item_name">Task {{index + 1}}</div>
+<!--        <div class="row_position item"-->
+<!--             v-if="taskFastModeItem.processTask.successAccounts === 'done'"-->
+<!--             :class="taskFastModeItem.processTask.style"-->
+<!--        >-->
+<!--          {{taskFastModeItem.processTask.successAccounts}}/{{taskFastModeItem.tokens.length}}-->
+<!--        </div>-->
         <div class="row_position item"
-             v-if="taskFastModeItem.processTask.successAccounts === 'done'"
+             v-if="taskFastModeItem.processTask.successAccounts === 'Failed'"
              :class="taskFastModeItem.processTask.style"
         >
-          {{taskFastModeItem.processTask.successAccounts}}/{{taskFastModeItem.tokens.length}}
+          {{taskFastModeItem.processTask.successAccounts}}
         </div>
         <div class="row_position item"
-             v-else
              :class="taskFastModeItem.processTask.style"
         >
           {{taskFastModeItem.processTask.successAccounts}}/{{taskFastModeItem.tokens.length}}
@@ -95,6 +100,9 @@ export default {
 }
 .process{
   color: rgba(255,203,89,0.81);
+}
+.error{
+  color: #7e2d2d;
 }
 .delete:active{
   background-color: #7e2d2d;
