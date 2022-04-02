@@ -128,6 +128,8 @@ export const actions = {
         setTimeout(() => {
             clearInterval(mainObj.timerId)
             console.log(tasks[findTaskInFastMode(tasks, mainObj.id)].successAccounts)
+            obj.processTask.successAccounts = tasks[findTaskInFastMode(tasks, mainObj.id)].successAccounts
+            ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
         }, 1000)
     }
 }
