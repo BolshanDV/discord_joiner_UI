@@ -14,13 +14,13 @@
           v-for="(taskFastModeItem, index) in taskFastMode"
       >
         <div class="row_position item_name">Task {{index + 1}}</div>
-<!--        <div class="row_position item"-->
-<!--             :class="taskFastModeItem.processTask.style"-->
-<!--             v-if="taskFastModeItem.processTask.successAccounts === 'Done'"-->
-<!--        >-->
-<!--          {{taskFastModeItem.processTask.successAccounts}}-->
-<!--        </div>-->
         <div class="row_position item"
+             v-if="taskFastModeItem.processTask.successAccounts === -1"
+        >
+          {{taskFastModeItem.processTask.successAccounts}}
+        </div>
+        <div class="row_position item"
+             v-else
         >
           {{taskFastModeItem.processTask.successAccounts}}/{{taskFastModeItem.tokens.length}}
         </div>

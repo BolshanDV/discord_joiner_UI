@@ -62,7 +62,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../../modalPage/modalPage";
-import {converter} from "~/store/web-app/discordJoinerStore/services/joinerServices/text-converter";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 export default {
 name: "messageList",
   components: {
