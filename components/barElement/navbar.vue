@@ -2,7 +2,7 @@
   <div class="navbar_section">
     <b-button variant="outline-danger"
               class="btn"
-              @click=""
+              @click="CLEAR"
     >
       <nuxt-link
           to="/web-tools"
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapActions, mapMutations} from "vuex";
 
 export default {
   name: "navbar",
   methods:{
-    ...mapMutations('web-app/authStore/authorization', ['CLEAR_TOKEN'])
+    ...mapActions('web-app/authStore/authorization', ['CLEAR'])
   }
 }
 </script>

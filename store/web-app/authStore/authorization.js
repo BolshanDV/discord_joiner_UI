@@ -1,6 +1,7 @@
 import {auth, check, setCheck} from "./services/auth";
 export const state = () => ({
-    token: true
+    token: false,
+    stopCheck: null
 })
 
 export const getters = {
@@ -8,13 +9,24 @@ export const getters = {
 }
 export const mutations = {
     SET_TOKEN: (state) => {
+        console.log('set')
         state.token = true
     },
     CLEAR_TOKEN: (state) => {
+        clearInterval(state.stopCheck)
         state.token = false
+        localStorage.clear()
+    },
+
+    STOP_CHECK: (state, id) => {
+        state.stopCheck = id
     }
 }
 export const actions = {
+    CLEAR: (ctx) => {
+        ctx.commit('CLEAR_TOKEN')
+    },
+
     LOG_IN: async (ctx, token) => {
         let resultHash = {
             hardwareConcurrency: navigator.hardwareConcurrency,
@@ -26,21 +38,25 @@ export const actions = {
             appName: navigator.appName,
             platform: navigator.platform
         }
+
         let res = await auth(token, resultHash)
+
         if (res) {
             setCheck();
             ctx.commit('SET_TOKEN')
             ctx.dispatch('CHEK_TOKEN')
         }
     },
+
     CHEK_TOKEN: (ctx) => {
-        setInterval(() => {
+        let id = setInterval(() => {
             if(check) {
                 ctx.commit('CLEAR_TOKEN')
             } else {
                 ctx.commit('SET_TOKEN')
             }
-        }, 100)
+        }, 1000)
+        ctx.commit('STOP_CHECK', id)
     }
  }
 

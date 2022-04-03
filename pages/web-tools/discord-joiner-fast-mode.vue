@@ -16,9 +16,9 @@
 import taskLogs from "~/components/discordJoinerModule/taskLogs";
 import taskManagerFastMode from "~/components/discordJoinerFastMode/taskManager/taskManagerFastMode";
 import taskStatusFastMode from "~/components/discordJoinerFastMode/taskStatusFastMode";
-import {mapGetters} from "vuex";
 export default {
   name: "discord-joiner-fast-mode",
+  middleware: ['authCheck'],
   components: {
     taskLogs,
     taskManagerFastMode,
