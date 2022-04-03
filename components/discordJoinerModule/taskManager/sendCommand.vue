@@ -37,9 +37,9 @@ export default {
   name: "reactionClicker",
   data() {
     return {
-      channelId: '',
-      commandText: '',
-      mode: ''
+      channelId: localStorage['sendCommandObj'] ? JSON.parse(localStorage['sendCommandObj']).channelId: '',
+      commandText: localStorage['sendCommandObj'] ? JSON.parse(localStorage['sendCommandObj']).commandText: '',
+      mode: localStorage['sendCommandObj'] ? JSON.parse(localStorage['sendCommandObj']).mode: ''
     }
   },
   methods: {

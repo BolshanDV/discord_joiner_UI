@@ -31,19 +31,20 @@ export const getters = {
     taskStatus: state => state.taskStatus
 }
 export const mutations = {
-    SAVE_TOKENS: (state, tokens) => {
-        state.tokens = tokens;
-    },
-    SAVE_ERROR_TOKEN: ({state, ctx}, token) => {
-        state.errorTokens.push(token);
-        let obj = {
-            type: "errorTokens",
-            data:  ctx.state.errorTokens
-        }
-        ctx.dispatch('ui/toastedStore/toasted/ADDING_ERROR', obj, {root: true})
-    },
+    // SAVE_TOKENS: (state, tokens) => {
+    //     state.tokens = tokens;
+    // },
+    // SAVE_ERROR_TOKEN: ({state, ctx}, token) => {
+    //     state.errorTokens.push(token);
+    //     let obj = {
+    //         type: "errorTokens",
+    //         data:  ctx.state.errorTokens
+    //     }
+    //     ctx.dispatch('ui/toastedStore/toasted/ADDING_ERROR', obj, {root: true})
+    // },
     SAVE_SINGLE_TOKEN: (state, token) => {
         if ( token !== 0 ) state.tokens.push(token)
+        localStorage['tokens'] = JSON.stringify(state.tokens);
     },
     ADD_SUCCESS_TOKEN: (state, token) => {
         if ( token !== 0) state.successJoined.push(token);
@@ -56,21 +57,29 @@ export const mutations = {
     },
     DELETE_TOKEN_FROM_LIST: (state, index) => {
         state.tokens.splice(index, 1)
+        localStorage['tokens'] = JSON.stringify(state.tokens);
     },
     ADD_PROXY: (state, proxy) => {
-        if(proxy !== '') state.proxyLists.push(proxy)
+        if(proxy !== '') {
+            state.proxyLists.push(proxy)
+            localStorage['proxyLists'] = JSON.stringify(state.proxyLists);
+        }
     },
-    ADD_PROXY_FROM_ARR: (state, proxyArr) => {
-        if( proxyArr.length !== 0) proxyArr.forEach(item => state.proxyLists.push(item))
-    },
+    // ADD_PROXY_FROM_ARR: (state, proxyArr) => {
+    //     if( proxyArr.length !== 0) proxyArr.forEach(item => state.proxyLists.push(item))
+    // },
     DELETE_PROXY_FROM_LIST: (state, index) => {
         state.proxyLists.splice(index, 1)
+        localStorage['proxyLists'] = JSON.stringify(state.proxyLists);
     },
     SAVE_DATA_FROM_R_CLICKER: (state, obj) => {
         state.reactionClickerObj = obj
+        localStorage['reactionClickerObj'] = JSON.stringify(state.reactionClickerObj);
     },
     SAVE_DATA_FROM_S_COMMAND: (state, obj) => {
         state.sendCommandObj = obj
+        localStorage['sendCommandObj'] = JSON.stringify(state.sendCommandObj);
+
     },
     CHANGE_CHECKBOX_REACTION_CLICKER: (state) => {
         state.selectedReactionClicker = !state.selectedReactionClicker
@@ -83,6 +92,10 @@ export const mutations = {
     },
     SAVE_MAIN_DATA: (state, obj) => {
         state.taskStatus.push(obj)
+        localStorage['taskStatus'] = JSON.stringify(state.taskStatus)
+        localStorage['inviteCode'] = obj.inviteCode.toString()
+        localStorage['delay'] = obj.delay.toString()
+        localStorage['guildId'] = obj.guildId.toString()
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
         if(obj.processedTokens.length === 0 ) {
@@ -90,16 +103,34 @@ export const mutations = {
         } else {
             state.successTokens[obj.id] = obj.processedTokens.successTokens.length
         }
+        localStorage['successTokens'] = JSON.stringify(state.successTokens)
         state.renderKey++
     },
     DELETE_TASK_STATUS: (state, index) => {
         state.taskStatus.splice(index, 1)
         state.successTokens.splice(index, 1)
+        localStorage['taskStatus'] = JSON.stringify(state.taskStatus)
+        localStorage['successTokens'] = JSON.stringify(state.successTokens)
     },
 
     CHANGE_PROCESSING_FLAG: (state, obj) =>  {
         state.taskStatus[obj.id].processingTask = obj.text
     },
+
+    GET_DATA_FROM_LOCAL_STORAGE: (state) => {
+        if (localStorage['taskStatus']) {
+            state.taskStatus = JSON.parse(localStorage['taskStatus'])
+        }
+        if (localStorage['tokens']) {
+            state.tokens = JSON.parse(localStorage['tokens'])
+        }
+        if (localStorage['successTokens']) {
+            state.successTokens = JSON.parse(localStorage['successTokens'])
+        }
+        if (localStorage['proxyLists']) {
+            state.proxyLists = JSON.parse(localStorage['proxyLists'])
+        }
+    }
 
 }
 export const actions = {
@@ -186,7 +217,7 @@ export const actions = {
     },
     EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensText) => {
         let tokensObj = converter(tokensText)
-        const {input, errorToken} = await validateAndExtractTokens(tokensObj);
+        const {input} = await validateAndExtractTokens(tokensObj);
         for (const inputElement of input) {
             let notRepeat = true
             for (const tokenItem of ctx.state.tokens) {
@@ -199,8 +230,7 @@ export const actions = {
             }
         }
     },
-    EXTRACT_AND_VALIDATE_PROXY: (ctx, proxyText) => {
-        let proxyObj = converter(proxyText)
+    EXTRACT_AND_VALIDATE_PROXY: (ctx, proxyObj) => {
         for (const proxy of proxyObj) {
             ctx.commit('ADD_PROXY', proxy)
         }

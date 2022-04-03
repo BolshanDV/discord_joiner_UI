@@ -55,11 +55,11 @@ export default {
 name: "reactionClicker",
   data() {
     return {
-      channelId: '',
-      messageId: '',
-      reactionId: '',
-      reactionClickDelay: '',
-      mode: ''
+      channelId: localStorage['reactionClickerObj'] ? JSON.parse(localStorage['reactionClickerObj']).channelId: '',
+      messageId: localStorage['reactionClickerObj'] ? JSON.parse(localStorage['reactionClickerObj']).messageId: '',
+      reactionId: localStorage['reactionClickerObj'] ? JSON.parse(localStorage['reactionClickerObj']).reactionId: '',
+      reactionClickDelay: localStorage['reactionClickerObj'] ? JSON.parse(localStorage['reactionClickerObj']).reactionClickDelay: '',
+      mode: localStorage['reactionClickerObj'] ? JSON.parse(localStorage['reactionClickerObj']).mode: ''
     }
   },
   methods:{

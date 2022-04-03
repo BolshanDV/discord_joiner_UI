@@ -61,6 +61,7 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
 export default {
   name: "proxyList",
@@ -79,7 +80,7 @@ export default {
     ...mapActions('web-app/discordJoinerStore/discord-joiner', ['EXTRACT_AND_VALIDATE_PROXY']),
 
     EXTRACT_AND_VALIDATE() {
-      this.EXTRACT_AND_VALIDATE_PROXY(this.proxyInput)
+      this.EXTRACT_AND_VALIDATE_PROXY(converter(this.proxyInput))
       this.proxyInput = ""
     }
   }

@@ -3,6 +3,7 @@ import {setCaptchaConfig} from "../discordJoinerStore/services/joinerServices/ex
 export const actions = {
     SAVE_KEY: (ctx, key) => {
         setCaptchaConfig('capmonster', key)
+        localStorage['capMonster'] = key.toString()
     }
 }
 

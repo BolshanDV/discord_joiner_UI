@@ -42,6 +42,7 @@
           Stop All
         </div>
         <div class="row_position row_position_btn_form"
+             v-if="name !== 'fastMode'"
              @click="START_ALL_TASKS(name)"
         >
           Start all

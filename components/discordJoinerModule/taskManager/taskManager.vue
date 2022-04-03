@@ -138,12 +138,11 @@ name: "taskManager",
   },
   data() {
     return {
-      inviteCode: '',
+      inviteCode: localStorage['inviteCode'] ? localStorage['inviteCode'] : '',
       token: '',
       proxy: '',
-      delay: '',
-      invitesPerTask: '',
-      guildId: '',
+      delay: localStorage['delay'] ? localStorage['delay'] : '',
+      guildId: localStorage['guildId'] ? localStorage['guildId'] : '',
       taskName: ''
     }
   },

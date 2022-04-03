@@ -1,9 +1,5 @@
 <template>
     <div class="body">
-      <modal-page
-        v-if="popUpFlag"
-      />
-<!--      <toasted/>-->
       <div class="sidebar">
         <Sidebar/>
       </div>
@@ -21,25 +17,23 @@
 <script>
 import Sidebar from "../components/barElement/sidebar";
 import navbar from "../components/barElement/navbar";
-import modalPage from "../components/modalPage/modalPage";
-// import toasted from "../components/toastedPart/toasted";
-import {mapActions, mapGetters} from "vuex"
+import {mapActions, mapGetters, mapMutations} from "vuex"
 export default {
   name: "default",
   components: {
     Sidebar,
     navbar,
-    modalPage,
-    // toasted
   },
   beforeMount() {
     this.PROCESS_LOGS()
+    this.GET_DATA_FROM_LOCAL_STORAGE()
   },
   computed: {
     ...mapGetters('ui/popUpStore/popUp', ['popUpFlag'])
   },
   methods: {
-    ...mapActions('web-app/discordJoinerStore/task-status', ['PROCESS_LOGS'])
+    ...mapActions('web-app/discordJoinerStore/task-status', ['PROCESS_LOGS']),
+    ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['GET_DATA_FROM_LOCAL_STORAGE'])
   }
 
 }

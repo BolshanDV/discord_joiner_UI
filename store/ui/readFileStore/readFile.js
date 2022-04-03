@@ -26,8 +26,8 @@ export const actions = {
         let reader = new FileReader();
         reader.readAsText(blob, 'UTF-8');
         reader.onload = () => {
-            const res = reader.result.split('\n');
-            ctx.commit('web-app/discordJoinerStore/discord-joiner/ADD_PROXY_FROM_ARR', res, {root: true})
+            const res = converter(reader.result)
+            ctx.dispatch('web-app/discordJoinerStore/discord-joiner/EXTRACT_AND_VALIDATE_PROXY', res, {root: true})
             reader = null;
         }
     },

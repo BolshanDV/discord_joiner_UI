@@ -41,8 +41,11 @@ export default {
   middleware: ['authCheck'],
   data() {
     return {
-      key: '',
+      key: localStorage['capMonster'] ? localStorage['capMonster'] : ''
     }
+  },
+  beforeMount() {
+    this.SAVE_KEY(this.key)
   },
   methods: {
     ...mapActions('web-app/captchaSettingsStore/settings', ['SAVE_KEY'])
