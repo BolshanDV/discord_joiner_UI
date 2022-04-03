@@ -123,12 +123,20 @@ export default {
   },
   data() {
     return {
-      token: "",
-      delay: '',
-      deleteMassages: '',
+      token: localStorage['tokenMB']
+          ? localStorage['tokenMB']
+          : "",
+      delay: localStorage['delayMB']
+          ? localStorage['delayMB']
+          : "",
+      deleteMassages: localStorage['deleteMessageMB']
+          ? JSON.parse(localStorage['deleteMessageMB']).deleteDelay
+          : "",
       channel: '',
       taskName: '',
-      massagesLoop: ''
+      massagesLoop: localStorage['loopMessageMB']
+          ? JSON.parse(localStorage['loopMessageMB']).deleteDelay
+          : "",
     }
   },
   computed: {
@@ -138,7 +146,8 @@ export default {
           'dropDownFlagForAccountListMBumper',
           'deleteMessagesFlag',
           'singleToken',
-          'deleteMessagesLoop'
+          'deleteMessagesLoop',
+          'tasksStatusMessageBumper'
         ]),
   },
   methods: {

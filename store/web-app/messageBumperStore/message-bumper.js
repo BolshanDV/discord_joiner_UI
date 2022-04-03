@@ -60,19 +60,52 @@ export const mutations = {
     },
     SAVE_MESSAGE_BUMPER_TASKS: (state, bumperObj) => {
         state.tasksStatusMessageBumper.push(bumperObj)
+        localStorage['tasksStatusMessageBumper'] = JSON.stringify(state.tasksStatusMessageBumper);
+        localStorage['channelListMB'] = JSON.stringify(bumperObj.channelList);
+        localStorage['messageListMB'] = JSON.stringify(bumperObj.messageList);
+        localStorage['tokenMB'] = bumperObj.token.toString();
+        localStorage['deleteMessageMB'] = JSON.stringify(bumperObj.deleteMessageObj);
+        localStorage['delayMB'] = bumperObj.delay.toString();
+        localStorage['loopMessageMB'] = JSON.stringify(bumperObj.loopMessageObj);
+
+
     },
     CHANGE_PROCESSING_FLAG_M_BUMPER: (state, obj) => {
         state.tasksStatusMessageBumper[obj.id].processingTaskObj = {
             text: obj.text,
             style: obj.style
         }
+        localStorage['tasksStatusMessageBumper'] = JSON.stringify(state.tasksStatusMessageBumper);
+
     },
     DELETE_TASK_MESSAGE_BUMPER: (state, id) => {
         state.tasksStatusMessageBumper.splice(id, 1)
+        localStorage['tasksStatusMessageBumper'] = JSON.stringify(state.tasksStatusMessageBumper);
+
     },
     SAVE_LOOP_ITERATION: (state, obj) => {
         state.tasksStatusMessageBumper[obj.id].loopMessageObj.loopIteration = obj.loopIteration
+        localStorage['tasksStatusMessageBumper'] = JSON.stringify(state.tasksStatusMessageBumper);
+    },
+
+    GET_DATA_FROM_LOCAL_STORAGE_MB: (state) => {
+        if (localStorage['tasksStatusMessageBumper']) {
+            state.tasksStatusMessageBumper = JSON.parse(localStorage['tasksStatusMessageBumper'])
+        }
+        if (localStorage['messageListMB']){
+            state.messageList = JSON.parse(localStorage['messageListMB'])
+        }
+        if (localStorage['channelListMB']) {
+            state.channelList = JSON.parse(localStorage['channelListMB'])
+        }
+        if (localStorage['deleteMessageMB']) {
+            state.deleteMessagesFlag = JSON.parse(localStorage['deleteMessageMB']).active
+        }
+        if (localStorage['loopMessageMB']) {
+            state.deleteMessagesLoop = JSON.parse(localStorage['loopMessageMB']).active
+        }
     }
+
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {

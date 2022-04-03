@@ -117,7 +117,7 @@ export const mutations = {
         state.taskStatus[obj.id].processingTask = obj.text
     },
 
-    GET_DATA_FROM_LOCAL_STORAGE: (state) => {
+    GET_DATA_FROM_LOCAL_STORAGE_DISCORD_JOINER: (state) => {
         if (localStorage['taskStatus']) {
             state.taskStatus = JSON.parse(localStorage['taskStatus'])
         }
