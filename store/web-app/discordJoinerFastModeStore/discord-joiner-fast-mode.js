@@ -21,25 +21,47 @@ export const getters = {
 export const mutations = {
     SAVE_TOKEN: (state, token) => {
         state.accountToken.push(token)
+        localStorage['accountTokenFastMode'] = JSON.stringify(state.accountToken)
     },
     DELETE_TOKEN: (state, index) => {
         state.accountToken.splice(index, 1)
+        localStorage['accountTokenFastMode'] = JSON.stringify(state.accountToken)
     },
     SAVE_PROXY_TO_ARR: (state, proxy) => {
         state.proxy.push(proxy)
+        localStorage['proxyFastMode'] = JSON.stringify(state.proxy)
     },
     DELETE_PROXY: (state, index) => {
         state.proxy.splice(index, 1)
+        localStorage['proxyFastMode'] = JSON.stringify(state.proxy)
     },
     SAVE_TASK: (state, obj) => {
         state.taskFastMode.push(obj)
+        localStorage['taskStatusFastMode'] = JSON.stringify(state.taskFastMode)
     },
     DELETE_TASK: (state, index) => {
         state.taskFastMode.splice(index, 1)
+        localStorage['taskStatusFastMode'] = JSON.stringify(state.taskFastMode)
+
     },
     UPDATE_TOKENS_AND_SAVE: (state, obj) => {
         state.taskFastMode[obj.id].processTask = obj.processTask
-        console.log(obj.processTask.successAccounts)
+        localStorage['taskStatusFastMode'] = JSON.stringify(state.taskFastMode)
+    },
+
+    GET_DATA_FROM_LOCAL_STORAGE_FM: (state) => {
+        if (localStorage['taskStatusFastMode']) {
+            console.log(
+                JSON.parse(localStorage['taskStatusFastMode'])
+            )
+            state.taskFastMode =  JSON.parse(localStorage['taskStatusFastMode'])
+        }
+        if (localStorage['accountTokenFastMode']) {
+            state.accountToken =  JSON.parse(localStorage['accountToken'])
+        }
+        if (localStorage['proxyFastMode']) {
+            state.proxy =  JSON.parse(localStorage['proxy'])
+        }
     }
 }
 

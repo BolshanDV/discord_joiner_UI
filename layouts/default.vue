@@ -28,7 +28,7 @@ export default {
     this.PROCESS_LOGS()
     this.GET_DATA_FROM_LOCAL_STORAGE_DISCORD_JOINER()
     this.GET_DATA_FROM_LOCAL_STORAGE_MB()
-
+    this.GET_DATA_FROM_LOCAL_STORAGE_FM()
   },
   computed: {
     ...mapGetters('ui/popUpStore/popUp', ['popUpFlag'])
@@ -36,7 +36,8 @@ export default {
   methods: {
     ...mapActions('web-app/discordJoinerStore/task-status', ['PROCESS_LOGS']),
     ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['GET_DATA_FROM_LOCAL_STORAGE_DISCORD_JOINER']),
-    ...mapMutations('web-app/messageBumperStore/message-bumper', ['GET_DATA_FROM_LOCAL_STORAGE_MB'])
+    ...mapMutations('web-app/messageBumperStore/message-bumper', ['GET_DATA_FROM_LOCAL_STORAGE_MB']),
+    ...mapMutations('web-app/discordJoinerFastModeStore/discord-joiner-fast-mode', ['GET_DATA_FROM_LOCAL_STORAGE_FM'])
   }
 
 }
