@@ -9,13 +9,11 @@ export const getters = {
 }
 export const mutations = {
     SET_TOKEN: (state) => {
-        console.log('set')
         state.token = true
     },
     CLEAR_TOKEN: (state) => {
         clearInterval(state.stopCheck)
         state.token = false
-        localStorage.clear()
     },
 
     STOP_CHECK: (state, id) => {
