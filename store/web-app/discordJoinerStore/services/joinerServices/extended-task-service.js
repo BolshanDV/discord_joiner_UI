@@ -67,7 +67,7 @@ export async function launchTasks(body) {
 
     if (tasks.length === 0 || !findTask(tasks, body.taskName).status) { tasks.push(task); }
 
-    prepareInviteCode(body);
+    const preparedInviteCode = prepareInviteCode(body);
 
     for (const token of body.tokens) {
         if (pauseFlag) await sleep(pause);
@@ -85,11 +85,11 @@ export async function launchTasks(body) {
         const me = await getMe(token.token);
 
         // after that we pass email and token to the function of joining the channel itself
-        const joinStatus = await joinChannel(body.inviteCode, token.token, me.email);
+        const joinStatus = await joinChannel(preparedInviteCode, token.token, me.email);
         let acceptRulesStatus = true;
 
         if (body.accept_rules) {
-            acceptRulesStatus = await acceptRules(body.inviteCode, body.guildId, token.token, me.email);
+            acceptRulesStatus = await acceptRules(preparedInviteCode, body.guildId, token.token, me.email);
 
             if (acceptRulesStatus) {
                 logs.push({type: 'JOINER', subtype: 'INFO', message: `Discord account ${token.username} successfully accepted rules`})
@@ -243,7 +243,9 @@ const getFormRules = async (inviteCode, guildId, token, email) => {
 }
 
 function prepareInviteCode(body) {
-    body.inviteCode.includes('https')
-        ? body.inviteCode = body.inviteCode.split('.gg/')[1]
-        : body.inviteCode;
+    if (body.inviteCode.includes('https')) {
+        return body.inviteCode.split('.gg/')[1]
+    } else {
+        return body.inviteCode;
+    }
 }

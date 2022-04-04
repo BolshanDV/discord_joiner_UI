@@ -1,5 +1,10 @@
-import {validateAndExtractTokens, validateSingleToken} from "./services/joinerServices/validate-service";
-import {getterTokens, launchTasks, setStartCriticalFlag} from "./services/joinerServices/extended-task-service";
+import {validateAndExtractTokens} from "./services/joinerServices/validate-service";
+import {
+    changeActiveFlag,
+    getterTokens,
+    launchTasks,
+    setStartCriticalFlag
+} from "./services/joinerServices/extended-task-service";
 import {findTaskInMainArray} from "../utils/taskUtils";
 import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
@@ -197,9 +202,11 @@ export const actions = {
     PAUSE_TASK: (ctx, taskName) => {
         if (taskName !== -1){
             let index = findTaskInMainArray(ctx.state.taskStatus, taskName)
+            changeActiveFlag(taskName)
             ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
         } else {
             for (let i = 0; i < ctx.state.taskStatus.length; i++){
+                changeActiveFlag(taskName)
                 ctx.commit('CHANGE_ICON_STOP_AND_PLAY', i)
             }
         }

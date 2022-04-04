@@ -73,10 +73,9 @@ export async function launchBumperTask(bumperObj) {
 
                     await sleep(delay);
                 }
-
-                loopIteration++;
             }
 
+            loopIteration++;
             await sleep(loopMessageObj.deleteDelay);
         }
 

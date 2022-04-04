@@ -48,7 +48,13 @@
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
           <div class="icon_element play"
+               v-if="!taskStatusItem.playPauseFlag"
                @click="PlAY_TASK_MESSAGE_BUMPER(taskStatusItem)"
+          >
+            <img src="../../assets/icons/play.svg" alt="" >
+          </div>
+          <div class="icon_element play"
+               v-if="taskStatusItem.playPauseFlag"
           >
             <img src="../../assets/icons/play.svg" alt="" >
           </div>

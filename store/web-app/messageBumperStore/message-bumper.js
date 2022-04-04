@@ -131,7 +131,8 @@ export const actions = {
             token: obj.token,
             deleteMessageObj: deleteMessageObj,
             processingTaskObj: processingTaskObj,
-            loopMessageObj: loopMessageObj
+            loopMessageObj: loopMessageObj,
+            playPauseFlag: false
         }
 
         let repeat = false
