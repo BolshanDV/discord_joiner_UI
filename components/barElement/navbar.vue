@@ -19,8 +19,15 @@ import {mapActions, mapMutations} from "vuex";
 
 export default {
   name: "navbar",
+  beforeMount() {
+    if (localStorage['capMonster']) {
+      let key = localStorage['capMonster']
+      this.SAVE_KEY(key)
+    }
+  },
   methods:{
-    ...mapActions('web-app/authStore/authorization', ['CLEAR'])
+    ...mapActions('web-app/authStore/authorization', ['CLEAR']),
+    ...mapActions('web-app/captchaSettingsStore/settings', ['SAVE_KEY'])
   }
 }
 </script>
