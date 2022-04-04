@@ -16,8 +16,8 @@ export let state = () => ({
     selectedReactionClicker: false,
     accept_rules: false,
     renderKey: 0,
-    successTokens: [],
-    taskStatus: []
+    successTokens: localStorage['successTokens']? JSON.parse(localStorage['successTokens']): [],
+    taskStatus: [],
 })
 
 export const getters = {
@@ -91,7 +91,8 @@ export const mutations = {
         state.accept_rules = !state.accept_rules
     },
     SAVE_MAIN_DATA: (state, obj) => {
-        state.taskStatus.push(obj)
+        const obj2 = JSON.stringify(obj);
+        state.taskStatus.push(JSON.parse(obj2))
         localStorage['taskStatus'] = JSON.stringify(state.taskStatus)
         localStorage['inviteCode'] = obj.inviteCode.toString()
         localStorage['delay'] = obj.delay.toString()
@@ -115,6 +116,12 @@ export const mutations = {
 
     CHANGE_PROCESSING_FLAG: (state, obj) =>  {
         state.taskStatus[obj.id].processingTask = obj.text
+        localStorage['taskStatus'] = JSON.stringify(state.taskStatus)
+    },
+
+    CHANGE_ICON_STOP_AND_PLAY: (state, id) => {
+        console.log(id)
+        state.taskStatus[id].startStopFlag = !state.taskStatus[id].startStopFlag
     },
 
     GET_DATA_FROM_LOCAL_STORAGE_DISCORD_JOINER: (state) => {
@@ -140,17 +147,19 @@ export const actions = {
         // We receive fields from the client, perform minimal validations and pass them to the task launch function
         const {inviteCode, tokens, delay, guildId, taskName} = parameters;
         let mainObj = {
-            tokens: tokens,
+            tokens: ctx.state.tokens,
             inviteCode: inviteCode,
             delay: delay,
             guildId: guildId,
             taskName: taskName,
+            proxy: ctx.state.proxyLists,
             reactionClickerFlag: ctx.state.selectedReactionClicker,
             sendCommandFlag: ctx.state.selectedSendCommand,
             reactionClickerObj:  ctx.state.reactionClickerObj,
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules,
-            processingTask: ''
+            processingTask: '',
+            startStopFlag: false
         }
 
         if (inviteCode !== undefined && tokens.length !== 0 && taskName!== '') {
@@ -169,12 +178,26 @@ export const actions = {
     PLAY_TASK: async (ctx, mainObj) => {
         setStartCriticalFlag()
         let index = findTaskInMainArray(ctx.state.taskStatus, mainObj.taskName)
+        ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
         ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj)
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
+            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
         }
+    },
+
+    PAUSE_TASK: (ctx, taskName) => {
+        if (taskName !== -1){
+            let index = findTaskInMainArray(ctx.state.taskStatus, taskName)
+            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
+        } else {
+            for (let i = 0; i < ctx.state.taskStatus.length; i++){
+                ctx.commit('CHANGE_ICON_STOP_AND_PLAY', i)
+            }
+        }
+
     },
 
     START_ALL_TASKS:  (ctx, name) => {
@@ -213,7 +236,7 @@ export const actions = {
                 }
                 ctx.commit('UPDATE_TOKENS_AND_SAVE', obj)
             }
-            , 4000)
+            , 1000)
     },
     EXTRACT_AND_VALIDATE_TOKENS_FOR_DISCORD_JOINER: async (ctx, tokensText) => {
         let tokensObj = converter(tokensText)

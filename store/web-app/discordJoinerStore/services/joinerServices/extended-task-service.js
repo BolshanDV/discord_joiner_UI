@@ -15,6 +15,10 @@ export function setStopCriticalFlag() {
     criticalStopFlag = true;
 }
 
+export function changePauseFlag() {
+    pauseFlag = !pauseFlag;
+}
+
 export function setStartCriticalFlag() {
     criticalStopFlag = false;
 }

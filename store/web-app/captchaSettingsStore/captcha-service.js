@@ -1,4 +1,5 @@
 import axios from "axios";
+import {logs} from "@/store/web-app/logger";
 
 export async function solveCaptcha(captchaType, apiKey) {
     const clientToken = apiKey;
@@ -15,7 +16,8 @@ export async function solveCaptcha(captchaType, apiKey) {
             }
     }).then(response => {
         captchaId = response.data.taskId;
-    });
+    })
+        .catch(error => console.log(error));
 
     let result;
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -25,7 +27,7 @@ export async function solveCaptcha(captchaType, apiKey) {
             const response = await axios.post('https://api.capmonster.cloud/getTaskResult/', {
                 "clientKey":clientToken,
                 "taskId": captchaId
-            });
+            }).catch(error => console.log(error));
             if (response.data.status === 'ready') {
                 result = response.data.solution.gRecaptchaResponse;
                 break;

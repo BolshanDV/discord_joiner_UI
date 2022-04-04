@@ -9,7 +9,6 @@ export const getters = {
 }
 export const mutations = {
     SET_TOKEN: (state, token) => {
-        console.log(typeof token )
         state.token = true
         localStorage['licenseKey'] = token.toString()
     },

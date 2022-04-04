@@ -4,7 +4,9 @@
         <task-manager/>
       </div>
       <div class="main_block information_section">
-        <task-status/>
+        <task-status
+            :key="renderKey"
+        />
         <task-logs
             name="discordJoiner"
         />

@@ -58,9 +58,16 @@
             <img src="../../assets/icons/delete.svg" alt="">
           </div>
           <div class="icon_element play"
+               v-if="!taskStatusItem.startStopFlag"
                @click="PLAY_TASK(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
+          </div>
+          <div class="icon_element play"
+               v-if="taskStatusItem.startStopFlag"
+               @click="PAUSE_TASK(taskStatusItem.taskName)"
+          >
+            <img src="../../assets/icons/stop.svg" alt="" >
           </div>
         </div>
       </div>
@@ -73,13 +80,13 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
 export default {
 name: "taskStatus",
   computed: {
-  ...mapGetters('web-app/discordJoinerStore/discord-joiner', ['taskStatus', 'successTokens']),
+    ...mapGetters('web-app/discordJoinerStore/discord-joiner', ['taskStatus', 'successTokens']),
     ...mapGetters('web-app/discordJoinerStore/task-status', ['playStopFlag'])
   },
   methods: {
-  ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['DELETE_TASK_STATUS', 'CHANGE_ICON_STOP_AND_PLAY']),
-  ...mapActions('web-app/discordJoinerStore/discord-joiner', ['UPDATE_TOKENS', 'PLAY_TASK']),
-    ...mapActions('web-app/discordJoinerStore/task-status', ['PAUSE_TASK', 'PLAY'])
+    ...mapMutations('web-app/discordJoinerStore/discord-joiner', ['DELETE_TASK_STATUS']),
+    ...mapActions('web-app/discordJoinerStore/discord-joiner', ['UPDATE_TOKENS', 'PLAY_TASK', 'PAUSE_TASK']),
+    ...mapActions('web-app/discordJoinerStore/task-status', ['PLAY'])
   }
 }
 </script>
