@@ -30,7 +30,7 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter proxy"
+               placeholder="Enter proxy list"
                :class="{input_space: proxy.length !== 0}"
 
         >

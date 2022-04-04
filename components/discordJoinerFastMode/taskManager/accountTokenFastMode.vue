@@ -30,7 +30,7 @@
                type="search"
                name="search"
                autocomplete="off"
-               placeholder="Enter message"
+               placeholder="Enter accounts tokens"
                :class="{input_space: accountToken.length !== 0}"
 
         >

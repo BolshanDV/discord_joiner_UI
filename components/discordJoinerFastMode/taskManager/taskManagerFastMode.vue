@@ -12,7 +12,7 @@
                v-model="inviteCode"
                @keyup.enter="CREATE_TASK"
                autocomplete="off"
-               placeholder="Enter task name"
+               placeholder="Enter invite code"
                type="search"
                name="search">
       </div>
