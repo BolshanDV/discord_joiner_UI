@@ -1,6 +1,6 @@
 import {auth, check, setCheck} from "./services/auth";
 export const state = () => ({
-    token: false,
+    token: localStorage['licenseKey'] ? localStorage['licenseKey'] : false,
     stopCheck: null
 })
 
@@ -8,12 +8,14 @@ export const getters = {
     token: state => state.token
 }
 export const mutations = {
-    SET_TOKEN: (state) => {
+    SET_TOKEN: (state, token) => {
         state.token = true
+        localStorage['licenseKey'] = token.toString()
     },
     CLEAR_TOKEN: (state) => {
         clearInterval(state.stopCheck)
         state.token = false
+        delete localStorage['licenseKey']
     },
 
     STOP_CHECK: (state, id) => {
@@ -41,7 +43,7 @@ export const actions = {
 
         if (res) {
             setCheck();
-            ctx.commit('SET_TOKEN')
+            ctx.commit('SET_TOKEN', token)
             ctx.dispatch('CHEK_TOKEN')
         }
     },
