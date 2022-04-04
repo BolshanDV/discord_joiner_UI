@@ -15,8 +15,9 @@ export function setStopCriticalFlag() {
     criticalStopFlag = true;
 }
 
-export function changePauseFlag() {
-    pauseFlag = !pauseFlag;
+export function changeActiveFlag(taskName) {
+    const task = findTask(tasks, taskName).task;
+    task.isActive = !task.isActive;
 }
 
 export function setStartCriticalFlag() {
@@ -56,15 +57,15 @@ export async function launchTasks(body) {
 
     const successTokens = [];
     const errorTokens = [];
-
-    if (tasks.length === 0 || !findTask(tasks, body.taskName).status) {
-        tasks.push({
-            taskName: body.taskName,
-            abortController: controller.signal,
-            successTokens: successTokens,
-            errorTokens: errorTokens
-        });
+    const task = {
+        taskName: body.taskName,
+        abortController: controller.signal,
+        successTokens: successTokens,
+        errorTokens: errorTokens,
+        isActive: true
     }
+
+    if (tasks.length === 0 || !findTask(tasks, body.taskName).status) { tasks.push(task); }
 
     prepareInviteCode(body);
 
@@ -73,6 +74,11 @@ export async function launchTasks(body) {
         if (criticalStopFlag) {
             tasks.length = 0;
             logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
+            break;
+        }
+
+        if (!task.isActive) {
+            logs.push({type: 'JOINER', subtype: 'INFO', message: `Task ${body.taskName} will be stopped`});
             break;
         }
         // execute a request to get information about the user to receive mail
