@@ -172,7 +172,7 @@ export const actions = {
         ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
-            const {successTokens, errorTokens} = await launchTasks(mainObj);
+            const {successTokens, errorTokens} = await launchTasks(mainObj)
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
         }
     },

@@ -9,13 +9,14 @@ export const getters = {
 }
 export const mutations = {
     SET_TOKEN: (state, token) => {
+        console.log(typeof token )
         state.token = true
         localStorage['licenseKey'] = token.toString()
     },
     CLEAR_TOKEN: (state) => {
         clearInterval(state.stopCheck)
         state.token = false
-        delete localStorage['licenseKey']
+        localStorage.clear()
     },
 
     STOP_CHECK: (state, id) => {
@@ -44,16 +45,16 @@ export const actions = {
         if (res) {
             setCheck();
             ctx.commit('SET_TOKEN', token)
-            ctx.dispatch('CHEK_TOKEN')
+            ctx.dispatch('CHEK_TOKEN', token)
         }
     },
 
-    CHEK_TOKEN: (ctx) => {
+    CHEK_TOKEN: (ctx, token) => {
         let id = setInterval(() => {
             if(check) {
                 ctx.commit('CLEAR_TOKEN')
             } else {
-                ctx.commit('SET_TOKEN')
+                ctx.commit('SET_TOKEN', token)
             }
         }, 1000)
         ctx.commit('STOP_CHECK', id)

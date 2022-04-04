@@ -36,17 +36,17 @@
 
         </div>
         <div class="row_position item success"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === undefined "
+             v-else-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] === undefined "
         >
           Processing...
         </div>
         <div class="row_position item process"
-             v-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] >= 0"
+             v-else-if="taskStatusItem.processingTask === 'startProcess' && successTokens[index] >= 0"
         >
           Running ({{successTokens[index]}}/{{taskStatusItem.tokens.length}})
         </div>
         <div class="row_position item success"
-             v-if="taskStatusItem.processingTask === 'done'"
+             v-else-if="taskStatusItem.processingTask === 'done'"
         >
           {{successTokens[index]}}/{{taskStatusItem.tokens.length}}
         </div>

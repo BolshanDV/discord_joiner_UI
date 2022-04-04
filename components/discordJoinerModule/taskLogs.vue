@@ -35,14 +35,15 @@
       >
         Clear logs
       </div>
-      <div class="row_position second_btn_element">
+      <div class="row_position second_btn_element"
+           v-if="name !== 'fastMode'"
+      >
         <div class="row_position row_position_btn_form_error"
              @click="STOP_ALL_TASKS(name)"
         >
           Stop All
         </div>
         <div class="row_position row_position_btn_form"
-             v-if="name !== 'fastMode'"
              @click="START_ALL_TASKS(name)"
         >
           Start all
