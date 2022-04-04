@@ -35,7 +35,8 @@ export const mutations = {
         localStorage['proxyFastMode'] = JSON.stringify(state.proxy)
     },
     SAVE_TASK: (state, obj) => {
-        state.taskFastMode.push(obj)
+        const obj2 = JSON.stringify(obj);
+        state.taskFastMode.push(JSON.parse(obj2))
         localStorage['taskStatusFastMode'] = JSON.stringify(state.taskFastMode)
     },
     DELETE_TASK: (state, index) => {

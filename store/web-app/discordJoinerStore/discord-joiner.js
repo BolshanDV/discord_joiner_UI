@@ -72,24 +72,30 @@ export const mutations = {
         state.proxyLists.splice(index, 1)
         localStorage['proxyLists'] = JSON.stringify(state.proxyLists);
     },
+
     SAVE_DATA_FROM_R_CLICKER: (state, obj) => {
         state.reactionClickerObj = obj
         localStorage['reactionClickerObj'] = JSON.stringify(state.reactionClickerObj);
     },
+
     SAVE_DATA_FROM_S_COMMAND: (state, obj) => {
         state.sendCommandObj = obj
         localStorage['sendCommandObj'] = JSON.stringify(state.sendCommandObj);
 
     },
+
     CHANGE_CHECKBOX_REACTION_CLICKER: (state) => {
         state.selectedReactionClicker = !state.selectedReactionClicker
     },
+
     CHANGE_CHECKBOX_SEND_COMMAND: (state) => {
         state.selectedSendCommand = !state.selectedSendCommand
     },
+
     CHANGE_CHECKBOX_ACCEPT_RULES: (state) => {
         state.accept_rules = !state.accept_rules
     },
+
     SAVE_MAIN_DATA: (state, obj) => {
         const obj2 = JSON.stringify(obj);
         state.taskStatus.push(JSON.parse(obj2))

@@ -58,8 +58,10 @@ export const mutations = {
     CHANGE_LOOP_MESSAGE_FLAG: (state) => {
         state.deleteMessagesLoop = !state.deleteMessagesLoop
     },
+
     SAVE_MESSAGE_BUMPER_TASKS: (state, bumperObj) => {
-        state.tasksStatusMessageBumper.push(bumperObj)
+        const obj2 = JSON.stringify(bumperObj);
+        state.tasksStatusMessageBumper.push(JSON.parse(obj2))
         localStorage['tasksStatusMessageBumper'] = JSON.stringify(state.tasksStatusMessageBumper);
         localStorage['channelListMB'] = JSON.stringify(bumperObj.channelList);
         localStorage['messageListMB'] = JSON.stringify(bumperObj.messageList);
@@ -67,8 +69,6 @@ export const mutations = {
         localStorage['deleteMessageMB'] = JSON.stringify(bumperObj.deleteMessageObj);
         localStorage['delayMB'] = bumperObj.delay.toString();
         localStorage['loopMessageMB'] = JSON.stringify(bumperObj.loopMessageObj);
-
-
     },
     CHANGE_PROCESSING_FLAG_M_BUMPER: (state, obj) => {
         state.tasksStatusMessageBumper[obj.id].processingTaskObj = {
