@@ -4,7 +4,6 @@ import {
     tasks
 } from "~/store/web-app/discordJoinerFastModeStore/fastModeServices/simple-task-service";
 import {findTaskInFastMode} from "@/store/web-app/utils/taskUtils";
-import {logs} from "~/store/web-app/logger";
 
 export let state = () => ({
     accountToken: [],

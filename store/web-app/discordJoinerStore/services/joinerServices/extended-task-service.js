@@ -66,6 +66,8 @@ export async function launchTasks(body) {
         });
     }
 
+    prepareInviteCode(body);
+
     for (const token of body.tokens) {
         if (pauseFlag) await sleep(pause);
         if (criticalStopFlag) {
@@ -232,4 +234,10 @@ const getFormRules = async (inviteCode, guildId, token, email) => {
             return response.data;
         })
         .catch((error) => console.log(error));
+}
+
+function prepareInviteCode(body) {
+    body.inviteCode.includes('https')
+        ? body.inviteCode = body.inviteCode.split('.gg/')[1]
+        : body.inviteCode;
 }
