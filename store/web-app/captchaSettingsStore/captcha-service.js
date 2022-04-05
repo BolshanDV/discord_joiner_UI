@@ -1,5 +1,4 @@
 import axios from "axios";
-import {logs} from "@/store/web-app/logger";
 
 export async function solveCaptcha(captchaType, apiKey) {
     const clientToken = apiKey;
@@ -44,10 +43,4 @@ export async function solveCaptcha(captchaType, apiKey) {
     }
 
     return result;
-    // return await axios.post(`${}${captchaType}`, {
-    //     token: apiKey
-    // }).then(response => {
-    //     return response.data;
-    // })
-    //     .catch(error => console.log(error))
 }

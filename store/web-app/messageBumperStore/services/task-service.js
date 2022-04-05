@@ -39,6 +39,7 @@ export async function launchBumperTask(bumperObj) {
         while (loopMessageObj.active) {
             for (const message of messageList) {
                 if (criticalStopFlag) {
+                    loopMessageObj.active = false;
                     tasks.length = 0;
                     task = null;
                     logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
@@ -47,6 +48,7 @@ export async function launchBumperTask(bumperObj) {
                 }
                 for (const channel of channelList) {
                     if (criticalStopFlag) {
+                        loopMessageObj.active = false;
                         tasks.length = 0;
                         task = null;
                         clearInterval(intervalId);

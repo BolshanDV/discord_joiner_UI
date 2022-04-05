@@ -70,7 +70,6 @@ async function prepareTaskParamsObject(taskParameters) {
         ? obj.inviteCode = taskParameters.inviteCode.split('.gg/')[1]
         : obj.inviteCode = taskParameters.inviteCode;
 
-
     if (Array.isArray(taskParameters.tokens)) {
         taskParameters.tokens.forEach((token) => {
             obj.tokens.push({token: token.token, proxy: undefined, email: undefined});
