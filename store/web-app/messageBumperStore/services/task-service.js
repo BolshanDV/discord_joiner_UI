@@ -2,6 +2,7 @@ import axios from "axios";
 import {buildHeaders} from "../../utils/requestUtils";
 import {getMe} from "../../discordJoinerStore/services/joinerServices/validate-service";
 import {logs} from "@/store/web-app/logger";
+import {findTask} from "@/store/web-app/utils/taskUtils";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -11,15 +12,16 @@ export function setStopBumperCriticalFlag() {
     criticalStopFlag = true;
 }
 
-export function setStartBumperCriticalFlag() {
-    criticalStopFlag = false;
+export function changeActiveFlag(taskName) {
+    const task = findTask(tasks, taskName).task;
+    task.isActive = !task.isActive;
 }
 
 const tasks = [];
 
 export function getLoopIterationForSelectTask(taskName) {
     let loopIter = 0;
-    tasks.forEach((task) => { if (task.name === taskName) loopIter = task.loopIteration });
+    tasks.forEach((task) => { if (task.taskName === taskName) loopIter = task.loopIteration });
 
     return loopIter;
 }
@@ -28,16 +30,17 @@ export function getLoopIterationForSelectTask(taskName) {
 export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj, loopMessageObj} = bumperObj;
     const me = await getMe(token);
+    const task = {
+        taskName: taskName,
+        successMessages: [],
+        deleteParameters: deleteMessageObj.deleteDelay,
+        token: token,
+        email: me.email,
+        loopIteration: 0,
+        isActive: true
+    }
 
     if (!checkTaskExisting(taskName)) {
-        let task = {
-            name: taskName,
-            successMessages: [],
-            deleteParameters: deleteMessageObj.deleteDelay,
-            token: token,
-            email: me.email,
-            loopIteration: 0
-        }
         tasks.push(task);
 
         let intervalId;
@@ -48,15 +51,20 @@ export async function launchBumperTask(bumperObj) {
             for (const message of messageList) {
                 if (criticalStopFlag) {
                     tasks.length = 0;
-                    task = null;
                     logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                     clearInterval(intervalId);
                     break;
                 }
+
+                if (!task.isActive) {
+                    criticalStopFlag = true;
+                    logs.push({type: 'JOINER', subtype: 'INFO', message: `Task ${task.taskName} will be stopped`});
+                    break;
+                }
+
                 for (const channel of channelList) {
                     if (criticalStopFlag) {
                         tasks.length = 0;
-                        task = null;
                         clearInterval(intervalId);
                         logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                         break;
