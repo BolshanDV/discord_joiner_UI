@@ -86,8 +86,7 @@ export async function launchTasks(body) {
 
         let joinStatus = true;
         // after that we pass email and token to the function of joining the channel itself
-        if (body.sendCommandObj.mode || body.reactionClickerObj.mode) {
-        } else {
+        if (!body.sendCommandObj.mode || !body.reactionClickerObj.mode) {
             joinStatus = await joinChannel(preparedInviteCode, token.token, me.email);
         }
 

@@ -4,7 +4,6 @@ import {getMe} from "../../discordJoinerStore/services/joinerServices/validate-s
 import {logs} from "@/store/web-app/logger";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-export let loopIteration = 0;
 
 let criticalStopFlag = false;
 
@@ -18,6 +17,14 @@ export function setStartBumperCriticalFlag() {
 
 const tasks = [];
 
+export function getLoopIterationForSelectTask(taskName) {
+    let loopIter = 0;
+    tasks.forEach((task) => { if (task.name === taskName) loopIter = task.loopIteration });
+
+    return loopIter;
+}
+
+
 export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj, loopMessageObj} = bumperObj;
     const me = await getMe(token);
@@ -28,7 +35,8 @@ export async function launchBumperTask(bumperObj) {
             successMessages: [],
             deleteParameters: deleteMessageObj.deleteDelay,
             token: token,
-            email: me.email
+            email: me.email,
+            loopIteration: 0
         }
         tasks.push(task);
 
@@ -36,10 +44,9 @@ export async function launchBumperTask(bumperObj) {
         if (deleteMessageObj.active)
             intervalId = setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
-        while (loopMessageObj.active) {
+        while (!criticalStopFlag) {
             for (const message of messageList) {
                 if (criticalStopFlag) {
-                    loopMessageObj.active = false;
                     tasks.length = 0;
                     task = null;
                     logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
@@ -48,7 +55,6 @@ export async function launchBumperTask(bumperObj) {
                 }
                 for (const channel of channelList) {
                     if (criticalStopFlag) {
-                        loopMessageObj.active = false;
                         tasks.length = 0;
                         task = null;
                         clearInterval(intervalId);
@@ -77,7 +83,7 @@ export async function launchBumperTask(bumperObj) {
                 }
             }
 
-            loopIteration++;
+            task.loopIteration++;
             await sleep(loopMessageObj.deleteDelay);
         }
 
