@@ -31,6 +31,7 @@ export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj, loopMessageObj} = bumperObj;
     const me = await getMe(token);
     criticalStopFlag = false;
+    findTask(tasks, taskName).task.isActive = true;
     let loopIter = (checkTaskExisting(taskName)) ? findTask(tasks, taskName).task.loopIteration : 0;
 
     const task = {
@@ -51,24 +52,22 @@ export async function launchBumperTask(bumperObj) {
     if (deleteMessageObj.active)
         intervalId = setInterval(deleteExpiredMessage, deleteMessageObj.deleteDelay, task);
 
-    while (!criticalStopFlag) {
+    while (findTask(tasks, taskName).task.isActive && !criticalStopFlag) {
         for (const message of messageList) {
             if (criticalStopFlag) {
-                tasks.length = 0;
                 logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                 clearInterval(intervalId);
                 break;
             }
 
-            if (!task.isActive) {
-                criticalStopFlag = true;
+            if (!findTask(tasks, taskName).task.isActive) {
+                clearInterval(intervalId);
                 logs.push({type: 'JOINER', subtype: 'INFO', message: `Task ${task.taskName} will be stopped`});
                 break;
             }
 
             for (const channel of channelList) {
                 if (criticalStopFlag) {
-                    tasks.length = 0;
                     clearInterval(intervalId);
                     logs.push({type: 'JOINER', subtype: 'INFO', message: `All tasks will be stopped`});
                     break;
@@ -77,7 +76,7 @@ export async function launchBumperTask(bumperObj) {
                 const {status, messageId} = await sendMessage(me.email, token, channel.channelId, message);
 
                 if (status) {
-                    task.successMessages.push({message: message, messageId: messageId, channel: channel});
+                    findTask(tasks, taskName).task.successMessages.push({message: message, messageId: messageId, channel: channel});
                     logs.push({
                         type: 'BUMPER',
                         subtype: 'INFO',
@@ -95,7 +94,7 @@ export async function launchBumperTask(bumperObj) {
             }
         }
 
-        task.loopIteration++;
+        if (task.isActive && !criticalStopFlag) findTask(tasks, taskName).task.loopIteration++;
         await sleep(loopMessageObj.deleteDelay);
     }
 
