@@ -48,15 +48,15 @@
             <img src="../../assets/icons/delete.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="!taskStatusItem.playPauseFlag"
+               v-if="taskStatusItem.playPauseFlag === 'play'"
                @click="PlAY_TASK_MESSAGE_BUMPER(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="taskStatusItem.playPauseFlag"
+               v-if="taskStatusItem.playPauseFlag === 'stop'"
           >
-            <img src="../../assets/icons/play.svg" alt="" >
+            <img src="../../assets/icons/stop.svg" alt="" >
           </div>
         </div>
       </div>

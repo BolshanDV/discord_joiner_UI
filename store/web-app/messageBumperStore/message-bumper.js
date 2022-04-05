@@ -2,7 +2,7 @@ import {
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validate-service";
-import {launchBumperTask, loopIteration} from "./services/task-service";
+import {getLoopIterationForSelectTask, launchBumperTask} from "./services/task-service";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
 
@@ -14,7 +14,7 @@ export const state = () => ({
     deleteMessagesLoop: false,
     tasksStatusMessageBumper: [],
     keyUpdate: 0,
-    singleToken: ""
+    singleToken: "",
 })
 
 export const getters = {
@@ -104,8 +104,12 @@ export const mutations = {
         if (localStorage['loopMessageMB']) {
             state.deleteMessagesLoop = JSON.parse(localStorage['loopMessageMB']).active
         }
-    }
+    },
 
+    CHANGE_PAUSE_PLAY_FLAG: (state, obj) => {
+        let id = findTaskInMainArray(state.tasksStatusMessageBumper, obj.taskName)
+        state.tasksStatusMessageBumper[id].playPauseFlag = obj.statusFlag
+    },
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
@@ -117,7 +121,7 @@ export const actions = {
         let loopMessageObj = {
             active: ctx.state.deleteMessagesLoop,
             deleteDelay: obj.messagesLoop,
-            loopIteration: loopIteration
+            loopIteration: 0
         }
         let processingTaskObj = {
             text: 'Task created',
@@ -132,7 +136,7 @@ export const actions = {
             deleteMessageObj: deleteMessageObj,
             processingTaskObj: processingTaskObj,
             loopMessageObj: loopMessageObj,
-            playPauseFlag: false
+            playPauseFlag: 'play'
         }
 
         let repeat = false
@@ -152,11 +156,14 @@ export const actions = {
         }
         let index = findTaskInMainArray(ctx.state.tasksStatusMessageBumper, bumperObj.taskName)
         ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "In process", style: "process"})
+        ctx.commit('CHANGE_PAUSE_PLAY_FLAG', {taskName: bumperObj.taskName, statusFlag: 'stop'})
         let flagProcessing = await launchBumperTask(bumperObj)
         if (flagProcessing) {
             ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "successfully", style: "success"})
+            ctx.commit('CHANGE_PAUSE_PLAY_FLAG', {taskName: bumperObj.taskName, statusFlag: 'play'})
         } else {
             ctx.commit('CHANGE_PROCESSING_FLAG_M_BUMPER', {id: index, text: "Failed", style: "failed"})
+            ctx.commit('CHANGE_PAUSE_PLAY_FLAG', {taskName: bumperObj.taskName, statusFlag: 'play'})
         }
     },
 
@@ -164,7 +171,7 @@ export const actions = {
         setInterval(() => {
             let obj = {
                 id: findTaskInMainArray(ctx.state.tasksStatusMessageBumper, taskName),
-                loopIteration: loopIteration
+                loopIteration: getLoopIterationForSelectTask(taskName)
             }
             ctx.commit('SAVE_LOOP_ITERATION', obj)
         }, 2000)
