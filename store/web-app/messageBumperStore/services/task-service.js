@@ -31,17 +31,21 @@ export async function launchBumperTask(bumperObj) {
     const {taskName, delay, channelList, messageList, token, deleteMessageObj, loopMessageObj} = bumperObj;
     const me = await getMe(token);
     criticalStopFlag = false;
+    let loopIter = (checkTaskExisting(taskName)) ? findTask(tasks, taskName).task.loopIteration : 0;
+
     const task = {
         taskName: taskName,
         successMessages: [],
         deleteParameters: deleteMessageObj.deleteDelay,
         token: token,
         email: me.email,
-        loopIteration: 0,
+        loopIteration: loopIter,
         isActive: true
     }
 
-    tasks.push(task);
+    if (checkTaskExisting(taskName)) {
+        tasks.push(task);
+    }
 
     let intervalId;
     if (deleteMessageObj.active)
