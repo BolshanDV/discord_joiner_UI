@@ -58,13 +58,13 @@
             <img src="../../assets/icons/delete.svg" alt="">
           </div>
           <div class="icon_element play"
-               v-if="!taskStatusItem.startStopFlag"
+               v-if="taskStatusItem.startStopFlag === 'play'"
                @click="PLAY_TASK(taskStatusItem)"
           >
             <img src="../../assets/icons/play.svg" alt="" >
           </div>
           <div class="icon_element play"
-               v-if="taskStatusItem.startStopFlag"
+               v-if="taskStatusItem.startStopFlag === 'stop'"
                @click="PAUSE_TASK(taskStatusItem.taskName)"
           >
             <img src="../../assets/icons/stop.svg" alt="" >

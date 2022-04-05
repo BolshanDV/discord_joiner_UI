@@ -108,7 +108,7 @@ export const mutations = {
 
     CHANGE_PAUSE_PLAY_FLAG: (state, obj) => {
         if (obj.taskName === -1) {
-            for (let i = 0; i < state.tasksStatusMessageBumper.length - 1; i++){
+            for (let i = 0; i < state.tasksStatusMessageBumper.length; i++){
                 state.tasksStatusMessageBumper[i].playPauseFlag = 'play'
             }
         } else {

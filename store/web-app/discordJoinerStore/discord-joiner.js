@@ -130,9 +130,8 @@ export const mutations = {
         localStorage['taskStatus'] = JSON.stringify(state.taskStatus)
     },
 
-    CHANGE_ICON_STOP_AND_PLAY: (state, id) => {
-        console.log(id)
-        state.taskStatus[id].startStopFlag = !state.taskStatus[id].startStopFlag
+    CHANGE_ICON_STOP_AND_PLAY: (state, obj) => {
+            state.taskStatus[obj.id].startStopFlag = obj.taskStatus
     },
 
     GET_DATA_FROM_LOCAL_STORAGE_DISCORD_JOINER: (state) => {
@@ -170,7 +169,7 @@ export const actions = {
             sendCommandObj: ctx.state.sendCommandObj,
             accept_rules: ctx.state.accept_rules,
             processingTask: '',
-            startStopFlag: false
+            startStopFlag: 'play'
         }
 
         if (inviteCode !== undefined && tokens.length !== 0 && taskName!== '') {
@@ -189,13 +188,13 @@ export const actions = {
     PLAY_TASK: async (ctx, mainObj) => {
         setStartCriticalFlag()
         let index = findTaskInMainArray(ctx.state.taskStatus, mainObj.taskName)
-        ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
+        ctx.commit('CHANGE_ICON_STOP_AND_PLAY', {id: index, taskStatus: 'stop'})
         ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "startProcess"})
         if (mainObj.inviteCode !== undefined && mainObj.tokens.length !== 0) {
             ctx.dispatch('UPDATE_TOKENS', mainObj.taskName)
             const {successTokens, errorTokens} = await launchTasks(mainObj)
             ctx.commit('CHANGE_PROCESSING_FLAG', {id: index, text: "done"})
-            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
+            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', {id: index, taskStatus: 'play'})
         }
     },
 
@@ -203,11 +202,11 @@ export const actions = {
         if (taskName !== -1) {
             let index = findTaskInMainArray(ctx.state.taskStatus, taskName)
             changeActiveFlag(taskName)
-            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
+            ctx.commit('CHANGE_ICON_STOP_AND_PLAY', {id: index, taskStatus: 'play'})
         } else {
             for (let i = 0; i < ctx.state.taskStatus.length; i++){
                 changeActiveFlag(taskName)
-                ctx.commit('CHANGE_ICON_STOP_AND_PLAY', i)
+                ctx.commit('CHANGE_ICON_STOP_AND_PLAY', {id: i, taskStatus: 'play'})
             }
         }
 
