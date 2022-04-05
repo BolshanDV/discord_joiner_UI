@@ -84,8 +84,13 @@ export async function launchTasks(body) {
         // execute a request to get information about the user to receive mail
         const me = await getMe(token.token);
 
+        let joinStatus = true;
         // after that we pass email and token to the function of joining the channel itself
-        const joinStatus = await joinChannel(preparedInviteCode, token.token, me.email);
+        if (body.sendCommandObj.mode || body.reactionClickerObj.mode) {
+        } else {
+            joinStatus = await joinChannel(preparedInviteCode, token.token, me.email);
+        }
+
         let acceptRulesStatus = true;
 
         if (body.accept_rules) {
