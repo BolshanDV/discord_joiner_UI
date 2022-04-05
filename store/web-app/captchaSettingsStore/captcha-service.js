@@ -20,7 +20,7 @@ export async function solveCaptcha(captchaType, apiKey) {
 
     let result;
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-    // await sleep(10 * 1000);
+    await sleep(3 * 1000);
     for(let i = 0; i < 60; i++) {
         try {
             const response = await axios.post('https://api.capmonster.cloud/getTaskResult/', {
@@ -29,10 +29,6 @@ export async function solveCaptcha(captchaType, apiKey) {
             }).catch(error => console.log(error));
             if (response.data.status === 'ready') {
                 result = response.data.solution.gRecaptchaResponse;
-                break;
-            }
-
-            if (response.data.request !== 'CAPCHA_NOT_READY') {
                 break;
             }
 
