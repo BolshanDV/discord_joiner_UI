@@ -200,7 +200,7 @@ export const actions = {
     },
 
     PAUSE_TASK: (ctx, taskName) => {
-        if (taskName !== -1){
+        if (taskName !== -1) {
             let index = findTaskInMainArray(ctx.state.taskStatus, taskName)
             changeActiveFlag(taskName)
             ctx.commit('CHANGE_ICON_STOP_AND_PLAY', index)
