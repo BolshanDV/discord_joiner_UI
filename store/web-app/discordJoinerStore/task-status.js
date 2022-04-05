@@ -49,6 +49,7 @@ export const actions = {
         switch (name) {
             case 'messageBumper': {
                 setStopBumperCriticalFlag()
+                ctx.commit('web-app/messageBumperStore/message-bumper/CHANGE_PAUSE_PLAY_FLAG', {taskName: -1, statusFlag: 'play'}, { root: true})
                 break;
             }
             case 'discordJoiner': {

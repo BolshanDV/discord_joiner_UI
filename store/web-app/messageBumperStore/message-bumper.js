@@ -2,7 +2,7 @@ import {
     validateAndExtractTokens,
     validateSingleToken
 } from "../discordJoinerStore/services/joinerServices/validate-service";
-import {getLoopIterationForSelectTask, launchBumperTask} from "./services/task-service";
+import {changeActiveFlag, getLoopIterationForSelectTask, launchBumperTask} from "./services/task-service";
 import {getIconAndChannelName} from "../utils/embedsLoader";
 import {findTaskInMainArray} from "../utils/taskUtils";
 
@@ -107,8 +107,14 @@ export const mutations = {
     },
 
     CHANGE_PAUSE_PLAY_FLAG: (state, obj) => {
-        let id = findTaskInMainArray(state.tasksStatusMessageBumper, obj.taskName)
-        state.tasksStatusMessageBumper[id].playPauseFlag = obj.statusFlag
+        if (obj.taskName === -1) {
+            for (let i = 0; i < state.tasksStatusMessageBumper.length - 1; i++){
+                state.tasksStatusMessageBumper[i].playPauseFlag = 'play'
+            }
+        } else {
+            let id = findTaskInMainArray(state.tasksStatusMessageBumper, obj.taskName)
+            state.tasksStatusMessageBumper[id].playPauseFlag = obj.statusFlag
+        }
     },
 }
 export const actions = {
@@ -181,6 +187,11 @@ export const actions = {
         for (const bumperObj of ctx.state.tasksStatusMessageBumper) {
             ctx.dispatch('PlAY_TASK_MESSAGE_BUMPER', bumperObj )
         }
+    },
+
+    STOP_TASK: (ctx, taskName) => {
+        ctx.commit('CHANGE_PAUSE_PLAY_FLAG', {taskName: taskName, statusFlag: 'play'})
+        changeActiveFlag(taskName)
     },
 
     VALIDATE_SINGLE_TOKEN_FOR_MANAGER_BUMPER: async (ctx, token) => {

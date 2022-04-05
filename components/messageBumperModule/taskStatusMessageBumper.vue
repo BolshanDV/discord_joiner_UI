@@ -55,6 +55,7 @@
           </div>
           <div class="icon_element play"
                v-if="taskStatusItem.playPauseFlag === 'stop'"
+               @click="STOP_TASK(taskStatusItem.taskName)"
           >
             <img src="../../assets/icons/stop.svg" alt="" >
           </div>
@@ -72,7 +73,7 @@ export default {
     ...mapGetters('web-app/messageBumperStore/message-bumper', ['tasksStatusMessageBumper'])
   },
   methods: {
-    ...mapActions('web-app/messageBumperStore/message-bumper', ['PlAY_TASK_MESSAGE_BUMPER']),
+    ...mapActions('web-app/messageBumperStore/message-bumper', ['PlAY_TASK_MESSAGE_BUMPER', 'STOP_TASK']),
     ...mapMutations('web-app/messageBumperStore/message-bumper', ['DELETE_TASK_MESSAGE_BUMPER'])
   }
 }
