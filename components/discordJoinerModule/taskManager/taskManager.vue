@@ -61,7 +61,7 @@
         </div>
         <div class="text-field">
           <input class="text-field__input input_element"
-                 v-model.number="guildId"
+                 v-model="guildId"
                  autocomplete="off"
                  placeholder="Enter guild id"
                  type="search"

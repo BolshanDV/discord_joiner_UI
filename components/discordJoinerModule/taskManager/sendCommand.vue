@@ -3,7 +3,7 @@
     <div class="work_space_element_title">Channel id</div>
       <div class="text-field">
         <input class="text-field__input input_element"
-               v-model.number="channelId"
+               v-model="channelId"
                autocomplete="off"
                placeholder="Enter channel id"
                type="search"
@@ -12,7 +12,7 @@
     <div class="work_space_element_title">Command</div>
     <div class="text-field">
      <input class="text-field__input input_element"
-            v-model.number="commandText"
+            v-model="commandText"
             autocomplete="off"
             placeholder="Enter command"
             type="search"

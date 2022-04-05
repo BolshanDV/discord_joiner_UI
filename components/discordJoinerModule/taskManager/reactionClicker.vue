@@ -3,7 +3,7 @@
       <div class="work_space_element_title">Channel id</div>
         <div class="text-field">
           <input class="text-field__input input_element"
-                 v-model.number="channelId"
+                 v-model="channelId"
                  autocomplete="off"
                  placeholder="Enter channel id"
                  type="search"
@@ -21,7 +21,7 @@
       <div class="work_space_element_title">Reaction id</div>
         <div class="text-field">
           <input class="text-field__input input_element"
-                 v-model.number="reactionId"
+                 v-model="reactionId"
                  autocomplete="off"
                  placeholder="Enter reaction id"
                  type="search"
@@ -30,7 +30,7 @@
       <div class="work_space_element_title">Reaction click delay</div>
         <div class="text-field">
           <input class="text-field__input input_element"
-                 v-model.number="reactionClickDelay"
+                 v-model="reactionClickDelay"
                  autocomplete="off"
                  placeholder="Enter delay"
                  type="search"
