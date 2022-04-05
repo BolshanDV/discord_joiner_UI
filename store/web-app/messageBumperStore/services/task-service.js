@@ -43,7 +43,7 @@ export async function launchBumperTask(bumperObj) {
         isActive: true
     }
 
-    if (checkTaskExisting(taskName)) {
+    if (!checkTaskExisting(taskName)) {
         tasks.push(task);
     }
 
