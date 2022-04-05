@@ -11,3 +11,12 @@ export function converter(text) {
     }
     return tokensObj
 }
+export function converterMessage(text) {
+    let tokensObj
+    if (text.indexOf(';') !== -1) {
+        tokensObj = [...new Set(text.split(';'))]
+    } else {
+        tokensObj = [text]
+    }
+    return tokensObj
+}

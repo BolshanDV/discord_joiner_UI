@@ -3,6 +3,20 @@
     <div class="work_space_element_title row_position work_space_element_advent">
       <div>Message list</div>
       <div class="row_position">
+        <div
+            v-if="messageList.length !== 0"
+        >
+            <a
+                download="messageText.txt"
+                v-bind:href="urlFile"
+            >
+              <img src="../../../assets/icons/download.svg"
+                   alt=""
+                   class="icons_svg rotate"
+              >
+            </a>
+
+        </div>
         <div>
           <label>
             <img src="../../../assets/icons/download.svg"
@@ -62,7 +76,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import modalPage from "../../modalPage/modalPage";
-import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
+import {converterMessage} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 export default {
 name: "messageList",
   components: {
@@ -74,15 +88,17 @@ name: "messageList",
     }
   },
   computed: {
-    ...mapGetters('web-app/messageBumperStore/message-bumper', ['messageList']),
+    ...mapGetters('web-app/messageBumperStore/message-bumper', ['messageList', 'urlFile']),
   },
   methods: {
     ...mapMutations('web-app/messageBumperStore/message-bumper',['ADD_MESSAGE_TO_LISTS', 'DELETE_MESSAGE']),
     ...mapMutations('ui/popUpStore/popUp', ['POPUP_DISPLAY']),
     ...mapActions('web-app/messageBumperStore/message-bumper', ['DOWNLOADING_FILE']),
     ...mapActions('ui/readFileStore/readFile', ['FILE_READ_MESSAGES']),
+
     ADD_MESSAGE_TO_LISTS_WITH_CLEAN_UP(){
-      this.ADD_MESSAGE_TO_LISTS(converter(this.message));
+      this.ADD_MESSAGE_TO_LISTS(converterMessage(this.message))
+      this.DOWNLOADING_FILE()
       this.message = ''
     }
   }
@@ -94,6 +110,9 @@ name: "messageList",
 <style scoped>
 .work_space_element_advent{
   margin-top: 0;
+}
+.rotate{
+  transform: rotate(180deg);
 }
 </style>
 

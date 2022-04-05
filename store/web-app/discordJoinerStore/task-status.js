@@ -54,7 +54,7 @@ export const actions = {
             }
             case 'discordJoiner': {
                 setStopCriticalFlag()
-                ctx.dispatch('web-app/discordJoinerStore/discord-joiner/PAUSE_TASK', {taskName: -1, statusFlag: 'play'}, {root: true})
+                ctx.dispatch('web-app/discordJoinerStore/discord-joiner/PAUSE_TASK', -1, {root: true})
                 break;
             }
         }

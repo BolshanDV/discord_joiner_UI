@@ -15,6 +15,7 @@ export const state = () => ({
     tasksStatusMessageBumper: [],
     keyUpdate: 0,
     singleToken: "",
+    url: ''
 })
 
 export const getters = {
@@ -25,7 +26,8 @@ export const getters = {
     keyUpdate: state => state.keyUpdate,
     tasksStatusMessageBumper: state => state.tasksStatusMessageBumper,
     singleToken: state => state.singleToken,
-    deleteMessagesLoop: state => state.deleteMessagesLoop
+    deleteMessagesLoop: state => state.deleteMessagesLoop,
+    urlFile: state => state.url
 }
 export const mutations = {
     VALIDATE_TOKEN: (state, singleToken) => {
@@ -116,6 +118,11 @@ export const mutations = {
             state.tasksStatusMessageBumper[id].playPauseFlag = obj.statusFlag
         }
     },
+
+    SAVE_URL: (state, fileUrl) => {
+        state.url = fileUrl
+        console.log(state.url)
+    }
 }
 export const actions = {
     CREATE_TASK_MESSAGE_BUMPER: async (ctx, obj) => {
@@ -230,6 +237,16 @@ export const actions = {
                 channelId: channelObj.channelId
             })
         }
+    },
+
+    DOWNLOADING_FILE: (ctx) => {
+        let text = ''
+        for (const message of ctx.state.messageList) {
+            text+= message + '\n'
+        }
+            let data = new Blob([text],{type: 'text/plain'})
+            let fileUrl = window.URL.createObjectURL(data)
+            ctx.commit('SAVE_URL', fileUrl)
     },
 }
 

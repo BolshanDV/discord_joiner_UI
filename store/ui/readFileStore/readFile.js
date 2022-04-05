@@ -1,4 +1,4 @@
-import {converter} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
+import {converter, converterMessage} from "@/store/web-app/discordJoinerStore/services/joinerServices/parser";
 
 export const actions = {
     FILE_READ_MESSAGES: async (ctx, file) => {
@@ -6,8 +6,9 @@ export const actions = {
         let reader = new FileReader();
         reader.readAsText(blob, 'UTF-8');
         reader.onload = () => {
-            const res = converter(reader.result);
+            const res = converterMessage(reader.result);
             ctx.commit(`web-app/messageBumperStore/message-bumper/ADD_MESSAGE_TO_LISTS`, res, {root: true});
+            ctx.dispatch(`web-app/messageBumperStore/message-bumper/DOWNLOADING_FILE`, '', {root: true});
             reader = null;
         }
     },
